@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "685994547119",
+    "firebase_url": "https://farming-happiness.firebaseio.com",
+    "project_id": "farming-happiness",
+    "storage_bucket": "farming-happiness.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:685994547119:android:41f268af69622bbc",
+        "android_client_info": {
+          "package_name": "com.frontanilla.farminghappyness"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "685994547119-d44qpb65abtdr9t0au5cqcm49hjf5ncs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.frontanilla.farminghappyness",
+            "certificate_hash": "926f2e90308d1fe6fe0554713ab434e5f440e4c6"
+          }
+        },
+        {
+          "client_id": "685994547119-3hr5mmkvr8issbqmnv7jhhsi54cekgpf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFX7anYEIapIZyubED6oOy3puZcULWU0Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "685994547119-3hr5mmkvr8issbqmnv7jhhsi54cekgpf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -13,6 +13,9 @@ public class FarmingGame extends Game {
         phoneID = phoneIdentifier;
     }
 
+    public FarmingGame() {
+    }
+
     @Override
     public void create() {
         // Catch all fucking errors?

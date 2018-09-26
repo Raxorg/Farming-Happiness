@@ -3,6 +3,7 @@ package com.frontanilla.farminghappyness.core;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
 import com.frontanilla.farminghappyness.utils.Assets;
+import com.frontanilla.farminghappyness.visualization.screens.loading.LoadingConnector;
 
 public class FarmingGame extends Game {
 
@@ -32,6 +33,6 @@ public class FarmingGame extends Game {
         Assets.instance.loadDisplayAssets(am);
 
         // Rock and roll
-        //new LoadingConnector(this);
+        new LoadingConnector(this);
     }
 }

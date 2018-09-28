@@ -2,12 +2,12 @@ package com.frontanilla.farminghappyness.visualization.screens;
 
 import com.frontanilla.farminghappyness.visualization.components.Component;
 
-public abstract class Observer {
+public abstract class Logic {
 
     // Structure
     protected Connector connector;
 
-    public Observer(Connector connector) {
+    public Logic(Connector connector) {
         this.connector = connector;
     }
 

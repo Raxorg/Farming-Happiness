@@ -2,16 +2,16 @@ package com.frontanilla.farminghappyness.visualization.screens.loading;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.frontanilla.farminghappyness.utils.Assets;
-import com.frontanilla.farminghappyness.visualization.screens.Observer;
+import com.frontanilla.farminghappyness.visualization.screens.Logic;
 
-public class LoadingObserver extends Observer {
+public class LoadingLogic extends Logic {
 
     // Logic related
     private AssetManager assetManager;
     private boolean doneLoading;
     private float time;
 
-    public LoadingObserver(LoadingConnector connector) {
+    public LoadingLogic(LoadingConnector connector) {
         super(connector);
     }
 

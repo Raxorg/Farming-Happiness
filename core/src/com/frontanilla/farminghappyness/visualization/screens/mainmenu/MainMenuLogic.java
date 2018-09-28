@@ -9,18 +9,18 @@ import com.frontanilla.farminghappyness.utils.FetchListener;
 import com.frontanilla.farminghappyness.utils.OnResultListener;
 import com.frontanilla.farminghappyness.utils.Util;
 import com.frontanilla.farminghappyness.visualization.components.Button;
-import com.frontanilla.farminghappyness.visualization.screens.Observer;
+import com.frontanilla.farminghappyness.visualization.screens.Logic;
 
 import static com.frontanilla.farminghappyness.utils.Constants.FETCHING_INTERVAL;
 
-public class MainMenuObserver extends Observer {
+public class MainMenuLogic extends Logic {
 
     // Logic attributes
     private Color selectedColor;
     private boolean requestSent;
     private float startTime;
 
-    public MainMenuObserver(MainMenuConnector connector) {
+    public MainMenuLogic(MainMenuConnector connector) {
         super(connector);
     }
 
@@ -46,10 +46,11 @@ public class MainMenuObserver extends Observer {
         startTime = 0;
         requestSent = false;
         checkIfAlreadyPlaying();
+        ((MainMenuScreen) connector.getScreen()).joinBattle();
     }
 
     private void checkIfAlreadyPlaying() {
-        System.out.println("MainMenuObserver-checkIfAlreadyPlaying");
+        System.out.println("MainMenuLogic-checkIfAlreadyPlaying");
         ((MainMenuStuff) connector.getStuff()).getMessageLabel().setText("Refreshing...");
         ((MainMenuStuff) connector.getStuff()).getLoadingImage().setVisible(true);
         connector.getInput().setEnabled(false);

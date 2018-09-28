@@ -3,15 +3,15 @@ package com.frontanilla.farminghappyness.visualization.screens;
 public abstract class Connector {
 
     protected FirestoreConnection firestore;
-    protected MyAdvancedScreen screen;
+    protected MyScreen screen;
     protected Stuff stuff;
-    protected Observer observer;
+    protected Logic logic;
     protected Renderer renderer;
     protected Input input;
 
     public FirestoreConnection getFirestore() { return firestore; }
 
-    public MyAdvancedScreen getScreen() {
+    public MyScreen getScreen() {
         return screen;
     }
 
@@ -19,8 +19,8 @@ public abstract class Connector {
         return stuff;
     }
 
-    public Observer getObserver() {
-        return observer;
+    public Logic getLogic() {
+        return logic;
     }
 
     public Renderer getRenderer() {

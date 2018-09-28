@@ -9,7 +9,7 @@ public class MainMenuConnector extends Connector {
         //firestore = new MainMenuFirestore(this);
         screen = new MainMenuScreen(this, game);
         stuff = new MainMenuStuff(this);
-        observer = new MainMenuObserver(this);
+        logic = new MainMenuLogic(this);
         renderer = new MainMenuRenderer(this);
         input = new MainMenuInput(this);
 
@@ -21,7 +21,7 @@ public class MainMenuConnector extends Connector {
         // Init input based on stuff buttons and components
         input.init();
         // Init logic based on input, stuff and screen data
-        observer.init();
+        logic.init();
         // Init renderer batches and renderers
         renderer.init();
         // Show screen once everything is initialized, with a fader todo

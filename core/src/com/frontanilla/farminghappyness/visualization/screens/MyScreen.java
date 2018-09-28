@@ -8,7 +8,7 @@ import com.frontanilla.farminghappyness.utils.Constants;
 import com.frontanilla.farminghappyness.utils.OnResultListener;
 import com.frontanilla.farminghappyness.visualization.DynamicCamera;
 
-public abstract class MyAdvancedScreen extends ScreenAdapter {
+public abstract class MyScreen extends ScreenAdapter {
 
     // Structure
     protected Connector connector;
@@ -16,7 +16,7 @@ public abstract class MyAdvancedScreen extends ScreenAdapter {
     // Screen related
     protected DynamicCamera camera;
 
-    public MyAdvancedScreen(Connector connector, FarmingGame game) {
+    public MyScreen(Connector connector, FarmingGame game) {
         this.connector = connector;
         this.game = game;
     }
@@ -27,13 +27,13 @@ public abstract class MyAdvancedScreen extends ScreenAdapter {
     public void render(float delta) {
         prepareViewport();
 
-        connector.observer.beforeUpdate(delta);
+        connector.logic.beforeUpdate(delta);
         connector.renderer.beforeRender();
 
-        connector.observer.update(delta);
+        connector.logic.update(delta);
         connector.renderer.render();
 
-        connector.observer.afterUpdate(delta);
+        connector.logic.afterUpdate(delta);
         connector.renderer.afterRender();
     }
 
@@ -45,7 +45,7 @@ public abstract class MyAdvancedScreen extends ScreenAdapter {
         connector.getRenderer().updateCamera();
     }
 
-    protected void fade(final MyAdvancedScreen nextScreen, boolean fadeIn) {
+    protected void fade(final MyScreen nextScreen, boolean fadeIn) {
         connector.getStuff().getFader().start(fadeIn, new OnResultListener() {
             @Override
             public void onResult(boolean fadeIn) {
@@ -60,7 +60,7 @@ public abstract class MyAdvancedScreen extends ScreenAdapter {
     public void show() {
         // Delegate
         connector.renderer.beforeScreenShow();
-        connector.observer.beforeScreenShow();
+        connector.logic.beforeScreenShow();
         // Setup the fader
         fade(null, true);
     }

@@ -4,16 +4,17 @@ import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.frontanilla.farminghappyness.core.FarmingGame;
 import com.frontanilla.farminghappyness.core.Player;
 import com.frontanilla.farminghappyness.visualization.DynamicCamera;
-import com.frontanilla.farminghappyness.visualization.screens.MyAdvancedScreen;
+import com.frontanilla.farminghappyness.visualization.screens.MyScreen;
+import com.frontanilla.farminghappyness.visualization.screens.game.GameConnector;
 
-public class MainMenuScreen extends MyAdvancedScreen {
+public class MainMenuScreen extends MyScreen {
 
     public MainMenuScreen(MainMenuConnector connector, FarmingGame game) {
         super(connector, game);
     }
 
     public void joinBattle() {
-        // new GameConnector(game);
+        new GameConnector(game);
     }
 
     public void onBattleDataFetched(String[] gridRows, int turn, DelayedRemovalArray<Player> players) {

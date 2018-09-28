@@ -151,7 +151,7 @@ public class MainMenuStuff extends Stuff {
         ) {
             @Override
             public void onTap() {
-                ((MainMenuObserver) connector.getObserver()).joinButtonPressed();
+                ((MainMenuLogic) connector.getLogic()).joinButtonPressed();
             }
         };
         container.addChild(joinBattleButton);
@@ -169,7 +169,7 @@ public class MainMenuStuff extends Stuff {
         ) {
             @Override
             public void onTap() {
-                ((MainMenuObserver) connector.getObserver()).colorButtonTapped(this);
+                ((MainMenuLogic) connector.getLogic()).colorButtonTapped(this);
             }
         };
         container.addChild(redButton);
@@ -187,7 +187,7 @@ public class MainMenuStuff extends Stuff {
         ) {
             @Override
             public void onTap() {
-                ((MainMenuObserver) connector.getObserver()).colorButtonTapped(this);
+                ((MainMenuLogic) connector.getLogic()).colorButtonTapped(this);
             }
         };
         container.addChild(blueButton);
@@ -205,7 +205,7 @@ public class MainMenuStuff extends Stuff {
         ) {
             @Override
             public void onTap() {
-                ((MainMenuObserver) connector.getObserver()).colorButtonTapped(this);
+                ((MainMenuLogic) connector.getLogic()).colorButtonTapped(this);
             }
         };
         container.addChild(greenButton);
@@ -223,7 +223,7 @@ public class MainMenuStuff extends Stuff {
         ) {
             @Override
             public void onTap() {
-                ((MainMenuObserver) connector.getObserver()).colorButtonTapped(this);
+                ((MainMenuLogic) connector.getLogic()).colorButtonTapped(this);
             }
         };
         container.addChild(yellowButton);

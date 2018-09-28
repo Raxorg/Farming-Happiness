@@ -1,17 +1,17 @@
-package com.frontanilla.farminghappyness.visualization.screens.loading;
+package com.frontanilla.farminghappyness.visualization.screens.game;
 
 import com.frontanilla.farminghappyness.core.FarmingGame;
 import com.frontanilla.farminghappyness.visualization.screens.Connector;
 
-public class LoadingConnector extends Connector {
+public class GameConnector extends Connector {
 
-    public LoadingConnector(FarmingGame game) {
-        //firestore = new LoadingFirestore(this);
-        screen = new LoadingScreen(this, game);
-        stuff = new LoadingStuff(this);
-        logic = new LoadingLogic(this);
-        renderer = new LoadingRenderer(this);
-        input = new LoadingInput(this);
+    public GameConnector(FarmingGame game) {
+        //firestore = new GameFirestore(this);
+        screen = new GameScreen(this, game);
+        stuff = new GameStuff(this);
+        logic = new GameLogic(this);
+        renderer = new GameRenderer(this);
+        input = new GameInput(this);
 
         // Init screen camera
         screen.init();

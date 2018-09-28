@@ -16,7 +16,7 @@ public class MainMenuFirestore extends FirestoreConnection {
         FirestoreDBConnection.getInstance().fetchPlayers(new FetchListener<DelayedRemovalArray<Player>>() {
             @Override
             public void onDataFetched(DelayedRemovalArray<Player> players) {
-                ((MainMenuObserver) connector.getObserver()).onPlayersFetched(players);
+                ((MainMenuLogic) connector.getLogic()).onPlayersFetched(players);
             }
         });
     }
@@ -26,7 +26,7 @@ public class MainMenuFirestore extends FirestoreConnection {
                 new FetchListener<String[]>() {
                     @Override
                     public void onDataFetched(String[] additionRequests) {
-                        ((MainMenuObserver) connector.getObserver()).onRequestsFetched(additionRequests);
+                        ((MainMenuLogic) connector.getLogic()).onRequestsFetched(additionRequests);
                     }
                 },
                 new FetchListener<Boolean>() {

@@ -1,18 +1,10 @@
 package com.frontanilla.farminghappyness.core;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.assets.AssetManager;
+import com.frontanilla.farminghappyness.game.GameScreen;
 import com.frontanilla.farminghappyness.utils.Assets;
-import com.frontanilla.farminghappyness.visualization.screens.loading.LoadingConnector;
 
 public class FarmingGame extends Game {
-
-    public static String phoneID;
-
-    public FarmingGame(FirestoreInterface firestoreInterface, String phoneIdentifier) {
-        FirestoreDBConnection.getInstance().setFirestore(firestoreInterface);
-        phoneID = phoneIdentifier;
-    }
 
     public FarmingGame() {
     }
@@ -28,11 +20,8 @@ public class FarmingGame extends Game {
             }
         });
 
-        // Load the loading screen assets
-        AssetManager am = new AssetManager();
-        Assets.instance.loadDisplayAssets(am);
+        Assets.init();
 
-        // Rock and roll
-        new LoadingConnector(this);
+        setScreen(new GameScreen());
     }
 }

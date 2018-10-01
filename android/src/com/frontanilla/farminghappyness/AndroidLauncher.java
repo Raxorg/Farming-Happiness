@@ -24,9 +24,6 @@ public class AndroidLauncher extends AndroidApplication {
         // Your screen phone will never go off
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        //creates an mainMenu of firebase connection
-        FirestoreDB firebaseConnection = new FirestoreDB();
-
-        initialize(new FarmingGame(firebaseConnection, android_id), config);
+        initialize(new FarmingGame(), config);
     }
 }

@@ -1,4 +1,4 @@
-package com.frontanilla.farminghappyness.visualization;
+package com.frontanilla.farminghappyness.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;

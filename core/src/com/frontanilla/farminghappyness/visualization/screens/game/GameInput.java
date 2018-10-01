@@ -1,6 +1,5 @@
 package com.frontanilla.farminghappyness.visualization.screens.game;
 
-import com.frontanilla.farminghappyness.visualization.screens.Connector;
 import com.frontanilla.farminghappyness.visualization.screens.Input;
 
 public class GameInput extends Input {

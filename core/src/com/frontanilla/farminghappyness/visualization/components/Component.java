@@ -41,6 +41,10 @@ public abstract class Component {
         this.centered = centered;
     }
 
+    public DelayedRemovalArray<Component> getChildren() {
+        return children;
+    }
+
     public void addChild(Component child) {
         if(children.contains(child,true)) {
             System.out.println("WARNING: CHILD ALREADY PRESENT");

@@ -2,12 +2,9 @@ package com.frontanilla.farminghappyness.tests;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.frontanilla.farminghappyness.utils.Constants;
 
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_WIDTH;
@@ -29,16 +26,16 @@ public class MyCamera extends OrthographicCamera {
             zoom -= 0.02;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            translate(-3, 0, 0); // TODO MULTIPLY BY A DYNAMIC VARIABLE ACCORDING TO ZOOM
+            translate(-Constants.PANNING_SPEED, 0, 0); // TODO MULTIPLY BY A DYNAMIC VARIABLE ACCORDING TO ZOOM
         }
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            translate(3, 0, 0); // TODO MULTIPLY BY A DYNAMIC VARIABLE ACCORDING TO ZOOM
+            translate(Constants.PANNING_SPEED, 0, 0); // TODO MULTIPLY BY A DYNAMIC VARIABLE ACCORDING TO ZOOM
         }
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            translate(0, -3, 0); // TODO MULTIPLY BY A DYNAMIC VARIABLE ACCORDING TO ZOOM
+            translate(0, -Constants.PANNING_SPEED, 0); // TODO MULTIPLY BY A DYNAMIC VARIABLE ACCORDING TO ZOOM
         }
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            translate(0, 3, 0); // TODO MULTIPLY BY A DYNAMIC VARIABLE ACCORDING TO ZOOM
+            translate(0, Constants.PANNING_SPEED, 0); // TODO MULTIPLY BY A DYNAMIC VARIABLE ACCORDING TO ZOOM
         }
 
         zoom = MathUtils.clamp(zoom, 1, WORLD_WIDTH / viewportWidth);

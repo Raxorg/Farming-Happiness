@@ -3,6 +3,7 @@ package com.frontanilla.farminghappyness.game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.frontanilla.farminghappyness.game.areas.DefenseArea;
 import com.frontanilla.farminghappyness.game.areas.PlantsArea;
+import com.frontanilla.farminghappyness.game.areas.Tile;
 import com.frontanilla.farminghappyness.utils.Assets;
 import com.frontanilla.farminghappyness.utils.Constants;
 
@@ -17,9 +18,9 @@ public class GameMap {
     }
 
     public void render(SpriteBatch batch) {
+        renderGround(batch);
         plantsArea.render(batch);
         defenseArea.render(batch);
-        renderGround(batch);
     }
 
     private void renderGround(SpriteBatch batch) {
@@ -33,5 +34,9 @@ public class GameMap {
                         Constants.WORLD_HEIGHT / 10);
             }
         }
+    }
+
+    public Tile[][] getDefenseTiles() {
+        return defenseArea.getTiles();
     }
 }

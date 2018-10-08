@@ -1,12 +1,13 @@
 package com.frontanilla.farminghappyness.game.areas;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.frontanilla.farminghappyness.utils.Constants;
 
 import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_AREA_COLUMNS;
+import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_AREA_DEFENSE_LINES;
 import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_AREA_ROWS;
 import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_AREA_X;
 import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_AREA_Y;
+import static com.frontanilla.farminghappyness.utils.Constants.TILE_SIZE;
 import static com.frontanilla.farminghappyness.utils.Enums.TileType.DEFENSIVE_TILE;
 import static com.frontanilla.farminghappyness.utils.Enums.TileType.HIDDEN_TILE;
 
@@ -20,16 +21,16 @@ public class DefenseArea {
             // Tile row
             tileMatrix[row] = new Tile[DEFENSE_AREA_COLUMNS];
             for (int column = 0; column < DEFENSE_AREA_COLUMNS; column++) {
-                if (column <= 3 || row <= 3) {
+                if (column < DEFENSE_AREA_DEFENSE_LINES || row < DEFENSE_AREA_DEFENSE_LINES) {
                     tileMatrix[row][column] = new Tile(
                             DEFENSIVE_TILE,
-                            DEFENSE_AREA_X + column * Constants.TILE_SIZE,
-                            DEFENSE_AREA_Y + Constants.TILE_SIZE * row);
+                            DEFENSE_AREA_X + column * TILE_SIZE,
+                            DEFENSE_AREA_Y + row * TILE_SIZE);
                 } else {
                     tileMatrix[row][column] = new Tile(
                             HIDDEN_TILE,
-                            DEFENSE_AREA_X + column * Constants.TILE_SIZE,
-                            DEFENSE_AREA_Y + Constants.TILE_SIZE * row);
+                            DEFENSE_AREA_X + column * TILE_SIZE,
+                            DEFENSE_AREA_Y + row * TILE_SIZE);
                 }
             }
         }
@@ -39,6 +40,13 @@ public class DefenseArea {
         for (Tile[] tileRow : tileMatrix) {
             for (Tile tile : tileRow) {
                 tile.render(batch);
+            }
+        }
+        for (Tile[] tileRow : tileMatrix) {
+            for (Tile tile : tileRow) {
+                if (tile.getContent() != null) {
+                    tile.getContent().render(batch);
+                }
             }
         }
     }

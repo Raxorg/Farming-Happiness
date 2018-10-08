@@ -23,6 +23,7 @@ public class GameMap {
 
     public void render(SpriteBatch batch) {
         renderGround(batch);
+
         farmingArea.render(batch);
         defenseArea.render(batch);
     }
@@ -42,5 +43,9 @@ public class GameMap {
 
     public Tile[][] getDefenseTiles() {
         return defenseArea.getTiles();
+    }
+
+    public FarmingArea getFarmingArea() {
+        return farmingArea;
     }
 }

@@ -17,19 +17,29 @@ public class Constants {
     public static final int DEFENSE_AREA_COLUMNS = (int) (DEFENSE_AREA_WIDTH / TILE_SIZE);
     public static final float X_SPACE = DEFENSE_AREA_WIDTH - DEFENSE_AREA_COLUMNS * TILE_SIZE;
     public static final float DEFENSE_AREA_X = WORLD_WIDTH - DEFENSE_AREA_WIDTH + X_SPACE;
+
     public static final float DEFENSE_AREA_HEIGHT = WORLD_HEIGHT / 2f;
     public static final int DEFENSE_AREA_ROWS = (int) (DEFENSE_AREA_HEIGHT / TILE_SIZE);
     public static final float DEFENSE_AREA_Y = WORLD_HEIGHT - DEFENSE_AREA_HEIGHT;
-    public static final float DEFENSE_AREA_THICKNESS = 4 * TILE_SIZE;
+
+    public static final int DEFENSE_AREA_DEFENSE_LINES = 4;
+    public static final float DEFENSE_AREA_THICKNESS = DEFENSE_AREA_DEFENSE_LINES * TILE_SIZE;
     // Farming Area
     public static final float FARMING_AREA_WIDTH = (DEFENSE_AREA_WIDTH - DEFENSE_AREA_THICKNESS) / 2f;
     public static final int FARMING_AREA_COLUMNS = (int) (FARMING_AREA_WIDTH / TILE_SIZE);
-    public static final float FARMING_AREA_HEIGHT = WORLD_HEIGHT - DEFENSE_AREA_HEIGHT;
+    public static final float FARMING_X_SPACE = FARMING_AREA_WIDTH - FARMING_AREA_COLUMNS * TILE_SIZE;
+    public static final float FARMING_AREA_X = WORLD_WIDTH - FARMING_AREA_WIDTH + FARMING_X_SPACE;
+    public static final float FARMING_AREA_HEIGHT = DEFENSE_AREA_HEIGHT - DEFENSE_AREA_THICKNESS;
+    public static final int FARMING_AREA_ROWS = (int) (FARMING_AREA_HEIGHT / TILE_SIZE);
+    public static final float FARMING_AREA_Y = WORLD_HEIGHT - FARMING_AREA_HEIGHT;
     // Camera
     public static final float PANNING_SPEED = 10f;
     // Turret
     public static final float TURRET_SIZE = 20f;
+    public static final float TURRET_RANGE = 200f;
     // Enemies
     public static final float ENEMY_WIDTH = 15f;
     public static final float ENEMY_HEIGHT = 30f;
+    // Tourists
+    public static final float TOURIST_SPEED = 20f;
 }

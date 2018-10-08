@@ -26,9 +26,6 @@ public class Tile {
     public void render(SpriteBatch batch) {
         batch.setColor(Color.WHITE);
         renderTile(batch);
-        if (content != null) {
-            content.render(batch);
-        }
     }
 
     private void renderTile(SpriteBatch batch) {
@@ -56,6 +53,10 @@ public class Tile {
 
     public boolean contains(float x, float y) {
         return bounds.contains(x, y);
+    }
+
+    public Turret getContent() {
+        return content;
     }
 
     public void setContent(Turret turret) {

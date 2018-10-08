@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class Assets {
 
     public static TextureRegion tree, river1, river2, river3, river4, farmingTile,
-            grass, defenseTile, turret, turretCannon;
+            grass, defenseTile, turret, turretCannon, tourist;
 
     public static void init() {
         Texture decoration = new Texture("images/decoration.png");
@@ -22,6 +22,8 @@ public class Assets {
         Texture defenses = new Texture("images/defenses.png");
         turret = new TextureRegion(defenses, 0, 0, 400, 400);
         turretCannon = new TextureRegion(defenses, 400, 0, 400, 400);
+        Texture enemies = new Texture("images/enemies.png");
+        tourist = new TextureRegion(enemies, 100, 200, 100, 200);
     }
 
 }

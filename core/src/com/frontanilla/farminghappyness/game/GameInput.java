@@ -20,7 +20,7 @@ public class GameInput extends InputAdapter {
         // ignore if its not left mouse button or first touch pointer
         if (button != Input.Buttons.LEFT || pointer > 0) return false;
         gameScreen.getCamera().unproject(usefulVector.set(screenX, screenY, 0));
-        gameScreen.touchDown(usefulVector);
+        gameScreen.getGameLogic().touchDown(usefulVector);
         return true;
     }
 }

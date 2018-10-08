@@ -14,7 +14,8 @@ public class MyCamera extends OrthographicCamera {
     public MyCamera(float viewportWidth, float viewportHeight) {
         super(viewportWidth, viewportHeight);
 
-        position.set(viewportWidth / 2f, viewportHeight / 2f, 0);
+        //position.set(viewportWidth / 2f, viewportHeight / 2f, 0);
+        position.add(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, 0);
         update();
     }
 
@@ -38,8 +39,8 @@ public class MyCamera extends OrthographicCamera {
             translate(0, Constants.PANNING_SPEED, 0); // TODO MULTIPLY BY A DYNAMIC VARIABLE ACCORDING TO ZOOM
         }
 
-        zoom = MathUtils.clamp(zoom, 1, WORLD_WIDTH / viewportWidth);
-        zoom = MathUtils.clamp(zoom, 1, WORLD_HEIGHT / viewportHeight);
+        zoom = MathUtils.clamp(zoom, 1, (WORLD_WIDTH / viewportWidth) * 0.9f);
+        zoom = MathUtils.clamp(zoom, 1, (WORLD_HEIGHT / viewportHeight) * 0.9f);
 
         float effectiveViewportWidth = viewportWidth * zoom;
         float effectiveViewportHeight = viewportHeight * zoom;

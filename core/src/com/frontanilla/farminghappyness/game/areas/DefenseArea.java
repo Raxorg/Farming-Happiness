@@ -3,6 +3,10 @@ package com.frontanilla.farminghappyness.game.areas;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.frontanilla.farminghappyness.utils.Constants;
 
+import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_AREA_COLUMNS;
+import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_AREA_ROWS;
+import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_AREA_X;
+import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_AREA_Y;
 import static com.frontanilla.farminghappyness.utils.Enums.TileType.DEFENSIVE_TILE;
 import static com.frontanilla.farminghappyness.utils.Enums.TileType.HIDDEN_TILE;
 
@@ -11,24 +15,21 @@ public class DefenseArea {
     private Tile[][] tileMatrix;
 
     public DefenseArea() {
-        int columns = (int) (Constants.DEFENSE_AREA_WIDTH / Constants.TILE_SIZE);
-        float xSpace = Constants.DEFENSE_AREA_WIDTH - columns * Constants.TILE_SIZE;
-        int rows = (int) (Constants.DEFENSE_AREA_HEIGHT / Constants.TILE_SIZE);
-        tileMatrix = new Tile[rows][columns];
-        for (int row = 0; row < rows; row++) {
+        tileMatrix = new Tile[DEFENSE_AREA_ROWS][DEFENSE_AREA_COLUMNS];
+        for (int row = 0; row < DEFENSE_AREA_ROWS; row++) {
             // Tile row
-            tileMatrix[row] = new Tile[columns];
-            for (int column = 0; column < columns; column++) {
+            tileMatrix[row] = new Tile[DEFENSE_AREA_COLUMNS];
+            for (int column = 0; column < DEFENSE_AREA_COLUMNS; column++) {
                 if (column <= 3 || row <= 3) {
                     tileMatrix[row][column] = new Tile(
                             DEFENSIVE_TILE,
-                            Constants.WORLD_WIDTH - Constants.DEFENSE_AREA_WIDTH + column * Constants.TILE_SIZE + xSpace,
-                            Constants.WORLD_HEIGHT - Constants.DEFENSE_AREA_HEIGHT + Constants.TILE_SIZE * row);
+                            DEFENSE_AREA_X + column * Constants.TILE_SIZE,
+                            DEFENSE_AREA_Y + Constants.TILE_SIZE * row);
                 } else {
                     tileMatrix[row][column] = new Tile(
                             HIDDEN_TILE,
-                            Constants.WORLD_WIDTH - Constants.DEFENSE_AREA_WIDTH + column * Constants.TILE_SIZE + xSpace,
-                            Constants.WORLD_HEIGHT - Constants.DEFENSE_AREA_HEIGHT + Constants.TILE_SIZE * row);
+                            DEFENSE_AREA_X + column * Constants.TILE_SIZE,
+                            DEFENSE_AREA_Y + Constants.TILE_SIZE * row);
                 }
             }
         }

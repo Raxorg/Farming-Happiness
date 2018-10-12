@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.frontanilla.farminghappyness.game.other.Bullet;
 import com.frontanilla.farminghappyness.game.units.Enemy;
 import com.frontanilla.farminghappyness.tests.MyCamera;
 

@@ -40,7 +40,7 @@ public class Constants {
     public static final float TURRET_COOL_DOWN = 0.5f;
     // Turret Bullet
     public static final float TURRET_BULLET_SIZE = TURRET_SIZE / 10;
-    public static final float TURRET_BULLET_SPEED = 150f;
+    public static final float TURRET_BULLET_SPEED = 250f;
     // Enemies
     public static final float ENEMY_WIDTH = 15f;
     public static final float ENEMY_HEIGHT = 30f;
@@ -48,4 +48,7 @@ public class Constants {
     // Tourists
     public static final int TOURIST_INITIAL_LIFE = 5;
     public static final float TOURIST_SPEED = 20f;
+    // Life bars
+    public static final float ENEMY_LIFE_BAR_HEIGHT = 5f;
+    public static final float ENEMY_LIFE_BAR_SIDES_WIDTH = (ENEMY_LIFE_BAR_HEIGHT / 10f);
 }

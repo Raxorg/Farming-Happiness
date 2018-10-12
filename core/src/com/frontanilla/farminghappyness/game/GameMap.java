@@ -1,5 +1,6 @@
 package com.frontanilla.farminghappyness.game;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.frontanilla.farminghappyness.game.areas.DefenseArea;
 import com.frontanilla.farminghappyness.game.areas.FarmingArea;
@@ -29,6 +30,7 @@ public class GameMap {
     }
 
     private void renderGround(SpriteBatch batch) {
+        batch.setColor(Color.WHITE);
         for (int column = 0; column < GRASS_COLUMNS; column++) {
             for (int row = 0; row < GRASS_ROWS; row++) {
                 batch.draw(

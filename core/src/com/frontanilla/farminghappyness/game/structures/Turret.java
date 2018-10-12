@@ -1,7 +1,7 @@
 package com.frontanilla.farminghappyness.game.structures;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.frontanilla.farminghappyness.game.Bullet;
+import com.frontanilla.farminghappyness.game.other.Bullet;
 import com.frontanilla.farminghappyness.game.areas.Tile;
 import com.frontanilla.farminghappyness.game.units.Enemy;
 import com.frontanilla.farminghappyness.utils.Assets;
@@ -58,9 +58,7 @@ public class Turret {
 
     public Bullet shoot(Enemy e) {
         coolDown = TURRET_COOL_DOWN;
-        Point bulletPosition = getCenter();
-        Bullet bullet = new Bullet(bulletPosition);
-        return bullet;
+        return new Bullet(getCenter(), e);
     }
 
     public float getCoolDown() {

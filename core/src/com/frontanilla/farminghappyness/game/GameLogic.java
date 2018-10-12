@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.frontanilla.farminghappyness.game.areas.Tile;
+import com.frontanilla.farminghappyness.game.other.Bullet;
 import com.frontanilla.farminghappyness.game.structures.Turret;
 import com.frontanilla.farminghappyness.game.units.Enemy;
 import com.frontanilla.farminghappyness.game.units.Tourist;
@@ -50,9 +51,14 @@ public class GameLogic {
     }
 
     private void updateEnemies(float delta) {
+        enemies.begin();
         for (Enemy e : enemies) {
             e.move(delta);
+            if (!e.isAlive()) {
+                enemies.removeValue(e, true);
+            }
         }
+        enemies.end();
     }
 
     private void updateTurrets(float delta) {
@@ -76,9 +82,14 @@ public class GameLogic {
     }
 
     private void updateBullets(float delta) {
+        bullets.begin();
         for (Bullet b : bullets) {
             b.update(delta);
+            if (b.hasExploded()) {
+                bullets.removeValue(b, true);
+            }
         }
+        bullets.end();
     }
 
     private void spawnEnemy() {

@@ -9,19 +9,26 @@ import com.frontanilla.farminghappyness.game.areas.Tile;
 import com.frontanilla.farminghappyness.game.structures.Turret;
 import com.frontanilla.farminghappyness.game.units.Enemy;
 import com.frontanilla.farminghappyness.game.units.Tourist;
+import com.frontanilla.farminghappyness.utils.Constants;
 import com.frontanilla.farminghappyness.utils.Util;
 
+import static com.frontanilla.farminghappyness.utils.Constants.ENEMY_HEIGHT;
+import static com.frontanilla.farminghappyness.utils.Constants.ENEMY_WIDTH;
+import static com.frontanilla.farminghappyness.utils.Constants.WORLD_HEIGHT;
+import static com.frontanilla.farminghappyness.utils.Constants.WORLD_WIDTH;
 import static com.frontanilla.farminghappyness.utils.Enums.TileType.DEFENSIVE_TILE;
 
 public class GameLogic {
 
     private GameScreen gameScreen;
     private DelayedRemovalArray<Enemy> enemies;
+    private DelayedRemovalArray<Bullet> bullets;
     private float time;
 
     public GameLogic(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
         enemies = new DelayedRemovalArray<>();
+        bullets = new DelayedRemovalArray<>();
         time = 0;
     }
 
@@ -31,39 +38,61 @@ public class GameLogic {
         gameScreen.getBatch().setProjectionMatrix(gameScreen.getCamera().combined);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        moveEnemies(delta);
-
-        rotateTurrets();
+        updateEnemies(delta);
+        updateTurrets(delta);
+        updateBullets(delta);
 
         time += delta;
-        if (time >= 0.5f) {
+        if (time >= Constants.SPAWN_RATE) {
             spawnEnemy();
-            time -= 0.5f;
+            time -= Constants.SPAWN_RATE;
         }
     }
 
-    private void moveEnemies(float delta) {
+    private void updateEnemies(float delta) {
         for (Enemy e : enemies) {
-            float angle = Util.getAngle(e.getCenter(), gameScreen.getMap().getFarmingArea().getCenter());
-            float cos = MathUtils.cosDeg(angle);
-            float sin = MathUtils.sinDeg(angle);
-            e.move(delta * cos, delta * sin);
+            e.move(delta);
         }
     }
 
-    private void rotateTurrets() {
+    private void updateTurrets(float delta) {
         for (Tile[] tileRow : gameScreen.getMap().getDefenseTiles()) {
             for (Tile tile : tileRow) {
                 if (tile.getContent() != null && tile.getContent() instanceof Turret) {
-                    tile.getContent().setCannonRotation(0); // TODO calc rotation
+                    tile.getContent().update(delta);
+                    for (Enemy e : enemies) {
+                        if (Util.getDistance(e.getCenter(), tile.getContent().getCenter()) < Constants.TURRET_RANGE) {
+                            float angle = Util.getAngle(tile.getContent().getCenter(), e.getCenter());
+                            tile.getContent().setCannonRotation(angle);
+                            if (tile.getContent().getCoolDown() == 0) {
+                                bullets.add(tile.getContent().shoot(e));
+                            }
+                            break;
+                        }
+                    }
                 }
             }
         }
     }
 
+    private void updateBullets(float delta) {
+        for (Bullet b : bullets) {
+            b.update(delta);
+        }
+    }
+
     private void spawnEnemy() {
-        int rand = MathUtils.random(1, 6);
-        Tourist t = new Tourist(rand * 100, 100);
+        boolean randSide = MathUtils.randomBoolean();
+        Tourist t;
+        if (randSide) { // Left
+            float randY = MathUtils.random(0, WORLD_HEIGHT - ENEMY_HEIGHT);
+            t = new Tourist(-ENEMY_WIDTH, randY);
+        } else { // Bottom
+            float randX = MathUtils.random(0, WORLD_WIDTH - ENEMY_WIDTH);
+            t = new Tourist(randX, -ENEMY_HEIGHT);
+        }
+        float angle = Util.getAngle(t.getCenter(), gameScreen.getMap().getFarmingArea().getCenter());
+        t.setAngle(angle);
         enemies.add(t);
     }
 
@@ -80,5 +109,9 @@ public class GameLogic {
 
     public DelayedRemovalArray<Enemy> getEnemies() {
         return enemies;
+    }
+
+    public DelayedRemovalArray<Bullet> getBullets() {
+        return bullets;
     }
 }

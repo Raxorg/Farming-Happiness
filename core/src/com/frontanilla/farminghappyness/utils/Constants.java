@@ -36,10 +36,16 @@ public class Constants {
     public static final float PANNING_SPEED = 10f;
     // Turret
     public static final float TURRET_SIZE = 20f;
-    public static final float TURRET_RANGE = 200f;
+    public static final float TURRET_RANGE = 100f;
+    public static final float TURRET_COOL_DOWN = 0.5f;
+    // Turret Bullet
+    public static final float TURRET_BULLET_SIZE = TURRET_SIZE / 10;
+    public static final float TURRET_BULLET_SPEED = 150f;
     // Enemies
     public static final float ENEMY_WIDTH = 15f;
     public static final float ENEMY_HEIGHT = 30f;
+    public static final float SPAWN_RATE = 0.15f;
     // Tourists
+    public static final int TOURIST_INITIAL_LIFE = 5;
     public static final float TOURIST_SPEED = 20f;
 }

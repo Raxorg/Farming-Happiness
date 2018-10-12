@@ -14,4 +14,10 @@ public class Util {
         return angle;
     }
 
+    public static float getDistance(Point a, Point b) {
+        double temp = Math.pow(a.getX() - b.getX(), 2);
+        double temp2 = Math.pow(a.getY() - b.getY(), 2);
+        return (float) Math.sqrt(temp + temp2);
+    }
+
 }

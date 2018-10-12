@@ -7,8 +7,8 @@ import com.frontanilla.farminghappyness.core.FarmingGame;
 public class DesktopLauncher {
     public static void main(String[] arg) {
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-        config.width = 1000;
-        config.height = 500;
+        config.width = 1400;
+        config.height = config.width / 2;
         new LwjglApplication(new FarmingGame(), config);
     }
 }

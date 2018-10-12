@@ -44,6 +44,9 @@ public class GameScreen extends ScreenAdapter {
         for (Enemy e : gameLogic.getEnemies()) {
             e.render(batch);
         }
+        for (Bullet b : gameLogic.getBullets()) {
+            b.render(batch);
+        }
         batch.end();
     }
 

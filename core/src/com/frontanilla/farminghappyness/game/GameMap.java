@@ -50,4 +50,8 @@ public class GameMap {
     public FarmingArea getFarmingArea() {
         return farmingArea;
     }
+
+    public DefenseArea getDefenseArea() {
+        return defenseArea;
+    }
 }

@@ -3,6 +3,7 @@ package com.frontanilla.farminghappyness.game.areas;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.frontanilla.farminghappyness.game.structures.Content;
 import com.frontanilla.farminghappyness.game.structures.Turret;
 import com.frontanilla.farminghappyness.utils.Assets;
 import com.frontanilla.farminghappyness.utils.Enums;
@@ -14,7 +15,7 @@ public class Tile {
     private Enums.TileType type;
     private float x, y;
     private Rectangle bounds;
-    private Turret content;
+    private Content content;
 
     public Tile(Enums.TileType type, float x, float y) {
         this.type = type;
@@ -55,12 +56,12 @@ public class Tile {
         return bounds.contains(x, y);
     }
 
-    public Turret getContent() {
+    public Content getContent() {
         return content;
     }
 
-    public void setContent(Turret turret) {
-        content = turret;
+    public void setContent(Content content) {
+        this.content = content;
     }
 
     public float getX() {

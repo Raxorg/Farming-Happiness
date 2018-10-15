@@ -41,6 +41,8 @@ public class Constants {
     // Turret Bullet
     public static final float TURRET_BULLET_SIZE = TURRET_SIZE / 10;
     public static final float TURRET_BULLET_SPEED = 250f;
+    // WALL
+    public static final float WALL_SIZE = 20f;
     // Enemies
     public static final float ENEMY_WIDTH = 15f;
     public static final float ENEMY_HEIGHT = 30f;

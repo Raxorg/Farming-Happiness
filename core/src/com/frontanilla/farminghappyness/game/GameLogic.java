@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.frontanilla.farminghappyness.game.areas.Tile;
 import com.frontanilla.farminghappyness.game.other.Bullet;
 import com.frontanilla.farminghappyness.game.structures.Turret;
+import com.frontanilla.farminghappyness.game.structures.Wall;
 import com.frontanilla.farminghappyness.game.units.Enemy;
 import com.frontanilla.farminghappyness.game.units.Tourist;
 import com.frontanilla.farminghappyness.utils.Constants;
@@ -68,10 +69,11 @@ public class GameLogic {
                     tile.getContent().update(delta);
                     for (Enemy e : enemies) {
                         if (Util.getDistance(e.getCenter(), tile.getContent().getCenter()) < Constants.TURRET_RANGE) {
+                            Turret turret = (Turret) tile.getContent();
                             float angle = Util.getAngle(tile.getContent().getCenter(), e.getCenter());
-                            tile.getContent().setCannonRotation(angle);
-                            if (tile.getContent().getCoolDown() == 0) {
-                                bullets.add(tile.getContent().shoot(e));
+                            turret.setCannonRotation(angle);
+                            if (turret.getCoolDown() == 0) {
+                                bullets.add(turret.shoot(e));
                             }
                             break;
                         }
@@ -111,6 +113,7 @@ public class GameLogic {
         for (Tile[] tileRow : gameScreen.getMap().getDefenseTiles()) {
             for (Tile tile : tileRow) {
                 if (tile.contains(usefulVector.x, usefulVector.y) && tile.getType() == DEFENSIVE_TILE) {
+                    // TODO place stuff according to player's selection
                     tile.setContent(new Turret(tile));
                     return;
                 }

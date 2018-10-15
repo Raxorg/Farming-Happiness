@@ -13,9 +13,11 @@ import static com.frontanilla.farminghappyness.utils.Constants.ENEMY_WIDTH;
 public class LifeBar {
 
     private Enemy enemy;
+    private float portionWidth;
 
     public LifeBar(Enemy enemy) {
         this.enemy = enemy;
+        portionWidth = (ENEMY_WIDTH - ENEMY_LIFE_BAR_SIDES_WIDTH * 2) / enemy.getInitialLife();
     }
 
     public void render(SpriteBatch batch) {
@@ -27,17 +29,19 @@ public class LifeBar {
                 ENEMY_LIFE_BAR_SIDES_WIDTH,
                 ENEMY_LIFE_BAR_HEIGHT);
         // Center TODO, draw this according to HP
-        batch.setColor(Color.BLUE);
-        batch.draw(
-                Assets.centerLifeBar,
-                enemy.getPosition().getX() + ENEMY_LIFE_BAR_SIDES_WIDTH,
-                enemy.getPosition().getY() + ENEMY_HEIGHT,
-                ENEMY_WIDTH - ENEMY_LIFE_BAR_SIDES_WIDTH * 2,
-                ENEMY_LIFE_BAR_HEIGHT);
+        for (int i = 0; i < enemy.getLife(); i++) {
+            batch.setColor(Color.RED);
+            batch.draw(
+                    Assets.centerLifeBar,
+                    enemy.getPosition().getX() + ENEMY_LIFE_BAR_SIDES_WIDTH + portionWidth * i,
+                    enemy.getPosition().getY() + ENEMY_HEIGHT,
+                    portionWidth,
+                    ENEMY_LIFE_BAR_HEIGHT);
+        }
         // Left side
         batch.draw(
                 Assets.sidesLifeBar,
-                enemy.getPosition().getX() + ENEMY_WIDTH - ENEMY_LIFE_BAR_SIDES_WIDTH,
+                enemy.getPosition().getX() + ENEMY_WIDTH - ENEMY_LIFE_BAR_SIDES_WIDTH - portionWidth * (enemy.getInitialLife() - enemy.getLife()),
                 enemy.getPosition().getY() + ENEMY_HEIGHT,
                 ENEMY_LIFE_BAR_SIDES_WIDTH,
                 ENEMY_LIFE_BAR_HEIGHT);

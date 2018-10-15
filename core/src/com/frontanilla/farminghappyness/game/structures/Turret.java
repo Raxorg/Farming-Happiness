@@ -12,9 +12,8 @@ import static com.frontanilla.farminghappyness.utils.Constants.TURRET_COOL_DOWN;
 import static com.frontanilla.farminghappyness.utils.Constants.TURRET_RANGE;
 import static com.frontanilla.farminghappyness.utils.Constants.TURRET_SIZE;
 
-public class Turret {
+public class Turret extends Content {
 
-    private Point position;
     private float cannonRotation;
     private float coolDown;
 
@@ -48,12 +47,6 @@ public class Turret {
                 1,
                 1,
                 cannonRotation);
-        batch.draw(
-                Assets.rangeCircle,
-                position.getX() - TURRET_RANGE + TURRET_SIZE / 2,
-                position.getY() - TURRET_RANGE + TURRET_SIZE / 2,
-                TURRET_RANGE * 2,
-                TURRET_RANGE * 2);
     }
 
     public Bullet shoot(Enemy e) {

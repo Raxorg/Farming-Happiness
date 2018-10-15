@@ -4,16 +4,21 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.frontanilla.farminghappyness.game.areas.Tile;
 import com.frontanilla.farminghappyness.game.other.Bullet;
+import com.frontanilla.farminghappyness.game.structures.Turret;
 import com.frontanilla.farminghappyness.game.units.Enemy;
 import com.frontanilla.farminghappyness.tests.MyCamera;
+import com.frontanilla.farminghappyness.utils.Assets;
 
+import static com.frontanilla.farminghappyness.utils.Constants.TURRET_RANGE;
+import static com.frontanilla.farminghappyness.utils.Constants.TURRET_SIZE;
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_WIDTH;
 
 public class GameScreen extends ScreenAdapter {
 
-    private SpriteBatch batch;
+    private SpriteBatch batch, staticBatch;
     private GameMap map;
     private MyCamera camera;
     private GameInput gameInput;
@@ -21,6 +26,7 @@ public class GameScreen extends ScreenAdapter {
 
     public GameScreen() {
         batch = new SpriteBatch();
+        staticBatch = new SpriteBatch();
         map = new GameMap();
 
         // Constructs a new OrthographicCamera, using the given viewport width and height
@@ -42,6 +48,19 @@ public class GameScreen extends ScreenAdapter {
 
         batch.begin();
         map.render(batch);
+        // TODO THIS IS TOO BIG TO BE HERE, RETHINK THIS PART, WE NEED TO DRAW THE RANGES BEHIND TURRETS
+        for (Tile[] tileRows : map.getDefenseArea().getTiles()) {
+            for (Tile tile : tileRows) {
+                if(tile.getContent() instanceof Turret) {
+                    batch.draw(
+                            Assets.rangeCircle,
+                            tile.getContent().getPosition().getX() - TURRET_RANGE + TURRET_SIZE / 2,
+                            tile.getContent().getPosition().getY() - TURRET_RANGE + TURRET_SIZE / 2,
+                            TURRET_RANGE * 2,
+                            TURRET_RANGE * 2);
+                }
+            }
+        }
         for (Enemy e : gameLogic.getEnemies()) {
             e.render(batch);
         }
@@ -49,6 +68,14 @@ public class GameScreen extends ScreenAdapter {
             b.render(batch);
         }
         batch.end();
+        staticBatch.begin();
+        staticBatch.draw(
+                Assets.triangle,
+                Gdx.graphics.getWidth() / 2f - Assets.triangle.getRegionWidth() / 2f,
+                0,
+                Gdx.graphics.getWidth() / 10f,
+                Gdx.graphics.getWidth() / 20f);
+        staticBatch.end();
     }
 
     @Override

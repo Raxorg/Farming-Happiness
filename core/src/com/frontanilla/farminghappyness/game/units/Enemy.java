@@ -15,7 +15,7 @@ public abstract class Enemy {
     protected TextureRegion texture;
     protected Point position;
     protected float speed, angle;
-    protected int life;
+    protected int life, initialLife;
     protected LifeBar lifeBar;
 
     public Enemy(TextureRegion texture, float x, float y, float speed, int life) {
@@ -23,6 +23,7 @@ public abstract class Enemy {
         position = new Point(x, y);
         this.speed = speed;
         this.life = life;
+        initialLife = life;
         lifeBar = new LifeBar(this);
     }
 
@@ -68,5 +69,9 @@ public abstract class Enemy {
 
     public boolean isAlive() {
         return life > 0;
+    }
+
+    public int getInitialLife() {
+        return initialLife;
     }
 }

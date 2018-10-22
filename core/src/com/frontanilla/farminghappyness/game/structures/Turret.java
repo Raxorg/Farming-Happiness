@@ -1,5 +1,6 @@
 package com.frontanilla.farminghappyness.game.structures;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.frontanilla.farminghappyness.game.other.Bullet;
 import com.frontanilla.farminghappyness.game.areas.Tile;
@@ -30,6 +31,7 @@ public class Turret extends Content {
     }
 
     public void render(SpriteBatch batch) {
+        batch.setColor(Color.WHITE);
         batch.draw(
                 Assets.turret,
                 position.getX(),

@@ -8,7 +8,6 @@ import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.frontanilla.farminghappyness.game.areas.Tile;
 import com.frontanilla.farminghappyness.game.other.Bullet;
 import com.frontanilla.farminghappyness.game.structures.Turret;
-import com.frontanilla.farminghappyness.game.structures.Wall;
 import com.frontanilla.farminghappyness.game.units.Enemy;
 import com.frontanilla.farminghappyness.game.units.Tourist;
 import com.frontanilla.farminghappyness.utils.Constants;
@@ -16,6 +15,7 @@ import com.frontanilla.farminghappyness.utils.Util;
 
 import static com.frontanilla.farminghappyness.utils.Constants.ENEMY_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.ENEMY_WIDTH;
+import static com.frontanilla.farminghappyness.utils.Constants.RIVER_TILE_SIZE;
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_WIDTH;
 import static com.frontanilla.farminghappyness.utils.Enums.TileType.DEFENSIVE_TILE;
@@ -24,12 +24,14 @@ public class GameLogic {
 
     private GameScreen gameScreen;
     private DelayedRemovalArray<Enemy> enemies;
+    private DelayedRemovalArray<Turret> turrets;
     private DelayedRemovalArray<Bullet> bullets;
     private float time;
 
     public GameLogic(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
         enemies = new DelayedRemovalArray<>();
+        turrets = new DelayedRemovalArray<>();
         bullets = new DelayedRemovalArray<>();
         time = 0;
     }
@@ -98,7 +100,7 @@ public class GameLogic {
         boolean randSide = MathUtils.randomBoolean();
         Tourist t;
         if (randSide) { // Left
-            float randY = MathUtils.random(0, WORLD_HEIGHT - ENEMY_HEIGHT);
+            float randY = MathUtils.random(0, WORLD_HEIGHT - ENEMY_HEIGHT - RIVER_TILE_SIZE);
             t = new Tourist(-ENEMY_WIDTH, randY);
         } else { // Bottom
             float randX = MathUtils.random(0, WORLD_WIDTH - ENEMY_WIDTH);
@@ -114,7 +116,9 @@ public class GameLogic {
             for (Tile tile : tileRow) {
                 if (tile.contains(usefulVector.x, usefulVector.y) && tile.getType() == DEFENSIVE_TILE) {
                     // TODO place stuff according to player's selection
-                    tile.setContent(new Turret(tile));
+                    Turret newTurret = new Turret(tile);
+                    turrets.add(newTurret);
+                    tile.setContent(newTurret);
                     return;
                 }
             }
@@ -127,5 +131,9 @@ public class GameLogic {
 
     public DelayedRemovalArray<Bullet> getBullets() {
         return bullets;
+    }
+
+    public DelayedRemovalArray<Turret> getTurrets() {
+        return turrets;
     }
 }

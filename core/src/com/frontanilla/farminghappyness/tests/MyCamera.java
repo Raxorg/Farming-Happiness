@@ -39,8 +39,8 @@ public class MyCamera extends OrthographicCamera {
             translate(0, Constants.PANNING_SPEED, 0); // TODO MULTIPLY BY A DYNAMIC VARIABLE ACCORDING TO ZOOM
         }
 
-        zoom = MathUtils.clamp(zoom, 1, (WORLD_WIDTH / viewportWidth) * 0.9f);
-        zoom = MathUtils.clamp(zoom, 1, (WORLD_HEIGHT / viewportHeight) * 0.9f);
+        zoom = MathUtils.clamp(zoom, 2, (WORLD_WIDTH / viewportWidth) * 0.9f);
+        zoom = MathUtils.clamp(zoom, 2, (WORLD_HEIGHT / viewportHeight) * 0.9f);
 
         float effectiveViewportWidth = viewportWidth * zoom;
         float effectiveViewportHeight = viewportHeight * zoom;

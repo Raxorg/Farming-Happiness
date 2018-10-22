@@ -8,6 +8,7 @@ import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_AREA_ROWS
 import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_AREA_X;
 import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_AREA_Y;
 import static com.frontanilla.farminghappyness.utils.Constants.TILE_SIZE;
+import static com.frontanilla.farminghappyness.utils.Constants.TILE_SPACING;
 import static com.frontanilla.farminghappyness.utils.Enums.TileType.DEFENSIVE_TILE;
 import static com.frontanilla.farminghappyness.utils.Enums.TileType.HIDDEN_TILE;
 
@@ -24,13 +25,13 @@ public class DefenseArea {
                 if (column < DEFENSE_AREA_DEFENSE_LINES || row < DEFENSE_AREA_DEFENSE_LINES) {
                     tileMatrix[row][column] = new Tile(
                             DEFENSIVE_TILE,
-                            DEFENSE_AREA_X + column * TILE_SIZE,
-                            DEFENSE_AREA_Y + row * TILE_SIZE);
+                            DEFENSE_AREA_X + column * (TILE_SIZE + TILE_SPACING),
+                            DEFENSE_AREA_Y + row * (TILE_SIZE + TILE_SPACING));
                 } else {
                     tileMatrix[row][column] = new Tile(
                             HIDDEN_TILE,
-                            DEFENSE_AREA_X + column * TILE_SIZE,
-                            DEFENSE_AREA_Y + row * TILE_SIZE);
+                            DEFENSE_AREA_X + column * (TILE_SIZE + TILE_SPACING),
+                            DEFENSE_AREA_Y + row * (TILE_SIZE + TILE_SPACING));
                 }
             }
         }
@@ -40,13 +41,6 @@ public class DefenseArea {
         for (Tile[] tileRow : tileMatrix) {
             for (Tile tile : tileRow) {
                 tile.render(batch);
-            }
-        }
-        for (Tile[] tileRow : tileMatrix) {
-            for (Tile tile : tileRow) {
-                if (tile.getContent() != null) {
-                    tile.getContent().render(batch);
-                }
             }
         }
     }

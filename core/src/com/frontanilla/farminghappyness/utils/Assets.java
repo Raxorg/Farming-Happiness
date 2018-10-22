@@ -12,10 +12,10 @@ public class Assets {
     public static void init() {
         Texture decoration = new Texture("images/decoration.png");
         tree = new TextureRegion(decoration, 0, 0, 170, 180);
-        river1 = new TextureRegion(decoration, 0, 180, 141, 170);
-        river2 = new TextureRegion(decoration, 141, 180, 141, 170);
-        river3 = new TextureRegion(decoration, 282, 180, 141, 170);
-        river4 = new TextureRegion(decoration, 423, 180, 141, 170);
+        river1 = new TextureRegion(decoration, 0, 200, 141, 130);
+        river2 = new TextureRegion(decoration, 141, 200, 141, 130);
+        river3 = new TextureRegion(decoration, 282, 200, 141, 130);
+        river4 = new TextureRegion(decoration, 423, 200, 141, 130);
         Texture tiles = new Texture("images/tiles.png");
         farmingTile = new TextureRegion(tiles, 225, 0, 150, 150);
         grass = new TextureRegion(tiles, 0, 0, 225, 225);
@@ -34,7 +34,6 @@ public class Assets {
         centerLifeBar = new TextureRegion(hud, 50, 0, 40, 100);
         centerEmptyLifeBar = new TextureRegion(hud, 10, 0, 40, 100);
         triangle = new TextureRegion(hud, 90, 0, 200, 100);
-
     }
 
 }

@@ -2,8 +2,10 @@ package com.frontanilla.farminghappyness.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.frontanilla.farminghappyness.game.areas.DisplayArea;
 import com.frontanilla.farminghappyness.game.areas.Tile;
 import com.frontanilla.farminghappyness.game.other.Bullet;
 import com.frontanilla.farminghappyness.game.structures.Turret;
@@ -23,11 +25,13 @@ public class GameScreen extends ScreenAdapter {
     private MyCamera camera;
     private GameInput gameInput;
     private GameLogic gameLogic;
+    private DisplayArea displayArea; // TODO DELETE GameMap class
 
     public GameScreen() {
         batch = new SpriteBatch();
         staticBatch = new SpriteBatch();
         map = new GameMap();
+        displayArea = new DisplayArea();
 
         // Constructs a new OrthographicCamera, using the given viewport width and height
         // Height is multiplied by aspect ratio.
@@ -49,6 +53,13 @@ public class GameScreen extends ScreenAdapter {
         batch.begin();
         map.render(batch);
         // TODO THIS IS TOO BIG TO BE HERE, RETHINK THIS PART, WE NEED TO DRAW THE RANGES BEHIND TURRETS
+        for (Enemy e : gameLogic.getEnemies()) {
+            e.render(batch);
+        }
+        for (Bullet b : gameLogic.getBullets()) {
+            b.render(batch);
+        }
+        batch.setColor(Color.WHITE);
         for (Tile[] tileRows : map.getDefenseArea().getTiles()) {
             for (Tile tile : tileRows) {
                 if(tile.getContent() instanceof Turret) {
@@ -61,21 +72,11 @@ public class GameScreen extends ScreenAdapter {
                 }
             }
         }
-        for (Enemy e : gameLogic.getEnemies()) {
-            e.render(batch);
-        }
-        for (Bullet b : gameLogic.getBullets()) {
-            b.render(batch);
+        for (Turret t : gameLogic.getTurrets()) {
+            t.render(batch);
         }
         batch.end();
-        staticBatch.begin();
-        staticBatch.draw(
-                Assets.triangle,
-                Gdx.graphics.getWidth() / 2f - Assets.triangle.getRegionWidth() / 2f,
-                0,
-                Gdx.graphics.getWidth() / 10f,
-                Gdx.graphics.getWidth() / 20f);
-        staticBatch.end();
+        displayArea.render(staticBatch);
     }
 
     @Override

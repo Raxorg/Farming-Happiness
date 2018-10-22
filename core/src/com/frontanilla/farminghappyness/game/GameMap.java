@@ -2,6 +2,8 @@ package com.frontanilla.farminghappyness.game;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.frontanilla.farminghappyness.game.areas.DefenseArea;
 import com.frontanilla.farminghappyness.game.areas.FarmingArea;
 import com.frontanilla.farminghappyness.game.areas.Tile;
@@ -11,6 +13,9 @@ import static com.frontanilla.farminghappyness.utils.Constants.GRASS_COLUMNS;
 import static com.frontanilla.farminghappyness.utils.Constants.GRASS_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.GRASS_ROWS;
 import static com.frontanilla.farminghappyness.utils.Constants.GRASS_WIDTH;
+import static com.frontanilla.farminghappyness.utils.Constants.RIVER_TILES;
+import static com.frontanilla.farminghappyness.utils.Constants.RIVER_TILE_SIZE;
+import static com.frontanilla.farminghappyness.utils.Constants.WORLD_HEIGHT;
 
 public class GameMap {
 
@@ -20,13 +25,26 @@ public class GameMap {
     public GameMap() {
         farmingArea = new FarmingArea();
         defenseArea = new DefenseArea();
+        // TODO randomize river tiles and save them
     }
 
     public void render(SpriteBatch batch) {
         renderGround(batch);
+        renderRiver(batch);
 
         farmingArea.render(batch);
         defenseArea.render(batch);
+    }
+
+    private void renderRiver(SpriteBatch batch) {
+        for (int i = 0; i < RIVER_TILES; i++) {
+            batch.draw(
+                    Assets.river1,
+                    RIVER_TILE_SIZE * i,
+                    WORLD_HEIGHT - RIVER_TILE_SIZE,
+                    RIVER_TILE_SIZE,
+                    RIVER_TILE_SIZE);
+        }
     }
 
     private void renderGround(SpriteBatch batch) {

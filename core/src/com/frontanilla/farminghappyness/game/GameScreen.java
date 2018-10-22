@@ -7,14 +7,16 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.frontanilla.farminghappyness.game.areas.DisplayArea;
 import com.frontanilla.farminghappyness.game.areas.Tile;
+import com.frontanilla.farminghappyness.game.defenses.Defense;
+import com.frontanilla.farminghappyness.game.defenses.Wall;
 import com.frontanilla.farminghappyness.game.other.Bullet;
-import com.frontanilla.farminghappyness.game.structures.Turret;
+import com.frontanilla.farminghappyness.game.defenses.Turret;
 import com.frontanilla.farminghappyness.game.units.Enemy;
 import com.frontanilla.farminghappyness.tests.MyCamera;
 import com.frontanilla.farminghappyness.utils.Assets;
 
 import static com.frontanilla.farminghappyness.utils.Constants.TURRET_RANGE;
-import static com.frontanilla.farminghappyness.utils.Constants.TURRET_SIZE;
+import static com.frontanilla.farminghappyness.utils.Constants.TURRET_WIDTH;
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_WIDTH;
 
@@ -53,27 +55,36 @@ public class GameScreen extends ScreenAdapter {
         batch.begin();
         map.render(batch);
         // TODO THIS IS TOO BIG TO BE HERE, RETHINK THIS PART, WE NEED TO DRAW THE RANGES BEHIND TURRETS
-        for (Enemy e : gameLogic.getEnemies()) {
-            e.render(batch);
-        }
         for (Bullet b : gameLogic.getBullets()) {
             b.render(batch);
         }
         batch.setColor(Color.WHITE);
         for (Tile[] tileRows : map.getDefenseArea().getTiles()) {
             for (Tile tile : tileRows) {
-                if(tile.getContent() instanceof Turret) {
+                if(tile.getDefense() instanceof Turret) {
                     batch.draw(
                             Assets.rangeCircle,
-                            tile.getContent().getPosition().getX() - TURRET_RANGE + TURRET_SIZE / 2,
-                            tile.getContent().getPosition().getY() - TURRET_RANGE + TURRET_SIZE / 2,
+                            tile.getDefense().getPosition().getX() - TURRET_RANGE + TURRET_WIDTH / 2,
+                            tile.getDefense().getPosition().getY() - TURRET_RANGE + TURRET_WIDTH / 2,
                             TURRET_RANGE * 2,
                             TURRET_RANGE * 2);
                 }
             }
         }
-        for (Turret t : gameLogic.getTurrets()) {
-            t.render(batch);
+        // Render turrets
+        for (Defense d : gameLogic.getDefenses()) {
+            if (d instanceof Turret) {
+                d.render(batch);
+            }
+        }
+        // Render walls
+        for (Defense d : gameLogic.getDefenses()) {
+            if (d instanceof Wall) {
+                d.render(batch);
+            }
+        }
+        for (Enemy e : gameLogic.getEnemies()) {
+            e.render(batch);
         }
         batch.end();
         displayArea.render(staticBatch);

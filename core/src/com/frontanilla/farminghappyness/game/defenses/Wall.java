@@ -1,20 +1,22 @@
-package com.frontanilla.farminghappyness.game.structures;
+package com.frontanilla.farminghappyness.game.defenses;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.frontanilla.farminghappyness.game.areas.Tile;
 import com.frontanilla.farminghappyness.utils.Assets;
 import com.frontanilla.farminghappyness.utils.Point;
 
-import static com.frontanilla.farminghappyness.utils.Constants.TILE_SIZE;
-import static com.frontanilla.farminghappyness.utils.Constants.TURRET_SIZE;
+import static com.frontanilla.farminghappyness.utils.Constants.TILE_SPACING;
 import static com.frontanilla.farminghappyness.utils.Constants.WALL_SIZE;
 
-public class Wall extends Content {
+public class Wall extends Defense {
 
     public Wall(Tile tile) {
-        float x = tile.getX() + (TILE_SIZE - WALL_SIZE) / 2;
-        float y = tile.getY() + (TILE_SIZE - WALL_SIZE) / 2;
+        float x = tile.getX();
+        float y = tile.getY();
         position = new Point(x, y);
+
+        bounds = new Rectangle(x, y, WALL_SIZE, WALL_SIZE);
     }
 
 
@@ -27,9 +29,9 @@ public class Wall extends Content {
     public void render(SpriteBatch batch) {
         batch.draw(
                 Assets.wall,
-                position.getX(),
+                position.getX() - TILE_SPACING,
                 position.getY(),
-                TURRET_SIZE,
-                TURRET_SIZE);
+                WALL_SIZE + TILE_SPACING * 2,
+                WALL_SIZE);
     }
 }

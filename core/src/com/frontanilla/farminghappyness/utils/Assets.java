@@ -21,10 +21,10 @@ public class Assets {
         grass = new TextureRegion(tiles, 0, 0, 225, 225);
         defenseTile = new TextureRegion(tiles, 0, 225, 100, 100);
         Texture defenses = new Texture("images/defenses.png");
-        turret = new TextureRegion(defenses, 0, 0, 400, 400);
-        turretCannon = new TextureRegion(defenses, 400, 0, 400, 400);
+        turret = new TextureRegion(defenses, 0, 0, 60, 88);
+        turretCannon = new TextureRegion(defenses, 60, 0, 60, 88);
         turretBullet = new TextureRegion(defenses, 0, 0, 25, 25);
-        wall = new TextureRegion(defenses, 0, 400, 400, 400);
+        wall = new TextureRegion(defenses, 0, 400, 120, 70);
         Texture enemies = new Texture("images/enemies.png");
         tourist = new TextureRegion(enemies, 100, 200, 100, 200);
         Texture debug = new Texture("images/rangeCircle.png");

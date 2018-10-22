@@ -8,4 +8,10 @@ public class Enums {
         HIDDEN_TILE
     }
 
+    public enum EnemyState {
+        MOVING,
+        CLIMBING,
+        SHOOTING,
+        SHOOTING_AND_MOVING
+    }
 }

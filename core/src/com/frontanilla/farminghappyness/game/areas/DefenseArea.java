@@ -40,7 +40,9 @@ public class DefenseArea {
     public void render(SpriteBatch batch) {
         for (Tile[] tileRow : tileMatrix) {
             for (Tile tile : tileRow) {
-                tile.render(batch);
+                if (tile.getDefense() == null) {
+                    tile.render(batch);
+                }
             }
         }
     }

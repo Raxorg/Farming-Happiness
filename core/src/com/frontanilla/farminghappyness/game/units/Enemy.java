@@ -4,6 +4,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.DelayedRemovalArray;
+import com.frontanilla.farminghappyness.game.defenses.Defense;
 import com.frontanilla.farminghappyness.game.other.LifeBar;
 import com.frontanilla.farminghappyness.utils.Point;
 
@@ -17,6 +20,7 @@ public abstract class Enemy {
     protected float speed, angle;
     protected int life, initialLife;
     protected LifeBar lifeBar;
+    protected Rectangle bounds;
 
     public Enemy(TextureRegion texture, float x, float y, float speed, int life) {
         this.texture = texture;
@@ -25,6 +29,7 @@ public abstract class Enemy {
         this.life = life;
         initialLife = life;
         lifeBar = new LifeBar(this);
+        bounds = new Rectangle(x, y, ENEMY_WIDTH, ENEMY_HEIGHT);
     }
 
     public void render(SpriteBatch batch) {
@@ -38,13 +43,17 @@ public abstract class Enemy {
         lifeBar.render(batch);
     }
 
-    public void move(float delta) {
+    public void update(float delta, DelayedRemovalArray<Defense> defenses) {
+        bounds.set(position.getX(), position.getY(), ENEMY_WIDTH, ENEMY_HEIGHT);
+    }
+
+    protected void move(float delta, float speedModifier) {
         float cos = MathUtils.cosDeg(angle);
         float sin = MathUtils.sinDeg(angle);
         float x = delta * cos;
         float y = delta * sin;
-        position.setX(position.getX() + x * speed);
-        position.setY(position.getY() + y * speed);
+        position.setX(position.getX() + x * speed * speedModifier);
+        position.setY(position.getY() + y * speed * speedModifier);
     }
 
     public Point getPosition() {

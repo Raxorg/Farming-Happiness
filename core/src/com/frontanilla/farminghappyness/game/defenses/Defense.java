@@ -1,10 +1,12 @@
-package com.frontanilla.farminghappyness.game.structures;
+package com.frontanilla.farminghappyness.game.defenses;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.frontanilla.farminghappyness.utils.Point;
 
-public abstract class Content {
+public abstract class Defense {
 
+    protected Rectangle bounds;
     protected Point position, center;
 
     public Point getCenter() {
@@ -17,5 +19,9 @@ public abstract class Content {
 
     public Point getPosition() {
         return position;
+    }
+
+    public Rectangle getBounds() {
+        return bounds;
     }
 }

@@ -42,22 +42,23 @@ public class Constants {
     // Camera
     public static final float PANNING_SPEED = 10f;
     // Turret
-    public static final float TURRET_SIZE = 20f;
+    public static final float TURRET_WIDTH = 40f;
+    public static final float TURRET_HEIGHT = 50f;
     public static final float TURRET_RANGE = 100f;
     public static final float TURRET_COOL_DOWN = 0.5f;
     // Turret Bullet
-    public static final float TURRET_BULLET_SIZE = TURRET_SIZE / 10;
+    public static final float TURRET_BULLET_SIZE = TILE_SIZE / 10;
     public static final float TURRET_BULLET_SPEED = 250f;
     // WALL
-    public static final float WALL_SIZE = 20f;
+    public static final float WALL_SIZE = TILE_SIZE;
     // Enemies
-    public static final float ENEMY_WIDTH = 15f;
-    public static final float ENEMY_HEIGHT = 30f;
+    public static final float ENEMY_WIDTH = 10f;
+    public static final float ENEMY_HEIGHT = ENEMY_WIDTH * 2f;
     public static final float SPAWN_RATE = 0.15f;
     // Tourists
     public static final int TOURIST_INITIAL_LIFE = 5;
     public static final float TOURIST_SPEED = 20f;
     // Life bars
-    public static final float ENEMY_LIFE_BAR_HEIGHT = 5f;
+    public static final float ENEMY_LIFE_BAR_HEIGHT = 3f;
     public static final float ENEMY_LIFE_BAR_SIDES_WIDTH = (ENEMY_LIFE_BAR_HEIGHT / 10f);
 }

@@ -1,5 +1,7 @@
 package com.frontanilla.farminghappyness.game.units;
 
+import com.badlogic.gdx.utils.DelayedRemovalArray;
+import com.frontanilla.farminghappyness.game.defenses.Defense;
 import com.frontanilla.farminghappyness.utils.Assets;
 
 import static com.frontanilla.farminghappyness.utils.Constants.TOURIST_INITIAL_LIFE;
@@ -12,4 +14,19 @@ public class Tourist extends Enemy {
     }
 
 
+    @Override
+    public void update(float delta, DelayedRemovalArray<Defense> defenses) {
+        super.update(delta, defenses);
+        boolean stuck = false;
+        for (Defense d : defenses) {
+            if (bounds.overlaps(d.getBounds())) {
+                stuck = true;
+            }
+        }
+        if (stuck) {
+            move(delta, 0.25f);
+        } else {
+            move(delta, 1);
+        }
+    }
 }

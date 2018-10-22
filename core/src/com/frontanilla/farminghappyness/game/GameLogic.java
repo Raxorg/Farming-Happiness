@@ -1,13 +1,16 @@
 package com.frontanilla.farminghappyness.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.frontanilla.farminghappyness.game.areas.Tile;
+import com.frontanilla.farminghappyness.game.defenses.Defense;
+import com.frontanilla.farminghappyness.game.defenses.Turret;
+import com.frontanilla.farminghappyness.game.defenses.Wall;
 import com.frontanilla.farminghappyness.game.other.Bullet;
-import com.frontanilla.farminghappyness.game.structures.Turret;
 import com.frontanilla.farminghappyness.game.units.Enemy;
 import com.frontanilla.farminghappyness.game.units.Tourist;
 import com.frontanilla.farminghappyness.utils.Constants;
@@ -24,14 +27,14 @@ public class GameLogic {
 
     private GameScreen gameScreen;
     private DelayedRemovalArray<Enemy> enemies;
-    private DelayedRemovalArray<Turret> turrets;
+    private DelayedRemovalArray<Defense> defenses;
     private DelayedRemovalArray<Bullet> bullets;
     private float time;
 
     public GameLogic(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
         enemies = new DelayedRemovalArray<>();
-        turrets = new DelayedRemovalArray<>();
+        defenses = new DelayedRemovalArray<>();
         bullets = new DelayedRemovalArray<>();
         time = 0;
     }
@@ -56,7 +59,7 @@ public class GameLogic {
     private void updateEnemies(float delta) {
         enemies.begin();
         for (Enemy e : enemies) {
-            e.move(delta);
+            e.update(delta, defenses);
             if (!e.isAlive()) {
                 enemies.removeValue(e, true);
             }
@@ -67,12 +70,12 @@ public class GameLogic {
     private void updateTurrets(float delta) {
         for (Tile[] tileRow : gameScreen.getMap().getDefenseTiles()) {
             for (Tile tile : tileRow) {
-                if (tile.getContent() != null && tile.getContent() instanceof Turret) {
-                    tile.getContent().update(delta);
+                if (tile.getDefense() != null && tile.getDefense() instanceof Turret) {
+                    tile.getDefense().update(delta);
                     for (Enemy e : enemies) {
-                        if (Util.getDistance(e.getCenter(), tile.getContent().getCenter()) < Constants.TURRET_RANGE) {
-                            Turret turret = (Turret) tile.getContent();
-                            float angle = Util.getAngle(tile.getContent().getCenter(), e.getCenter());
+                        if (Util.getDistance(e.getCenter(), tile.getDefense().getCenter()) < Constants.TURRET_RANGE) {
+                            Turret turret = (Turret) tile.getDefense();
+                            float angle = Util.getAngle(tile.getDefense().getCenter(), e.getCenter());
                             turret.setCannonRotation(angle);
                             if (turret.getCoolDown() == 0) {
                                 bullets.add(turret.shoot(e));
@@ -111,14 +114,23 @@ public class GameLogic {
         enemies.add(t);
     }
 
-    public void touchDown(Vector3 usefulVector) {
+    public void touchDown(Vector3 usefulVector, int button) {
         for (Tile[] tileRow : gameScreen.getMap().getDefenseTiles()) {
             for (Tile tile : tileRow) {
                 if (tile.contains(usefulVector.x, usefulVector.y) && tile.getType() == DEFENSIVE_TILE) {
                     // TODO place stuff according to player's selection
-                    Turret newTurret = new Turret(tile);
-                    turrets.add(newTurret);
-                    tile.setContent(newTurret);
+                    switch (button) {
+                        case Input.Buttons.LEFT:
+                            Defense newDefense = new Turret(tile);
+                            defenses.add(newDefense);
+                            tile.setDefense(newDefense);
+                            break;
+                        case Input.Buttons.RIGHT:
+                            newDefense = new Wall(tile);
+                            defenses.add(newDefense);
+                            tile.setDefense(newDefense);
+                            break;
+                    }
                     return;
                 }
             }
@@ -133,7 +145,7 @@ public class GameLogic {
         return bullets;
     }
 
-    public DelayedRemovalArray<Turret> getTurrets() {
-        return turrets;
+    public DelayedRemovalArray<Defense> getDefenses() {
+        return defenses;
     }
 }

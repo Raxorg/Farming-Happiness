@@ -62,6 +62,7 @@ public class GameLogic {
             e.update(delta, defenses);
             if (!e.isAlive()) {
                 enemies.removeValue(e, true);
+                gameScreen.getGameStuff().setMoney(gameScreen.getGameStuff().getMoney() + 1);
             }
         }
         enemies.end();
@@ -75,7 +76,7 @@ public class GameLogic {
                     for (Enemy e : enemies) {
                         if (Util.getDistance(e.getCenter(), tile.getDefense().getCenter()) < Constants.TURRET_RANGE) {
                             Turret turret = (Turret) tile.getDefense();
-                            float angle = Util.getAngle(tile.getDefense().getCenter(), e.getCenter());
+                            float angle = Util.getAngle(tile.getDefense().getCenter(), e.getCenter()) + 155;
                             turret.setCannonRotation(angle);
                             if (turret.getCoolDown() == 0) {
                                 bullets.add(turret.shoot(e));
@@ -117,8 +118,12 @@ public class GameLogic {
     public void touchDown(Vector3 usefulVector, int button) {
         for (Tile[] tileRow : gameScreen.getMap().getDefenseTiles()) {
             for (Tile tile : tileRow) {
-                if (tile.contains(usefulVector.x, usefulVector.y) && tile.getType() == DEFENSIVE_TILE) {
+                if (tile.contains(usefulVector.x, usefulVector.y)
+                        && gameScreen.getGameStuff().getMoney() >= 10
+                        && tile.getType() == DEFENSIVE_TILE
+                        && tile.getDefense() == null) {
                     // TODO place stuff according to player's selection
+                    gameScreen.getGameStuff().setMoney(gameScreen.getGameStuff().getMoney() - 10);
                     switch (button) {
                         case Input.Buttons.LEFT:
                             Defense newDefense = new Turret(tile);

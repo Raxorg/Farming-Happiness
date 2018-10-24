@@ -8,20 +8,29 @@ public abstract class Defense {
 
     protected Rectangle bounds;
     protected Point position, center;
+    protected int health;
 
-    public Point getCenter() {
-        return center;
+    public Rectangle getBounds() {
+        return bounds;
     }
-
-    public abstract void update(float delta);
-
-    public abstract void render(SpriteBatch batch);
 
     public Point getPosition() {
         return position;
     }
 
-    public Rectangle getBounds() {
-        return bounds;
+    public Point getCenter() {
+        return center;
     }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public abstract void update(float delta);
+
+    public abstract void render(SpriteBatch batch);
 }

@@ -1,6 +1,7 @@
 package com.frontanilla.farminghappyness.game.areas;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.frontanilla.farminghappyness.utils.Assets;
 
 import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_AREA_COLUMNS;
 import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_AREA_DEFENSE_LINES;
@@ -25,11 +26,13 @@ public class DefenseArea {
                 if (column < DEFENSE_AREA_DEFENSE_LINES || row < DEFENSE_AREA_DEFENSE_LINES) {
                     tileMatrix[row][column] = new Tile(
                             DEFENSIVE_TILE,
+                            Assets.defenseTile,
                             DEFENSE_AREA_X + column * (TILE_SIZE + TILE_SPACING),
                             DEFENSE_AREA_Y + row * (TILE_SIZE + TILE_SPACING));
                 } else {
                     tileMatrix[row][column] = new Tile(
                             HIDDEN_TILE,
+                            Assets.empty,
                             DEFENSE_AREA_X + column * (TILE_SIZE + TILE_SPACING),
                             DEFENSE_AREA_Y + row * (TILE_SIZE + TILE_SPACING));
                 }

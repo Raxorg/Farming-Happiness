@@ -10,6 +10,10 @@ import com.frontanilla.farminghappyness.utils.Assets;
 import com.frontanilla.farminghappyness.utils.Point;
 
 import static com.frontanilla.farminghappyness.utils.Constants.TILE_SIZE;
+import static com.frontanilla.farminghappyness.utils.Constants.TURRET_CANNON_HEIGHT;
+import static com.frontanilla.farminghappyness.utils.Constants.TURRET_CANNON_WIDTH;
+import static com.frontanilla.farminghappyness.utils.Constants.TURRET_CANNON_X_OFFSET;
+import static com.frontanilla.farminghappyness.utils.Constants.TURRET_CANNON_Y_OFFSET;
 import static com.frontanilla.farminghappyness.utils.Constants.TURRET_COOL_DOWN;
 import static com.frontanilla.farminghappyness.utils.Constants.TURRET_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.TURRET_WIDTH;
@@ -43,12 +47,12 @@ public class Turret extends Defense {
                 TURRET_HEIGHT);
         batch.draw(
                 Assets.turretCannon,
-                position.getX(),
-                position.getY(),
-                TURRET_WIDTH / 2,
-                TURRET_HEIGHT / 2,
-                TURRET_WIDTH,
-                TURRET_HEIGHT,
+                position.getX() + TURRET_CANNON_X_OFFSET,
+                position.getY() + TURRET_CANNON_Y_OFFSET,
+                TURRET_CANNON_WIDTH / 2,
+                TURRET_CANNON_HEIGHT / 2,
+                TURRET_CANNON_WIDTH,
+                TURRET_CANNON_HEIGHT,
                 1,
                 1,
                 cannonRotation);
@@ -56,7 +60,10 @@ public class Turret extends Defense {
 
     public Bullet shoot(Enemy e) {
         coolDown = TURRET_COOL_DOWN;
-        return new Bullet(getCenter(), e);
+        Point bulletSpawnPoint = new Point(
+                getCenter().getX(),
+                getCenter().getY() + TURRET_CANNON_HEIGHT / 2f + TURRET_CANNON_Y_OFFSET - TURRET_HEIGHT / 2f);
+        return new Bullet(bulletSpawnPoint, e);
     }
 
     public float getCoolDown() {
@@ -64,7 +71,7 @@ public class Turret extends Defense {
     }
 
     public Point getCenter() {
-        return new Point(position.getX() + TURRET_WIDTH / 2, position.getY() + TURRET_WIDTH / 2);
+        return new Point(position.getX() + TURRET_WIDTH / 2, position.getY() + TURRET_HEIGHT / 2);
     }
 
     public void setCannonRotation(float cannonRotation) {

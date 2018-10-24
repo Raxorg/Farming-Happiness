@@ -41,16 +41,24 @@ public class Constants {
     public static final float FARMING_AREA_Y = WORLD_HEIGHT - FARMING_AREA_HEIGHT + FARMING_Y_SPACE - RIVER_TILE_SIZE;
     // Camera
     public static final float PANNING_SPEED = 10f;
+    public static final float MIN_ZOOM = 2f;
     // Turret
     public static final float TURRET_WIDTH = 40f;
     public static final float TURRET_HEIGHT = 50f;
     public static final float TURRET_RANGE = 100f;
-    public static final float TURRET_COOL_DOWN = 0.5f;
+    public static final float TURRET_COOL_DOWN = 0.2f;
+    // Turret Cannon
+    public static final float TURRET_CANNON_WIDTH = TURRET_WIDTH / 3f;
+    public static final float TURRET_CANNON_HEIGHT = TURRET_HEIGHT / 5f;
+    public static final float TURRET_CANNON_X_OFFSET = TURRET_WIDTH / 2f - TURRET_CANNON_WIDTH / 2;
+    public static final float TURRET_CANNON_Y_OFFSET = TURRET_HEIGHT * 0.7f;
     // Turret Bullet
     public static final float TURRET_BULLET_SIZE = TILE_SIZE / 10;
     public static final float TURRET_BULLET_SPEED = 250f;
     // WALL
     public static final float WALL_SIZE = TILE_SIZE;
+    // TRAP
+    public static final float TRAP_SIZE = TILE_SIZE;
     // Enemies
     public static final float ENEMY_WIDTH = 10f;
     public static final float ENEMY_HEIGHT = ENEMY_WIDTH * 2f;
@@ -61,4 +69,14 @@ public class Constants {
     // Life bars
     public static final float ENEMY_LIFE_BAR_HEIGHT = 3f;
     public static final float ENEMY_LIFE_BAR_SIDES_WIDTH = (ENEMY_LIFE_BAR_HEIGHT / 10f);
+    // Resource frames
+    public static final float RESOURCE_FRAME_WIDTH = 200f;
+    public static final float RESOURCE_FRAME_HEIGHT = RESOURCE_FRAME_WIDTH / 3f;
+    public static final float RESOURCE_FRAME_BORDER = RESOURCE_FRAME_HEIGHT / 20f;
+    // Resource frame image
+    public static final float RESOURCE_FRAME_IMAGE_WIDTH = RESOURCE_FRAME_WIDTH * 0.25f;
+    public static final float RESOURCE_FRAME_IMAGE_HEIGHT = RESOURCE_FRAME_HEIGHT / 2f;
+    // Resource frame quantity
+    public static final float RESOURCE_FRAME_QUANTITY_X_OFFSET = RESOURCE_FRAME_BORDER * 4f;
+    public static final float RESOURCE_FRAME_QUANTITY_Y_OFFSET = RESOURCE_FRAME_HEIGHT / 2f;
 }

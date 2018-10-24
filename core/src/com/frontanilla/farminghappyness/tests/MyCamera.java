@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
 import com.frontanilla.farminghappyness.utils.Constants;
 
+import static com.frontanilla.farminghappyness.utils.Constants.MIN_ZOOM;
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_WIDTH;
 
@@ -39,8 +40,8 @@ public class MyCamera extends OrthographicCamera {
             translate(0, Constants.PANNING_SPEED, 0); // TODO MULTIPLY BY A DYNAMIC VARIABLE ACCORDING TO ZOOM
         }
 
-        zoom = MathUtils.clamp(zoom, 2, (WORLD_WIDTH / viewportWidth) * 0.9f);
-        zoom = MathUtils.clamp(zoom, 2, (WORLD_HEIGHT / viewportHeight) * 0.9f);
+        zoom = MathUtils.clamp(zoom, MIN_ZOOM, (WORLD_WIDTH / viewportWidth) * 0.8f);
+        zoom = MathUtils.clamp(zoom, MIN_ZOOM, (WORLD_HEIGHT / viewportHeight) * 0.8f);
 
         float effectiveViewportWidth = viewportWidth * zoom;
         float effectiveViewportHeight = viewportHeight * zoom;

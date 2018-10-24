@@ -2,9 +2,9 @@ package com.frontanilla.farminghappyness.game.areas;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.frontanilla.farminghappyness.game.defenses.Defense;
-import com.frontanilla.farminghappyness.utils.Assets;
 import com.frontanilla.farminghappyness.utils.Enums;
 
 import static com.frontanilla.farminghappyness.utils.Constants.TILE_SIZE;
@@ -15,9 +15,11 @@ public class Tile {
     private float x, y;
     private Rectangle bounds;
     private Defense defense;
+    private TextureRegion texture;
 
-    public Tile(Enums.TileType type, float x, float y) {
+    public Tile(Enums.TileType type, TextureRegion texture, float x, float y) {
         this.type = type;
+        this.texture = texture;
         this.x = x;
         this.y = y;
         bounds = new Rectangle(x, y, TILE_SIZE, TILE_SIZE);
@@ -25,30 +27,12 @@ public class Tile {
 
     public void render(SpriteBatch batch) {
         batch.setColor(Color.WHITE);
-        renderTile(batch);
-    }
-
-    private void renderTile(SpriteBatch batch) {
-        switch (type) {
-            case DEFENSIVE_TILE:
-                batch.draw(
-                        Assets.defenseTile,
-                        x,
-                        y,
-                        TILE_SIZE,
-                        TILE_SIZE);
-                break;
-            case FARMING_TILE:
-                batch.draw(
-                        Assets.farmingTile,
-                        x,
-                        y,
-                        TILE_SIZE,
-                        TILE_SIZE);
-                break;
-            case HIDDEN_TILE:
-                break;
-        }
+        batch.draw(
+                texture,
+                x,
+                y,
+                TILE_SIZE,
+                TILE_SIZE);
     }
 
     public boolean contains(float x, float y) {

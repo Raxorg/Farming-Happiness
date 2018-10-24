@@ -20,9 +20,9 @@ public class Bullet {
     private boolean exploded;
 
     public Bullet(Point position, Enemy target) {
-        angle = Util.getAngle(position, target.getCenter());
         this.position = new Point(position.getX() - TURRET_BULLET_SIZE / 2, position.getY() - TURRET_BULLET_SIZE / 2);
         this.target = target;
+        angle = Util.getAngle(this.position, target.getCenter());
     }
 
     public void update(float delta) {

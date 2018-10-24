@@ -1,6 +1,7 @@
 package com.frontanilla.farminghappyness.game.areas;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.frontanilla.farminghappyness.utils.Assets;
 import com.frontanilla.farminghappyness.utils.Enums;
 import com.frontanilla.farminghappyness.utils.Point;
@@ -24,8 +25,45 @@ public class FarmingArea {
             // Tile row
             tileMatrix[row] = new Tile[FARMING_AREA_COLUMNS];
             for (int column = 0; column < FARMING_AREA_COLUMNS; column++) {
+                TextureRegion texture = Assets.empty;
+                if (row > 0 && row < FARMING_AREA_ROWS - 1 && column > 0 && column < FARMING_AREA_COLUMNS - 1) {
+                    texture = Assets.farmingCenter;
+                }
+                // Bottom
+                if (row == 0 && column > 0 && column < FARMING_AREA_COLUMNS - 1) {
+                    texture = Assets.farmingBottom;
+                }
+                // Top
+                if (row == FARMING_AREA_ROWS - 1 && column > 0 && column < FARMING_AREA_COLUMNS - 1) {
+                    texture = Assets.farmingTop;
+                }
+                // Left
+                if (column == 0 && row > 0 && row < FARMING_AREA_ROWS - 1) {
+                    texture = Assets.farmingLeft;
+                }
+                // Right
+                if (column == FARMING_AREA_COLUMNS - 1 && row > 0 && row < FARMING_AREA_ROWS - 1) {
+                    texture = Assets.farmingRight;
+                }
+                // Bottom left corner
+                if (row == 0 && column == 0) {
+                    texture = Assets.farmingCornerBottomLeft;
+                }
+                // Top left corner
+                if (row == FARMING_AREA_ROWS - 1 && column == 0) {
+                    texture = Assets.farmingCornerTopLeft;
+                }
+                // Bottom Right corner
+                if (row == 0 && column == FARMING_AREA_COLUMNS - 1) {
+                    texture = Assets.farmingCornerBottomRight;
+                }
+                // Top Right corner
+                if (row == FARMING_AREA_ROWS - 1 && column == FARMING_AREA_COLUMNS - 1) {
+                    texture = Assets.farmingCornerTopRight;
+                }
                 tileMatrix[row][column] = new Tile(
                         Enums.TileType.FARMING_TILE,
+                        texture,
                         FARMING_AREA_X + column * TILE_SIZE,
                         FARMING_AREA_Y + row * TILE_SIZE);
             }

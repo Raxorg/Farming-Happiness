@@ -7,14 +7,14 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.frontanilla.farminghappyness.game.areas.DisplayArea;
 import com.frontanilla.farminghappyness.game.areas.Tile;
-import com.frontanilla.farminghappyness.game.defenses.Defense;
-import com.frontanilla.farminghappyness.game.defenses.Wall;
-import com.frontanilla.farminghappyness.game.other.Bullet;
 import com.frontanilla.farminghappyness.game.defenses.Turret;
+import com.frontanilla.farminghappyness.game.other.Bullet;
 import com.frontanilla.farminghappyness.game.units.Enemy;
 import com.frontanilla.farminghappyness.tests.MyCamera;
 import com.frontanilla.farminghappyness.utils.Assets;
 
+import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_AREA_COLUMNS;
+import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_AREA_ROWS;
 import static com.frontanilla.farminghappyness.utils.Constants.TURRET_RANGE;
 import static com.frontanilla.farminghappyness.utils.Constants.TURRET_WIDTH;
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_HEIGHT;
@@ -22,18 +22,19 @@ import static com.frontanilla.farminghappyness.utils.Constants.WORLD_WIDTH;
 
 public class GameScreen extends ScreenAdapter {
 
+    private GameStuff gameStuff;
     private SpriteBatch batch, staticBatch;
     private GameMap map;
     private MyCamera camera;
-    private GameInput gameInput;
     private GameLogic gameLogic;
     private DisplayArea displayArea; // TODO DELETE GameMap class
 
     public GameScreen() {
+        gameStuff = new GameStuff();
         batch = new SpriteBatch();
         staticBatch = new SpriteBatch();
         map = new GameMap();
-        displayArea = new DisplayArea();
+        displayArea = new DisplayArea(gameStuff);
 
         // Constructs a new OrthographicCamera, using the given viewport width and height
         // Height is multiplied by aspect ratio.
@@ -42,7 +43,7 @@ public class GameScreen extends ScreenAdapter {
         camera = new MyCamera(WORLD_WIDTH * 0.3f, WORLD_HEIGHT * 0.3f * (h / w));
 
         // Detect and process user input
-        gameInput = new GameInput(this);
+        GameInput gameInput = new GameInput(this);
         Gdx.input.setInputProcessor(gameInput);
 
         // The logic of the game goes here
@@ -61,7 +62,7 @@ public class GameScreen extends ScreenAdapter {
         batch.setColor(Color.WHITE);
         for (Tile[] tileRows : map.getDefenseArea().getTiles()) {
             for (Tile tile : tileRows) {
-                if(tile.getDefense() instanceof Turret) {
+                if (tile.getDefense() instanceof Turret) {
                     batch.draw(
                             Assets.rangeCircle,
                             tile.getDefense().getPosition().getX() - TURRET_RANGE + TURRET_WIDTH / 2,
@@ -71,22 +72,20 @@ public class GameScreen extends ScreenAdapter {
                 }
             }
         }
-        // Render turrets
-        for (Defense d : gameLogic.getDefenses()) {
-            if (d instanceof Turret) {
-                d.render(batch);
+        // Render defenses
+        for (int row = DEFENSE_AREA_ROWS - 1; row >= 0; row--) {
+            for (int column = 0; column < DEFENSE_AREA_COLUMNS; column++) {
+                if (getMap().getDefenseTiles()[row][column].getDefense() != null) {
+                    getMap().getDefenseTiles()[row][column].getDefense().render(batch);
+                }
             }
         }
-        // Render walls
-        for (Defense d : gameLogic.getDefenses()) {
-            if (d instanceof Wall) {
-                d.render(batch);
-            }
-        }
+
         for (Enemy e : gameLogic.getEnemies()) {
             e.render(batch);
         }
         batch.end();
+        displayArea.update(delta);
         displayArea.render(staticBatch);
     }
 
@@ -110,5 +109,9 @@ public class GameScreen extends ScreenAdapter {
 
     public GameMap getMap() {
         return map;
+    }
+
+    public GameStuff getGameStuff() {
+        return gameStuff;
     }
 }

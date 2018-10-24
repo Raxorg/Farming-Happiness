@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.frontanilla.farminghappyness.game.defenses.Defense;
 import com.frontanilla.farminghappyness.game.other.LifeBar;
 import com.frontanilla.farminghappyness.utils.Point;
+import com.frontanilla.farminghappyness.utils.Util;
 
 import static com.frontanilla.farminghappyness.utils.Constants.ENEMY_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.ENEMY_WIDTH;

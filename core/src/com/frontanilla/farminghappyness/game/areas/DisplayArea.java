@@ -15,13 +15,10 @@ import static com.frontanilla.farminghappyness.utils.Constants.RESOURCE_FRAME_WI
 public class DisplayArea {
 
     private GameStuff gameStuff;
-    private BitmapFont font;
     private ResourceFrame moneyFrame, workerFrame;
 
     public DisplayArea(GameStuff gameStuff) {
         this.gameStuff = gameStuff;
-        font = new BitmapFont();
-        font.getData().scale(1);
         // TODO, set the rectangles
         moneyFrame = new ResourceFrame(
                 Color.FOREST,

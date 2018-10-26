@@ -1,5 +1,7 @@
 package com.frontanilla.farminghappyness.utils;
 
+import com.badlogic.gdx.Gdx;
+
 public class Constants {
 
     // World
@@ -41,6 +43,7 @@ public class Constants {
     public static final float FARMING_AREA_Y = WORLD_HEIGHT - FARMING_AREA_HEIGHT + FARMING_Y_SPACE - RIVER_TILE_SIZE;
     // Camera
     public static final float PANNING_SPEED = 10f;
+    public static final float OTHER_PANNING_SPEED = 1f;
     public static final float MIN_ZOOM = 2f;
     // Turret
     public static final float TURRET_WIDTH = 40f;
@@ -70,7 +73,7 @@ public class Constants {
     public static final float ENEMY_LIFE_BAR_HEIGHT = 3f;
     public static final float ENEMY_LIFE_BAR_SIDES_WIDTH = (ENEMY_LIFE_BAR_HEIGHT / 10f);
     // Resource frames
-    public static final float RESOURCE_FRAME_WIDTH = 200f;
+    public static final float RESOURCE_FRAME_WIDTH = Gdx.graphics.getWidth() / 6f;
     public static final float RESOURCE_FRAME_HEIGHT = RESOURCE_FRAME_WIDTH / 3f;
     public static final float RESOURCE_FRAME_BORDER = RESOURCE_FRAME_HEIGHT / 20f;
     // Resource frame image

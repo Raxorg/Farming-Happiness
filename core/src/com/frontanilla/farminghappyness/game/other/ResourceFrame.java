@@ -24,7 +24,7 @@ public class ResourceFrame {
 
     public ResourceFrame(Color frameColor, Point position, TextureRegion image) {
         font = new BitmapFont();
-        font.getData().scale(1);
+        font.getData().scale(2);
         this.frameColor = frameColor;
         this.position = position;
         this.image = image;

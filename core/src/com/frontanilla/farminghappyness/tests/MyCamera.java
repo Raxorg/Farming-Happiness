@@ -4,9 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
-import com.frontanilla.farminghappyness.utils.Constants;
 
 import static com.frontanilla.farminghappyness.utils.Constants.MIN_ZOOM;
+import static com.frontanilla.farminghappyness.utils.Constants.OTHER_PANNING_SPEED;
+import static com.frontanilla.farminghappyness.utils.Constants.PANNING_SPEED;
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_WIDTH;
 
@@ -28,16 +29,16 @@ public class MyCamera extends OrthographicCamera {
             zoom -= 0.02;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            translate(-Constants.PANNING_SPEED, 0, 0); // TODO MULTIPLY BY A DYNAMIC VARIABLE ACCORDING TO ZOOM
+            translate(-PANNING_SPEED, 0); // TODO MULTIPLY BY A DYNAMIC VARIABLE ACCORDING TO ZOOM
         }
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            translate(Constants.PANNING_SPEED, 0, 0); // TODO MULTIPLY BY A DYNAMIC VARIABLE ACCORDING TO ZOOM
+            translate(PANNING_SPEED, 0); // TODO MULTIPLY BY A DYNAMIC VARIABLE ACCORDING TO ZOOM
         }
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            translate(0, -Constants.PANNING_SPEED, 0); // TODO MULTIPLY BY A DYNAMIC VARIABLE ACCORDING TO ZOOM
+            translate(0, -PANNING_SPEED); // TODO MULTIPLY BY A DYNAMIC VARIABLE ACCORDING TO ZOOM
         }
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            translate(0, Constants.PANNING_SPEED, 0); // TODO MULTIPLY BY A DYNAMIC VARIABLE ACCORDING TO ZOOM
+            translate(0, PANNING_SPEED); // TODO MULTIPLY BY A DYNAMIC VARIABLE ACCORDING TO ZOOM
         }
 
         zoom = MathUtils.clamp(zoom, MIN_ZOOM, (WORLD_WIDTH / viewportWidth) * 0.8f);
@@ -46,6 +47,14 @@ public class MyCamera extends OrthographicCamera {
         float effectiveViewportWidth = viewportWidth * zoom;
         float effectiveViewportHeight = viewportHeight * zoom;
 
+        position.x = MathUtils.clamp(position.x, effectiveViewportWidth / 2f, WORLD_WIDTH - effectiveViewportWidth / 2f);
+        position.y = MathUtils.clamp(position.y, effectiveViewportHeight / 2f, WORLD_HEIGHT - effectiveViewportHeight / 2f);
+    }
+
+    public void oneFingerPan(float distX, float distY) {
+        translate(OTHER_PANNING_SPEED * -distX, OTHER_PANNING_SPEED * -distY);
+        float effectiveViewportWidth = viewportWidth * zoom;
+        float effectiveViewportHeight = viewportHeight * zoom;
         position.x = MathUtils.clamp(position.x, effectiveViewportWidth / 2f, WORLD_WIDTH - effectiveViewportWidth / 2f);
         position.y = MathUtils.clamp(position.y, effectiveViewportHeight / 2f, WORLD_HEIGHT - effectiveViewportHeight / 2f);
     }

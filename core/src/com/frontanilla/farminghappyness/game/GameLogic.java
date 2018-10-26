@@ -30,6 +30,7 @@ public class GameLogic {
     private DelayedRemovalArray<Defense> defenses;
     private DelayedRemovalArray<Bullet> bullets;
     private float time;
+    private boolean lost;
 
     public GameLogic(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
@@ -37,22 +38,25 @@ public class GameLogic {
         defenses = new DelayedRemovalArray<>();
         bullets = new DelayedRemovalArray<>();
         time = 0;
+        lost = false;
     }
 
     public void update(float delta) {
-        gameScreen.getCamera().handleInput();
-        gameScreen.getCamera().update();
-        gameScreen.getBatch().setProjectionMatrix(gameScreen.getCamera().combined);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        if (!lost) {
+            gameScreen.getCamera().handleInput();
+            gameScreen.getCamera().update();
+            gameScreen.getBatch().setProjectionMatrix(gameScreen.getCamera().combined);
+            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        updateEnemies(delta);
-        updateTurrets(delta);
-        updateBullets(delta);
+            updateEnemies(delta);
+            updateTurrets(delta);
+            updateBullets(delta);
 
-        time += delta;
-        if (time >= Constants.SPAWN_RATE) {
-            spawnEnemy();
-            time -= Constants.SPAWN_RATE;
+            time += delta;
+            if (time >= Constants.SPAWN_RATE) {
+                spawnEnemy();
+                time -= Constants.SPAWN_RATE;
+            }
         }
     }
 
@@ -63,6 +67,9 @@ public class GameLogic {
             if (!e.isAlive()) {
                 enemies.removeValue(e, true);
                 gameScreen.getGameStuff().setMoney(gameScreen.getGameStuff().getMoney() + 1);
+            }
+            if (Util.getDistance(e.getCenter(), gameScreen.getMap().getFarmingArea().getCenter()) < ENEMY_WIDTH / 2f) {
+                lost = true;
             }
         }
         enemies.end();
@@ -116,30 +123,48 @@ public class GameLogic {
     }
 
     public void touchDown(Vector3 usefulVector, int button) {
-        for (Tile[] tileRow : gameScreen.getMap().getDefenseTiles()) {
-            for (Tile tile : tileRow) {
-                if (tile.contains(usefulVector.x, usefulVector.y)
-                        && gameScreen.getGameStuff().getMoney() >= 10
-                        && tile.getType() == DEFENSIVE_TILE
-                        && tile.getDefense() == null) {
-                    // TODO place stuff according to player's selection
-                    gameScreen.getGameStuff().setMoney(gameScreen.getGameStuff().getMoney() - 10);
-                    switch (button) {
-                        case Input.Buttons.LEFT:
-                            Defense newDefense = new Turret(tile);
-                            defenses.add(newDefense);
-                            tile.setDefense(newDefense);
-                            break;
-                        case Input.Buttons.RIGHT:
-                            newDefense = new Wall(tile);
-                            defenses.add(newDefense);
-                            tile.setDefense(newDefense);
-                            break;
+        if (!lost) {
+            for (Tile[] tileRow : gameScreen.getMap().getDefenseTiles()) {
+                for (Tile tile : tileRow) {
+                    if (tile.contains(usefulVector.x, usefulVector.y)
+                            && gameScreen.getGameStuff().getMoney() >= 10
+                            && tile.getType() == DEFENSIVE_TILE
+                            && tile.getDefense() == null) {
+                        // TODO place stuff according to player's selection
+                        gameScreen.getGameStuff().setMoney(gameScreen.getGameStuff().getMoney() - 10);
+                        switch (button) {
+                            case Input.Buttons.LEFT:
+                                Defense newDefense = new Turret(tile);
+                                defenses.add(newDefense);
+                                tile.setDefense(newDefense);
+                                break;
+                            case Input.Buttons.RIGHT:
+                                newDefense = new Wall(tile);
+                                defenses.add(newDefense);
+                                tile.setDefense(newDefense);
+                                break;
+                        }
+                        return;
                     }
-                    return;
                 }
             }
+        } else {
+            restart();
         }
+    }
+
+    private void restart() {
+        gameScreen.getGameStuff().setMoney(100);
+        gameScreen.getGameStuff().setWorkers(0);
+        for (Tile[] tileRow : gameScreen.getMap().getDefenseTiles()) {
+            for (Tile tile : tileRow) {
+                tile.setDefense(null);
+            }
+        }
+        enemies = new DelayedRemovalArray<>();
+        defenses = new DelayedRemovalArray<>();
+        bullets = new DelayedRemovalArray<>();
+        lost = false;
     }
 
     public DelayedRemovalArray<Enemy> getEnemies() {

@@ -202,6 +202,7 @@ public class GameLogic {
         defenses = new DelayedRemovalArray<>();
         bullets = new DelayedRemovalArray<>();
         lost = false;
+        time = 0;
     }
 
     public DelayedRemovalArray<Enemy> getEnemies() {

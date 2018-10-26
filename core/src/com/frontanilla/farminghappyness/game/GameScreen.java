@@ -9,12 +9,17 @@ import com.frontanilla.farminghappyness.game.areas.DisplayArea;
 import com.frontanilla.farminghappyness.game.areas.Tile;
 import com.frontanilla.farminghappyness.game.defenses.Turret;
 import com.frontanilla.farminghappyness.game.other.Bullet;
+import com.frontanilla.farminghappyness.game.other.Button;
 import com.frontanilla.farminghappyness.game.units.Enemy;
 import com.frontanilla.farminghappyness.tests.MyCamera;
 import com.frontanilla.farminghappyness.utils.Assets;
 
 import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_AREA_COLUMNS;
 import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_AREA_ROWS;
+import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_BUTTON_SIZE;
+import static com.frontanilla.farminghappyness.utils.Constants.FARMING_AREA_WIDTH;
+import static com.frontanilla.farminghappyness.utils.Constants.FARMING_AREA_X;
+import static com.frontanilla.farminghappyness.utils.Constants.FARMING_AREA_Y;
 import static com.frontanilla.farminghappyness.utils.Constants.TURRET_RANGE;
 import static com.frontanilla.farminghappyness.utils.Constants.TURRET_WIDTH;
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_HEIGHT;
@@ -28,6 +33,7 @@ public class GameScreen extends ScreenAdapter {
     private MyCamera camera;
     private GameLogic gameLogic;
     private DisplayArea displayArea; // TODO DELETE GameMap class
+    private Button towerButton, wallButton, trapButton;
 
     public GameScreen() {
         gameStuff = new GameStuff();
@@ -48,6 +54,26 @@ public class GameScreen extends ScreenAdapter {
 
         // The logic of the game goes here
         gameLogic = new GameLogic(this);
+
+        // Defense buttons
+        towerButton = new Button(
+                Assets.turret,
+                FARMING_AREA_X - FARMING_AREA_WIDTH,
+                FARMING_AREA_Y + DEFENSE_BUTTON_SIZE / 2f,
+                DEFENSE_BUTTON_SIZE,
+                DEFENSE_BUTTON_SIZE);
+        wallButton = new Button(
+                Assets.wall,
+                FARMING_AREA_X - FARMING_AREA_WIDTH + DEFENSE_BUTTON_SIZE * 1.5f,
+                FARMING_AREA_Y + DEFENSE_BUTTON_SIZE / 2,
+                DEFENSE_BUTTON_SIZE,
+                DEFENSE_BUTTON_SIZE);
+        trapButton = new Button(
+                Assets.trap,
+                FARMING_AREA_X - FARMING_AREA_WIDTH + DEFENSE_BUTTON_SIZE * 3f,
+                FARMING_AREA_Y + DEFENSE_BUTTON_SIZE / 2f,
+                DEFENSE_BUTTON_SIZE,
+                DEFENSE_BUTTON_SIZE);
     }
 
     public void render(float delta) {
@@ -87,6 +113,11 @@ public class GameScreen extends ScreenAdapter {
         batch.end();
         displayArea.update(delta);
         displayArea.render(staticBatch);
+        batch.begin();
+        towerButton.render(batch);
+        wallButton.render(batch);
+        trapButton.render(batch);
+        batch.end();
     }
 
     @Override
@@ -113,5 +144,21 @@ public class GameScreen extends ScreenAdapter {
 
     public GameStuff getGameStuff() {
         return gameStuff;
+    }
+
+    public DisplayArea getDisplayArea() {
+        return displayArea;
+    }
+
+    public Button getTurretButton() {
+        return towerButton;
+    }
+
+    public Button getWallButton() {
+        return wallButton;
+    }
+
+    public Button getTrapButton() {
+        return trapButton;
     }
 }

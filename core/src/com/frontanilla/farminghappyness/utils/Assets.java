@@ -9,7 +9,7 @@ public class Assets {
             farmingCornerTopLeft, farmingBottom, farmingTop, defenseTile, turret, turretCannon, wall,
             tourist, rangeCircle, turretBullet, empty, sidesLifeBar, centerLifeBar, dollar,
             centerEmptyLifeBar, triangle, trap, farmingCenter, farmingLeft, farmingRight,
-            farmingCornerBottomRight, farmingCornerTopRight, resourceFrame;
+            farmingCornerBottomRight, farmingCornerTopRight, resourceFrame, trapLeaves;
 
     public static void init() {
         Texture decoration = new Texture("images/decoration.png");
@@ -31,16 +31,19 @@ public class Assets {
         farmingBottom = new TextureRegion(tiles, 375, 300, 150, -150);
         farmingLeft = new TextureRegion(tiles, 225, 150, 150, 150);
         farmingRight = new TextureRegion(tiles, 375, 150, -150, 150);
-        // Defense tile
+        //------------------
+        //     DEFENSES
+        //------------------
         defenseTile = new TextureRegion(tiles, 0, 225, 100, 100);
         Texture defenses = new Texture("images/defenses.png");
         turret = new TextureRegion(defenses, 0, 0, 60, 88);
         turretCannon = new TextureRegion(defenses, 60, 0, 18, 15);
         turretBullet = new TextureRegion(defenses, 0, 0, 25, 25);
         wall = new TextureRegion(defenses, 0, 400, 120, 70);
-        trap = new TextureRegion(defenses, 120, 400, 93, 62);
+        trap = new TextureRegion(defenses, 120, 400, 100, 83);
+        trapLeaves = new TextureRegion(defenses, 220, 400, 100, 83);
         Texture enemies = new Texture("images/enemies.png");
-        tourist = new TextureRegion(enemies, 100, 200, 100, 200);
+        tourist = new TextureRegion(enemies, 0, 0, 594, 1135);
         Texture debug = new Texture("images/rangeCircle.png");
         rangeCircle = new TextureRegion(debug, 0, 0, 500, 500);
         //------------------

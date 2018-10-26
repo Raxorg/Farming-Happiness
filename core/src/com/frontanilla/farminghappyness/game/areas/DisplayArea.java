@@ -5,17 +5,23 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.frontanilla.farminghappyness.game.GameStuff;
+import com.frontanilla.farminghappyness.game.other.Button;
 import com.frontanilla.farminghappyness.game.other.ResourceFrame;
 import com.frontanilla.farminghappyness.utils.Assets;
 import com.frontanilla.farminghappyness.utils.Point;
 
+import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_BUTTON_SIZE;
 import static com.frontanilla.farminghappyness.utils.Constants.RESOURCE_FRAME_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.RESOURCE_FRAME_WIDTH;
+import static com.frontanilla.farminghappyness.utils.Constants.SPAWN_TIME;
 
 public class DisplayArea {
 
     private GameStuff gameStuff;
     private ResourceFrame moneyFrame, workerFrame;
+    private float time;
+    private SpriteBatch batch;
+    private BitmapFont font;
 
     public DisplayArea(GameStuff gameStuff) {
         this.gameStuff = gameStuff;
@@ -33,24 +39,32 @@ public class DisplayArea {
                         Gdx.graphics.getHeight() - RESOURCE_FRAME_HEIGHT),
                 Assets.dollar
         );
+
+        batch = new SpriteBatch();
+        font = new BitmapFont();
+        font.getData().scale(3);
+        font.setColor(Color.RED);
     }
 
     public void update(float delta) {
         moneyFrame.setQuantity(gameStuff.getMoney());
         workerFrame.setQuantity(gameStuff.getWorkers());
+        time += delta;
+        if (time < SPAWN_TIME) {
+            batch.begin();
+            font.draw(
+                    batch,
+                    (int) (10 - time) + "",
+                    Gdx.graphics.getWidth() / 2,
+                    Gdx.graphics.getHeight() - 10);
+            batch.end();
+        }
     }
 
     public void render(SpriteBatch staticBatch) {
         staticBatch.begin();
         moneyFrame.render(staticBatch);
         workerFrame.render(staticBatch);
-        staticBatch.setColor(Color.BLUE);
-        staticBatch.draw(
-                Assets.triangle,
-                Gdx.graphics.getWidth() / 2f - Assets.triangle.getRegionWidth() / 2f,
-                0,
-                Gdx.graphics.getWidth() / 10f,
-                Gdx.graphics.getWidth() / 20f);
         staticBatch.end();
     }
 }

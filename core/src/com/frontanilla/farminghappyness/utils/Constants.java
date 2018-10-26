@@ -56,8 +56,8 @@ public class Constants {
     public static final float TURRET_CANNON_X_OFFSET = TURRET_WIDTH / 2f - TURRET_CANNON_WIDTH / 2;
     public static final float TURRET_CANNON_Y_OFFSET = TURRET_HEIGHT * 0.7f;
     // Turret Bullet
-    public static final float TURRET_BULLET_SIZE = TILE_SIZE / 10;
-    public static final float TURRET_BULLET_SPEED = 250f;
+    public static final float TURRET_BULLET_SIZE = TILE_SIZE / 8f;
+    public static final float TURRET_BULLET_SPEED = 350f;
     // WALL
     public static final float WALL_SIZE = TILE_SIZE;
     // TRAP
@@ -65,10 +65,11 @@ public class Constants {
     // Enemies
     public static final float ENEMY_WIDTH = 10f;
     public static final float ENEMY_HEIGHT = ENEMY_WIDTH * 2f;
-    public static final float SPAWN_RATE = 0.15f;
+    public static final float SPAWN_RATE = 0.4f;
+    public static final float SPAWN_TIME = 10f;
     // Tourists
-    public static final int TOURIST_INITIAL_LIFE = 5;
-    public static final float TOURIST_SPEED = 20f;
+    public static final int TOURIST_INITIAL_LIFE = 7;
+    public static final float TOURIST_SPEED = 50f;
     // Life bars
     public static final float ENEMY_LIFE_BAR_HEIGHT = 3f;
     public static final float ENEMY_LIFE_BAR_SIDES_WIDTH = (ENEMY_LIFE_BAR_HEIGHT / 10f);
@@ -82,4 +83,6 @@ public class Constants {
     // Resource frame quantity
     public static final float RESOURCE_FRAME_QUANTITY_X_OFFSET = RESOURCE_FRAME_BORDER * 4f;
     public static final float RESOURCE_FRAME_QUANTITY_Y_OFFSET = RESOURCE_FRAME_HEIGHT / 2f;
+    // Defense buttons
+    public static final float DEFENSE_BUTTON_SIZE = FARMING_AREA_HEIGHT / 2f;
 }

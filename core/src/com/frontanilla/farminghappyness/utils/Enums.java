@@ -14,4 +14,11 @@ public class Enums {
         SHOOTING,
         SHOOTING_AND_MOVING
     }
+
+    public enum ConstructionState {
+        BUILDING_TURRET,
+        BUILDING_WALL,
+        BUILDING_TRAP,
+        NONE
+    }
 }

@@ -53,10 +53,6 @@ public class MyCamera extends OrthographicCamera {
 
     public void oneFingerPan(float distX, float distY) {
         translate(OTHER_PANNING_SPEED * -distX, OTHER_PANNING_SPEED * -distY);
-        float effectiveViewportWidth = viewportWidth * zoom;
-        float effectiveViewportHeight = viewportHeight * zoom;
-        position.x = MathUtils.clamp(position.x, effectiveViewportWidth / 2f, WORLD_WIDTH - effectiveViewportWidth / 2f);
-        position.y = MathUtils.clamp(position.y, effectiveViewportHeight / 2f, WORLD_HEIGHT - effectiveViewportHeight / 2f);
     }
 
     public void resize(int width, int height) {

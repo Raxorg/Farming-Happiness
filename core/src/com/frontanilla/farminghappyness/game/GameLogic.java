@@ -1,26 +1,30 @@
 package com.frontanilla.farminghappyness.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.frontanilla.farminghappyness.game.areas.Tile;
 import com.frontanilla.farminghappyness.game.defenses.Defense;
+import com.frontanilla.farminghappyness.game.defenses.Trap;
 import com.frontanilla.farminghappyness.game.defenses.Turret;
 import com.frontanilla.farminghappyness.game.defenses.Wall;
 import com.frontanilla.farminghappyness.game.other.Bullet;
 import com.frontanilla.farminghappyness.game.units.Enemy;
 import com.frontanilla.farminghappyness.game.units.Tourist;
 import com.frontanilla.farminghappyness.utils.Constants;
+import com.frontanilla.farminghappyness.utils.Enums;
 import com.frontanilla.farminghappyness.utils.Util;
 
 import static com.frontanilla.farminghappyness.utils.Constants.ENEMY_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.ENEMY_WIDTH;
 import static com.frontanilla.farminghappyness.utils.Constants.RIVER_TILE_SIZE;
+import static com.frontanilla.farminghappyness.utils.Constants.SPAWN_TIME;
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_WIDTH;
+import static com.frontanilla.farminghappyness.utils.Enums.ConstructionState.BUILDING_TURRET;
 import static com.frontanilla.farminghappyness.utils.Enums.TileType.DEFENSIVE_TILE;
 
 public class GameLogic {
@@ -31,6 +35,7 @@ public class GameLogic {
     private DelayedRemovalArray<Bullet> bullets;
     private float time;
     private boolean lost;
+    private Enums.ConstructionState constructionState;
 
     public GameLogic(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
@@ -39,6 +44,7 @@ public class GameLogic {
         bullets = new DelayedRemovalArray<>();
         time = 0;
         lost = false;
+        constructionState = Enums.ConstructionState.NONE;
     }
 
     public void update(float delta) {
@@ -53,7 +59,7 @@ public class GameLogic {
             updateBullets(delta);
 
             time += delta;
-            if (time >= Constants.SPAWN_RATE) {
+            if (time >= Constants.SPAWN_RATE + SPAWN_TIME) {
                 spawnEnemy();
                 time -= Constants.SPAWN_RATE;
             }
@@ -78,17 +84,19 @@ public class GameLogic {
     private void updateTurrets(float delta) {
         for (Tile[] tileRow : gameScreen.getMap().getDefenseTiles()) {
             for (Tile tile : tileRow) {
-                if (tile.getDefense() != null && tile.getDefense() instanceof Turret) {
+                if (tile.getDefense() != null) {
                     tile.getDefense().update(delta);
-                    for (Enemy e : enemies) {
-                        if (Util.getDistance(e.getCenter(), tile.getDefense().getCenter()) < Constants.TURRET_RANGE) {
-                            Turret turret = (Turret) tile.getDefense();
-                            float angle = Util.getAngle(tile.getDefense().getCenter(), e.getCenter()) + 155;
-                            turret.setCannonRotation(angle);
-                            if (turret.getCoolDown() == 0) {
-                                bullets.add(turret.shoot(e));
+                    if (tile.getDefense() instanceof Turret) {
+                        for (Enemy e : enemies) {
+                            if (Util.getDistance(e.getCenter(), tile.getDefense().getCenter()) < Constants.TURRET_RANGE) {
+                                Turret turret = (Turret) tile.getDefense();
+                                float angle = Util.getAngle(tile.getDefense().getCenter(), e.getCenter()) + 155;
+                                turret.setCannonRotation(angle);
+                                if (turret.getCoolDown() == 0) {
+                                    bullets.add(turret.shoot(e));
+                                }
+                                break;
                             }
-                            break;
                         }
                     }
                 }
@@ -124,24 +132,53 @@ public class GameLogic {
 
     public void touchDown(Vector3 usefulVector, int button) {
         if (!lost) {
+            // Check if this happened on a defense construction button
+            if (gameScreen.getTurretButton().contains(usefulVector.x, usefulVector.y)) {
+                gameScreen.getTurretButton().setColor(Color.GREEN);
+                gameScreen.getWallButton().setColor(Color.WHITE);
+                gameScreen.getTrapButton().setColor(Color.WHITE);
+                constructionState = BUILDING_TURRET;
+                return;
+            }
+            if (gameScreen.getWallButton().contains(usefulVector.x, usefulVector.y)) {
+                gameScreen.getWallButton().setColor(Color.GREEN);
+                gameScreen.getTurretButton().setColor(Color.WHITE);
+                gameScreen.getTrapButton().setColor(Color.WHITE);
+                constructionState = Enums.ConstructionState.BUILDING_WALL;
+                return;
+            }
+            if (gameScreen.getTrapButton().contains(usefulVector.x, usefulVector.y)) {
+                gameScreen.getTrapButton().setColor(Color.GREEN);
+                gameScreen.getTurretButton().setColor(Color.WHITE);
+                gameScreen.getWallButton().setColor(Color.WHITE);
+                constructionState = Enums.ConstructionState.BUILDING_TRAP;
+                return;
+            }
+            // Check if this happened on a defense tile
             for (Tile[] tileRow : gameScreen.getMap().getDefenseTiles()) {
                 for (Tile tile : tileRow) {
                     if (tile.contains(usefulVector.x, usefulVector.y)
                             && gameScreen.getGameStuff().getMoney() >= 10
                             && tile.getType() == DEFENSIVE_TILE
                             && tile.getDefense() == null) {
-                        // TODO place stuff according to player's selection
-                        gameScreen.getGameStuff().setMoney(gameScreen.getGameStuff().getMoney() - 10);
-                        switch (button) {
-                            case Input.Buttons.LEFT:
+                        switch (constructionState) {
+                            case BUILDING_TURRET:
                                 Defense newDefense = new Turret(tile);
                                 defenses.add(newDefense);
                                 tile.setDefense(newDefense);
+                                gameScreen.getGameStuff().setMoney(gameScreen.getGameStuff().getMoney() - 10);
                                 break;
-                            case Input.Buttons.RIGHT:
+                            case BUILDING_WALL:
                                 newDefense = new Wall(tile);
                                 defenses.add(newDefense);
                                 tile.setDefense(newDefense);
+                                gameScreen.getGameStuff().setMoney(gameScreen.getGameStuff().getMoney() - 10);
+                                break;
+                            case BUILDING_TRAP:
+                                newDefense = new Trap(tile);
+                                defenses.add(newDefense);
+                                tile.setDefense(newDefense);
+                                gameScreen.getGameStuff().setMoney(gameScreen.getGameStuff().getMoney() - 10);
                                 break;
                         }
                         return;
@@ -177,5 +214,9 @@ public class GameLogic {
 
     public DelayedRemovalArray<Defense> getDefenses() {
         return defenses;
+    }
+
+    public Enums.ConstructionState getConstructionState() {
+        return constructionState;
     }
 }

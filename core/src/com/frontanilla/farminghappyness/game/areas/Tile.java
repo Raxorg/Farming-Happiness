@@ -1,38 +1,20 @@
 package com.frontanilla.farminghappyness.game.areas;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Rectangle;
 import com.frontanilla.farminghappyness.game.defenses.Defense;
+import com.frontanilla.farminghappyness.game.other.Button;
 import com.frontanilla.farminghappyness.utils.Enums;
 
 import static com.frontanilla.farminghappyness.utils.Constants.TILE_SIZE;
 
-public class Tile {
+public class Tile extends Button {
 
     private Enums.TileType type;
-    private float x, y;
-    private Rectangle bounds;
     private Defense defense;
-    private TextureRegion texture;
 
     public Tile(Enums.TileType type, TextureRegion texture, float x, float y) {
+        super(texture, x, y, TILE_SIZE, TILE_SIZE);
         this.type = type;
-        this.texture = texture;
-        this.x = x;
-        this.y = y;
-        bounds = new Rectangle(x, y, TILE_SIZE, TILE_SIZE);
-    }
-
-    public void render(SpriteBatch batch) {
-        batch.setColor(Color.WHITE);
-        batch.draw(
-                texture,
-                x,
-                y,
-                TILE_SIZE,
-                TILE_SIZE);
     }
 
     public boolean contains(float x, float y) {
@@ -48,11 +30,19 @@ public class Tile {
     }
 
     public float getX() {
-        return x;
+        return bounds.x;
+    }
+
+    public void setX(float x) {
+        bounds.x = x;
     }
 
     public float getY() {
-        return y;
+        return bounds.y;
+    }
+
+    public void setY(float y) {
+        bounds.y = y;
     }
 
     public Enums.TileType getType() {

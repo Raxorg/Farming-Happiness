@@ -6,31 +6,27 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
+import com.frontanilla.farminghappyness.game.GameEntity;
 import com.frontanilla.farminghappyness.game.defenses.Defense;
-import com.frontanilla.farminghappyness.game.other.LifeBar;
+import com.frontanilla.farminghappyness.utils.Enums;
 import com.frontanilla.farminghappyness.utils.Point;
-import com.frontanilla.farminghappyness.utils.Util;
 
 import static com.frontanilla.farminghappyness.utils.Constants.ENEMY_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.ENEMY_WIDTH;
 
-public abstract class Enemy {
+public abstract class Enemy extends GameEntity {
 
     protected TextureRegion texture;
-    protected Point position;
     protected float speed, angle;
-    protected int life, initialLife;
-    protected LifeBar lifeBar;
-    protected Rectangle bounds;
+    protected Enums.EnemyState state;
 
     public Enemy(TextureRegion texture, float x, float y, float speed, int life) {
+        super(new Rectangle(x, y, ENEMY_WIDTH, ENEMY_HEIGHT), life);
         this.texture = texture;
         position = new Point(x, y);
         this.speed = speed;
-        this.life = life;
-        initialLife = life;
-        lifeBar = new LifeBar(this);
-        bounds = new Rectangle(x, y, ENEMY_WIDTH, ENEMY_HEIGHT);
+        state = Enums.EnemyState.MOVING;
+        width = ENEMY_WIDTH;
     }
 
     public void render(SpriteBatch batch) {
@@ -57,10 +53,6 @@ public abstract class Enemy {
         position.setY(position.getY() + y * speed * speedModifier);
     }
 
-    public Point getPosition() {
-        return position;
-    }
-
     public Point getCenter() {
         return new Point(position.getX() + ENEMY_WIDTH / 2, position.getY() + ENEMY_HEIGHT / 2);
     }
@@ -79,9 +71,5 @@ public abstract class Enemy {
 
     public boolean isAlive() {
         return life > 0;
-    }
-
-    public int getInitialLife() {
-        return initialLife;
     }
 }

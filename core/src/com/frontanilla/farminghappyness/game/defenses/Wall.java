@@ -7,11 +7,13 @@ import com.frontanilla.farminghappyness.utils.Assets;
 import com.frontanilla.farminghappyness.utils.Point;
 
 import static com.frontanilla.farminghappyness.utils.Constants.TILE_SPACING;
+import static com.frontanilla.farminghappyness.utils.Constants.WALL_INITIAL_HEALTH;
 import static com.frontanilla.farminghappyness.utils.Constants.WALL_SIZE;
 
 public class Wall extends Defense {
 
     public Wall(Tile tile) {
+        super(WALL_INITIAL_HEALTH);
         float x = tile.getX();
         float y = tile.getY();
         position = new Point(x, y);

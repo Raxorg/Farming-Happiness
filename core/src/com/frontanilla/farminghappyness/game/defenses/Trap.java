@@ -7,6 +7,7 @@ import com.frontanilla.farminghappyness.utils.Assets;
 import com.frontanilla.farminghappyness.utils.Point;
 
 import static com.frontanilla.farminghappyness.utils.Constants.TILE_SPACING;
+import static com.frontanilla.farminghappyness.utils.Constants.TRAP_INITIAL_HEALTH;
 import static com.frontanilla.farminghappyness.utils.Constants.TRAP_SIZE;
 import static com.frontanilla.farminghappyness.utils.Constants.WALL_SIZE;
 
@@ -16,11 +17,8 @@ public class Trap extends Defense {
     private float time;
 
     public Trap(Tile tile) {
-        float x = tile.getX();
-        float y = tile.getY();
-        position = new Point(x, y);
-
-        bounds = new Rectangle(x, y, WALL_SIZE, WALL_SIZE);
+        super(new Rectangle(tile.getX(), tile.getY(), WALL_SIZE, WALL_SIZE),TRAP_INITIAL_HEALTH);
+        position = new Point(tile.getX(), tile.getY());
 
         activated = false;
         time = 0;

@@ -2,16 +2,17 @@ package com.frontanilla.farminghappyness.game.defenses;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.frontanilla.farminghappyness.game.GameEntity;
+import com.frontanilla.farminghappyness.game.other.LifeBar;
 import com.frontanilla.farminghappyness.utils.Point;
 
-public abstract class Defense {
+public abstract class Defense extends GameEntity {
 
-    protected Rectangle bounds;
     protected Point position, center;
     protected int health;
 
-    public Rectangle getBounds() {
-        return bounds;
+    public Defense(Rectangle bounds, int life) {
+        super(bounds, life);
     }
 
     public Point getPosition() {

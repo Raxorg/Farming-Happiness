@@ -2,48 +2,49 @@ package com.frontanilla.farminghappyness.game.other;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.frontanilla.farminghappyness.game.units.Enemy;
+import com.frontanilla.farminghappyness.game.GameEntity;
 import com.frontanilla.farminghappyness.utils.Assets;
 
 import static com.frontanilla.farminghappyness.utils.Constants.ENEMY_HEIGHT;
-import static com.frontanilla.farminghappyness.utils.Constants.ENEMY_LIFE_BAR_HEIGHT;
-import static com.frontanilla.farminghappyness.utils.Constants.ENEMY_LIFE_BAR_SIDES_WIDTH;
 import static com.frontanilla.farminghappyness.utils.Constants.ENEMY_WIDTH;
+import static com.frontanilla.farminghappyness.utils.Constants.LIFE_BAR_HEIGHT;
+import static com.frontanilla.farminghappyness.utils.Constants.LIFE_BAR_SIDES_WIDTH;
 
 public class LifeBar {
 
-    private Enemy enemy;
+    private GameEntity entity;
     private float portionWidth;
 
-    public LifeBar(Enemy enemy) {
-        this.enemy = enemy;
-        portionWidth = (ENEMY_WIDTH - ENEMY_LIFE_BAR_SIDES_WIDTH * 2) / enemy.getInitialLife();
+    public LifeBar(GameEntity entity) {
+        this.entity = entity;
+        portionWidth = (ENEMY_WIDTH - LIFE_BAR_SIDES_WIDTH * 2) / entity.getInitialLife();
+        portionWidth = (ENEMY_WIDTH - LIFE_BAR_SIDES_WIDTH * 2) / entity.getInitialLife();
     }
 
     public void render(SpriteBatch batch) {
         // Left side
         batch.draw(
                 Assets.sidesLifeBar,
-                enemy.getPosition().getX(),
-                enemy.getPosition().getY() + ENEMY_HEIGHT,
-                ENEMY_LIFE_BAR_SIDES_WIDTH,
-                ENEMY_LIFE_BAR_HEIGHT);
+                entity.getPosition().getX(),
+                entity.getPosition().getY() + ENEMY_HEIGHT,
+                LIFE_BAR_SIDES_WIDTH,
+                LIFE_BAR_HEIGHT);
         // Center TODO, draw this according to HP
-        for (int i = 0; i < enemy.getLife(); i++) {
+        for (int i = 0; i < entity.getLife(); i++) {
             batch.setColor(Color.RED);
             batch.draw(
                     Assets.centerLifeBar,
-                    enemy.getPosition().getX() + ENEMY_LIFE_BAR_SIDES_WIDTH + portionWidth * i,
-                    enemy.getPosition().getY() + ENEMY_HEIGHT,
+                    entity.getPosition().getX() + LIFE_BAR_SIDES_WIDTH + portionWidth * i,
+                    entity.getPosition().getY() + ENEMY_HEIGHT,
                     portionWidth,
-                    ENEMY_LIFE_BAR_HEIGHT);
+                    LIFE_BAR_HEIGHT);
         }
         // Left side
         batch.draw(
                 Assets.sidesLifeBar,
-                enemy.getPosition().getX() + ENEMY_WIDTH - ENEMY_LIFE_BAR_SIDES_WIDTH - portionWidth * (enemy.getInitialLife() - enemy.getLife()),
-                enemy.getPosition().getY() + ENEMY_HEIGHT,
-                ENEMY_LIFE_BAR_SIDES_WIDTH,
-                ENEMY_LIFE_BAR_HEIGHT);
+                entity.getPosition().getX() + ENEMY_WIDTH - LIFE_BAR_SIDES_WIDTH - portionWidth * (entity.getInitialLife() - entity.getLife()),
+                entity.getPosition().getY() + ENEMY_HEIGHT,
+                LIFE_BAR_SIDES_WIDTH,
+                LIFE_BAR_HEIGHT);
     }
 }

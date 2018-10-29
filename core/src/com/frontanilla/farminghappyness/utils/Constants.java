@@ -44,12 +44,13 @@ public class Constants {
     // Camera
     public static final float PANNING_SPEED = 10f;
     public static final float OTHER_PANNING_SPEED = 1f;
-    public static final float MIN_ZOOM = 2f;
+    public static final float MIN_ZOOM = 3f;
     // Turret
     public static final float TURRET_WIDTH = 40f;
     public static final float TURRET_HEIGHT = 50f;
     public static final float TURRET_RANGE = 100f;
     public static final float TURRET_COOL_DOWN = 0.2f;
+    public static final int TURRET_INITIAL_HEALTH = 10;
     // Turret Cannon
     public static final float TURRET_CANNON_WIDTH = TURRET_WIDTH / 3f;
     public static final float TURRET_CANNON_HEIGHT = TURRET_HEIGHT / 5f;
@@ -60,8 +61,10 @@ public class Constants {
     public static final float TURRET_BULLET_SPEED = 350f;
     // WALL
     public static final float WALL_SIZE = TILE_SIZE;
+    public static final int WALL_INITIAL_HEALTH = 25;
     // TRAP
     public static final float TRAP_SIZE = TILE_SIZE;
+    public static final int TRAP_INITIAL_HEALTH = 5;
     // Enemies
     public static final float ENEMY_WIDTH = 10f;
     public static final float ENEMY_HEIGHT = ENEMY_WIDTH * 2f;
@@ -71,8 +74,8 @@ public class Constants {
     public static final int TOURIST_INITIAL_LIFE = 7;
     public static final float TOURIST_SPEED = 50f;
     // Life bars
-    public static final float ENEMY_LIFE_BAR_HEIGHT = 3f;
-    public static final float ENEMY_LIFE_BAR_SIDES_WIDTH = (ENEMY_LIFE_BAR_HEIGHT / 10f);
+    public static final float LIFE_BAR_HEIGHT = 3f;
+    public static final float LIFE_BAR_SIDES_WIDTH = (LIFE_BAR_HEIGHT / 10f);
     // Resource frames
     public static final float RESOURCE_FRAME_WIDTH = Gdx.graphics.getWidth() / 6f;
     public static final float RESOURCE_FRAME_HEIGHT = RESOURCE_FRAME_WIDTH / 3f;

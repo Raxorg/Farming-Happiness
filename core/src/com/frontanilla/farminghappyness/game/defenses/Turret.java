@@ -16,6 +16,7 @@ import static com.frontanilla.farminghappyness.utils.Constants.TURRET_CANNON_X_O
 import static com.frontanilla.farminghappyness.utils.Constants.TURRET_CANNON_Y_OFFSET;
 import static com.frontanilla.farminghappyness.utils.Constants.TURRET_COOL_DOWN;
 import static com.frontanilla.farminghappyness.utils.Constants.TURRET_HEIGHT;
+import static com.frontanilla.farminghappyness.utils.Constants.TURRET_INITIAL_HEALTH;
 import static com.frontanilla.farminghappyness.utils.Constants.TURRET_WIDTH;
 
 public class Turret extends Defense {
@@ -24,11 +25,13 @@ public class Turret extends Defense {
     private float coolDown;
 
     public Turret(Tile tile) {
+        super(TURRET_INITIAL_HEALTH);
         float x = tile.getX() + (TILE_SIZE - TURRET_WIDTH) / 2;
         float y = tile.getY() + (TILE_SIZE - TURRET_WIDTH) / 2;
         position = new Point(x, y);
 
         bounds = new Rectangle(x, y, TURRET_WIDTH, TURRET_HEIGHT);
+        width = TURRET_WIDTH;
     }
 
     public void update(float delta) {
@@ -56,6 +59,7 @@ public class Turret extends Defense {
                 1,
                 1,
                 cannonRotation);
+        lifeBar.render(batch);
     }
 
     public Bullet shoot(Enemy e) {

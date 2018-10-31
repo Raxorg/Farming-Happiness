@@ -26,7 +26,6 @@ public abstract class Enemy extends GameEntity {
         position = new Point(x, y);
         this.speed = speed;
         state = Enums.EnemyState.MOVING;
-        width = ENEMY_WIDTH;
     }
 
     public void render(SpriteBatch batch) {

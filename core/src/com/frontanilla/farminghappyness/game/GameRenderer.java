@@ -1,33 +1,31 @@
 package com.frontanilla.farminghappyness.game;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.frontanilla.farminghappyness.components.Background;
 import com.frontanilla.farminghappyness.game.areas.DefenseArea;
 import com.frontanilla.farminghappyness.game.areas.FarmingArea;
 import com.frontanilla.farminghappyness.game.areas.Tile;
 import com.frontanilla.farminghappyness.utils.Assets;
 
-import static com.frontanilla.farminghappyness.utils.Constants.GRASS_COLUMNS;
-import static com.frontanilla.farminghappyness.utils.Constants.GRASS_HEIGHT;
-import static com.frontanilla.farminghappyness.utils.Constants.GRASS_ROWS;
-import static com.frontanilla.farminghappyness.utils.Constants.GRASS_WIDTH;
 import static com.frontanilla.farminghappyness.utils.Constants.RIVER_TILES;
 import static com.frontanilla.farminghappyness.utils.Constants.RIVER_TILE_SIZE;
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_HEIGHT;
 
-public class GameMap {
+public class GameRenderer {
 
+    private Background background;
     private FarmingArea farmingArea;
     private DefenseArea defenseArea;
 
-    public GameMap() {
+    public GameRenderer() {
+        background = new Background();
         farmingArea = new FarmingArea();
         defenseArea = new DefenseArea();
         // TODO randomize river tiles and save them
     }
 
     public void render(SpriteBatch batch) {
-        renderGround(batch);
+        background.render(batch);
         renderRiver(batch);
 
         farmingArea.render(batch);
@@ -42,20 +40,6 @@ public class GameMap {
                     WORLD_HEIGHT - RIVER_TILE_SIZE,
                     RIVER_TILE_SIZE,
                     RIVER_TILE_SIZE);
-        }
-    }
-
-    private void renderGround(SpriteBatch batch) {
-        batch.setColor(Color.WHITE);
-        for (int column = 0; column < GRASS_COLUMNS; column++) {
-            for (int row = 0; row < GRASS_ROWS; row++) {
-                batch.draw(
-                        Assets.grass,
-                        column * GRASS_WIDTH,
-                        row * GRASS_HEIGHT,
-                        GRASS_WIDTH,
-                        GRASS_HEIGHT);
-            }
         }
     }
 

@@ -25,13 +25,15 @@ public class Turret extends Defense {
     private float coolDown;
 
     public Turret(Tile tile) {
-        super(TURRET_INITIAL_HEALTH);
-        float x = tile.getX() + (TILE_SIZE - TURRET_WIDTH) / 2;
-        float y = tile.getY() + (TILE_SIZE - TURRET_WIDTH) / 2;
-        position = new Point(x, y);
+        super(
+                new Rectangle(
+                        tile.getX() + (TILE_SIZE - TURRET_WIDTH) / 2,
+                        tile.getY() + (TILE_SIZE - TURRET_WIDTH) / 2,
+                        TURRET_WIDTH,
+                        TURRET_HEIGHT),
+                TURRET_INITIAL_HEALTH);
 
-        bounds = new Rectangle(x, y, TURRET_WIDTH, TURRET_HEIGHT);
-        width = TURRET_WIDTH;
+        position = new Point(bounds.x, bounds.y);
     }
 
     public void update(float delta) {

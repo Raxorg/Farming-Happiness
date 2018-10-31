@@ -6,7 +6,11 @@ public class Constants {
 
     // World
     public static final int WORLD_WIDTH = 1000;
-    public static final int WORLD_HEIGHT = 500;
+    public static final int WORLD_HEIGHT = 1000;
+    //------------------
+    //      TILES
+    //------------------
+    public static final float BACKGROUND_TILE_SIZE = 50f;
     // Grids
     public static final float TILE_SIZE = 25f;
     public static final float TILE_SPACING = 5f;
@@ -87,5 +91,10 @@ public class Constants {
     public static final float RESOURCE_FRAME_QUANTITY_X_OFFSET = RESOURCE_FRAME_BORDER * 4f;
     public static final float RESOURCE_FRAME_QUANTITY_Y_OFFSET = RESOURCE_FRAME_HEIGHT / 2f;
     // Defense buttons
-    public static final float DEFENSE_BUTTON_SIZE = FARMING_AREA_HEIGHT / 2f;
+    public static final float DEFENSE_BUTTON_SIZE = 50f;
+    //------------------
+    //    DECORATION
+    //------------------
+    public static final int GRASS_QUANTITY = 200;
+    public static final float GRASS_SIZE = 15f;
 }

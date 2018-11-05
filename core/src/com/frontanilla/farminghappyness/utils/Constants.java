@@ -70,8 +70,8 @@ public class Constants {
     public static final float TRAP_SIZE = TILE_SIZE;
     public static final int TRAP_INITIAL_HEALTH = 5;
     // Enemies
-    public static final float ENEMY_WIDTH = 10f;
-    public static final float ENEMY_HEIGHT = ENEMY_WIDTH * 2f;
+    public static final float ENEMY_WIDTH = 15f;
+    public static final float ENEMY_HEIGHT = ENEMY_WIDTH * 1.8f;
     public static final float SPAWN_RATE = 0.4f;
     public static final float SPAWN_TIME = 10f;
     // Tourists

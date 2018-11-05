@@ -11,9 +11,9 @@ public class Button {
     protected Rectangle bounds;
     protected Color color;
 
-    public Button(TextureRegion texture, float x, float y, float width, float height) {
+    public Button(TextureRegion texture, float x, float y, float w, float h) {
         this.texture = texture;
-        bounds = new Rectangle(x, y, width, height);
+        bounds = new Rectangle(x, y, w, h);
         color = Color.WHITE;
     }
 

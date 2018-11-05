@@ -44,8 +44,9 @@ public class Turret extends Defense {
 
     public void render(SpriteBatch batch) {
         batch.setColor(Color.WHITE);
+        
         batch.draw(
-                Assets.turret,
+                Assets.turretGlow,
                 position.getX(),
                 position.getY(),
                 TURRET_WIDTH,

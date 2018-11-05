@@ -1,6 +1,8 @@
 package com.frontanilla.farminghappyness.utils;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Assets {
@@ -8,12 +10,16 @@ public class Assets {
     public static TextureRegion tree, river1, river2, river3, river4, grass, farmingCornerBottomLeft, farmingCornerTopLeft, farmingBottom, farmingTop,
             defenseTile, wall, tourist, rangeCircle, empty, sidesLifeBar, centerLifeBar, dollar, centerEmptyLifeBar, triangle, trap, farmingCenter,
             farmingLeft, farmingRight, farmingCornerBottomRight, farmingCornerTopRight, resourceFrame, trapLeaves;
+    // Enemies
+    public static Animation<TextureRegion> touristAnimation;
     // Borders
     public static TextureRegion bordersTopLeft, bordersTopRight, bordersBottomLeft, bordersBottomRight, bordersLeft, bordersTop, bordersRight,
             bordersBottom;
     // Borders Glow
     public static TextureRegion bordersTopLeftGlow, bordersTopRightGlow, bordersBottomLeftGlow, bordersBottomRightGlow, bordersLeftGlow,
             bordersTopGlow, bordersRightGlow, bordersBottomGlow;
+    // Tiles
+    public static NinePatch defenseTilePatch;
     // Turret
     public static TextureRegion turret, turretGlow, turretCannon, turretCannonGlow, turretBullet, turretBulletGlow;
     // Decoration
@@ -79,11 +85,10 @@ public class Assets {
         //------------------
         Texture defenses = new Texture("images/defenses.png");
         defenseTile = new TextureRegion(tiles, 0, 225, 100, 100);
+        defenseTilePatch = new NinePatch(borders, 54, 54, 54, 54);
         wall = new TextureRegion(defenses, 0, 400, 120, 70);
         trap = new TextureRegion(defenses, 120, 400, 100, 83);
         trapLeaves = new TextureRegion(defenses, 220, 400, 100, 83);
-        Texture enemies = new Texture("images/enemies.png");
-        tourist = new TextureRegion(enemies, 0, 0, 594, 1135);
         Texture debug = new Texture("images/rangeCircle.png");
         rangeCircle = new TextureRegion(debug, 0, 0, 500, 500);
         //------------------
@@ -92,6 +97,13 @@ public class Assets {
         Texture decor = new Texture("images/decor.png");
         grass1 = new TextureRegion(decor, 0, 0, 100, 100);
         grass1Glow = new TextureRegion(decor, 100, 0, 100, 100);
+        //------------------
+        //     ENEMIES
+        //------------------
+        Texture enemies = new Texture("animations/stickmanRunning.png");
+        touristAnimation = new Animation<>(1f / 60f, Util.regions(enemies, 180, 340, 2));
+        touristAnimation.setPlayMode(Animation.PlayMode.LOOP);
+        tourist = new TextureRegion(enemies, 0, 0, 594, 1135);
         //------------------
         //       HUD
         //------------------

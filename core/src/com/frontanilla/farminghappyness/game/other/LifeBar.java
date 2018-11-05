@@ -17,8 +17,8 @@ public class LifeBar {
 
     public LifeBar(GameEntity entity) {
         this.entity = entity;
-        portionWidth = (ENEMY_WIDTH - LIFE_BAR_SIDES_WIDTH * 2) / entity.getInitialLife();
-        portionWidth = (ENEMY_WIDTH - LIFE_BAR_SIDES_WIDTH * 2) / entity.getInitialLife();
+        portionWidth = (entity.getBounds().width - LIFE_BAR_SIDES_WIDTH * 2) / entity.getInitialLife();
+        portionWidth = (entity.getBounds().width - LIFE_BAR_SIDES_WIDTH * 2) / entity.getInitialLife();
     }
 
     public void render(SpriteBatch batch) {
@@ -31,11 +31,11 @@ public class LifeBar {
                 LIFE_BAR_HEIGHT);
         // Center TODO, draw this according to HP
         for (int i = 0; i < entity.getLife(); i++) {
-            batch.setColor(Color.RED);
+            batch.setColor(Color.CYAN);
             batch.draw(
                     Assets.centerLifeBar,
                     entity.getPosition().getX() + LIFE_BAR_SIDES_WIDTH + portionWidth * i,
-                    entity.getPosition().getY() + ENEMY_HEIGHT,
+                    entity.getPosition().getY() + entity.getBounds().height,
                     portionWidth,
                     LIFE_BAR_HEIGHT);
         }

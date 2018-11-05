@@ -26,13 +26,13 @@ public class DefenseArea {
                 if (column < DEFENSE_AREA_DEFENSE_LINES || row < DEFENSE_AREA_DEFENSE_LINES) {
                     tileMatrix[row][column] = new Tile(
                             DEFENSIVE_TILE,
-                            Assets.defenseTile,
+                            Assets.defenseTilePatch,
                             DEFENSE_AREA_X + column * (TILE_SIZE + TILE_SPACING),
                             DEFENSE_AREA_Y + row * (TILE_SIZE + TILE_SPACING));
                 } else {
                     tileMatrix[row][column] = new Tile(
                             HIDDEN_TILE,
-                            Assets.empty,
+                            null,
                             DEFENSE_AREA_X + column * (TILE_SIZE + TILE_SPACING),
                             DEFENSE_AREA_Y + row * (TILE_SIZE + TILE_SPACING));
                 }

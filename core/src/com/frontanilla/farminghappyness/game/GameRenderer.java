@@ -1,5 +1,7 @@
 package com.frontanilla.farminghappyness.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.frontanilla.farminghappyness.components.Background;
 import com.frontanilla.farminghappyness.game.areas.DefenseArea;
@@ -25,6 +27,7 @@ public class GameRenderer {
     }
 
     public void render(SpriteBatch batch) {
+        background.update(Gdx.graphics.getDeltaTime());
         background.render(batch);
         renderRiver(batch);
 
@@ -33,6 +36,7 @@ public class GameRenderer {
     }
 
     private void renderRiver(SpriteBatch batch) {
+        batch.setColor(Color.WHITE);
         for (int i = 0; i < RIVER_TILES; i++) {
             batch.draw(
                     Assets.river1,

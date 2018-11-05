@@ -29,6 +29,12 @@ public class Background {
         }
     }
 
+    public void update(float delta) {
+        for (GrassDot dot : grassDots) {
+            dot.update(delta);
+        }
+    }
+
     public void render(SpriteBatch batch) {
         batch.setColor(Color.WHITE);
         renderBase(batch);
@@ -174,34 +180,49 @@ public class Background {
     }
 
     private class GrassDot {
-        private float x, y;
+        private float x, y, alpha;
         private Color color;
+        private float time, delay;
+        private boolean reverseAnimation;
 
         public GrassDot(float x, float y, Color color) {
             this.x = x;
             this.y = y;
             this.color = color;
+            delay = MathUtils.random() * 2;
+            time = MathUtils.random();
+            alpha = 0;
+            reverseAnimation = false;
+        }
+
+        public void update(float delta) {
+            delay -= delta;
+            if (delay <= 0) {
+                if (reverseAnimation) {
+                    time -= delta;
+                    if (time <= 0) {
+                        time = 0;
+                        reverseAnimation = false;
+                    }
+                } else {
+                    time += delta;
+                    if (time >= 1) {
+                        time = 1;
+                        reverseAnimation = true;
+                    }
+                }
+                alpha = time;
+            }
         }
 
         public void render(SpriteBatch batch) {
-            batch.setColor(color);
-            for (int i = 0; i < GRASS_QUANTITY; i++) {
-                batch.draw(
-                        Assets.grass1Glow,
-                        x,
-                        y,
-                        GRASS_SIZE,
-                        GRASS_SIZE);
-            }
-            batch.setColor(Color.WHITE);
-            for (int i = 0; i < GRASS_QUANTITY; i++) {
-                batch.draw(
-                        Assets.grass1,
-                        x,
-                        y,
-                        GRASS_SIZE,
-                        GRASS_SIZE);
-            }
+            batch.setColor(new Color(color.r, color.g, color.b, alpha));
+            batch.draw(
+                    Assets.grass1Glow,
+                    x,
+                    y,
+                    GRASS_SIZE,
+                    GRASS_SIZE);
         }
     }
 }

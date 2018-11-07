@@ -13,12 +13,14 @@ import static com.frontanilla.farminghappyness.utils.Constants.WALL_SIZE;
 public class Wall extends Defense {
 
     public Wall(Tile tile) {
-        super(WALL_INITIAL_HEALTH);
-        float x = tile.getX();
-        float y = tile.getY();
-        position = new Point(x, y);
+        super(new Rectangle(
+                tile.getX(),
+                tile.getY(),
+                WALL_SIZE,
+                WALL_SIZE
+        ), WALL_INITIAL_HEALTH);
 
-        bounds = new Rectangle(x, y, WALL_SIZE, WALL_SIZE);
+        position = new Point(bounds.x, bounds.y);
     }
 
 

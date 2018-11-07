@@ -117,17 +117,17 @@ public class GameLogic {
 
     private void spawnEnemy() {
         boolean randSide = MathUtils.randomBoolean();
-        Tourist t;
+        Tourist tourist;
         if (randSide) { // Left
             float randY = MathUtils.random(0, WORLD_HEIGHT - ENEMY_HEIGHT - RIVER_TILE_SIZE);
-            t = new Tourist(-ENEMY_WIDTH, randY);
+            tourist = new Tourist(-ENEMY_WIDTH, randY);
         } else { // Bottom
             float randX = MathUtils.random(0, WORLD_WIDTH - ENEMY_WIDTH);
-            t = new Tourist(randX, -ENEMY_HEIGHT);
+            tourist = new Tourist(randX, -ENEMY_HEIGHT);
         }
-        float angle = Util.getAngle(t.getCenter(), gameScreen.getMap().getFarmingArea().getCenter());
-        t.setAngle(angle);
-        enemies.add(t);
+        float angle = Util.getAngle(tourist.getCenter(), gameScreen.getMap().getFarmingArea().getCenter());
+        tourist.setAngle(angle);
+        enemies.add(tourist);
     }
 
     public void touchDown(Vector3 usefulVector, int button) {

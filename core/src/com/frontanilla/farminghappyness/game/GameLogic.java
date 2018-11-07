@@ -121,7 +121,7 @@ public class GameLogic {
         }
         float angle = Util.getAngle(tourist.getCenter(), connector.getRenderer().getFarmingArea().getCenter());
         tourist.setAngle(angle);
-        connector.getGameState().getEnemies.add(tourist);
+        connector.getGameState().getEnemies().add(tourist);
     }
 
     public void touchDown(Vector3 usefulVector, int button) {

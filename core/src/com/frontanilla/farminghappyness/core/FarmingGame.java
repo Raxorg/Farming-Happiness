@@ -1,7 +1,7 @@
 package com.frontanilla.farminghappyness.core;
 
 import com.badlogic.gdx.Game;
-import com.frontanilla.farminghappyness.game.GameScreen;
+import com.frontanilla.farminghappyness.game.GameConnector;
 import com.frontanilla.farminghappyness.utils.Assets;
 
 public class FarmingGame extends Game {
@@ -22,6 +22,6 @@ public class FarmingGame extends Game {
 
         Assets.init();
 
-        setScreen(new GameScreen());
+        setScreen(new GameConnector());
     }
 }

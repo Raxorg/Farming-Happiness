@@ -25,22 +25,22 @@ import static com.frontanilla.farminghappyness.utils.Constants.TURRET_WIDTH;
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_WIDTH;
 
-public class GameScreen extends ScreenAdapter {
+public class GameConnector extends ScreenAdapter {
 
-    private GameStuff gameStuff;
-    private SpriteBatch batch, staticBatch;
-    private GameMap map;
-    private MyCamera camera;
+    private GameState gameState;
     private GameLogic gameLogic;
-    private DisplayArea displayArea; // TODO DELETE GameMap class
+    private SpriteBatch batch, staticBatch;
+    private GameRenderer renderer;
+    private MyCamera camera;
+    private DisplayArea displayArea; // TODO DELETE GameRenderer class
     private Button towerButton, wallButton, trapButton;
 
-    public GameScreen() {
-        gameStuff = new GameStuff();
+    public GameConnector() {
+        gameState = new GameState();
         batch = new SpriteBatch();
         staticBatch = new SpriteBatch();
-        map = new GameMap();
-        displayArea = new DisplayArea(gameStuff);
+        renderer = new GameRenderer();
+        displayArea = new DisplayArea(gameState);
 
         // Constructs a new OrthographicCamera, using the given viewport width and height
         // Height is multiplied by aspect ratio.
@@ -80,13 +80,13 @@ public class GameScreen extends ScreenAdapter {
         gameLogic.update(delta);
 
         batch.begin();
-        map.render(batch);
+        renderer.render(batch);
         // TODO THIS IS TOO BIG TO BE HERE, RETHINK THIS PART, WE NEED TO DRAW THE RANGES BEHIND TURRETS
-        for (Bullet b : gameLogic.getBullets()) {
+        for (Bullet b : gameState.getBullets()) {
             b.render(batch);
         }
         batch.setColor(Color.WHITE);
-        for (Tile[] tileRows : map.getDefenseArea().getTiles()) {
+        for (Tile[] tileRows : renderer.getDefenseArea().getTiles()) {
             for (Tile tile : tileRows) {
                 if (tile.getDefense() instanceof Turret) {
                     batch.draw(
@@ -101,13 +101,13 @@ public class GameScreen extends ScreenAdapter {
         // Render defenses
         for (int row = DEFENSE_AREA_ROWS - 1; row >= 0; row--) {
             for (int column = 0; column < DEFENSE_AREA_COLUMNS; column++) {
-                if (getMap().getDefenseTiles()[row][column].getDefense() != null) {
-                    getMap().getDefenseTiles()[row][column].getDefense().render(batch);
+                if (getRenderer().getDefenseTiles()[row][column].getDefense() != null) {
+                    getRenderer().getDefenseTiles()[row][column].getDefense().render(batch);
                 }
             }
         }
 
-        for (Enemy e : gameLogic.getEnemies()) {
+        for (Enemy e : gameState.getEnemies()) {
             e.render(batch);
         }
         batch.end();
@@ -138,12 +138,12 @@ public class GameScreen extends ScreenAdapter {
         return gameLogic;
     }
 
-    public GameMap getMap() {
-        return map;
+    public GameRenderer getRenderer() {
+        return renderer;
     }
 
-    public GameStuff getGameStuff() {
-        return gameStuff;
+    public GameState getGameState() {
+        return gameState;
     }
 
     public DisplayArea getDisplayArea() {

@@ -25,12 +25,14 @@ public class Turret extends Defense {
     private float coolDown;
 
     public Turret(Tile tile) {
-        super(new Rectangle(
-                tile.getX() + (TILE_SIZE - TURRET_WIDTH) / 2,
-                tile.getY() + (TILE_SIZE - TURRET_WIDTH) / 2,
-                TURRET_WIDTH,
-                TURRET_HEIGHT
-        ),TURRET_INITIAL_HEALTH);
+        super(
+                new Rectangle(
+                        tile.getX() + (TILE_SIZE - TURRET_WIDTH) / 2,
+                        tile.getY() + (TILE_SIZE - TURRET_WIDTH) / 2,
+                        TURRET_WIDTH,
+                        TURRET_HEIGHT),
+                TURRET_INITIAL_HEALTH);
+
         position = new Point(bounds.x, bounds.y);
     }
 
@@ -43,7 +45,7 @@ public class Turret extends Defense {
     public void render(SpriteBatch batch) {
         batch.setColor(Color.WHITE);
         batch.draw(
-                Assets.turret,
+                Assets.turretGlow,
                 position.getX(),
                 position.getY(),
                 TURRET_WIDTH,

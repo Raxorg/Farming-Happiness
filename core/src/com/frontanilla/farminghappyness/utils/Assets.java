@@ -1,15 +1,31 @@
 package com.frontanilla.farminghappyness.utils;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Assets {
 
-    public static TextureRegion tree, river1, river2, river3, river4, grass, farmingCornerBottomLeft,
-            farmingCornerTopLeft, farmingBottom, farmingTop, defenseTile, turret, turretCannon, wall,
-            tourist, rangeCircle, turretBullet, empty, sidesLifeBar, centerLifeBar, dollar,
-            centerEmptyLifeBar, triangle, trap, farmingCenter, farmingLeft, farmingRight,
-            farmingCornerBottomRight, farmingCornerTopRight, resourceFrame, trapLeaves;
+    public static TextureRegion tree, river1, river2, river3, river4, grass, farmingCornerBottomLeft, farmingCornerTopLeft, farmingBottom, farmingTop,
+            defenseTile, wall, tourist, rangeCircle, empty, sidesLifeBar, centerLifeBar, dollar, centerEmptyLifeBar, triangle, trap, farmingCenter,
+            farmingLeft, farmingRight, farmingCornerBottomRight, farmingCornerTopRight, resourceFrame, trapLeaves;
+    // Enemies
+    public static Animation<TextureRegion> touristAnimation;
+    // Borders
+    public static TextureRegion bordersTopLeft, bordersTopRight, bordersBottomLeft, bordersBottomRight, bordersLeft, bordersTop, bordersRight,
+            bordersBottom;
+    // Borders Glow
+    public static TextureRegion bordersTopLeftGlow, bordersTopRightGlow, bordersBottomLeftGlow, bordersBottomRightGlow, bordersLeftGlow,
+            bordersTopGlow, bordersRightGlow, bordersBottomGlow;
+    // Tiles
+    public static NinePatch defenseTilePatch;
+    // Turret
+    public static TextureRegion turret, turretGlow, turretCannon, turretCannonGlow, turretBullet, turretBulletGlow;
+    // Decoration
+    public static TextureRegion grass1, grass1Glow;
+    // Misc
+    public static TextureRegion pixel;
 
     public static void init() {
         Texture decoration = new Texture("images/decoration.png");
@@ -32,20 +48,62 @@ public class Assets {
         farmingLeft = new TextureRegion(tiles, 225, 150, 150, 150);
         farmingRight = new TextureRegion(tiles, 375, 150, -150, 150);
         //------------------
+        //      TILES
+        //------------------
+        // Borders
+        Texture borders = new Texture("images/borders.png");
+        bordersTopLeft = new TextureRegion(borders, 0, 0, 500, 500);
+        bordersTopRight = new TextureRegion(borders, 1000, 0, 500, 500);
+        bordersBottomLeft = new TextureRegion(borders, 0, 1000, 500, 500);
+        bordersBottomRight = new TextureRegion(borders, 1000, 1000, 500, 500);
+        bordersLeft = new TextureRegion(borders, 0, 500, 500, 500);
+        bordersTop = new TextureRegion(borders, 500, 0, 500, 500);
+        bordersRight = new TextureRegion(borders, 1000, 500, 500, 500);
+        bordersBottom = new TextureRegion(borders, 500, 1000, 500, 500);
+        // Borders Glow
+        Texture bordersGlow = new Texture("images/bordersGlow.png");
+        bordersTopLeftGlow = new TextureRegion(bordersGlow, 0, 0, 500, 500);
+        bordersTopRightGlow = new TextureRegion(bordersGlow, 1000, 0, 500, 500);
+        bordersBottomLeftGlow = new TextureRegion(bordersGlow, 0, 1000, 500, 500);
+        bordersBottomRightGlow = new TextureRegion(bordersGlow, 1000, 1000, 500, 500);
+        bordersLeftGlow = new TextureRegion(bordersGlow, 0, 500, 500, 500);
+        bordersTopGlow = new TextureRegion(bordersGlow, 500, 0, 500, 500);
+        bordersRightGlow = new TextureRegion(bordersGlow, 1000, 500, 500, 500);
+        bordersBottomGlow = new TextureRegion(bordersGlow, 500, 1000, 500, 500);
+        //------------------
+        //      TURRET
+        //------------------
+        Texture turretTex = new Texture("images/turret.png");
+        turret = new TextureRegion(turretTex, 0, 0, 400, 560);
+        turretGlow = new TextureRegion(turretTex, 400, 0, 400, 560);
+        turretCannon = new TextureRegion(turretTex, 0, 560, 228, 228);
+        turretCannonGlow = new TextureRegion(turretTex, 228, 0, 228, 228);
+        turretBullet = new TextureRegion(turretTex, 456, 0, 115, 60);
+        turretBulletGlow = new TextureRegion(turretTex, 571, 0, 115, 60);
+        //------------------
         //     DEFENSES
         //------------------
-        defenseTile = new TextureRegion(tiles, 0, 225, 100, 100);
         Texture defenses = new Texture("images/defenses.png");
-        turret = new TextureRegion(defenses, 0, 0, 60, 88);
-        turretCannon = new TextureRegion(defenses, 60, 0, 18, 15);
-        turretBullet = new TextureRegion(defenses, 0, 0, 25, 25);
+        defenseTile = new TextureRegion(tiles, 0, 225, 100, 100);
+        defenseTilePatch = new NinePatch(borders, 54, 54, 54, 54);
         wall = new TextureRegion(defenses, 0, 400, 120, 70);
         trap = new TextureRegion(defenses, 120, 400, 100, 83);
         trapLeaves = new TextureRegion(defenses, 220, 400, 100, 83);
-        Texture enemies = new Texture("images/enemies.png");
-        tourist = new TextureRegion(enemies, 0, 0, 594, 1135);
         Texture debug = new Texture("images/rangeCircle.png");
         rangeCircle = new TextureRegion(debug, 0, 0, 500, 500);
+        //------------------
+        //    DECORATION
+        //------------------
+        Texture decor = new Texture("images/decor.png");
+        grass1 = new TextureRegion(decor, 0, 0, 100, 100);
+        grass1Glow = new TextureRegion(decor, 100, 0, 100, 100);
+        //------------------
+        //     ENEMIES
+        //------------------
+        Texture enemies = new Texture("animations/stickmanRunning.png");
+        touristAnimation = new Animation<>(1f / 60f, Util.regions(enemies, 180, 340, 2));
+        touristAnimation.setPlayMode(Animation.PlayMode.LOOP);
+        tourist = new TextureRegion(enemies, 0, 0, 594, 1135);
         //------------------
         //       HUD
         //------------------
@@ -62,6 +120,10 @@ public class Assets {
         dollar = new TextureRegion(hud, 591, 0, 54, 41); // TODO WHY +1
 
         empty = new TextureRegion(tiles, 100, 225, 1, 1);
+        //------------------
+        //       MISC
+        //------------------
+        pixel = new TextureRegion(new Texture("images/pixel.png"), 0, 0, 1, 1);
     }
 
 }

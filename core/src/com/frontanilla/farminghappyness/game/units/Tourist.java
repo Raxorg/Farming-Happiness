@@ -1,20 +1,25 @@
 package com.frontanilla.farminghappyness.game.units;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.frontanilla.farminghappyness.game.defenses.Defense;
 import com.frontanilla.farminghappyness.game.defenses.Trap;
 import com.frontanilla.farminghappyness.game.defenses.Wall;
 import com.frontanilla.farminghappyness.utils.Assets;
 
+import static com.frontanilla.farminghappyness.utils.Assets.touristAnimation;
 import static com.frontanilla.farminghappyness.utils.Constants.TOURIST_INITIAL_LIFE;
 import static com.frontanilla.farminghappyness.utils.Constants.TOURIST_SPEED;
 
 public class Tourist extends Enemy {
 
+    private float time;
+
     public Tourist(float x, float y) {
         super(Assets.tourist, x, y, TOURIST_SPEED, TOURIST_INITIAL_LIFE);
+        time = 0;
     }
-
 
     @Override
     public void update(float delta, DelayedRemovalArray<Defense> defenses) {
@@ -35,5 +40,18 @@ public class Tourist extends Enemy {
         } else {
             move(delta, 1);
         }
+        time += delta;
+    }
+
+    @Override
+    public void render(SpriteBatch batch) {
+        batch.setColor(Color.WHITE);
+        batch.draw(
+                touristAnimation.getKeyFrame(time),
+                bounds.x,
+                bounds.y,
+                bounds.width,
+                bounds.height);
+        lifeBar.render(batch);
     }
 }

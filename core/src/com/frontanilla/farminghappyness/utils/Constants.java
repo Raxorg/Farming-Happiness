@@ -6,7 +6,11 @@ public class Constants {
 
     // World
     public static final int WORLD_WIDTH = 1000;
-    public static final int WORLD_HEIGHT = 500;
+    public static final int WORLD_HEIGHT = 1000;
+    //------------------
+    //      TILES
+    //------------------
+    public static final float BACKGROUND_TILE_SIZE = 50f;
     // Grids
     public static final float TILE_SIZE = 25f;
     public static final float TILE_SPACING = 5f;
@@ -66,8 +70,8 @@ public class Constants {
     public static final float TRAP_SIZE = TILE_SIZE;
     public static final int TRAP_INITIAL_HEALTH = 5;
     // Enemies
-    public static final float ENEMY_WIDTH = 10f;
-    public static final float ENEMY_HEIGHT = ENEMY_WIDTH * 2f;
+    public static final float ENEMY_WIDTH = 15f;
+    public static final float ENEMY_HEIGHT = ENEMY_WIDTH * 1.8f;
     public static final float SPAWN_RATE = 0.4f;
     public static final float SPAWN_TIME = 10f;
     // Tourists
@@ -87,5 +91,10 @@ public class Constants {
     public static final float RESOURCE_FRAME_QUANTITY_X_OFFSET = RESOURCE_FRAME_BORDER * 4f;
     public static final float RESOURCE_FRAME_QUANTITY_Y_OFFSET = RESOURCE_FRAME_HEIGHT / 2f;
     // Defense buttons
-    public static final float DEFENSE_BUTTON_SIZE = FARMING_AREA_HEIGHT / 2f;
+    public static final float DEFENSE_BUTTON_SIZE = 50f;
+    //------------------
+    //    DECORATION
+    //------------------
+    public static final int GRASS_QUANTITY = 200;
+    public static final float GRASS_SIZE = 15f;
 }

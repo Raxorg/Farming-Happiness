@@ -63,7 +63,7 @@ public class FarmingArea {
                 }
                 tileMatrix[row][column] = new Tile(
                         Enums.TileType.FARMING_TILE,
-                        texture,
+                        Assets.defenseTilePatch,
                         FARMING_AREA_X + column * TILE_SIZE,
                         FARMING_AREA_Y + row * TILE_SIZE);
             }

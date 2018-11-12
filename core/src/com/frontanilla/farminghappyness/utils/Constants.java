@@ -48,7 +48,7 @@ public class Constants {
     // Camera
     public static final float PANNING_SPEED = 10f;
     public static final float OTHER_PANNING_SPEED = 1f;
-    public static final float MIN_ZOOM = 3f;
+    public static final float MIN_ZOOM = 1f;
     // Turret
     public static final float TURRET_WIDTH = 40f;
     public static final float TURRET_HEIGHT = 50f;

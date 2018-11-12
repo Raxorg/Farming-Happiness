@@ -45,6 +45,7 @@ public class GameRenderer {
         //defenseArea.render(batch);
         ninePatcher.render(batch);
         ninePatcher2.render(batch);
+
     }
 
     private void renderRiver(SpriteBatch batch) {

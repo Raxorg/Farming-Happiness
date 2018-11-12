@@ -28,6 +28,7 @@ public class Assets {
     public static TextureRegion pixel;
     // TODO test
     public static TextureRegion nptest;
+    public static Texture grassx, person, exm;
 
     public static void init() {
         Texture decoration = new Texture("images/decoration.png");
@@ -128,6 +129,9 @@ public class Assets {
         pixel = new TextureRegion(new Texture("images/pixel.png"), 0, 0, 1, 1);
         // TODO TEST
         nptest = new TextureRegion(new Texture("images/nptest.png"), 0, 0, 10, 10);
+        grassx = new Texture("images/grass.png");
+        person = new Texture("images/person.png");
+        exm = new Texture("images/exm.png");
     }
 
 }

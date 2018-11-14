@@ -25,15 +25,15 @@ public class GameRenderer {
         farmingArea = new FarmingArea();
         defenseArea = new DefenseArea();
         // TODO randomize river tiles and save them
-        ninePatcher = new NinePatcher(Assets.nptest, 10); // TODO TEST
+        ninePatcher = new NinePatcher(Assets.nptest, 10, 2); // TODO TEST
         ninePatcher.setWidth(200f);
         ninePatcher.setHeight(100f);
-        ninePatcher.setMargin(10f);
-        ninePatcher.setPosition(500, 100);
-        ninePatcher2 = new NinePatcher(Assets.nptest, 15); // TODO TEST
-        ninePatcher.setWidth(120f);
-        ninePatcher.setHeight(120f);
-        ninePatcher.setPosition(0, 0);
+        ninePatcher.setBorderSize(10f);
+        ninePatcher.setPosition(100, 100);
+        ninePatcher2 = new NinePatcher(Assets.nptest, 15, 2); // TODO TEST
+        ninePatcher2.setWidth(120f);
+        ninePatcher2.setHeight(120f);
+        ninePatcher2.setPosition(200, 200);
     }
 
     public void render(SpriteBatch batch) {

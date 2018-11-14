@@ -9,42 +9,58 @@ public class NinePatcher {
     private TextureRegion topLeft, topRight, bottomLeft, bottomRight;
     private TextureRegion left, top, right, bottom, center;
     private Rectangle bounds;
-    private float margin;
+    private float borderSize;
 
-    public NinePatcher(TextureRegion texture, int margin) {
-        this.margin = margin;
+    public NinePatcher(TextureRegion texture, float borderSize, int borderPixels) {
+        this.borderSize = borderSize;
         // Corners
-        topLeft = new TextureRegion(texture, 0, 0, margin, margin);
-        topRight = new TextureRegion(texture, texture.getRegionWidth() - margin, 0, margin, margin);
-        bottomLeft = new TextureRegion(texture, 0, texture.getRegionHeight() - margin, margin, margin);
-        bottomRight = new TextureRegion(texture, texture.getRegionWidth() - margin, texture.getRegionHeight() - margin, margin, margin);
+        topLeft = new TextureRegion(texture,
+                0,
+                0,
+                borderPixels,
+                borderPixels);
+        topRight = new TextureRegion(texture,
+                texture.getRegionWidth() - borderPixels,
+                0,
+                borderPixels,
+                borderPixels);
+        bottomLeft = new TextureRegion(texture,
+                0,
+                texture.getRegionHeight() - borderPixels,
+                borderPixels,
+                borderPixels);
+        bottomRight = new TextureRegion(texture,
+                texture.getRegionWidth() - borderPixels,
+                texture.getRegionHeight() - borderPixels,
+                borderPixels,
+                borderPixels);
         // Sides
         left = new TextureRegion(texture,
                 0,
-                margin,
-                margin,
-                texture.getRegionHeight() - margin - margin);
+                borderPixels,
+                borderPixels,
+                texture.getRegionHeight() - borderPixels - borderPixels);
         top = new TextureRegion(texture,
-                margin,
+                borderPixels,
                 0,
-                texture.getRegionWidth() - margin - margin,
-                margin);
+                texture.getRegionWidth() - borderPixels - borderPixels,
+                borderPixels);
         right = new TextureRegion(texture,
-                texture.getRegionWidth() - margin,
-                margin,
-                margin,
-                texture.getRegionHeight() - margin - margin);
+                texture.getRegionWidth() - borderPixels,
+                borderPixels,
+                borderPixels,
+                texture.getRegionHeight() - borderPixels - borderPixels);
         bottom = new TextureRegion(texture,
-                margin,
-                texture.getRegionHeight() - margin,
-                texture.getRegionWidth() - margin - margin,
-                margin);
-        // Lastly
+                borderPixels,
+                texture.getRegionHeight() - borderPixels,
+                texture.getRegionWidth() - borderPixels - borderPixels,
+                borderPixels);
+        // Center
         center = new TextureRegion(texture,
-                margin,
-                margin,
-                texture.getRegionWidth() - margin - margin,
-                texture.getRegionHeight() - margin - margin);
+                borderPixels,
+                borderPixels,
+                texture.getRegionWidth() - borderPixels - borderPixels,
+                texture.getRegionHeight() - borderPixels - borderPixels);
         bounds = new Rectangle(0, 0, texture.getRegionWidth(), texture.getRegionHeight());
     }
 
@@ -59,70 +75,70 @@ public class NinePatcher {
         batch.draw(
                 topLeft,
                 bounds.x,
-                bounds.y + bounds.height - margin,
-                margin,
-                margin);
+                bounds.y + bounds.height - borderSize,
+                borderSize,
+                borderSize);
         // Top Right
         batch.draw(
                 topRight,
-                bounds.x + bounds.width - margin,
-                bounds.y + bounds.height - margin,
-                margin,
-                margin);
+                bounds.x + bounds.width - borderSize,
+                bounds.y + bounds.height - borderSize,
+                borderSize,
+                borderSize);
         // Bottom Left
         batch.draw(
                 bottomLeft,
                 bounds.x,
                 bounds.y,
-                margin,
-                margin);
+                borderSize,
+                borderSize);
         // Bottom Right
         batch.draw(
                 bottomRight,
-                bounds.x + bounds.width - margin,
+                bounds.x + bounds.width - borderSize,
                 bounds.y,
-                margin,
-                margin);
+                borderSize,
+                borderSize);
     }
 
     private void renderSides(SpriteBatch batch) {
         // Top
         batch.draw(
                 top,
-                bounds.x + margin,
-                bounds.y + bounds.height - margin,
-                bounds.width - margin - margin,
-                margin);
+                bounds.x + borderSize,
+                bounds.y + bounds.height - borderSize,
+                bounds.width - borderSize - borderSize,
+                borderSize);
         // Right
         batch.draw(
                 right,
-                bounds.x + bounds.width - margin,
-                bounds.y + margin,
-                margin,
-                bounds.height - margin - margin);
+                bounds.x + bounds.width - borderSize,
+                bounds.y + borderSize,
+                borderSize,
+                bounds.height - borderSize - borderSize);
         // Bottom
         batch.draw(
                 bottom,
-                bounds.x + margin,
+                bounds.x + borderSize,
                 bounds.y,
-                bounds.width - margin - margin,
-                margin);
+                bounds.width - borderSize - borderSize,
+                borderSize);
         // Left
         batch.draw(
                 left,
                 bounds.x,
-                bounds.y + margin,
-                margin,
-                bounds.height - margin - margin);
+                bounds.y + borderSize,
+                borderSize,
+                bounds.height - borderSize - borderSize);
     }
 
     private void renderCenter(SpriteBatch batch) {
         batch.draw(
                 center,
-                bounds.x + margin,
-                bounds.y + margin,
-                bounds.width - margin - margin,
-                bounds.height - margin - margin);
+                bounds.x + borderSize,
+                bounds.y + borderSize,
+                bounds.width - borderSize - borderSize,
+                bounds.height - borderSize - borderSize);
     }
 
     public void setWidth(float width) {
@@ -133,8 +149,8 @@ public class NinePatcher {
         bounds.height = height;
     }
 
-    public void setMargin(float margin) {
-        this.margin = margin;
+    public void setBorderSize(float borderSize) {
+        this.borderSize = borderSize;
     }
 
     public void setPosition(float x, float y) {

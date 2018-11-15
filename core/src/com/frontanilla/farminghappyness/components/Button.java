@@ -1,4 +1,4 @@
-package com.frontanilla.farminghappyness.game.other;
+package com.frontanilla.farminghappyness.components;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -25,6 +25,22 @@ public class Button {
                 bounds.y,
                 bounds.width,
                 bounds.height);
+    }
+
+    public float getX() {
+        return bounds.x;
+    }
+
+    public void setX(float x) {
+        bounds.x = x;
+    }
+
+    public float getY() {
+        return bounds.y;
+    }
+
+    public void setY(float y) {
+        bounds.y = y;
     }
 
     public boolean contains(float x, float y) {

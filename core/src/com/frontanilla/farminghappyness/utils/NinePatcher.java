@@ -11,57 +11,57 @@ public class NinePatcher {
     private Rectangle bounds;
     private float borderSize;
 
-    public NinePatcher(TextureRegion texture, float borderSize, int borderPixels) {
+    public NinePatcher(TextureRegion textureRegion, float borderSize, int borderPixels) {
         this.borderSize = borderSize;
         // Corners
-        topLeft = new TextureRegion(texture,
+        topLeft = new TextureRegion(textureRegion,
                 0,
                 0,
                 borderPixels,
                 borderPixels);
-        topRight = new TextureRegion(texture,
-                texture.getRegionWidth() - borderPixels,
+        topRight = new TextureRegion(textureRegion,
+                textureRegion.getRegionWidth() - borderPixels,
                 0,
                 borderPixels,
                 borderPixels);
-        bottomLeft = new TextureRegion(texture,
+        bottomLeft = new TextureRegion(textureRegion,
                 0,
-                texture.getRegionHeight() - borderPixels,
+                textureRegion.getRegionHeight() - borderPixels,
                 borderPixels,
                 borderPixels);
-        bottomRight = new TextureRegion(texture,
-                texture.getRegionWidth() - borderPixels,
-                texture.getRegionHeight() - borderPixels,
+        bottomRight = new TextureRegion(textureRegion,
+                textureRegion.getRegionWidth() - borderPixels,
+                textureRegion.getRegionHeight() - borderPixels,
                 borderPixels,
                 borderPixels);
         // Sides
-        left = new TextureRegion(texture,
+        left = new TextureRegion(textureRegion,
                 0,
                 borderPixels,
                 borderPixels,
-                texture.getRegionHeight() - borderPixels - borderPixels);
-        top = new TextureRegion(texture,
+                textureRegion.getRegionHeight() - borderPixels - borderPixels);
+        top = new TextureRegion(textureRegion,
                 borderPixels,
                 0,
-                texture.getRegionWidth() - borderPixels - borderPixels,
+                textureRegion.getRegionWidth() - borderPixels - borderPixels,
                 borderPixels);
-        right = new TextureRegion(texture,
-                texture.getRegionWidth() - borderPixels,
+        right = new TextureRegion(textureRegion,
+                textureRegion.getRegionWidth() - borderPixels,
                 borderPixels,
                 borderPixels,
-                texture.getRegionHeight() - borderPixels - borderPixels);
-        bottom = new TextureRegion(texture,
+                textureRegion.getRegionHeight() - borderPixels - borderPixels);
+        bottom = new TextureRegion(textureRegion,
                 borderPixels,
-                texture.getRegionHeight() - borderPixels,
-                texture.getRegionWidth() - borderPixels - borderPixels,
+                textureRegion.getRegionHeight() - borderPixels,
+                textureRegion.getRegionWidth() - borderPixels - borderPixels,
                 borderPixels);
         // Center
-        center = new TextureRegion(texture,
+        center = new TextureRegion(textureRegion,
                 borderPixels,
                 borderPixels,
-                texture.getRegionWidth() - borderPixels - borderPixels,
-                texture.getRegionHeight() - borderPixels - borderPixels);
-        bounds = new Rectangle(0, 0, texture.getRegionWidth(), texture.getRegionHeight());
+                textureRegion.getRegionWidth() - borderPixels - borderPixels,
+                textureRegion.getRegionHeight() - borderPixels - borderPixels);
+        bounds = new Rectangle(0, 0, textureRegion.getRegionWidth(), textureRegion.getRegionHeight());
     }
 
     public void render(SpriteBatch batch) {

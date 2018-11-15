@@ -19,8 +19,10 @@ public class Constants {
     public static final int GRASS_ROWS = WORLD_HEIGHT / 100;
     public static final float GRASS_WIDTH = WORLD_WIDTH / GRASS_COLUMNS;
     public static final float GRASS_HEIGHT = WORLD_HEIGHT / GRASS_ROWS;
-    // River
-    public static final float RIVER_TILE_SIZE = WORLD_HEIGHT / 5;
+    //------------------
+    //      RIVER
+    //------------------
+    public static final float RIVER_TILE_SIZE = 100;
     public static final int RIVER_TILES = (int) (WORLD_WIDTH / RIVER_TILE_SIZE + 1);
     // Defense Area
     public static final float DEFENSE_AREA_WIDTH = WORLD_WIDTH * (2f / 3f);
@@ -93,8 +95,16 @@ public class Constants {
     // Defense buttons
     public static final float DEFENSE_BUTTON_SIZE = 50f;
     //------------------
+    //      PLANTS
+    //------------------
+    public static final float PLANT_SIZE = 15f;
+    //------------------
     //    DECORATION
     //------------------
     public static final int GRASS_QUANTITY = 200;
     public static final float GRASS_SIZE = 15f;
+    //------------------
+    //       TEST
+    //------------------
+    public static final int NPTEST_BORDER_PIXELS = 2;
 }

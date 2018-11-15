@@ -8,6 +8,7 @@ import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_AREA_DEFE
 import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_AREA_ROWS;
 import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_AREA_X;
 import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_AREA_Y;
+import static com.frontanilla.farminghappyness.utils.Constants.NPTEST_BORDER_PIXELS;
 import static com.frontanilla.farminghappyness.utils.Constants.TILE_SIZE;
 import static com.frontanilla.farminghappyness.utils.Constants.TILE_SPACING;
 import static com.frontanilla.farminghappyness.utils.Enums.TileType.DEFENSIVE_TILE;
@@ -26,13 +27,17 @@ public class DefenseArea {
                 if (column < DEFENSE_AREA_DEFENSE_LINES || row < DEFENSE_AREA_DEFENSE_LINES) {
                     tileMatrix[row][column] = new Tile(
                             DEFENSIVE_TILE,
-                            Assets.defenseTilePatch,
+                            Assets.nptest,
+                            TILE_SIZE / 10f,
+                            NPTEST_BORDER_PIXELS,
                             DEFENSE_AREA_X + column * (TILE_SIZE + TILE_SPACING),
                             DEFENSE_AREA_Y + row * (TILE_SIZE + TILE_SPACING));
                 } else {
                     tileMatrix[row][column] = new Tile(
                             HIDDEN_TILE,
                             null,
+                            TILE_SIZE / 10f,
+                            NPTEST_BORDER_PIXELS,
                             DEFENSE_AREA_X + column * (TILE_SIZE + TILE_SPACING),
                             DEFENSE_AREA_Y + row * (TILE_SIZE + TILE_SPACING));
                 }

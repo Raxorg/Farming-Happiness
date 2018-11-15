@@ -21,4 +21,17 @@ public class Enums {
         BUILDING_TRAP,
         NONE
     }
+
+    public enum PlantType {
+        ELSKER,
+        GRA,
+        KOCHAM,
+        SZERELEM,
+        ELSKA,
+        AYARN,
+        SEVIYORUM,
+        MILESTIBA,
+        RAKKAUS,
+        KAERLIGHED
+    }
 }

@@ -12,6 +12,7 @@ import static com.frontanilla.farminghappyness.utils.Constants.FARMING_AREA_ROWS
 import static com.frontanilla.farminghappyness.utils.Constants.FARMING_AREA_WIDTH;
 import static com.frontanilla.farminghappyness.utils.Constants.FARMING_AREA_X;
 import static com.frontanilla.farminghappyness.utils.Constants.FARMING_AREA_Y;
+import static com.frontanilla.farminghappyness.utils.Constants.NPTEST_BORDER_PIXELS;
 import static com.frontanilla.farminghappyness.utils.Constants.TILE_SIZE;
 
 public class FarmingArea {
@@ -25,45 +26,47 @@ public class FarmingArea {
             // Tile row
             tileMatrix[row] = new Tile[FARMING_AREA_COLUMNS];
             for (int column = 0; column < FARMING_AREA_COLUMNS; column++) {
-                TextureRegion texture = Assets.empty;
+                TextureRegion textureRegion = Assets.empty;
                 if (row > 0 && row < FARMING_AREA_ROWS - 1 && column > 0 && column < FARMING_AREA_COLUMNS - 1) {
-                    texture = Assets.farmingCenter;
+                    textureRegion = Assets.farmingCenter;
                 }
                 // Bottom
                 if (row == 0 && column > 0 && column < FARMING_AREA_COLUMNS - 1) {
-                    texture = Assets.farmingBottom;
+                    textureRegion = Assets.farmingBottom;
                 }
                 // Top
                 if (row == FARMING_AREA_ROWS - 1 && column > 0 && column < FARMING_AREA_COLUMNS - 1) {
-                    texture = Assets.farmingTop;
+                    textureRegion = Assets.farmingTop;
                 }
                 // Left
                 if (column == 0 && row > 0 && row < FARMING_AREA_ROWS - 1) {
-                    texture = Assets.farmingLeft;
+                    textureRegion = Assets.farmingLeft;
                 }
                 // Right
                 if (column == FARMING_AREA_COLUMNS - 1 && row > 0 && row < FARMING_AREA_ROWS - 1) {
-                    texture = Assets.farmingRight;
+                    textureRegion = Assets.farmingRight;
                 }
                 // Bottom left corner
                 if (row == 0 && column == 0) {
-                    texture = Assets.farmingCornerBottomLeft;
+                    textureRegion = Assets.farmingCornerBottomLeft;
                 }
                 // Top left corner
                 if (row == FARMING_AREA_ROWS - 1 && column == 0) {
-                    texture = Assets.farmingCornerTopLeft;
+                    textureRegion = Assets.farmingCornerTopLeft;
                 }
                 // Bottom Right corner
                 if (row == 0 && column == FARMING_AREA_COLUMNS - 1) {
-                    texture = Assets.farmingCornerBottomRight;
+                    textureRegion = Assets.farmingCornerBottomRight;
                 }
                 // Top Right corner
                 if (row == FARMING_AREA_ROWS - 1 && column == FARMING_AREA_COLUMNS - 1) {
-                    texture = Assets.farmingCornerTopRight;
+                    textureRegion = Assets.farmingCornerTopRight;
                 }
                 tileMatrix[row][column] = new Tile(
                         Enums.TileType.FARMING_TILE,
-                        Assets.defenseTilePatch,
+                        Assets.nptest,
+                        TILE_SIZE / 10f,
+                        NPTEST_BORDER_PIXELS,
                         FARMING_AREA_X + column * TILE_SIZE,
                         FARMING_AREA_Y + row * TILE_SIZE);
             }
@@ -77,6 +80,10 @@ public class FarmingArea {
                 tile.render(batch);
             }
         }
+    }
+
+    public Tile getTile(int row, int column) {
+        return tileMatrix[row][column];
     }
 
     public Point getCenter() {

@@ -1,7 +1,7 @@
 package com.frontanilla.farminghappyness.game;
 
 import com.badlogic.gdx.math.Rectangle;
-import com.frontanilla.farminghappyness.game.other.LifeBar;
+import com.frontanilla.farminghappyness.components.LifeBar;
 import com.frontanilla.farminghappyness.utils.Point;
 
 public class GameEntity {

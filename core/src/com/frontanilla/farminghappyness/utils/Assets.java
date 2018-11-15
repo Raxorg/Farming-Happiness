@@ -25,7 +25,7 @@ public class Assets {
     // Decoration
     public static TextureRegion grass1, grass1Glow;
     // Misc
-    public static TextureRegion pixel;
+    public static TextureRegion pixel, plantTest;
     // TODO test
     public static TextureRegion nptest;
     public static Texture grassx, person, exm;
@@ -123,6 +123,10 @@ public class Assets {
         dollar = new TextureRegion(hud, 591, 0, 54, 41); // TODO WHY +1
 
         empty = new TextureRegion(tiles, 100, 225, 1, 1);
+        //------------------
+        //      PLANTS
+        //------------------
+        plantTest = new TextureRegion(new Texture("images/plant.png"), 0, 0, 100, 100);
         //------------------
         //       MISC
         //------------------

@@ -1,4 +1,4 @@
-package com.frontanilla.farminghappyness.game.other;
+package com.frontanilla.farminghappyness.components;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

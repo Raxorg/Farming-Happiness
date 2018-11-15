@@ -3,7 +3,6 @@ package com.frontanilla.farminghappyness.game.defenses;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.frontanilla.farminghappyness.game.GameEntity;
-import com.frontanilla.farminghappyness.game.other.LifeBar;
 import com.frontanilla.farminghappyness.utils.Point;
 
 public abstract class Defense extends GameEntity {

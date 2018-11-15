@@ -4,20 +4,28 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
+import com.frontanilla.farminghappyness.components.LifeBar;
+import com.frontanilla.farminghappyness.components.ProgressBar;
+import com.frontanilla.farminghappyness.game.GameEntity;
 import com.frontanilla.farminghappyness.game.areas.Tile;
+import com.frontanilla.farminghappyness.game.other.Progressable;
 import com.frontanilla.farminghappyness.utils.Assets;
 import com.frontanilla.farminghappyness.utils.Enums.PlantType;
 
 import static com.frontanilla.farminghappyness.utils.Constants.PLANT_SIZE;
-import static com.frontanilla.farminghappyness.utils.Constants.TILE_SIZE;
+import static com.frontanilla.farminghappyness.utils.Constants.PLANT_TILE_SPACING;
 
-public class Plant {
+public class Plant extends Progressable {
 
-    private Rectangle bounds;
+    // Structure
     private TextureRegion textureRegion;
+    // Plant
     private PlantType plantType;
     private int buyCost, sellCost;
-
+    // Logic
+    private float time;
+    private ProgressBar progressBar;
+    // Plants
     public static Plant ELSKER = new Plant(PlantType.ELSKER, 1, 2);
     public static Plant GRA = new Plant(PlantType.GRA, 1, 2);
     public static Plant KOCHAM = new Plant(PlantType.KOCHAM, 1, 2);
@@ -30,6 +38,7 @@ public class Plant {
     public static Plant KAERLIGHED = new Plant(PlantType.KAERLIGHED, 1, 5);
 
     private Plant(PlantType plantType, int buyCost, int sellCost) {
+        super(null);
         switch (plantType) {
             case ELSKER:
                 textureRegion = Assets.plantTest;
@@ -68,12 +77,21 @@ public class Plant {
     }
 
     public Plant(Plant plant, Tile tile) {
-        float spacing = (TILE_SIZE - PLANT_SIZE) / 2;
-        bounds = new Rectangle(tile.getX() + spacing, tile.getY() + spacing, PLANT_SIZE, PLANT_SIZE);
+        super(new Rectangle(tile.getX() + PLANT_TILE_SPACING, tile.getY() + PLANT_TILE_SPACING, PLANT_SIZE, PLANT_SIZE));
+        // Structure
         textureRegion = plant.textureRegion;
+        // Plant
         plantType = plant.plantType;
         buyCost = plant.buyCost;
         sellCost = plant.sellCost;
+        // Logic
+        time = 0;
+        progressBar = new ProgressBar(this);
+    }
+
+    public void update(float delta) {
+        time += delta;
+        // TODO UPDATE STATUS BAR
     }
 
     public void render(SpriteBatch batch) {
@@ -84,5 +102,6 @@ public class Plant {
                 bounds.y,
                 bounds.width,
                 bounds.height);
+        progressBar.render(batch);
     }
 }

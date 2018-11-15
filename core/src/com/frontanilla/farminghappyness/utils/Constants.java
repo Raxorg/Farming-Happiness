@@ -24,7 +24,9 @@ public class Constants {
     //------------------
     public static final float RIVER_TILE_SIZE = 100;
     public static final int RIVER_TILES = (int) (WORLD_WIDTH / RIVER_TILE_SIZE + 1);
-    // Defense Area
+    //------------------
+    //   DEFENSE AREA
+    //------------------
     public static final float DEFENSE_AREA_WIDTH = WORLD_WIDTH * (2f / 3f);
     public static final int DEFENSE_AREA_COLUMNS = (int) (DEFENSE_AREA_WIDTH / (TILE_SIZE + TILE_SPACING));
     public static final float DEFENSE_X_SPACE = DEFENSE_AREA_WIDTH - DEFENSE_AREA_COLUMNS * (TILE_SIZE + TILE_SPACING);
@@ -37,7 +39,9 @@ public class Constants {
 
     public static final int DEFENSE_AREA_DEFENSE_LINES = 4;
     public static final float DEFENSE_AREA_THICKNESS = DEFENSE_AREA_DEFENSE_LINES * (TILE_SIZE + TILE_SPACING);
-    // Farming Area
+    //------------------
+    //   FARMING AREA
+    //------------------
     public static final float FARMING_AREA_WIDTH = (DEFENSE_AREA_WIDTH - DEFENSE_AREA_THICKNESS) / 2f;
     public static final int FARMING_AREA_COLUMNS = (int) (FARMING_AREA_WIDTH / TILE_SIZE);
     public static final float FARMING_X_SPACE = FARMING_AREA_WIDTH - FARMING_AREA_COLUMNS * TILE_SIZE;
@@ -47,28 +51,36 @@ public class Constants {
     public static final int FARMING_AREA_ROWS = (int) (FARMING_AREA_HEIGHT / TILE_SIZE);
     public static final float FARMING_Y_SPACE = FARMING_AREA_HEIGHT - FARMING_AREA_ROWS * TILE_SIZE;
     public static final float FARMING_AREA_Y = WORLD_HEIGHT - FARMING_AREA_HEIGHT + FARMING_Y_SPACE - RIVER_TILE_SIZE;
-    // Camera
+    //------------------
+    //      CAMERA
+    //------------------
     public static final float PANNING_SPEED = 10f;
     public static final float OTHER_PANNING_SPEED = 1f;
     public static final float MIN_ZOOM = 1f;
-    // Turret
+    //------------------
+    //      TURRET
+    //------------------
     public static final float TURRET_WIDTH = 40f;
     public static final float TURRET_HEIGHT = 50f;
     public static final float TURRET_RANGE = 100f;
     public static final float TURRET_COOL_DOWN = 0.2f;
     public static final int TURRET_INITIAL_HEALTH = 10;
-    // Turret Cannon
+
     public static final float TURRET_CANNON_WIDTH = TURRET_WIDTH / 3f;
     public static final float TURRET_CANNON_HEIGHT = TURRET_HEIGHT / 5f;
     public static final float TURRET_CANNON_X_OFFSET = TURRET_WIDTH / 2f - TURRET_CANNON_WIDTH / 2;
     public static final float TURRET_CANNON_Y_OFFSET = TURRET_HEIGHT * 0.7f;
-    // Turret Bullet
+
     public static final float TURRET_BULLET_SIZE = TILE_SIZE / 8f;
     public static final float TURRET_BULLET_SPEED = 350f;
-    // WALL
+    //------------------
+    //       WALL
+    //------------------
     public static final float WALL_SIZE = TILE_SIZE;
     public static final int WALL_INITIAL_HEALTH = 25;
-    // TRAP
+    //------------------
+    //       TRAP
+    //------------------
     public static final float TRAP_SIZE = TILE_SIZE;
     public static final int TRAP_INITIAL_HEALTH = 5;
     // Enemies
@@ -98,6 +110,8 @@ public class Constants {
     //      PLANTS
     //------------------
     public static final float PLANT_SIZE = 15f;
+    public static final float PLANT_TILE_SPACING = (TILE_SIZE - PLANT_SIZE) / 2f;
+    public static final float PLANT_PRODUCTION_TIME = 5f;
     //------------------
     //    DECORATION
     //------------------

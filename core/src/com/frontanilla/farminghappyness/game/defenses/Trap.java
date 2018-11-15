@@ -60,4 +60,9 @@ public class Trap extends Defense {
     public boolean isActivated() {
         return activated;
     }
+
+    @Override
+    public void takeDamage(int damage) {
+
+    }
 }

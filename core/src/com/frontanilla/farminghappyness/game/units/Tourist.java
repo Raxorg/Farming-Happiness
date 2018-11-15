@@ -54,4 +54,9 @@ public class Tourist extends Enemy {
                 bounds.height);
         lifeBar.render(batch);
     }
+
+    @Override
+    public void takeDamage(int damage) {
+
+    }
 }

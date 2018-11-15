@@ -4,30 +4,12 @@ import com.badlogic.gdx.math.Rectangle;
 import com.frontanilla.farminghappyness.components.LifeBar;
 import com.frontanilla.farminghappyness.utils.Point;
 
-public class GameEntity {
+public abstract class GameEntity {
 
-    protected Point position;
     protected Rectangle bounds;
-    protected int life, initialLife;
-    protected LifeBar lifeBar;
 
-    public GameEntity(Rectangle bounds, int life) {
+    public GameEntity(Rectangle bounds) {
         this.bounds = bounds;
-        this.life = life;
-        initialLife = life;
-        lifeBar = new LifeBar(this);
-    }
-
-    public Point getPosition() {
-        return position;
-    }
-
-    public int getInitialLife() {
-        return initialLife;
-    }
-
-    public int getLife() {
-        return life;
     }
 
     public Rectangle getBounds() {

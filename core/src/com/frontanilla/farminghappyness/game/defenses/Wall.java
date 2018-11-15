@@ -32,4 +32,9 @@ public class Wall extends Defense {
                 WALL_SIZE + TILE_SPACING * 2,
                 WALL_SIZE);
     }
+
+    @Override
+    public void takeDamage(int damage) {
+
+    }
 }

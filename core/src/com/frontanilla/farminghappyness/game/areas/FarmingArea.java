@@ -64,7 +64,7 @@ public class FarmingArea {
                 }
                 tileMatrix[row][column] = new Tile(
                         Enums.TileType.FARMING_TILE,
-                        Assets.nptest,
+                        Assets.nptest, // TODO Use textureRegion variable
                         TILE_SIZE / 10f,
                         NPTEST_BORDER_PIXELS,
                         FARMING_AREA_X + column * TILE_SIZE,

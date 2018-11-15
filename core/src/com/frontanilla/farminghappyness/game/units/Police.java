@@ -35,4 +35,9 @@ public class Police extends Enemy {
             move(delta, 1);
         }
     }
+
+    @Override
+    public void takeDamage(int damage) {
+
+    }
 }

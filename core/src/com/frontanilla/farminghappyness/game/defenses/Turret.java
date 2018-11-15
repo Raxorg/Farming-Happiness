@@ -83,4 +83,9 @@ public class Turret extends Defense {
     public void setCannonRotation(float cannonRotation) {
         this.cannonRotation = cannonRotation;
     }
+
+    @Override
+    public void takeDamage(int damage) {
+
+    }
 }

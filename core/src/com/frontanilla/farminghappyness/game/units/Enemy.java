@@ -8,13 +8,14 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.frontanilla.farminghappyness.game.GameEntity;
 import com.frontanilla.farminghappyness.game.defenses.Defense;
+import com.frontanilla.farminghappyness.game.other.Damageable;
 import com.frontanilla.farminghappyness.utils.Enums;
 import com.frontanilla.farminghappyness.utils.Point;
 
 import static com.frontanilla.farminghappyness.utils.Constants.ENEMY_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.ENEMY_WIDTH;
 
-public abstract class Enemy extends GameEntity {
+public abstract class Enemy extends Damageable {
 
     protected TextureRegion texture;
     protected float speed, angle;
@@ -23,7 +24,6 @@ public abstract class Enemy extends GameEntity {
     public Enemy(TextureRegion texture, float x, float y, float speed, int life) {
         super(new Rectangle(x, y, ENEMY_WIDTH, ENEMY_HEIGHT), life);
         this.texture = texture;
-        position = new Point(x, y);
         this.speed = speed;
         state = Enums.EnemyState.MOVING;
     }
@@ -32,15 +32,15 @@ public abstract class Enemy extends GameEntity {
         batch.setColor(Color.WHITE);
         batch.draw(
                 texture,
-                position.getX(),
-                position.getY(),
+                bounds.getX(),
+                bounds.getY(),
                 ENEMY_WIDTH,
                 ENEMY_HEIGHT);
         lifeBar.render(batch);
     }
 
     public void update(float delta, DelayedRemovalArray<Defense> defenses) {
-        bounds.set(position.getX(), position.getY(), ENEMY_WIDTH, ENEMY_HEIGHT);
+        bounds.set(bounds.getX(), bounds.getY(), ENEMY_WIDTH, ENEMY_HEIGHT);
     }
 
     protected void move(float delta, float speedModifier) {
@@ -48,12 +48,12 @@ public abstract class Enemy extends GameEntity {
         float sin = MathUtils.sinDeg(angle);
         float x = delta * cos;
         float y = delta * sin;
-        position.setX(position.getX() + x * speed * speedModifier);
-        position.setY(position.getY() + y * speed * speedModifier);
+        bounds.setX(bounds.getX() + x * speed * speedModifier);
+        bounds.setY(bounds.getY() + y * speed * speedModifier);
     }
 
     public Point getCenter() {
-        return new Point(position.getX() + ENEMY_WIDTH / 2, position.getY() + ENEMY_HEIGHT / 2);
+        return new Point(bounds.getX() + ENEMY_WIDTH / 2, bounds.getY() + ENEMY_HEIGHT / 2);
     }
 
     public void setAngle(float angle) {

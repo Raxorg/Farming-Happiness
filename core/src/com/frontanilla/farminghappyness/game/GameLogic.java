@@ -76,21 +76,19 @@ public class GameLogic {
     }
 
     private void updateTurrets(float delta) {
-        for (Tile[] tileRow : connector.getRenderer().getDefenseTiles()) {
-            for (Tile tile : tileRow) {
-                if (tile.getDefense() != null) {
-                    tile.getDefense().update(delta);
-                    if (tile.getDefense() instanceof Turret) {
-                        for (Enemy e : connector.getGameState().getEnemies()) {
-                            if (Util.getDistance(e.getCenter(), tile.getDefense().getCenter()) < Constants.TURRET_RANGE) {
-                                Turret turret = (Turret) tile.getDefense();
-                                float angle = Util.getAngle(tile.getDefense().getCenter(), e.getCenter()) + 155;
-                                turret.setCannonRotation(angle);
-                                if (turret.getCoolDown() == 0) {
-                                    connector.getGameState().getBullets().add(turret.shoot(e));
-                                }
-                                break;
+        for (Tile tile : connector.getRenderer().getDefenseArea().getTiles()) {
+            if (tile.getDefense() != null) {
+                tile.getDefense().update(delta);
+                if (tile.getDefense() instanceof Turret) {
+                    for (Enemy e : connector.getGameState().getEnemies()) {
+                        if (Util.getDistance(e.getCenter(), tile.getDefense().getCenter()) < Constants.TURRET_RANGE) {
+                            Turret turret = (Turret) tile.getDefense();
+                            float angle = Util.getAngle(tile.getDefense().getCenter(), e.getCenter()) + 155;
+                            turret.setCannonRotation(angle);
+                            if (turret.getCoolDown() == 0) {
+                                connector.getGameState().getBullets().add(turret.shoot(e));
                             }
+                            break;
                         }
                     }
                 }
@@ -149,34 +147,32 @@ public class GameLogic {
                 return;
             }
             // Check if this happened on a defense tile
-            for (Tile[] tileRow : connector.getRenderer().getDefenseTiles()) {
-                for (Tile tile : tileRow) {
-                    if (tile.contains(usefulVector.x, usefulVector.y)
-                            && connector.getGameState().getMoney() >= 10
-                            && tile.getType() == DEFENSIVE_TILE
-                            && tile.getDefense() == null) {
-                        switch (constructionState) {
-                            case BUILDING_TURRET:
-                                Defense newDefense = new Turret(tile);
-                                connector.getGameState().getDefenses().add(newDefense);
-                                tile.setDefense(newDefense);
-                                connector.getGameState().setMoney(connector.getGameState().getMoney() - 10);
-                                break;
-                            case BUILDING_WALL:
-                                newDefense = new Wall(tile);
-                                connector.getGameState().getDefenses().add(newDefense);
-                                tile.setDefense(newDefense);
-                                connector.getGameState().setMoney(connector.getGameState().getMoney() - 10);
-                                break;
-                            case BUILDING_TRAP:
-                                newDefense = new Trap(tile);
-                                connector.getGameState().getDefenses().add(newDefense);
-                                tile.setDefense(newDefense);
-                                connector.getGameState().setMoney(connector.getGameState().getMoney() - 10);
-                                break;
-                        }
-                        return;
+            for (Tile tile : connector.getRenderer().getDefenseArea().getTiles()) {
+                if (tile.contains(usefulVector.x, usefulVector.y)
+                        && connector.getGameState().getMoney() >= 10
+                        && tile.getType() == DEFENSIVE_TILE
+                        && tile.getDefense() == null) {
+                    switch (constructionState) {
+                        case BUILDING_TURRET:
+                            Defense newDefense = new Turret(tile);
+                            connector.getGameState().getDefenses().add(newDefense);
+                            tile.setDefense(newDefense);
+                            connector.getGameState().setMoney(connector.getGameState().getMoney() - 10);
+                            break;
+                        case BUILDING_WALL:
+                            newDefense = new Wall(tile);
+                            connector.getGameState().getDefenses().add(newDefense);
+                            tile.setDefense(newDefense);
+                            connector.getGameState().setMoney(connector.getGameState().getMoney() - 10);
+                            break;
+                        case BUILDING_TRAP:
+                            newDefense = new Trap(tile);
+                            connector.getGameState().getDefenses().add(newDefense);
+                            tile.setDefense(newDefense);
+                            connector.getGameState().setMoney(connector.getGameState().getMoney() - 10);
+                            break;
                     }
+                    return;
                 }
             }
         } else {
@@ -185,10 +181,8 @@ public class GameLogic {
     }
 
     private void restart() {
-        for (Tile[] tileRow : connector.getRenderer().getDefenseTiles()) {
-            for (Tile tile : tileRow) {
-                tile.setDefense(null);
-            }
+        for (Tile tile : connector.getRenderer().getDefenseArea().getTiles()) {
+            tile.setDefense(null);
         }
         connector.getGameState().restart();
         lost = false;

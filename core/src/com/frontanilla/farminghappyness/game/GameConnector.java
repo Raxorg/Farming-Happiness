@@ -5,19 +5,17 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.frontanilla.farminghappyness.components.Button;
 import com.frontanilla.farminghappyness.game.areas.DisplayArea;
 import com.frontanilla.farminghappyness.game.areas.Tile;
 import com.frontanilla.farminghappyness.game.defenses.Turret;
 import com.frontanilla.farminghappyness.game.other.Bullet;
-import com.frontanilla.farminghappyness.components.Button;
 import com.frontanilla.farminghappyness.game.units.Enemy;
 import com.frontanilla.farminghappyness.tests.MyCamera;
 import com.frontanilla.farminghappyness.utils.Assets;
 
-import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_AREA_COLUMNS;
-import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_AREA_ROWS;
 import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_BUTTON_SIZE;
-import static com.frontanilla.farminghappyness.utils.Constants.FARMING_AREA_WIDTH;
+import static com.frontanilla.farminghappyness.utils.Constants.FARMING_AREA_SIZE;
 import static com.frontanilla.farminghappyness.utils.Constants.FARMING_AREA_X;
 import static com.frontanilla.farminghappyness.utils.Constants.FARMING_AREA_Y;
 import static com.frontanilla.farminghappyness.utils.Constants.TURRET_RANGE;
@@ -58,19 +56,19 @@ public class GameConnector extends ScreenAdapter {
         // Defense buttons
         towerButton = new Button(
                 Assets.turret,
-                FARMING_AREA_X - FARMING_AREA_WIDTH,
+                FARMING_AREA_X - FARMING_AREA_SIZE,
                 FARMING_AREA_Y + DEFENSE_BUTTON_SIZE / 2f,
                 DEFENSE_BUTTON_SIZE,
                 DEFENSE_BUTTON_SIZE);
         wallButton = new Button(
                 Assets.wall,
-                FARMING_AREA_X - FARMING_AREA_WIDTH + DEFENSE_BUTTON_SIZE * 1.5f,
+                FARMING_AREA_X - FARMING_AREA_SIZE + DEFENSE_BUTTON_SIZE * 1.5f,
                 FARMING_AREA_Y + DEFENSE_BUTTON_SIZE / 2,
                 DEFENSE_BUTTON_SIZE,
                 DEFENSE_BUTTON_SIZE);
         trapButton = new Button(
                 Assets.trap,
-                FARMING_AREA_X - FARMING_AREA_WIDTH + DEFENSE_BUTTON_SIZE * 3f,
+                FARMING_AREA_X - FARMING_AREA_SIZE + DEFENSE_BUTTON_SIZE * 3f,
                 FARMING_AREA_Y + DEFENSE_BUTTON_SIZE / 2f,
                 DEFENSE_BUTTON_SIZE,
                 DEFENSE_BUTTON_SIZE);
@@ -86,24 +84,20 @@ public class GameConnector extends ScreenAdapter {
             b.render(batch);
         }
         batch.setColor(Color.WHITE);
-        for (Tile[] tileRows : renderer.getDefenseArea().getTiles()) {
-            for (Tile tile : tileRows) {
-                if (tile.getDefense() instanceof Turret) {
-                    batch.draw(
-                            Assets.rangeCircle,
-                            tile.getDefense().getPosition().getX() - TURRET_RANGE + TURRET_WIDTH / 2,
-                            tile.getDefense().getPosition().getY() - TURRET_RANGE + TURRET_WIDTH / 2,
-                            TURRET_RANGE * 2,
-                            TURRET_RANGE * 2);
-                }
+        for (Tile tile : renderer.getDefenseArea().getTiles()) {
+            if (tile.getDefense() instanceof Turret) {
+                batch.draw(
+                        Assets.rangeCircle,
+                        tile.getDefense().getPosition().getX() - TURRET_RANGE + TURRET_WIDTH / 2,
+                        tile.getDefense().getPosition().getY() - TURRET_RANGE + TURRET_WIDTH / 2,
+                        TURRET_RANGE * 2,
+                        TURRET_RANGE * 2);
             }
         }
         // Render defenses
-        for (int row = DEFENSE_AREA_ROWS - 1; row >= 0; row--) {
-            for (int column = 0; column < DEFENSE_AREA_COLUMNS; column++) {
-                if (getRenderer().getDefenseTiles()[row][column].getDefense() != null) {
-                    getRenderer().getDefenseTiles()[row][column].getDefense().render(batch);
-                }
+        for (Tile tile : renderer.getDefenseArea().getTiles()) {
+            if (tile.getDefense() != null) {
+                tile.getDefense().render(batch);
             }
         }
 

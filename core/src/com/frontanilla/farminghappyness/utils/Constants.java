@@ -6,7 +6,7 @@ public class Constants {
 
     // World
     public static final int WORLD_WIDTH = 1000;
-    public static final int WORLD_HEIGHT = 1000;
+    public static final int WORLD_HEIGHT = 1100;
     //------------------
     //      TILES
     //------------------
@@ -27,36 +27,40 @@ public class Constants {
     //------------------
     //   DEFENSE AREA
     //------------------
-    public static final float DEFENSE_AREA_WIDTH = WORLD_WIDTH * (2f / 3f);
-    public static final int DEFENSE_AREA_COLUMNS = (int) (DEFENSE_AREA_WIDTH / (TILE_SIZE + TILE_SPACING));
-    public static final float DEFENSE_X_SPACE = DEFENSE_AREA_WIDTH - DEFENSE_AREA_COLUMNS * (TILE_SIZE + TILE_SPACING);
-    public static final float DEFENSE_AREA_X = WORLD_WIDTH - DEFENSE_AREA_WIDTH + DEFENSE_X_SPACE;
+    public static final float DEFENSE_TILE_SIZE = 25f;
+    public static final float DEFENSE_X_SPACE = 5;
+    public static final float DEFENSE_Y_SPACE = 5;
 
-    public static final float DEFENSE_AREA_HEIGHT = WORLD_HEIGHT / 2f;
-    public static final int DEFENSE_AREA_ROWS = (int) (DEFENSE_AREA_HEIGHT / (TILE_SIZE + TILE_SPACING));
-    public static final float DEFENSE_Y_SPACE = DEFENSE_AREA_HEIGHT - DEFENSE_AREA_ROWS * (TILE_SIZE + TILE_SPACING);
-    public static final float DEFENSE_AREA_Y = WORLD_HEIGHT - DEFENSE_AREA_HEIGHT + DEFENSE_Y_SPACE - RIVER_TILE_SIZE;
+    public static final int LEFT_DEFENSE_ROWS = (int) (500 / DEFENSE_TILE_SIZE);
+    public static final int LEFT_DEFENSE_COLUMNS = 3;
+    public static final float LEFT_DEFENSE_X = 500 - DEFENSE_TILE_SIZE * 3;
+    public static final float LEFT_DEFENSE_Y = 500;
 
-    public static final int DEFENSE_AREA_DEFENSE_LINES = 4;
-    public static final float DEFENSE_AREA_THICKNESS = DEFENSE_AREA_DEFENSE_LINES * (TILE_SIZE + TILE_SPACING);
+    public static final int BOTTOM_DEFENSE_ROWS = 3;
+    public static final int BOTTOM_DEFENSE_COLUMNS = (int) (500 / DEFENSE_TILE_SIZE);
+    public static final float BOTTOM_DEFENSE_X = 500;
+    public static final float BOTTOM_DEFENSE_Y = 500 - DEFENSE_TILE_SIZE * 3;
     //------------------
     //   FARMING AREA
     //------------------
-    public static final float FARMING_AREA_WIDTH = (DEFENSE_AREA_WIDTH - DEFENSE_AREA_THICKNESS) / 2f;
-    public static final int FARMING_AREA_COLUMNS = (int) (FARMING_AREA_WIDTH / TILE_SIZE);
-    public static final float FARMING_X_SPACE = FARMING_AREA_WIDTH - FARMING_AREA_COLUMNS * TILE_SIZE;
-    public static final float FARMING_AREA_X = WORLD_WIDTH - FARMING_AREA_WIDTH + FARMING_X_SPACE;
+    public static final float FARMING_TILE_SIZE = 25f;
+    public static final float FARMING_AREA_SIZE = 500f;
 
-    public static final float FARMING_AREA_HEIGHT = DEFENSE_AREA_HEIGHT - DEFENSE_AREA_THICKNESS;
-    public static final int FARMING_AREA_ROWS = (int) (FARMING_AREA_HEIGHT / TILE_SIZE);
-    public static final float FARMING_Y_SPACE = FARMING_AREA_HEIGHT - FARMING_AREA_ROWS * TILE_SIZE;
-    public static final float FARMING_AREA_Y = WORLD_HEIGHT - FARMING_AREA_HEIGHT + FARMING_Y_SPACE - RIVER_TILE_SIZE;
+    public static final int FARMING_AREA_COLUMNS = (int) (FARMING_AREA_SIZE / FARMING_TILE_SIZE);
+    public static final float FARMING_X_SPACE = 5;
+    public static final float FARMING_AREA_X = 500f;
+
+    public static final int FARMING_AREA_ROWS = (int) (FARMING_AREA_SIZE / FARMING_TILE_SIZE);
+    public static final float FARMING_Y_SPACE = 5;
+    public static final float FARMING_AREA_Y = 500f;
     //------------------
     //      CAMERA
     //------------------
     public static final float PANNING_SPEED = 10f;
     public static final float OTHER_PANNING_SPEED = 1f;
     public static final float MIN_ZOOM = 1f;
+    public static final float SCREEN_WIDTH_VISIBILITY_PERCENTAGE_ = 1f;
+    public static final float SCREEN_HEIGHT_VISIBILITY_PERCENTAGE_ = 1f;
     //------------------
     //      TURRET
     //------------------
@@ -87,7 +91,7 @@ public class Constants {
     public static final float ENEMY_WIDTH = 15f;
     public static final float ENEMY_HEIGHT = ENEMY_WIDTH * 1.8f;
     public static final float SPAWN_RATE = 0.4f;
-    public static final float SPAWN_TIME = 10f;
+    public static final float SPAWN_TIME = 2f;
     // Tourists
     public static final int TOURIST_INITIAL_LIFE = 7;
     public static final float TOURIST_SPEED = 50f;

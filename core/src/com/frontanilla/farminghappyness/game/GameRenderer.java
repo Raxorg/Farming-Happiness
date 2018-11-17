@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.frontanilla.farminghappyness.components.Background;
 import com.frontanilla.farminghappyness.game.areas.DefenseArea;
 import com.frontanilla.farminghappyness.game.areas.FarmingArea;
-import com.frontanilla.farminghappyness.game.areas.Tile;
 import com.frontanilla.farminghappyness.game.plants.Plant;
 import com.frontanilla.farminghappyness.utils.Assets;
 
@@ -27,7 +26,7 @@ public class GameRenderer {
         defenseArea = new DefenseArea();
         // TODO randomize river tiles and save them
 
-        plant = new Plant(Plant.AYARN, farmingArea.getTile(4, 4));// TODO TEST
+        plant = new Plant(Plant.AYARN, farmingArea.getTiles().get(4));// TODO TEST WITH USER INPUT
     }
 
     public void render(SpriteBatch batch) {
@@ -51,10 +50,6 @@ public class GameRenderer {
                     RIVER_TILE_SIZE,
                     RIVER_TILE_SIZE);
         }
-    }
-
-    public Tile[][] getDefenseTiles() {
-        return defenseArea.getTiles();
     }
 
     public FarmingArea getFarmingArea() {

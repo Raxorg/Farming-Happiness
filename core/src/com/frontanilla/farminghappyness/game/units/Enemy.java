@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
-import com.frontanilla.farminghappyness.game.GameEntity;
 import com.frontanilla.farminghappyness.game.defenses.Defense;
 import com.frontanilla.farminghappyness.game.other.Damageable;
 import com.frontanilla.farminghappyness.utils.Enums;
@@ -58,14 +57,6 @@ public abstract class Enemy extends Damageable {
 
     public void setAngle(float angle) {
         this.angle = angle;
-    }
-
-    public void setLife(int life) {
-        this.life = life;
-    }
-
-    public int getLife() {
-        return life;
     }
 
     public boolean isAlive() {

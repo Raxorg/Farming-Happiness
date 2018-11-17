@@ -52,7 +52,7 @@ public class DisplayArea {
             batch.begin();
             font.draw(
                     batch,
-                    (int) (10 - time) + "",
+                    (int) (SPAWN_TIME + 1 - time) + "",
                     Gdx.graphics.getWidth() / 2,
                     Gdx.graphics.getHeight() - 10);
             batch.end();

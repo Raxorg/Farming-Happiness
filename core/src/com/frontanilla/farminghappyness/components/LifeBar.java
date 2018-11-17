@@ -18,7 +18,6 @@ public class LifeBar {
     public LifeBar(Damageable damageable) {
         this.damageable = damageable;
         portionWidth = (damageable.getBounds().width - LIFE_BAR_SIDES_WIDTH * 2) / damageable.getInitialLife();
-        portionWidth = (damageable.getBounds().width - LIFE_BAR_SIDES_WIDTH * 2) / damageable.getInitialLife();
     }
 
     public void render(SpriteBatch batch) {
@@ -26,7 +25,7 @@ public class LifeBar {
         batch.draw(
                 Assets.sidesLifeBar,
                 damageable.getBounds().getX(),
-                damageable.getBounds().getY() + ENEMY_HEIGHT,
+                damageable.getBounds().getY() + damageable.getBounds().height,
                 LIFE_BAR_SIDES_WIDTH,
                 LIFE_BAR_HEIGHT);
         // Center TODO, draw this according to HP

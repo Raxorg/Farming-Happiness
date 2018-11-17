@@ -8,6 +8,8 @@ import com.badlogic.gdx.math.MathUtils;
 import static com.frontanilla.farminghappyness.utils.Constants.MIN_ZOOM;
 import static com.frontanilla.farminghappyness.utils.Constants.OTHER_PANNING_SPEED;
 import static com.frontanilla.farminghappyness.utils.Constants.PANNING_SPEED;
+import static com.frontanilla.farminghappyness.utils.Constants.SCREEN_HEIGHT_VISIBILITY_PERCENTAGE_;
+import static com.frontanilla.farminghappyness.utils.Constants.SCREEN_WIDTH_VISIBILITY_PERCENTAGE_;
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_WIDTH;
 
@@ -18,6 +20,8 @@ public class MyCamera extends OrthographicCamera {
 
         //position.set(viewportWidth / 2f, viewportHeight / 2f, 0);
         position.add(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, 0);
+        zoom = MathUtils.clamp(zoom, (WORLD_WIDTH / viewportWidth) * SCREEN_WIDTH_VISIBILITY_PERCENTAGE_, (WORLD_WIDTH / viewportWidth) * SCREEN_WIDTH_VISIBILITY_PERCENTAGE_);
+        zoom = MathUtils.clamp(zoom, (WORLD_HEIGHT / viewportHeight) * SCREEN_HEIGHT_VISIBILITY_PERCENTAGE_, (WORLD_HEIGHT / viewportHeight) * SCREEN_HEIGHT_VISIBILITY_PERCENTAGE_);
         update();
     }
 
@@ -41,8 +45,8 @@ public class MyCamera extends OrthographicCamera {
             translate(0, PANNING_SPEED); // TODO MULTIPLY BY A DYNAMIC VARIABLE ACCORDING TO ZOOM
         }
 
-        zoom = MathUtils.clamp(zoom, MIN_ZOOM, (WORLD_WIDTH / viewportWidth) * 0.8f);
-        zoom = MathUtils.clamp(zoom, MIN_ZOOM, (WORLD_HEIGHT / viewportHeight) * 0.8f);
+        zoom = MathUtils.clamp(zoom, MIN_ZOOM, (WORLD_WIDTH / viewportWidth) * SCREEN_WIDTH_VISIBILITY_PERCENTAGE_);
+        zoom = MathUtils.clamp(zoom, MIN_ZOOM, (WORLD_HEIGHT / viewportHeight) * SCREEN_HEIGHT_VISIBILITY_PERCENTAGE_);
 
         float effectiveViewportWidth = viewportWidth * zoom;
         float effectiveViewportHeight = viewportHeight * zoom;

@@ -1,61 +1,105 @@
 package com.frontanilla.farminghappyness.game.areas;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.frontanilla.farminghappyness.utils.Assets;
 
-import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_AREA_COLUMNS;
-import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_AREA_DEFENSE_LINES;
-import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_AREA_ROWS;
-import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_AREA_X;
-import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_AREA_Y;
+import static com.frontanilla.farminghappyness.utils.Constants.BOTTOM_DEFENSE_COLUMNS;
+import static com.frontanilla.farminghappyness.utils.Constants.BOTTOM_DEFENSE_ROWS;
+import static com.frontanilla.farminghappyness.utils.Constants.BOTTOM_DEFENSE_X;
+import static com.frontanilla.farminghappyness.utils.Constants.BOTTOM_DEFENSE_Y;
+import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_TILE_SIZE;
+import static com.frontanilla.farminghappyness.utils.Constants.LEFT_DEFENSE_COLUMNS;
+import static com.frontanilla.farminghappyness.utils.Constants.LEFT_DEFENSE_ROWS;
+import static com.frontanilla.farminghappyness.utils.Constants.LEFT_DEFENSE_X;
+import static com.frontanilla.farminghappyness.utils.Constants.LEFT_DEFENSE_Y;
 import static com.frontanilla.farminghappyness.utils.Constants.NPTEST_BORDER_PIXELS;
-import static com.frontanilla.farminghappyness.utils.Constants.TILE_SIZE;
-import static com.frontanilla.farminghappyness.utils.Constants.TILE_SPACING;
 import static com.frontanilla.farminghappyness.utils.Enums.TileType.DEFENSIVE_TILE;
-import static com.frontanilla.farminghappyness.utils.Enums.TileType.HIDDEN_TILE;
 
 public class DefenseArea {
 
-    private Tile[][] tileMatrix;
+    private DelayedRemovalArray<Tile> defenseTiles;
 
     public DefenseArea() {
-        tileMatrix = new Tile[DEFENSE_AREA_ROWS][DEFENSE_AREA_COLUMNS];
-        for (int row = 0; row < DEFENSE_AREA_ROWS; row++) {
-            // Tile row
-            tileMatrix[row] = new Tile[DEFENSE_AREA_COLUMNS];
-            for (int column = 0; column < DEFENSE_AREA_COLUMNS; column++) {
-                if (column < DEFENSE_AREA_DEFENSE_LINES || row < DEFENSE_AREA_DEFENSE_LINES) {
-                    tileMatrix[row][column] = new Tile(
-                            DEFENSIVE_TILE,
-                            Assets.nptest,
-                            TILE_SIZE / 10f,
-                            NPTEST_BORDER_PIXELS,
-                            DEFENSE_AREA_X + column * (TILE_SIZE + TILE_SPACING),
-                            DEFENSE_AREA_Y + row * (TILE_SIZE + TILE_SPACING));
-                } else {
-                    tileMatrix[row][column] = new Tile(
-                            HIDDEN_TILE,
-                            null,
-                            TILE_SIZE / 10f,
-                            NPTEST_BORDER_PIXELS,
-                            DEFENSE_AREA_X + column * (TILE_SIZE + TILE_SPACING),
-                            DEFENSE_AREA_Y + row * (TILE_SIZE + TILE_SPACING));
-                }
+        defenseTiles = new DelayedRemovalArray<>();
+        // Add left tiles
+        for (int row = 0; row < LEFT_DEFENSE_ROWS; row++) {
+            for (int column = 0; column < LEFT_DEFENSE_COLUMNS; column++) {
+                defenseTiles.add(new Tile(
+                        DEFENSIVE_TILE,
+                        Assets.nptest,
+                        DEFENSE_TILE_SIZE / 10f,
+                        NPTEST_BORDER_PIXELS,
+                        LEFT_DEFENSE_X + DEFENSE_TILE_SIZE * column,
+                        LEFT_DEFENSE_Y + DEFENSE_TILE_SIZE * row));
             }
         }
+        // Add bottom tiles
+        for (int row = 0; row < BOTTOM_DEFENSE_ROWS; row++) {
+            for (int column = 0; column < BOTTOM_DEFENSE_COLUMNS; column++) {
+                defenseTiles.add(new Tile(
+                        DEFENSIVE_TILE,
+                        Assets.nptest,
+                        DEFENSE_TILE_SIZE / 10f,
+                        NPTEST_BORDER_PIXELS,
+                        BOTTOM_DEFENSE_X + DEFENSE_TILE_SIZE * column,
+                        BOTTOM_DEFENSE_Y + DEFENSE_TILE_SIZE * row));
+            }
+        }
+        // Add extra tiles
+        defenseTiles.add(new Tile(
+                DEFENSIVE_TILE,
+                Assets.nptest,
+                DEFENSE_TILE_SIZE / 10f,
+                NPTEST_BORDER_PIXELS,
+                LEFT_DEFENSE_X,
+                LEFT_DEFENSE_Y - DEFENSE_TILE_SIZE));
+        defenseTiles.add(new Tile(
+                DEFENSIVE_TILE,
+                Assets.nptest,
+                DEFENSE_TILE_SIZE / 10f,
+                NPTEST_BORDER_PIXELS,
+                LEFT_DEFENSE_X + DEFENSE_TILE_SIZE,
+                LEFT_DEFENSE_Y - DEFENSE_TILE_SIZE));
+        defenseTiles.add(new Tile(
+                DEFENSIVE_TILE,
+                Assets.nptest,
+                DEFENSE_TILE_SIZE / 10f,
+                NPTEST_BORDER_PIXELS,
+                LEFT_DEFENSE_X + DEFENSE_TILE_SIZE * 2,
+                LEFT_DEFENSE_Y - DEFENSE_TILE_SIZE));
+        defenseTiles.add(new Tile(
+                DEFENSIVE_TILE,
+                Assets.nptest,
+                DEFENSE_TILE_SIZE / 10f,
+                NPTEST_BORDER_PIXELS,
+                LEFT_DEFENSE_X + DEFENSE_TILE_SIZE,
+                LEFT_DEFENSE_Y - DEFENSE_TILE_SIZE * 2));
+        defenseTiles.add(new Tile(
+                DEFENSIVE_TILE,
+                Assets.nptest,
+                DEFENSE_TILE_SIZE / 10f,
+                NPTEST_BORDER_PIXELS,
+                LEFT_DEFENSE_X + DEFENSE_TILE_SIZE * 2,
+                LEFT_DEFENSE_Y - DEFENSE_TILE_SIZE * 2));
+        defenseTiles.add(new Tile(
+                DEFENSIVE_TILE,
+                Assets.nptest,
+                DEFENSE_TILE_SIZE / 10f,
+                NPTEST_BORDER_PIXELS,
+                LEFT_DEFENSE_X + DEFENSE_TILE_SIZE * 2,
+                LEFT_DEFENSE_Y - DEFENSE_TILE_SIZE * 3));
     }
 
     public void render(SpriteBatch batch) {
-        for (Tile[] tileRow : tileMatrix) {
-            for (Tile tile : tileRow) {
-                if (tile.getDefense() == null) {
-                    tile.render(batch);
-                }
+        for (Tile defenseTile : defenseTiles) {
+            if (defenseTile.getDefense() == null) {
+                defenseTile.render(batch);
             }
         }
     }
 
-    public Tile[][] getTiles() {
-        return tileMatrix;
+    public DelayedRemovalArray<Tile> getTiles() {
+        return defenseTiles;
     }
 }

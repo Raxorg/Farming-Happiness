@@ -3,9 +3,9 @@ package com.frontanilla.farminghappyness.game.defenses;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import com.frontanilla.farminghappyness.game.areas.Tile;
+import com.frontanilla.farminghappyness.components.Tile;
 import com.frontanilla.farminghappyness.game.other.Bullet;
-import com.frontanilla.farminghappyness.game.units.Enemy;
+import com.frontanilla.farminghappyness.game.entities.units.Enemy;
 import com.frontanilla.farminghappyness.utils.Assets;
 import com.frontanilla.farminghappyness.utils.Point;
 

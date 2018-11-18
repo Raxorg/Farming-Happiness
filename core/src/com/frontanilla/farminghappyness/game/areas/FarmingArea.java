@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
+import com.frontanilla.farminghappyness.components.Tile;
 import com.frontanilla.farminghappyness.utils.Assets;
 import com.frontanilla.farminghappyness.utils.Enums;
 import com.frontanilla.farminghappyness.utils.Point;

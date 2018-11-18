@@ -2,7 +2,7 @@ package com.frontanilla.farminghappyness.game.defenses;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import com.frontanilla.farminghappyness.game.areas.Tile;
+import com.frontanilla.farminghappyness.components.Tile;
 import com.frontanilla.farminghappyness.utils.Assets;
 
 import static com.frontanilla.farminghappyness.utils.Constants.TILE_SPACING;

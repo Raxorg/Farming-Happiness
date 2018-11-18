@@ -7,10 +7,10 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.frontanilla.farminghappyness.components.Button;
 import com.frontanilla.farminghappyness.game.areas.DisplayArea;
-import com.frontanilla.farminghappyness.game.areas.Tile;
+import com.frontanilla.farminghappyness.components.Tile;
 import com.frontanilla.farminghappyness.game.defenses.Turret;
 import com.frontanilla.farminghappyness.game.other.Bullet;
-import com.frontanilla.farminghappyness.game.units.Enemy;
+import com.frontanilla.farminghappyness.game.entities.units.Enemy;
 import com.frontanilla.farminghappyness.tests.MyCamera;
 import com.frontanilla.farminghappyness.utils.Assets;
 

@@ -100,10 +100,10 @@ public class Constants {
     public static final float TOURIST_SPEED = 50f;
     // Life bars
     public static final float LIFE_BAR_HEIGHT = 3f;
-    public static final float LIFE_BAR_SIDES_WIDTH = (LIFE_BAR_HEIGHT / 10f);
+    public static final float LIFE_BAR_SIDES_WIDTH = (LIFE_BAR_HEIGHT / 3f);
     // Progress bars
     public static final float PROGRESS_BAR_HEIGHT = 3f;
-    public static final float PROGRESS_BAR_SIDES_WIDTH = (PROGRESS_BAR_HEIGHT / 10f);
+    public static final float PROGRESS_BAR_SIDES_WIDTH = (PROGRESS_BAR_HEIGHT / 3f);
     // Resource frames
     public static final float RESOURCE_FRAME_WIDTH = Gdx.graphics.getWidth() / 6f;
     public static final float RESOURCE_FRAME_HEIGHT = RESOURCE_FRAME_WIDTH / 3f;

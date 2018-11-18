@@ -111,9 +111,9 @@ public class Assets {
         //------------------
         Texture hud = new Texture("images/hud.png");
         // Life bar
-        barSides = new TextureRegion(hud, 0, 0, 10, 100);
-        centerLifeBar = new TextureRegion(hud, 50, 0, 40, 100);
-        centerEmptyLifeBar = new TextureRegion(hud, 10, 0, 40, 100);
+        barSides = new TextureRegion(hud, 0, 0, 20, 100);
+        centerLifeBar = new TextureRegion(hud, 55, 0, 35, 100);
+        centerEmptyLifeBar = new TextureRegion(hud, 20, 0, 35, 100);
         // Construction menu
         triangle = new TextureRegion(hud, 90, 0, 200, 100);
         // Resource frame

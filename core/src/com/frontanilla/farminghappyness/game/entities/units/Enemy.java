@@ -1,4 +1,4 @@
-package com.frontanilla.farminghappyness.game.units;
+package com.frontanilla.farminghappyness.game.entities.units;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.frontanilla.farminghappyness.game.defenses.Defense;
-import com.frontanilla.farminghappyness.game.other.Damageable;
+import com.frontanilla.farminghappyness.game.entities.Damageable;
 import com.frontanilla.farminghappyness.utils.Enums;
 import com.frontanilla.farminghappyness.utils.Point;
 

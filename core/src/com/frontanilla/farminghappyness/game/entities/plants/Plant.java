@@ -1,14 +1,15 @@
-package com.frontanilla.farminghappyness.game.plants;
+package com.frontanilla.farminghappyness.game.entities.plants;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
-import com.frontanilla.farminghappyness.game.areas.Tile;
-import com.frontanilla.farminghappyness.game.other.Progressable;
+import com.frontanilla.farminghappyness.components.Tile;
+import com.frontanilla.farminghappyness.game.entities.Progressable;
 import com.frontanilla.farminghappyness.utils.Assets;
 import com.frontanilla.farminghappyness.utils.Enums.PlantType;
 
+import static com.frontanilla.farminghappyness.utils.Constants.PLANT_PRODUCTION_TIME;
 import static com.frontanilla.farminghappyness.utils.Constants.PLANT_SIZE;
 import static com.frontanilla.farminghappyness.utils.Constants.PLANT_TILE_SPACING;
 
@@ -19,8 +20,6 @@ public class Plant extends Progressable {
     // Plant
     private PlantType plantType;
     private int buyCost, sellCost;
-    // Logic
-    private float time;
     // Plants
     public static Plant ELSKER = new Plant(PlantType.ELSKER, 1, 2);
     public static Plant GRA = new Plant(PlantType.GRA, 1, 2);
@@ -34,7 +33,7 @@ public class Plant extends Progressable {
     public static Plant KAERLIGHED = new Plant(PlantType.KAERLIGHED, 1, 5);
 
     private Plant(PlantType plantType, int buyCost, int sellCost) {
-        super(new Rectangle());
+        super(new Rectangle(), PLANT_PRODUCTION_TIME);
         switch (plantType) {
             case ELSKER:
                 textureRegion = Assets.plantTest;
@@ -73,7 +72,7 @@ public class Plant extends Progressable {
     }
 
     public Plant(Plant plant, Tile tile) {
-        super(new Rectangle(tile.getX() + PLANT_TILE_SPACING, tile.getY() + PLANT_TILE_SPACING, PLANT_SIZE, PLANT_SIZE));
+        super(new Rectangle(tile.getX() + PLANT_TILE_SPACING, tile.getY() + PLANT_TILE_SPACING, PLANT_SIZE, PLANT_SIZE), PLANT_PRODUCTION_TIME);
         // Structure
         textureRegion = plant.textureRegion;
         // Plant
@@ -81,12 +80,11 @@ public class Plant extends Progressable {
         buyCost = plant.buyCost;
         sellCost = plant.sellCost;
         // Logic
-        time = 0;
+        progress = 0;
     }
 
     public void update(float delta) {
-        time += delta;
-        progress = Math.min(progress + 1, 100);
+        progress = Math.min(progress + delta, maxProgress);
     }
 
     public void render(SpriteBatch batch) {

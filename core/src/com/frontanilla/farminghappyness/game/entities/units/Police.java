@@ -1,4 +1,4 @@
-package com.frontanilla.farminghappyness.game.units;
+package com.frontanilla.farminghappyness.game.entities.units;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.DelayedRemovalArray;

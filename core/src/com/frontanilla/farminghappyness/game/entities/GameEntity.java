@@ -1,9 +1,7 @@
-package com.frontanilla.farminghappyness.game;
+package com.frontanilla.farminghappyness.game.entities;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import com.frontanilla.farminghappyness.components.LifeBar;
-import com.frontanilla.farminghappyness.utils.Point;
 
 public abstract class GameEntity {
 

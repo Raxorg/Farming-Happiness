@@ -2,7 +2,7 @@ package com.frontanilla.farminghappyness.components;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.frontanilla.farminghappyness.game.other.Damageable;
+import com.frontanilla.farminghappyness.game.entities.Damageable;
 import com.frontanilla.farminghappyness.utils.Assets;
 
 import static com.frontanilla.farminghappyness.utils.Constants.LIFE_BAR_HEIGHT;

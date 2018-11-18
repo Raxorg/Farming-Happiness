@@ -3,7 +3,7 @@ package com.frontanilla.farminghappyness.game.other;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
-import com.frontanilla.farminghappyness.game.units.Enemy;
+import com.frontanilla.farminghappyness.game.entities.units.Enemy;
 import com.frontanilla.farminghappyness.utils.Assets;
 import com.frontanilla.farminghappyness.utils.Point;
 import com.frontanilla.farminghappyness.utils.Util;

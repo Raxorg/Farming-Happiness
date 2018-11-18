@@ -2,6 +2,7 @@ package com.frontanilla.farminghappyness.game.areas;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
+import com.frontanilla.farminghappyness.components.Tile;
 import com.frontanilla.farminghappyness.utils.Assets;
 
 import static com.frontanilla.farminghappyness.utils.Constants.BOTTOM_DEFENSE_COLUMNS;

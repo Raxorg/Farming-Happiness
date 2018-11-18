@@ -4,8 +4,8 @@ import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.frontanilla.farminghappyness.game.areas.FarmingArea;
 import com.frontanilla.farminghappyness.game.defenses.Defense;
 import com.frontanilla.farminghappyness.game.other.Bullet;
-import com.frontanilla.farminghappyness.game.plants.Plant;
-import com.frontanilla.farminghappyness.game.units.Enemy;
+import com.frontanilla.farminghappyness.game.entities.plants.Plant;
+import com.frontanilla.farminghappyness.game.entities.units.Enemy;
 
 public class GameState {
 

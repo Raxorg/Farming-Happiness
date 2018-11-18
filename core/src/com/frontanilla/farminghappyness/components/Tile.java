@@ -1,8 +1,8 @@
-package com.frontanilla.farminghappyness.game.areas;
+package com.frontanilla.farminghappyness.components;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.frontanilla.farminghappyness.components.NinePatcherButton;
-import com.frontanilla.farminghappyness.game.GameEntity;
+import com.frontanilla.farminghappyness.game.entities.GameEntity;
 import com.frontanilla.farminghappyness.utils.Enums;
 
 public class Tile extends NinePatcherButton {

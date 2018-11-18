@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.frontanilla.farminghappyness.game.areas.Tile;
 import com.frontanilla.farminghappyness.utils.Assets;
-import com.frontanilla.farminghappyness.utils.Point;
 
 import static com.frontanilla.farminghappyness.utils.Constants.TILE_SPACING;
 import static com.frontanilla.farminghappyness.utils.Constants.TRAP_INITIAL_HEALTH;
@@ -17,9 +16,7 @@ public class Trap extends Defense {
     private float time;
 
     public Trap(Tile tile) {
-        super(new Rectangle(tile.getX(), tile.getY(), WALL_SIZE, WALL_SIZE),TRAP_INITIAL_HEALTH);
-        position = new Point(tile.getX(), tile.getY());
-
+        super(new Rectangle(tile.getX(), tile.getY(), WALL_SIZE, WALL_SIZE), TRAP_INITIAL_HEALTH);
         activated = false;
         time = 0;
     }
@@ -39,15 +36,15 @@ public class Trap extends Defense {
     public void render(SpriteBatch batch) {
         batch.draw(
                 Assets.trap,
-                position.getX() - TILE_SPACING,
-                position.getY(),
+                bounds.x - TILE_SPACING,
+                bounds.y,
                 TRAP_SIZE + TILE_SPACING * 2,
                 TRAP_SIZE);
         if (!activated) {
             batch.draw(
                     Assets.trapLeaves,
-                    position.getX() - TILE_SPACING,
-                    position.getY(),
+                    bounds.x - TILE_SPACING,
+                    bounds.y,
                     TRAP_SIZE + TILE_SPACING * 2,
                     TRAP_SIZE);
         }

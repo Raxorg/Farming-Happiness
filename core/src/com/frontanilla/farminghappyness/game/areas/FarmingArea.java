@@ -69,7 +69,9 @@ public class FarmingArea {
                         TILE_SIZE / 10f,
                         NPTEST_BORDER_PIXELS,
                         FARMING_AREA_X + column * FARMING_TILE_SIZE,
-                        FARMING_AREA_Y + row * FARMING_TILE_SIZE);
+                        FARMING_AREA_Y + row * FARMING_TILE_SIZE,
+                        FARMING_TILE_SIZE,
+                        FARMING_TILE_SIZE);
                 farmingTile.setColor(Color.OLIVE);
                 farmingTiles.add(farmingTile);
             }
@@ -80,6 +82,9 @@ public class FarmingArea {
     public void render(SpriteBatch batch) {
         for (Tile tile : farmingTiles) {
             tile.render(batch);
+            if (tile.getGameEntity() != null) {
+                tile.getGameEntity().render(batch);
+            }
         }
     }
 

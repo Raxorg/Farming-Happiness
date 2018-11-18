@@ -6,17 +6,17 @@ import com.frontanilla.farminghappyness.game.GameEntity;
 
 public abstract class Damageable extends GameEntity {
 
-    protected LifeBar lifeBar;
     protected int initialLife, life;
+    protected LifeBar lifeBar;
 
     public Damageable(Rectangle bounds, int initialLife) {
         super(bounds);
-        lifeBar = new LifeBar(this);
         this.initialLife = initialLife;
         life = initialLife;
+        lifeBar = new LifeBar(this);
     }
 
-    public abstract void takeDamage(int damage);
+    public abstract void takeDamage(int damage); // TODO maybe use this
 
     public int getInitialLife() {
         return initialLife;

@@ -11,6 +11,7 @@ import com.frontanilla.farminghappyness.game.defenses.Trap;
 import com.frontanilla.farminghappyness.game.defenses.Turret;
 import com.frontanilla.farminghappyness.game.defenses.Wall;
 import com.frontanilla.farminghappyness.game.other.Bullet;
+import com.frontanilla.farminghappyness.game.plants.Plant;
 import com.frontanilla.farminghappyness.game.units.Enemy;
 import com.frontanilla.farminghappyness.game.units.Tourist;
 import com.frontanilla.farminghappyness.utils.Constants;
@@ -48,6 +49,7 @@ public class GameLogic {
             connector.getBatch().setProjectionMatrix(connector.getCamera().combined);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+            updatePlants(delta);
             updateEnemies(delta);
             updateTurrets(delta);
             updateBullets(delta);
@@ -60,6 +62,12 @@ public class GameLogic {
         }
     }
 
+    private void updatePlants(float delta) {
+        for (Plant p : connector.getGameState().getPlants()) {
+            p.update(delta);
+        }
+    }
+
     private void updateEnemies(float delta) {
         connector.getGameState().getEnemies().begin();
         for (Enemy e : connector.getGameState().getEnemies()) {
@@ -68,7 +76,7 @@ public class GameLogic {
                 connector.getGameState().getEnemies().removeValue(e, true);
                 connector.getGameState().setMoney(connector.getGameState().getMoney() + 1);
             }
-            if (Util.getDistance(e.getCenter(), connector.getRenderer().getFarmingArea().getCenter()) < ENEMY_WIDTH / 2f) {
+            if (Util.getDistance(e.getCenter(), connector.getGameState().getFarmingArea().getCenter()) < ENEMY_WIDTH / 2f) {
                 lost = true;
             }
         }
@@ -77,14 +85,12 @@ public class GameLogic {
 
     private void updateTurrets(float delta) {
         for (Tile tile : connector.getRenderer().getDefenseArea().getTiles()) {
-            if (tile.getDefense() != null) {
-                tile.getDefense().update(delta);
-                if (tile.getDefense() instanceof Turret) {
+            if (tile.getGameEntity() != null) {
+                if (tile.getGameEntity() instanceof Turret) {
+                    Turret turret = (Turret) tile.getGameEntity();
+                    turret.update(delta);
                     for (Enemy e : connector.getGameState().getEnemies()) {
-                        if (Util.getDistance(e.getCenter(), tile.getDefense().getCenter()) < Constants.TURRET_RANGE) {
-                            Turret turret = (Turret) tile.getDefense();
-                            float angle = Util.getAngle(tile.getDefense().getCenter(), e.getCenter()) + 155;
-                            turret.setCannonRotation(angle);
+                        if (Util.getDistance(e.getCenter(), turret.getCenter()) < Constants.TURRET_RANGE) {
                             if (turret.getCoolDown() == 0) {
                                 connector.getGameState().getBullets().add(turret.shoot(e));
                             }
@@ -117,12 +123,12 @@ public class GameLogic {
             float randX = MathUtils.random(0, WORLD_WIDTH - ENEMY_WIDTH);
             tourist = new Tourist(randX, -ENEMY_HEIGHT);
         }
-        float angle = Util.getAngle(tourist.getCenter(), connector.getRenderer().getFarmingArea().getCenter());
+        float angle = Util.getAngle(tourist.getCenter(), connector.getGameState().getFarmingArea().getCenter());
         tourist.setAngle(angle);
         connector.getGameState().getEnemies().add(tourist);
     }
 
-    public void touchDown(Vector3 usefulVector, int button) {
+    public void touchDown(Vector3 usefulVector) {
         if (!lost) {
             // Check if this happened on a defense construction button
             if (connector.getTurretButton().contains(usefulVector.x, usefulVector.y)) {
@@ -130,16 +136,12 @@ public class GameLogic {
                 connector.getWallButton().setColor(Color.WHITE);
                 connector.getTrapButton().setColor(Color.WHITE);
                 constructionState = BUILDING_TURRET;
-                return;
-            }
-            if (connector.getWallButton().contains(usefulVector.x, usefulVector.y)) {
+            } else if (connector.getWallButton().contains(usefulVector.x, usefulVector.y)) {
                 connector.getWallButton().setColor(Color.GREEN);
                 connector.getTurretButton().setColor(Color.WHITE);
                 connector.getTrapButton().setColor(Color.WHITE);
                 constructionState = Enums.ConstructionState.BUILDING_WALL;
-                return;
-            }
-            if (connector.getTrapButton().contains(usefulVector.x, usefulVector.y)) {
+            } else if (connector.getTrapButton().contains(usefulVector.x, usefulVector.y)) {
                 connector.getTrapButton().setColor(Color.GREEN);
                 connector.getTurretButton().setColor(Color.WHITE);
                 connector.getWallButton().setColor(Color.WHITE);
@@ -150,29 +152,37 @@ public class GameLogic {
             for (Tile tile : connector.getRenderer().getDefenseArea().getTiles()) {
                 if (tile.contains(usefulVector.x, usefulVector.y)
                         && connector.getGameState().getMoney() >= 10
-                        && tile.getType() == DEFENSIVE_TILE
-                        && tile.getDefense() == null) {
+                        && tile.getType() == DEFENSIVE_TILE // TODO Check if wall, trap or turret tile
+                        && tile.getGameEntity() == null) {
                     switch (constructionState) {
                         case BUILDING_TURRET:
                             Defense newDefense = new Turret(tile);
                             connector.getGameState().getDefenses().add(newDefense);
-                            tile.setDefense(newDefense);
+                            tile.setGameEntity(newDefense);
                             connector.getGameState().setMoney(connector.getGameState().getMoney() - 10);
                             break;
                         case BUILDING_WALL:
                             newDefense = new Wall(tile);
                             connector.getGameState().getDefenses().add(newDefense);
-                            tile.setDefense(newDefense);
+                            tile.setGameEntity(newDefense);
                             connector.getGameState().setMoney(connector.getGameState().getMoney() - 10);
                             break;
                         case BUILDING_TRAP:
                             newDefense = new Trap(tile);
                             connector.getGameState().getDefenses().add(newDefense);
-                            tile.setDefense(newDefense);
+                            tile.setGameEntity(newDefense);
                             connector.getGameState().setMoney(connector.getGameState().getMoney() - 10);
                             break;
                     }
                     return;
+                }
+            }
+            // Check if this happened on a farming tile
+            for (Tile tile : connector.getGameState().getFarmingArea().getTiles()) {
+                if (tile.contains(usefulVector.x, usefulVector.y)) {
+                    Plant newPlant = new Plant(Plant.AYARN, tile);
+                    connector.getGameState().getPlants().add(newPlant);
+                    tile.setGameEntity(newPlant);
                 }
             }
         } else {
@@ -182,9 +192,10 @@ public class GameLogic {
 
     private void restart() {
         for (Tile tile : connector.getRenderer().getDefenseArea().getTiles()) {
-            tile.setDefense(null);
+            tile.setGameEntity(null);
         }
         connector.getGameState().restart();
+        connector.getDisplayArea().restart();
         lost = false;
         time = 0;
     }

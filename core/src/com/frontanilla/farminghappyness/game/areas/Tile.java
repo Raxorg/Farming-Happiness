@@ -1,19 +1,17 @@
 package com.frontanilla.farminghappyness.game.areas;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.frontanilla.farminghappyness.game.defenses.Defense;
 import com.frontanilla.farminghappyness.components.NinePatcherButton;
+import com.frontanilla.farminghappyness.game.GameEntity;
 import com.frontanilla.farminghappyness.utils.Enums;
-
-import static com.frontanilla.farminghappyness.utils.Constants.TILE_SIZE;
 
 public class Tile extends NinePatcherButton {
 
     private Enums.TileType type;
-    private Defense defense;
+    private GameEntity gameEntity;
 
-    public Tile(Enums.TileType type, TextureRegion textureRegion, float borderSize, int borderPixels, float x, float y) {
-        super(textureRegion, borderSize, borderPixels, x, y, TILE_SIZE, TILE_SIZE);
+    public Tile(Enums.TileType type, TextureRegion textureRegion, float borderSize, int borderPixels, float x, float y, float width, float height) {
+        super(textureRegion, borderSize, borderPixels, x, y, width, height);
         this.type = type;
     }
 
@@ -21,12 +19,12 @@ public class Tile extends NinePatcherButton {
         return bounds.contains(x, y);
     }
 
-    public Defense getDefense() {
-        return defense;
+    public GameEntity getGameEntity() {
+        return gameEntity;
     }
 
-    public void setDefense(Defense defense) {
-        this.defense = defense;
+    public void setGameEntity(GameEntity gameEntity) {
+        this.gameEntity = gameEntity;
     }
 
     public Enums.TileType getType() {

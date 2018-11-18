@@ -27,23 +27,26 @@ public class Constants {
     //------------------
     //   DEFENSE AREA
     //------------------
-    public static final float DEFENSE_TILE_SIZE = 25f;
-    public static final float DEFENSE_X_SPACE = 5;
-    public static final float DEFENSE_Y_SPACE = 5;
+    public static final float DEFENSE_TILE_SIZE = 40f;
 
     public static final int LEFT_DEFENSE_ROWS = (int) (500 / DEFENSE_TILE_SIZE);
     public static final int LEFT_DEFENSE_COLUMNS = 3;
-    public static final float LEFT_DEFENSE_X = 500 - DEFENSE_TILE_SIZE * 3;
-    public static final float LEFT_DEFENSE_Y = 500;
-
     public static final int BOTTOM_DEFENSE_ROWS = 3;
     public static final int BOTTOM_DEFENSE_COLUMNS = (int) (500 / DEFENSE_TILE_SIZE);
+
+    private static final float DEFENSE_X_SPACE = 500 - DEFENSE_TILE_SIZE * BOTTOM_DEFENSE_COLUMNS;
+    public static final float DEFENSE_X_SPACING = DEFENSE_X_SPACE / (BOTTOM_DEFENSE_COLUMNS - 1);
+    private static final float DEFENSE_Y_SPACE = 500 - DEFENSE_TILE_SIZE * LEFT_DEFENSE_ROWS;
+    public static final float DEFENSE_Y_SPACING = DEFENSE_Y_SPACE / (LEFT_DEFENSE_ROWS - 1);
+
+    public static final float LEFT_DEFENSE_X = 500 - DEFENSE_TILE_SIZE * 3 - DEFENSE_X_SPACING * 3;
+    public static final float LEFT_DEFENSE_Y = 500;
     public static final float BOTTOM_DEFENSE_X = 500;
-    public static final float BOTTOM_DEFENSE_Y = 500 - DEFENSE_TILE_SIZE * 3;
+    public static final float BOTTOM_DEFENSE_Y = 500 - DEFENSE_TILE_SIZE * 3 - DEFENSE_Y_SPACING * 3;
     //------------------
     //   FARMING AREA
     //------------------
-    public static final float FARMING_TILE_SIZE = 25f;
+    public static final float FARMING_TILE_SIZE = 35f;
     public static final float FARMING_AREA_SIZE = 500f;
 
     public static final int FARMING_AREA_COLUMNS = (int) (FARMING_AREA_SIZE / FARMING_TILE_SIZE);
@@ -65,7 +68,7 @@ public class Constants {
     //      TURRET
     //------------------
     public static final float TURRET_WIDTH = 40f;
-    public static final float TURRET_HEIGHT = 50f;
+    public static final float TURRET_HEIGHT = 60f;
     public static final float TURRET_RANGE = 100f;
     public static final float TURRET_COOL_DOWN = 0.2f;
     public static final int TURRET_INITIAL_HEALTH = 10;
@@ -98,6 +101,9 @@ public class Constants {
     // Life bars
     public static final float LIFE_BAR_HEIGHT = 3f;
     public static final float LIFE_BAR_SIDES_WIDTH = (LIFE_BAR_HEIGHT / 10f);
+    // Progress bars
+    public static final float PROGRESS_BAR_HEIGHT = 3f;
+    public static final float PROGRESS_BAR_SIDES_WIDTH = (PROGRESS_BAR_HEIGHT / 10f);
     // Resource frames
     public static final float RESOURCE_FRAME_WIDTH = Gdx.graphics.getWidth() / 6f;
     public static final float RESOURCE_FRAME_HEIGHT = RESOURCE_FRAME_WIDTH / 3f;
@@ -113,8 +119,8 @@ public class Constants {
     //------------------
     //      PLANTS
     //------------------
-    public static final float PLANT_SIZE = 15f;
-    public static final float PLANT_TILE_SPACING = (TILE_SIZE - PLANT_SIZE) / 2f;
+    public static final float PLANT_SIZE = 25f;
+    public static final float PLANT_TILE_SPACING = (FARMING_TILE_SIZE - PLANT_SIZE) / 2f;
     public static final float PLANT_PRODUCTION_TIME = 5f;
     //------------------
     //    DECORATION

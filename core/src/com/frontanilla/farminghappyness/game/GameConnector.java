@@ -37,7 +37,7 @@ public class GameConnector extends ScreenAdapter {
         gameState = new GameState();
         batch = new SpriteBatch();
         staticBatch = new SpriteBatch();
-        renderer = new GameRenderer();
+        renderer = new GameRenderer(this);
         displayArea = new DisplayArea(gameState);
 
         // Constructs a new OrthographicCamera, using the given viewport width and height
@@ -85,19 +85,19 @@ public class GameConnector extends ScreenAdapter {
         }
         batch.setColor(Color.WHITE);
         for (Tile tile : renderer.getDefenseArea().getTiles()) {
-            if (tile.getDefense() instanceof Turret) {
+            if (tile.getGameEntity() instanceof Turret) {
                 batch.draw(
                         Assets.rangeCircle,
-                        tile.getDefense().getPosition().getX() - TURRET_RANGE + TURRET_WIDTH / 2,
-                        tile.getDefense().getPosition().getY() - TURRET_RANGE + TURRET_WIDTH / 2,
+                        tile.getGameEntity().getBounds().x - TURRET_RANGE + TURRET_WIDTH / 2,
+                        tile.getGameEntity().getBounds().y - TURRET_RANGE + TURRET_WIDTH / 2,
                         TURRET_RANGE * 2,
                         TURRET_RANGE * 2);
             }
         }
         // Render defenses
         for (Tile tile : renderer.getDefenseArea().getTiles()) {
-            if (tile.getDefense() != null) {
-                tile.getDefense().render(batch);
+            if (tile.getGameEntity() != null) {
+                tile.getGameEntity().render(batch);
             }
         }
 

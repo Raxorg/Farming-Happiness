@@ -9,10 +9,8 @@ import com.frontanilla.farminghappyness.game.units.Enemy;
 import com.frontanilla.farminghappyness.utils.Assets;
 import com.frontanilla.farminghappyness.utils.Point;
 
-import static com.frontanilla.farminghappyness.utils.Constants.TILE_SIZE;
+import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_TILE_SIZE;
 import static com.frontanilla.farminghappyness.utils.Constants.TURRET_CANNON_HEIGHT;
-import static com.frontanilla.farminghappyness.utils.Constants.TURRET_CANNON_WIDTH;
-import static com.frontanilla.farminghappyness.utils.Constants.TURRET_CANNON_X_OFFSET;
 import static com.frontanilla.farminghappyness.utils.Constants.TURRET_CANNON_Y_OFFSET;
 import static com.frontanilla.farminghappyness.utils.Constants.TURRET_COOL_DOWN;
 import static com.frontanilla.farminghappyness.utils.Constants.TURRET_HEIGHT;
@@ -21,19 +19,16 @@ import static com.frontanilla.farminghappyness.utils.Constants.TURRET_WIDTH;
 
 public class Turret extends Defense {
 
-    private float cannonRotation;
     private float coolDown;
 
     public Turret(Tile tile) {
         super(
                 new Rectangle(
-                        tile.getX() + (TILE_SIZE - TURRET_WIDTH) / 2,
-                        tile.getY() + (TILE_SIZE - TURRET_WIDTH) / 2,
+                        tile.getX() + (DEFENSE_TILE_SIZE - TURRET_WIDTH) / 2,
+                        tile.getY() + (DEFENSE_TILE_SIZE - TURRET_WIDTH) / 2,
                         TURRET_WIDTH,
                         TURRET_HEIGHT),
                 TURRET_INITIAL_HEALTH);
-
-        position = new Point(bounds.x, bounds.y);
     }
 
     public void update(float delta) {
@@ -45,22 +40,11 @@ public class Turret extends Defense {
     public void render(SpriteBatch batch) {
         batch.setColor(Color.WHITE);
         batch.draw(
-                Assets.turretGlow,
-                position.getX(),
-                position.getY(),
-                TURRET_WIDTH,
-                TURRET_HEIGHT);
-        batch.draw(
-                Assets.turretCannon,
-                position.getX() + TURRET_CANNON_X_OFFSET,
-                position.getY() + TURRET_CANNON_Y_OFFSET,
-                TURRET_CANNON_WIDTH / 2,
-                TURRET_CANNON_HEIGHT / 2,
-                TURRET_CANNON_WIDTH,
-                TURRET_CANNON_HEIGHT,
-                1,
-                1,
-                cannonRotation);
+                Assets.turret,
+                bounds.x,
+                bounds.y,
+                bounds.width,
+                bounds.height);
         lifeBar.render(batch);
     }
 
@@ -77,11 +61,7 @@ public class Turret extends Defense {
     }
 
     public Point getCenter() {
-        return new Point(position.getX() + TURRET_WIDTH / 2, position.getY() + TURRET_HEIGHT / 2);
-    }
-
-    public void setCannonRotation(float cannonRotation) {
-        this.cannonRotation = cannonRotation;
+        return new Point(bounds.x + TURRET_WIDTH / 2, bounds.y + TURRET_HEIGHT / 2);
     }
 
     @Override

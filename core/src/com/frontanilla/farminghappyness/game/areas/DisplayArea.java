@@ -44,6 +44,10 @@ public class DisplayArea {
         font.setColor(Color.RED);
     }
 
+    public void restart() {
+        time = 0;
+    }
+
     public void update(float delta) {
         moneyFrame.setQuantity(gameState.getMoney());
         workerFrame.setQuantity(gameState.getWorkers());

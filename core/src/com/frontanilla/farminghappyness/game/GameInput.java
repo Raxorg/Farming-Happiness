@@ -21,7 +21,7 @@ public class GameInput extends InputAdapter {
             gameConnector.getCamera().unproject(usefulVector.set(screenX, screenY, 0));
             touchDownX = usefulVector.x;
             touchDownY = usefulVector.y;
-            gameConnector.getGameLogic().touchDown(usefulVector, button);
+            gameConnector.getGameLogic().touchDown(usefulVector);
             return true;
         }
         return false;

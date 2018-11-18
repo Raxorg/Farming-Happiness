@@ -7,9 +7,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Assets {
 
-    public static TextureRegion tree, river1, river2, river3, river4, grass, farmingCornerBottomLeft, farmingCornerTopLeft, farmingBottom, farmingTop,
-            defenseTile, wall, tourist, rangeCircle, empty, sidesLifeBar, centerLifeBar, dollar, centerEmptyLifeBar, triangle, trap, farmingCenter,
+    public static TextureRegion tree, grass, farmingCornerBottomLeft, farmingCornerTopLeft, farmingBottom, farmingTop,
+            defenseTile, wall, tourist, rangeCircle, empty, barSides, centerLifeBar, dollar, centerEmptyLifeBar, triangle, trap, farmingCenter,
             farmingLeft, farmingRight, farmingCornerBottomRight, farmingCornerTopRight, resourceFrame, trapLeaves;
+    // River
+    public static Animation<TextureRegion> riverAnimation;
     // Enemies
     public static Animation<TextureRegion> touristAnimation;
     // Borders
@@ -21,7 +23,7 @@ public class Assets {
     // Tiles
     public static NinePatch defenseTilePatch;
     // Turret
-    public static TextureRegion turret, turretGlow, turretCannon, turretCannonGlow, turretBullet, turretBulletGlow;
+    public static TextureRegion turret, turretBullet;
     // Decoration
     public static TextureRegion grass1, grass1Glow;
     // Misc
@@ -33,10 +35,6 @@ public class Assets {
     public static void init() {
         Texture decoration = new Texture("images/decoration.png");
         tree = new TextureRegion(decoration, 0, 0, 170, 180);
-        river1 = new TextureRegion(decoration, 0, 200, 141, 130);
-        river2 = new TextureRegion(decoration, 141, 200, 141, 130);
-        river3 = new TextureRegion(decoration, 282, 200, 141, 130);
-        river4 = new TextureRegion(decoration, 423, 200, 141, 130);
         Texture tiles = new Texture("images/tiles.png");
         // Grass tile
         grass = new TextureRegion(tiles, 0, 0, 225, 225);
@@ -76,17 +74,12 @@ public class Assets {
         //------------------
         //      TURRET
         //------------------
-        Texture turretTex = new Texture("images/turret.png");
-        turret = new TextureRegion(turretTex, 0, 0, 400, 560);
-        turretGlow = new TextureRegion(turretTex, 400, 0, 400, 560);
-        turretCannon = new TextureRegion(turretTex, 0, 560, 228, 228);
-        turretCannonGlow = new TextureRegion(turretTex, 228, 0, 228, 228);
-        turretBullet = new TextureRegion(turretTex, 456, 0, 115, 60);
-        turretBulletGlow = new TextureRegion(turretTex, 571, 0, 115, 60);
+        Texture defenses = new Texture("images/defenses.png");
+        turret = new TextureRegion(defenses, 0, 0, 40, 60);
+        turretBullet = new TextureRegion(defenses, 0, 0, 10, 10);
         //------------------
         //     DEFENSES
         //------------------
-        Texture defenses = new Texture("images/defenses.png");
         defenseTile = new TextureRegion(tiles, 0, 225, 100, 100);
         defenseTilePatch = new NinePatch(borders, 54, 54, 54, 54);
         wall = new TextureRegion(defenses, 0, 400, 120, 70);
@@ -103,16 +96,22 @@ public class Assets {
         //------------------
         //     ENEMIES
         //------------------
-        Texture enemies = new Texture("animations/stickmanRunning.png");
+        Texture enemies = new Texture("animations/stickFigureRunning.png");
         touristAnimation = new Animation<>(1f / 60f, Util.regions(enemies, 180, 340, 2));
         touristAnimation.setPlayMode(Animation.PlayMode.LOOP);
         tourist = new TextureRegion(enemies, 0, 0, 594, 1135);
+        //------------------
+        //      RIVER
+        //------------------
+        Texture river = new Texture("animations/river.png");
+        riverAnimation = new Animation<>(1f / 3f, Util.regions(river, 100, 100, 0));
+        riverAnimation.setPlayMode(Animation.PlayMode.LOOP);
         //------------------
         //       HUD
         //------------------
         Texture hud = new Texture("images/hud.png");
         // Life bar
-        sidesLifeBar = new TextureRegion(hud, 0, 0, 10, 100);
+        barSides = new TextureRegion(hud, 0, 0, 10, 100);
         centerLifeBar = new TextureRegion(hud, 50, 0, 40, 100);
         centerEmptyLifeBar = new TextureRegion(hud, 10, 0, 40, 100);
         // Construction menu

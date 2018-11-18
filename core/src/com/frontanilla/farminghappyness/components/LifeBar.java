@@ -5,8 +5,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.frontanilla.farminghappyness.game.other.Damageable;
 import com.frontanilla.farminghappyness.utils.Assets;
 
-import static com.frontanilla.farminghappyness.utils.Constants.ENEMY_HEIGHT;
-import static com.frontanilla.farminghappyness.utils.Constants.ENEMY_WIDTH;
 import static com.frontanilla.farminghappyness.utils.Constants.LIFE_BAR_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.LIFE_BAR_SIDES_WIDTH;
 
@@ -23,12 +21,12 @@ public class LifeBar {
     public void render(SpriteBatch batch) {
         // Left side
         batch.draw(
-                Assets.sidesLifeBar,
+                Assets.barSides,
                 damageable.getBounds().getX(),
                 damageable.getBounds().getY() + damageable.getBounds().height,
                 LIFE_BAR_SIDES_WIDTH,
                 LIFE_BAR_HEIGHT);
-        // Center TODO, draw this according to HP
+        // Center
         for (int i = 0; i < damageable.getLife(); i++) {
             batch.setColor(Color.CYAN);
             batch.draw(
@@ -40,9 +38,9 @@ public class LifeBar {
         }
         // Right side
         batch.draw(
-                Assets.sidesLifeBar,
-                damageable.getBounds().getX() + ENEMY_WIDTH - LIFE_BAR_SIDES_WIDTH - portionWidth * (damageable.getInitialLife() - damageable.getLife()),
-                damageable.getBounds().getY() + ENEMY_HEIGHT,
+                Assets.barSides,
+                damageable.getBounds().getX() + damageable.getBounds().width - LIFE_BAR_SIDES_WIDTH - portionWidth * (damageable.getInitialLife() - damageable.getLife()),
+                damageable.getBounds().getY() + damageable.getBounds().height,
                 LIFE_BAR_SIDES_WIDTH,
                 LIFE_BAR_HEIGHT);
     }

@@ -4,9 +4,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
-import com.frontanilla.farminghappyness.components.LifeBar;
-import com.frontanilla.farminghappyness.components.ProgressBar;
-import com.frontanilla.farminghappyness.game.GameEntity;
 import com.frontanilla.farminghappyness.game.areas.Tile;
 import com.frontanilla.farminghappyness.game.other.Progressable;
 import com.frontanilla.farminghappyness.utils.Assets;
@@ -24,7 +21,6 @@ public class Plant extends Progressable {
     private int buyCost, sellCost;
     // Logic
     private float time;
-    private ProgressBar progressBar;
     // Plants
     public static Plant ELSKER = new Plant(PlantType.ELSKER, 1, 2);
     public static Plant GRA = new Plant(PlantType.GRA, 1, 2);
@@ -38,7 +34,7 @@ public class Plant extends Progressable {
     public static Plant KAERLIGHED = new Plant(PlantType.KAERLIGHED, 1, 5);
 
     private Plant(PlantType plantType, int buyCost, int sellCost) {
-        super(null);
+        super(new Rectangle());
         switch (plantType) {
             case ELSKER:
                 textureRegion = Assets.plantTest;
@@ -86,12 +82,11 @@ public class Plant extends Progressable {
         sellCost = plant.sellCost;
         // Logic
         time = 0;
-        progressBar = new ProgressBar(this);
     }
 
     public void update(float delta) {
         time += delta;
-        // TODO UPDATE STATUS BAR
+        progress = Math.min(progress + 1, 100);
     }
 
     public void render(SpriteBatch batch) {

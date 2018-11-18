@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Assets {
 
-    public static TextureRegion tree, grass, farmingCornerBottomLeft, farmingCornerTopLeft, farmingBottom, farmingTop,
+    public static TextureRegion grass, farmingCornerBottomLeft, farmingCornerTopLeft, farmingBottom, farmingTop,
             defenseTile, wall, tourist, rangeCircle, empty, barSides, centerLifeBar, dollar, centerEmptyLifeBar, triangle, trap, farmingCenter,
             farmingLeft, farmingRight, farmingCornerBottomRight, farmingCornerTopRight, resourceFrame, trapLeaves;
     // River
@@ -30,11 +30,9 @@ public class Assets {
     public static TextureRegion pixel, plantTest;
     // TODO test
     public static TextureRegion nptest;
-    public static Texture grassx, person, exm;
+    public static Texture grassx;
 
     public static void init() {
-        Texture decoration = new Texture("images/decoration.png");
-        tree = new TextureRegion(decoration, 0, 0, 170, 180);
         Texture tiles = new Texture("images/tiles.png");
         // Grass tile
         grass = new TextureRegion(tiles, 0, 0, 225, 225);
@@ -133,8 +131,6 @@ public class Assets {
         // TODO TEST
         nptest = new TextureRegion(new Texture("images/nptest.png"), 0, 0, 10, 10);
         grassx = new Texture("images/grass.png");
-        person = new Texture("images/person.png");
-        exm = new Texture("images/exm.png");
     }
 
 }

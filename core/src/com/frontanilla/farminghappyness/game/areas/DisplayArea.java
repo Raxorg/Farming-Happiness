@@ -15,14 +15,12 @@ import static com.frontanilla.farminghappyness.utils.Constants.SPAWN_TIME;
 
 public class DisplayArea {
 
-    private GameState gameState;
     private ResourceFrame moneyFrame, workerFrame;
     private float time;
     private SpriteBatch batch;
     private BitmapFont font;
 
-    public DisplayArea(GameState gameState) {
-        this.gameState = gameState;
+    public DisplayArea() {
         // TODO, set the rectangles
         moneyFrame = new ResourceFrame(
                 Color.FOREST,
@@ -30,7 +28,6 @@ public class DisplayArea {
                         0,
                         Gdx.graphics.getHeight() - RESOURCE_FRAME_HEIGHT),
                 Assets.dollar);
-        moneyFrame.setQuantity(gameState.getMoney());
         workerFrame = new ResourceFrame(Color.SALMON,
                 new Point(
                         RESOURCE_FRAME_WIDTH,
@@ -48,9 +45,9 @@ public class DisplayArea {
         time = 0;
     }
 
-    public void update(float delta) {
-        moneyFrame.setQuantity(gameState.getMoney());
-        workerFrame.setQuantity(gameState.getWorkers());
+    public void update(float delta, int money, int workers) {
+        moneyFrame.setQuantity(money);
+        workerFrame.setQuantity(workers); // TODO don't update each frame, update each change
         time += delta;
         if (time < SPAWN_TIME) {
             batch.begin();
@@ -64,9 +61,7 @@ public class DisplayArea {
     }
 
     public void render(SpriteBatch staticBatch) {
-        staticBatch.begin();
         moneyFrame.render(staticBatch);
         workerFrame.render(staticBatch);
-        staticBatch.end();
     }
 }

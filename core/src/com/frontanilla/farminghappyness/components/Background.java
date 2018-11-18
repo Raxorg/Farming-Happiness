@@ -1,41 +1,43 @@
 package com.frontanilla.farminghappyness.components;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.frontanilla.farminghappyness.utils.Assets;
 
 import static com.frontanilla.farminghappyness.utils.Constants.BACKGROUND_TILE_SIZE;
-import static com.frontanilla.farminghappyness.utils.Constants.GRASS_QUANTITY;
-import static com.frontanilla.farminghappyness.utils.Constants.GRASS_SIZE;
+import static com.frontanilla.farminghappyness.utils.Constants.DOT_QUANTITY;
+import static com.frontanilla.farminghappyness.utils.Constants.DOT_SIZE;
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_WIDTH;
 
 public class Background {
 
-    private GrassDot[] grassDots;
+    private NeonDot[] neonDots;
 
     public Background() {
-        grassDots = new GrassDot[GRASS_QUANTITY];
-        Color[] grassColors = new Color[4];
-        grassColors[0] = Color.GREEN;
-        grassColors[1] = Color.PURPLE;
-        grassColors[2] = Color.BLUE;
-        grassColors[3] = Color.CYAN;
-        for (int i = 0; i < GRASS_QUANTITY; i++) {
-            float x = MathUtils.random(BACKGROUND_TILE_SIZE, WORLD_WIDTH - BACKGROUND_TILE_SIZE * 2);
-            float y = MathUtils.random(BACKGROUND_TILE_SIZE, WORLD_HEIGHT - BACKGROUND_TILE_SIZE * 2);
-            grassDots[i] = new GrassDot(x, y, grassColors[MathUtils.random(0, 3)]);
+        neonDots = new NeonDot[DOT_QUANTITY];
+        Color[] dotColors = new Color[3];
+        dotColors[0] = Color.PURPLE;
+        dotColors[1] = Color.BLUE;
+        dotColors[2] = Color.CYAN;
+        for (int i = 0; i < DOT_QUANTITY; i++) {
+            float x = MathUtils.random(0, WORLD_WIDTH - DOT_SIZE);
+            float y = MathUtils.random(0, WORLD_HEIGHT - DOT_SIZE);
+            neonDots[i] = new NeonDot(x, y, dotColors[MathUtils.random(0, dotColors.length - 1)]);
         }
     }
 
-    public void update(float delta) {
-        for (GrassDot dot : grassDots) {
+    private void update() {
+        float delta = Gdx.graphics.getDeltaTime();
+        for (NeonDot dot : neonDots) {
             dot.update(delta);
         }
     }
 
     public void render(SpriteBatch batch) {
+        update();
         batch.setColor(Color.WHITE);
         renderBase(batch);
         renderBorders(batch);
@@ -174,23 +176,24 @@ public class Background {
     }
 
     private void renderDecoration(SpriteBatch batch) {
-        for (GrassDot dot : grassDots) {
+        for (NeonDot dot : neonDots) {
             dot.render(batch);
         }
     }
 
-    private class GrassDot {
+    private class NeonDot {
         private float x, y, alpha;
         private Color color;
-        private float time, delay;
+        private float time, delay, deltaMultiplier;
         private boolean reverseAnimation;
 
-        public GrassDot(float x, float y, Color color) {
+        public NeonDot(float x, float y, Color color) {
             this.x = x;
             this.y = y;
             this.color = color;
-            delay = MathUtils.random() * 2;
-            time = MathUtils.random();
+            time = 0;
+            delay = MathUtils.random(0f, 2f);
+            deltaMultiplier = MathUtils.random(0.25f, 1f);
             alpha = 0;
             reverseAnimation = false;
         }
@@ -199,7 +202,7 @@ public class Background {
             delay -= delta;
             if (delay <= 0) {
                 if (reverseAnimation) {
-                    time -= delta;
+                    time -= delta * deltaMultiplier;
                     if (time <= 0) {
                         time = 0;
                         reverseAnimation = false;
@@ -221,8 +224,8 @@ public class Background {
                     Assets.grass1Glow,
                     x,
                     y,
-                    GRASS_SIZE,
-                    GRASS_SIZE);
+                    DOT_SIZE,
+                    DOT_SIZE);
         }
     }
 }

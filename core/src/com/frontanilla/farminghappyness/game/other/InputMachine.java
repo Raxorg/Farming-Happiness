@@ -5,7 +5,7 @@ import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.frontanilla.farminghappyness.game.GameLogic;
-import com.frontanilla.farminghappyness.tests.MyCamera;
+import com.frontanilla.farminghappyness.components.MyCamera;
 
 public class InputMachine extends InputAdapter implements GestureListener {
 

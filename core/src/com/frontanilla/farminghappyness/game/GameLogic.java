@@ -1,7 +1,6 @@
 package com.frontanilla.farminghappyness.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
@@ -10,10 +9,10 @@ import com.frontanilla.farminghappyness.game.defenses.Defense;
 import com.frontanilla.farminghappyness.game.defenses.Trap;
 import com.frontanilla.farminghappyness.game.defenses.Turret;
 import com.frontanilla.farminghappyness.game.defenses.Wall;
-import com.frontanilla.farminghappyness.game.other.Bullet;
 import com.frontanilla.farminghappyness.game.entities.plants.Plant;
 import com.frontanilla.farminghappyness.game.entities.units.Enemy;
 import com.frontanilla.farminghappyness.game.entities.units.Tourist;
+import com.frontanilla.farminghappyness.game.other.Bullet;
 import com.frontanilla.farminghappyness.utils.Constants;
 import com.frontanilla.farminghappyness.utils.Enums;
 import com.frontanilla.farminghappyness.utils.Util;
@@ -25,7 +24,6 @@ import static com.frontanilla.farminghappyness.utils.Constants.SPAWN_TIME;
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_WIDTH;
 import static com.frontanilla.farminghappyness.utils.Enums.ConstructionState;
-import static com.frontanilla.farminghappyness.utils.Enums.ConstructionState.BUILDING_TURRET;
 import static com.frontanilla.farminghappyness.utils.Enums.TileType.DEFENSIVE_TILE;
 
 public class GameLogic {
@@ -46,9 +44,10 @@ public class GameLogic {
         if (!lost) {
             connector.getCamera().handleInput();
             connector.getCamera().update();
-            connector.getBatch().setProjectionMatrix(connector.getCamera().combined);
+            connector.getGameRenderer().getDynamicBatch().setProjectionMatrix(connector.getCamera().combined);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+            connector.getGameState().getRiverArea().update(delta);
             updatePlants(delta);
             updateEnemies(delta);
             updateTurrets(delta);
@@ -59,6 +58,8 @@ public class GameLogic {
                 spawnEnemy();
                 time -= Constants.SPAWN_RATE;
             }
+
+            connector.getGameState().getDisplayArea().update(delta, connector.getGameState().getMoney(), connector.getGameState().getWorkers());
         }
     }
 
@@ -84,7 +85,7 @@ public class GameLogic {
     }
 
     private void updateTurrets(float delta) {
-        for (Tile tile : connector.getRenderer().getDefenseArea().getTiles()) {
+        for (Tile tile : connector.getGameState().getDefenseArea().getTiles()) {
             if (tile.getGameEntity() != null) {
                 if (tile.getGameEntity() instanceof Turret) {
                     Turret turret = (Turret) tile.getGameEntity();
@@ -130,26 +131,8 @@ public class GameLogic {
 
     public void touchDown(Vector3 usefulVector) {
         if (!lost) {
-            // Check if this happened on a defense construction button
-            if (connector.getTurretButton().contains(usefulVector.x, usefulVector.y)) {
-                connector.getTurretButton().setColor(Color.GREEN);
-                connector.getWallButton().setColor(Color.WHITE);
-                connector.getTrapButton().setColor(Color.WHITE);
-                constructionState = BUILDING_TURRET;
-            } else if (connector.getWallButton().contains(usefulVector.x, usefulVector.y)) {
-                connector.getWallButton().setColor(Color.GREEN);
-                connector.getTurretButton().setColor(Color.WHITE);
-                connector.getTrapButton().setColor(Color.WHITE);
-                constructionState = Enums.ConstructionState.BUILDING_WALL;
-            } else if (connector.getTrapButton().contains(usefulVector.x, usefulVector.y)) {
-                connector.getTrapButton().setColor(Color.GREEN);
-                connector.getTurretButton().setColor(Color.WHITE);
-                connector.getWallButton().setColor(Color.WHITE);
-                constructionState = Enums.ConstructionState.BUILDING_TRAP;
-                return;
-            }
             // Check if this happened on a defense tile
-            for (Tile tile : connector.getRenderer().getDefenseArea().getTiles()) {
+            for (Tile tile : connector.getGameState().getDefenseArea().getTiles()) {
                 if (tile.contains(usefulVector.x, usefulVector.y)
                         && connector.getGameState().getMoney() >= 10
                         && tile.getType() == DEFENSIVE_TILE // TODO Check if wall, trap or turret tile
@@ -191,11 +174,11 @@ public class GameLogic {
     }
 
     private void restart() {
-        for (Tile tile : connector.getRenderer().getDefenseArea().getTiles()) {
+        for (Tile tile : connector.getGameState().getDefenseArea().getTiles()) {
             tile.setGameEntity(null);
         }
         connector.getGameState().restart();
-        connector.getDisplayArea().restart();
+        connector.getGameState().getDisplayArea().restart();
         lost = false;
         time = 0;
     }

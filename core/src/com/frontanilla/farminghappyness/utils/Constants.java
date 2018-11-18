@@ -125,8 +125,8 @@ public class Constants {
     //------------------
     //    DECORATION
     //------------------
-    public static final int GRASS_QUANTITY = 200;
-    public static final float GRASS_SIZE = 15f;
+    public static final int DOT_QUANTITY = 500;
+    public static final float DOT_SIZE = 15f;
     //------------------
     //       TEST
     //------------------

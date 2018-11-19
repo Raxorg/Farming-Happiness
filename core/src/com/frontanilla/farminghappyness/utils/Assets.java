@@ -8,6 +8,10 @@ public class Assets {
 
     public static TextureRegion tourist, rangeCircle, barSides, centerLifeBar, dollar, centerEmptyLifeBar, triangle, resourceFrame;
     //-------------------
+    //     BUILDINGS
+    //-------------------
+    public static TextureRegion farmBase, laboratory;
+    //-------------------
     //      PLANTS
     //-------------------
     public static TextureRegion elsker, gra, kocham, szerelem, elska, ayarn, seviyorum, milestiba, rakkaus, kaerlighed;
@@ -43,6 +47,12 @@ public class Assets {
     public static TextureRegion testFrame, testToggleButtonRight, testToggleButtonLeft;
 
     public static void init() {
+        //-------------------
+        //     BUILDINGS
+        //-------------------
+        Texture buildings = new Texture("images/buildings.png");
+        farmBase = new TextureRegion(buildings, 0, 0, 90, 46);
+        laboratory = new TextureRegion(buildings, 0, 46, 90, 51);
         //-------------------
         //      PLANTS
         //-------------------

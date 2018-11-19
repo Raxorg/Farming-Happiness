@@ -28,7 +28,6 @@ public class ToggleMenu {
 
     private MenuState menuState;
     private float time, x;
-    private boolean showingDefenseButtons;
     private NinePatcher panel;
     private Button defensesButton, plantsButton;
     private DelayedRemovalArray<ToggleMenuButton> defenseButtons, plantButtons;
@@ -37,7 +36,6 @@ public class ToggleMenu {
         menuState = MenuState.DEACTIVATED;
         time = 0;
         x = -MENU_WIDTH;
-        showingDefenseButtons = true;
         panel = new NinePatcher(
                 Assets.testPanel,
                 10f,
@@ -105,11 +103,18 @@ public class ToggleMenu {
 
     public void update(float delta, int money) {
         // Activating
-        if (menuState == MenuState.ACTIVATING) {
+        if (menuState == MenuState.ACTIVATING_DEFENSES_MENU || menuState == MenuState.ACTIVATING_PLANTS_MENU) {
             time += delta;
             if (time >= MENU_ACTIVATION_TIME) {
-                menuState = MenuState.ACTIVATED;
                 time = MENU_ACTIVATION_TIME;
+                if (menuState == MenuState.ACTIVATING_DEFENSES_MENU) {
+                    menuState = MenuState.SHOWING_DEFENSES_MENU;
+                    defensesButton.setTexture(Assets.testToggleButtonLeft);
+                }
+                if (menuState == MenuState.ACTIVATING_PLANTS_MENU) {
+                    menuState = MenuState.SHOWING_PLANTS_MENU;
+                    plantsButton.setTexture(Assets.testToggleButtonLeft);
+                }
             }
             x = Math.min((time * MENU_WIDTH) / MENU_ACTIVATION_TIME - MENU_WIDTH, 0);
             defensesButton.bounds.x = x + MENU_WIDTH - MENU_ACTIVATION_BUTTON_SIZE / 2;
@@ -121,6 +126,8 @@ public class ToggleMenu {
             if (time <= 0) {
                 menuState = MenuState.DEACTIVATED;
                 time = 0;
+                defensesButton.setTexture(Assets.testToggleButtonRight);
+                plantsButton.setTexture(Assets.testToggleButtonRight);
             }
             x = Math.max(-MENU_WIDTH, (time * MENU_WIDTH) / MENU_ACTIVATION_TIME - MENU_WIDTH);
             defensesButton.bounds.x = x + MENU_WIDTH - MENU_ACTIVATION_BUTTON_SIZE / 2;
@@ -156,19 +163,23 @@ public class ToggleMenu {
     }
 
     private void renderIcons(SpriteBatch batch) {
-        if (showingDefenseButtons) {
+        if (menuState == MenuState.SHOWING_DEFENSES_MENU) {
             for (ToggleMenuButton b : defenseButtons) {
                 b.render(batch);
             }
-        } else {
+        } else if (menuState == MenuState.SHOWING_PLANTS_MENU) {
             for (ToggleMenuButton b : plantButtons) {
                 b.render(batch);
             }
         }
     }
 
-    public void activate() {
-        menuState = MenuState.ACTIVATING;
+    public void activate(boolean defensesMenu) {
+        if (defensesMenu) {
+            menuState = MenuState.ACTIVATING_DEFENSES_MENU;
+        } else {
+            menuState = MenuState.ACTIVATING_PLANTS_MENU;
+        }
         time = 0;
     }
 
@@ -189,12 +200,17 @@ public class ToggleMenu {
         return defensesButton;
     }
 
+    public Button getPlantsButton() {
+        return plantsButton;
+    }
+
     public DelayedRemovalArray<ToggleMenuButton> getActiveButtons() {
-        if (showingDefenseButtons) {
+        if (menuState == MenuState.SHOWING_DEFENSES_MENU) {
             return defenseButtons;
-        } else {
+        } else if (menuState == MenuState.SHOWING_PLANTS_MENU) {
             return plantButtons;
         }
+        return null;
     }
 
     // TODO use ConstructionState enum

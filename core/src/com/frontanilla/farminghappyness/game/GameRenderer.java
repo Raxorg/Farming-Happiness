@@ -31,6 +31,10 @@ public class GameRenderer {
         dynamicBatch.begin();
         // Render background
         background.render(dynamicBatch);
+        // Render Areas
+        connector.getGameState().getRiverArea().render(dynamicBatch);
+        connector.getGameState().getFarmingArea().render(dynamicBatch);
+        connector.getGameState().getDefenseArea().render(dynamicBatch);
         // Render Turret ranges
         if (DEBUG) {
             for (NinePatcherTile ninePatcherTile : connector.getGameState().getDefenseArea().getTiles()) {
@@ -44,20 +48,16 @@ public class GameRenderer {
                 }
             }
         }
-        // Render bullets
-        for (Bullet b : connector.getGameState().getBullets()) {
-            b.render(dynamicBatch);
-        }
-        // Render defenses TODO improve logic and placement of code?
+        // Render defenses
         for (NinePatcherTile ninePatcherTile : connector.getGameState().getDefenseArea().getTiles()) {
             if (ninePatcherTile.getGameEntity() instanceof Defense) {
                 ninePatcherTile.getGameEntity().render(dynamicBatch);
             }
         }
-        // Render Areas
-        connector.getGameState().getRiverArea().render(dynamicBatch);
-        connector.getGameState().getFarmingArea().render(dynamicBatch);
-        connector.getGameState().getDefenseArea().render(dynamicBatch);
+        // Render bullets
+        for (Bullet b : connector.getGameState().getBullets()) {
+            b.render(dynamicBatch);
+        }
         // Render enemies
         for (Enemy e : connector.getGameState().getEnemies()) {
             e.render(dynamicBatch);

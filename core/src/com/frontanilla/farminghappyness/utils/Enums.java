@@ -17,8 +17,10 @@ public class Enums {
 
     public enum MenuState {
         DEACTIVATED,
-        ACTIVATED,
-        ACTIVATING,
+        SHOWING_DEFENSES_MENU,
+        SHOWING_PLANTS_MENU,
+        ACTIVATING_DEFENSES_MENU,
+        ACTIVATING_PLANTS_MENU,
         DEACTIVATING
     }
 

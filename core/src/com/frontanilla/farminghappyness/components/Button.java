@@ -27,6 +27,10 @@ public class Button {
                 bounds.height);
     }
 
+    public void setTexture(TextureRegion texture) {
+        this.texture = texture;
+    }
+
     public float getX() {
         return bounds.x;
     }

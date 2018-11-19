@@ -1,6 +1,7 @@
 package com.frontanilla.farminghappyness.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
@@ -194,19 +195,32 @@ public class GameLogic {
     public boolean rawTap(float x, float y) {
         // Check if this happened on a menu activation button
         if (connector.getGameState().getDisplayArea().getToggleMenu().getDefensesButton().contains(x, y)) {
-            if (connector.getGameState().getDisplayArea().getToggleMenu().getMenuState() == Enums.MenuState.ACTIVATED) {
+            if (connector.getGameState().getDisplayArea().getToggleMenu().getMenuState() == Enums.MenuState.SHOWING_DEFENSES_MENU) {
                 connector.getGameState().getDisplayArea().getToggleMenu().deactivate();
             }
             if (connector.getGameState().getDisplayArea().getToggleMenu().getMenuState() == Enums.MenuState.DEACTIVATED) {
-                connector.getGameState().getDisplayArea().getToggleMenu().activate();
+                connector.getGameState().getDisplayArea().getToggleMenu().activate(true);
+            }
+            return true;
+        }
+        if (connector.getGameState().getDisplayArea().getToggleMenu().getPlantsButton().contains(x, y)) {
+            if (connector.getGameState().getDisplayArea().getToggleMenu().getMenuState() == Enums.MenuState.SHOWING_PLANTS_MENU) {
+                connector.getGameState().getDisplayArea().getToggleMenu().deactivate();
+            }
+            if (connector.getGameState().getDisplayArea().getToggleMenu().getMenuState() == Enums.MenuState.DEACTIVATED) {
+                connector.getGameState().getDisplayArea().getToggleMenu().activate(false);
             }
             return true;
         }
         // Check if this happened on a menu button
-        if (connector.getGameState().getDisplayArea().getToggleMenu().getMenuState() == Enums.MenuState.ACTIVATED) {
+        if (connector.getGameState().getDisplayArea().getToggleMenu().getMenuState() == Enums.MenuState.SHOWING_DEFENSES_MENU
+                || connector.getGameState().getDisplayArea().getToggleMenu().getMenuState() == Enums.MenuState.SHOWING_PLANTS_MENU) {
             for (ToggleMenuButton button : connector.getGameState().getDisplayArea().getToggleMenu().getActiveButtons()) {
                 if (button.contains(x, y)) {
-                    restart(); // TODO highlight this button
+                    for (ToggleMenuButton buttons : connector.getGameState().getDisplayArea().getToggleMenu().getActiveButtons()) {
+                        buttons.setColor(Color.BLUE);
+                    }
+                    button.setColor(Color.YELLOW);
                     return true;
                 }
             }
@@ -215,6 +229,13 @@ public class GameLogic {
     }
 
     public void unprojectedTap(float x, float y) {
+        for (NinePatcherTile tile : connector.getGameState().getDefenseArea().getTiles()) {
+            if (tile.contains(x, y)) {
+                Defense newDefense = new Turret(tile);
+                tile.setGameEntity(newDefense); // TODO place according to selection
+                connector.getGameState().getDefenses().add(newDefense);
+            }
+        }
         for (ButtonTile tile : connector.getGameState().getFarmingArea().getTiles()) {
             if (tile.contains(x, y)) {
                 Plant newPlant = new Plant(Plant.AYARN, tile);

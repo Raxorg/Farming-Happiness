@@ -26,7 +26,7 @@ public class DefenseArea {
     public DefenseArea() {
         defenseTiles = new DelayedRemovalArray<>();
         // Add left tiles
-        for (int row = 0; row < LEFT_DEFENSE_ROWS; row++) {
+        for (int row = LEFT_DEFENSE_ROWS - 1; row >= 0; row--) {
             for (int column = 0; column < LEFT_DEFENSE_COLUMNS; column++) {
                 defenseTiles.add(new NinePatcherTile(
                         DEFENSIVE_TILE,

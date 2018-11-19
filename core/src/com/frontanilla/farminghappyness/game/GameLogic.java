@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
-import com.frontanilla.farminghappyness.components.Tile;
+import com.frontanilla.farminghappyness.components.ButtonTile;
+import com.frontanilla.farminghappyness.components.NinePatcherTile;
+import com.frontanilla.farminghappyness.components.ToggleMenuButton;
 import com.frontanilla.farminghappyness.game.defenses.Defense;
 import com.frontanilla.farminghappyness.game.defenses.Trap;
 import com.frontanilla.farminghappyness.game.defenses.Turret;
@@ -85,10 +87,10 @@ public class GameLogic {
     }
 
     private void updateTurrets(float delta) {
-        for (Tile tile : connector.getGameState().getDefenseArea().getTiles()) {
-            if (tile.getGameEntity() != null) {
-                if (tile.getGameEntity() instanceof Turret) {
-                    Turret turret = (Turret) tile.getGameEntity();
+        for (NinePatcherTile ninePatcherTile : connector.getGameState().getDefenseArea().getTiles()) {
+            if (ninePatcherTile.getGameEntity() != null) {
+                if (ninePatcherTile.getGameEntity() instanceof Turret) {
+                    Turret turret = (Turret) ninePatcherTile.getGameEntity();
                     turret.update(delta);
                     for (Enemy e : connector.getGameState().getEnemies()) {
                         if (Util.getDistance(e.getCenter(), turret.getCenter()) < Constants.TURRET_RANGE) {
@@ -132,28 +134,28 @@ public class GameLogic {
     public void touchDown(Vector3 usefulVector) {
         if (!lost) {
             // Check if this happened on a defense tile
-            for (Tile tile : connector.getGameState().getDefenseArea().getTiles()) {
-                if (tile.contains(usefulVector.x, usefulVector.y)
+            for (NinePatcherTile ninePatcherTile : connector.getGameState().getDefenseArea().getTiles()) {
+                if (ninePatcherTile.contains(usefulVector.x, usefulVector.y)
                         && connector.getGameState().getMoney() >= 10
-                        && tile.getType() == DEFENSIVE_TILE // TODO Check if wall, trap or turret tile
-                        && tile.getGameEntity() == null) {
+                        && ninePatcherTile.getType() == DEFENSIVE_TILE // TODO Check if wall, trap or turret ninePatcherTile
+                        && ninePatcherTile.getGameEntity() == null) {
                     switch (constructionState) {
                         case BUILDING_TURRET:
-                            Defense newDefense = new Turret(tile);
+                            Defense newDefense = new Turret(ninePatcherTile);
                             connector.getGameState().getDefenses().add(newDefense);
-                            tile.setGameEntity(newDefense);
+                            ninePatcherTile.setGameEntity(newDefense);
                             connector.getGameState().setMoney(connector.getGameState().getMoney() - 10);
                             break;
                         case BUILDING_WALL:
-                            newDefense = new Wall(tile);
+                            newDefense = new Wall(ninePatcherTile);
                             connector.getGameState().getDefenses().add(newDefense);
-                            tile.setGameEntity(newDefense);
+                            ninePatcherTile.setGameEntity(newDefense);
                             connector.getGameState().setMoney(connector.getGameState().getMoney() - 10);
                             break;
                         case BUILDING_TRAP:
-                            newDefense = new Trap(tile);
+                            newDefense = new Trap(ninePatcherTile);
                             connector.getGameState().getDefenses().add(newDefense);
-                            tile.setGameEntity(newDefense);
+                            ninePatcherTile.setGameEntity(newDefense);
                             connector.getGameState().setMoney(connector.getGameState().getMoney() - 10);
                             break;
                     }
@@ -161,11 +163,11 @@ public class GameLogic {
                 }
             }
             // Check if this happened on a farming tile
-            for (Tile tile : connector.getGameState().getFarmingArea().getTiles()) {
-                if (tile.contains(usefulVector.x, usefulVector.y)) {
-                    Plant newPlant = new Plant(Plant.AYARN, tile);
+            for (ButtonTile buttonTile : connector.getGameState().getFarmingArea().getTiles()) {
+                if (buttonTile.contains(usefulVector.x, usefulVector.y)) {
+                    Plant newPlant = new Plant(Plant.AYARN, buttonTile);
                     connector.getGameState().getPlants().add(newPlant);
-                    tile.setGameEntity(newPlant);
+                    buttonTile.setGameEntity(newPlant);
                 }
             }
         } else {
@@ -174,11 +176,10 @@ public class GameLogic {
     }
 
     private void restart() {
-        for (Tile tile : connector.getGameState().getDefenseArea().getTiles()) {
-            tile.setGameEntity(null);
+        for (NinePatcherTile ninePatcherTile : connector.getGameState().getDefenseArea().getTiles()) {
+            ninePatcherTile.setGameEntity(null);
         }
         connector.getGameState().restart();
-        connector.getGameState().getDisplayArea().restart();
         lost = false;
         time = 0;
     }
@@ -187,15 +188,39 @@ public class GameLogic {
         return constructionState;
     }
 
-    public void touchUp(float x, float y) {
-        // TODO
+    //--------------------
+    //   INPUT HANDLING
+    //--------------------
+    public boolean rawTap(float x, float y) {
+        // Check if this happened on a menu activation button
+        if (connector.getGameState().getDisplayArea().getToggleMenu().getDefensesButton().contains(x, y)) {
+            if (connector.getGameState().getDisplayArea().getToggleMenu().getMenuState() == Enums.MenuState.ACTIVATED) {
+                connector.getGameState().getDisplayArea().getToggleMenu().deactivate();
+            }
+            if (connector.getGameState().getDisplayArea().getToggleMenu().getMenuState() == Enums.MenuState.DEACTIVATED) {
+                connector.getGameState().getDisplayArea().getToggleMenu().activate();
+            }
+            return true;
+        }
+        // Check if this happened on a menu button
+        if (connector.getGameState().getDisplayArea().getToggleMenu().getMenuState() == Enums.MenuState.ACTIVATED) {
+            for (ToggleMenuButton button : connector.getGameState().getDisplayArea().getToggleMenu().getActiveButtons()) {
+                if (button.contains(x, y)) {
+                    restart(); // TODO highlight this button
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
-    public void touchDragged(float x, float y) {
-        // TODO
-    }
-
-    public void tap(float x, float y, int count) {
-        // TODO
+    public void unprojectedTap(float x, float y) {
+        for (ButtonTile tile : connector.getGameState().getFarmingArea().getTiles()) {
+            if (tile.contains(x, y)) {
+                Plant newPlant = new Plant(Plant.AYARN, tile);
+                tile.setGameEntity(newPlant); // TODO place according to selection
+                connector.getGameState().getPlants().add(newPlant);
+            }
+        }
     }
 }

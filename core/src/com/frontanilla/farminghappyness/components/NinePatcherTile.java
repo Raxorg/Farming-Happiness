@@ -5,18 +5,14 @@ import com.frontanilla.farminghappyness.components.NinePatcherButton;
 import com.frontanilla.farminghappyness.game.entities.GameEntity;
 import com.frontanilla.farminghappyness.utils.Enums;
 
-public class Tile extends NinePatcherButton {
+public class NinePatcherTile extends NinePatcherButton {
 
     private Enums.TileType type;
     private GameEntity gameEntity;
 
-    public Tile(Enums.TileType type, TextureRegion textureRegion, float borderSize, int borderPixels, float x, float y, float width, float height) {
-        super(textureRegion, borderSize, borderPixels, x, y, width, height);
+    public NinePatcherTile(Enums.TileType type, TextureRegion textureRegion, float borderSize, int borderPixels, float x, float y, float w, float h) {
+        super(textureRegion, borderSize, borderPixels, x, y, w, h);
         this.type = type;
-    }
-
-    public boolean contains(float x, float y) {
-        return bounds.contains(x, y);
     }
 
     public GameEntity getGameEntity() {

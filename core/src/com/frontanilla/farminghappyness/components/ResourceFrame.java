@@ -1,11 +1,11 @@
-package com.frontanilla.farminghappyness.game.other;
+package com.frontanilla.farminghappyness.components;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 import com.frontanilla.farminghappyness.utils.Assets;
-import com.frontanilla.farminghappyness.utils.Point;
 
 import static com.frontanilla.farminghappyness.utils.Constants.RESOURCE_FRAME_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.RESOURCE_FRAME_IMAGE_HEIGHT;
@@ -18,15 +18,15 @@ public class ResourceFrame {
 
     private BitmapFont font;
     private Color frameColor;
-    private Point position;
+    private Rectangle bounds;
     private TextureRegion image;
     private int quantity;
 
-    public ResourceFrame(Color frameColor, Point position, TextureRegion image) {
+    public ResourceFrame(Color frameColor, float x, float y, TextureRegion image) {
         font = new BitmapFont();
         font.getData().scale(2);
         this.frameColor = frameColor;
-        this.position = position;
+        bounds = new Rectangle(x, y, RESOURCE_FRAME_WIDTH, RESOURCE_FRAME_HEIGHT);
         this.image = image;
     }
 
@@ -35,28 +35,24 @@ public class ResourceFrame {
         batch.setColor(frameColor);
         batch.draw(
                 Assets.resourceFrame,
-                position.getX(),
-                position.getY(),
+                bounds.x,
+                bounds.y,
                 RESOURCE_FRAME_WIDTH,
                 RESOURCE_FRAME_HEIGHT);
         // Image
         batch.setColor(Color.WHITE);
         batch.draw(
                 image,
-                position.getX() + RESOURCE_FRAME_WIDTH / 3 * 2,
-                position.getY() + RESOURCE_FRAME_HEIGHT / 2f - RESOURCE_FRAME_IMAGE_HEIGHT / 2f,
+                bounds.x + RESOURCE_FRAME_WIDTH / 3 * 2,
+                bounds.y + RESOURCE_FRAME_HEIGHT / 2f - RESOURCE_FRAME_IMAGE_HEIGHT / 2f,
                 RESOURCE_FRAME_IMAGE_WIDTH,
                 RESOURCE_FRAME_IMAGE_HEIGHT);
         // Text
         font.draw(
                 batch,
                 quantity + "",
-                position.getX() + RESOURCE_FRAME_QUANTITY_X_OFFSET,
-                position.getY() + RESOURCE_FRAME_QUANTITY_Y_OFFSET + 10f); // TODO use text size calculator
-    }
-
-    public int getQuantity() {
-        return quantity;
+                bounds.x + RESOURCE_FRAME_QUANTITY_X_OFFSET,
+                bounds.y + RESOURCE_FRAME_QUANTITY_Y_OFFSET + 10f); // TODO use text size calculator
     }
 
     public void setQuantity(int quantity) {

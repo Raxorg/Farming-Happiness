@@ -3,7 +3,7 @@ package com.frontanilla.farminghappyness.game.defenses;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import com.frontanilla.farminghappyness.components.Tile;
+import com.frontanilla.farminghappyness.components.NinePatcherTile;
 import com.frontanilla.farminghappyness.game.other.Bullet;
 import com.frontanilla.farminghappyness.game.entities.units.Enemy;
 import com.frontanilla.farminghappyness.utils.Assets;
@@ -21,11 +21,11 @@ public class Turret extends Defense {
 
     private float coolDown;
 
-    public Turret(Tile tile) {
+    public Turret(NinePatcherTile ninePatcherTile) {
         super(
                 new Rectangle(
-                        tile.getX() + (DEFENSE_TILE_SIZE - TURRET_WIDTH) / 2,
-                        tile.getY() + (DEFENSE_TILE_SIZE - TURRET_WIDTH) / 2,
+                        ninePatcherTile.getX() + (DEFENSE_TILE_SIZE - TURRET_WIDTH) / 2,
+                        ninePatcherTile.getY() + (DEFENSE_TILE_SIZE - TURRET_WIDTH) / 2,
                         TURRET_WIDTH,
                         TURRET_HEIGHT),
                 TURRET_INITIAL_HEALTH);

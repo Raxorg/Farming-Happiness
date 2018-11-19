@@ -2,50 +2,69 @@ package com.frontanilla.farminghappyness.utils;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Assets {
 
-    public static TextureRegion grass, farmingCornerBottomLeft, farmingCornerTopLeft, farmingBottom, farmingTop,
-            defenseTile, wall, tourist, rangeCircle, empty, barSides, centerLifeBar, dollar, centerEmptyLifeBar, triangle, trap, farmingCenter,
-            farmingLeft, farmingRight, farmingCornerBottomRight, farmingCornerTopRight, resourceFrame, trapLeaves;
-    // River
+    public static TextureRegion tourist, rangeCircle, barSides, centerLifeBar, dollar, centerEmptyLifeBar, triangle, resourceFrame;
+    //-------------------
+    //      PLANTS
+    //-------------------
+    public static TextureRegion elsker, gra, kocham, szerelem, elska, ayarn, seviyorum, milestiba, rakkaus, kaerlighed;
+    //------------------
+    //     TERRAIN
+    //------------------
+    public static TextureRegion grassTile, farmlandTile;
+    //------------------
+    //      RIVER
+    //------------------
     public static Animation<TextureRegion> riverAnimation;
-    // Enemies
+    //------------------
+    //     ENEMIES
+    //------------------
     public static Animation<TextureRegion> touristAnimation;
     // Borders
     public static TextureRegion bordersTopLeft, bordersTopRight, bordersBottomLeft, bordersBottomRight, bordersLeft, bordersTop, bordersRight,
             bordersBottom;
-    // Borders Glow
-    public static TextureRegion bordersTopLeftGlow, bordersTopRightGlow, bordersBottomLeftGlow, bordersBottomRightGlow, bordersLeftGlow,
-            bordersTopGlow, bordersRightGlow, bordersBottomGlow;
-    // Tiles
-    public static NinePatch defenseTilePatch;
-    // Turret
-    public static TextureRegion turret, turretBullet;
+    //------------------
+    //     DEFENSES
+    //------------------
+    public static TextureRegion turret, turretBullet, wall, trap;
+    //-------------------
+    //     GAME MENU
+    //-------------------
+    public static TextureRegion testPanel;
     // Decoration
     public static TextureRegion grass1, grass1Glow;
     // Misc
-    public static TextureRegion pixel, plantTest;
+    public static TextureRegion pixel;
     // TODO test
     public static TextureRegion nptest;
-    public static Texture grassx;
+    public static TextureRegion testFrame, testToggleButtonRight, testToggleButtonLeft;
 
     public static void init() {
-        Texture tiles = new Texture("images/tiles.png");
-        // Grass tile
-        grass = new TextureRegion(tiles, 0, 0, 225, 225);
-        // Farming tiles
-        farmingCenter = new TextureRegion(tiles, 225, 300, 150, 150);
-        farmingCornerBottomLeft = new TextureRegion(tiles, 225, 0, 150, 150);
-        farmingCornerTopLeft = new TextureRegion(tiles, 375, 0, 150, 150);
-        farmingCornerBottomRight = new TextureRegion(tiles, 375, 0, -150, 150);
-        farmingCornerTopRight = new TextureRegion(tiles, 525, 0, -150, 150);
-        farmingTop = new TextureRegion(tiles, 375, 150, 150, 150);
-        farmingBottom = new TextureRegion(tiles, 375, 300, 150, -150);
-        farmingLeft = new TextureRegion(tiles, 225, 150, 150, 150);
-        farmingRight = new TextureRegion(tiles, 375, 150, -150, 150);
+        //-------------------
+        //      PLANTS
+        //-------------------
+        Texture plants = new Texture("images/plants.png");
+        elsker = new TextureRegion(plants, 0, 0, 35, 35);
+        gra = new TextureRegion(plants, 35, 0, 35, 35);
+        kocham = new TextureRegion(plants, 70, 0, 35, 35);
+        szerelem = new TextureRegion(plants, 105, 0, 35, 35);
+        elska = new TextureRegion(plants, 140, 0, 35, 38);
+        ayarn = new TextureRegion(plants, 0, 35, 35, 42);
+        seviyorum = new TextureRegion(plants, 35, 35, 35, 42);
+        milestiba = new TextureRegion(plants, 70, 35, 35, 49);
+        rakkaus = new TextureRegion(plants, 105, 35, 35, 49);
+        kaerlighed = new TextureRegion(plants, 140, 35, 35, 54);
+        //------------------
+        //     TERRAIN
+        //------------------
+        Texture terrain = new Texture("images/terrain.png");
+        // Grass
+        grassTile = new TextureRegion(terrain, 0, 0, 100, 100);
+        // Farmland
+        farmlandTile = new TextureRegion(terrain, 100, 0, 35, 35);
         //------------------
         //      TILES
         //------------------
@@ -59,30 +78,17 @@ public class Assets {
         bordersTop = new TextureRegion(borders, 500, 0, 500, 500);
         bordersRight = new TextureRegion(borders, 1000, 500, 500, 500);
         bordersBottom = new TextureRegion(borders, 500, 1000, 500, 500);
-        // Borders Glow
-        Texture bordersGlow = new Texture("images/bordersGlow.png");
-        bordersTopLeftGlow = new TextureRegion(bordersGlow, 0, 0, 500, 500);
-        bordersTopRightGlow = new TextureRegion(bordersGlow, 1000, 0, 500, 500);
-        bordersBottomLeftGlow = new TextureRegion(bordersGlow, 0, 1000, 500, 500);
-        bordersBottomRightGlow = new TextureRegion(bordersGlow, 1000, 1000, 500, 500);
-        bordersLeftGlow = new TextureRegion(bordersGlow, 0, 500, 500, 500);
-        bordersTopGlow = new TextureRegion(bordersGlow, 500, 0, 500, 500);
-        bordersRightGlow = new TextureRegion(bordersGlow, 1000, 500, 500, 500);
-        bordersBottomGlow = new TextureRegion(bordersGlow, 500, 1000, 500, 500);
-        //------------------
-        //      TURRET
-        //------------------
-        Texture defenses = new Texture("images/defenses.png");
-        turret = new TextureRegion(defenses, 0, 0, 40, 60);
-        turretBullet = new TextureRegion(defenses, 0, 0, 10, 10);
         //------------------
         //     DEFENSES
         //------------------
-        defenseTile = new TextureRegion(tiles, 0, 225, 100, 100);
-        defenseTilePatch = new NinePatch(borders, 54, 54, 54, 54);
-        wall = new TextureRegion(defenses, 0, 400, 120, 70);
-        trap = new TextureRegion(defenses, 120, 400, 100, 83);
-        trapLeaves = new TextureRegion(defenses, 220, 400, 100, 83);
+        Texture defenses = new Texture("images/defenses.png");
+        // Turret
+        turret = new TextureRegion(defenses, 0, 0, 40, 57);
+        turretBullet = new TextureRegion(defenses, 0, 0, 10, 10);
+        // Wall
+        wall = new TextureRegion(defenses, 40, 0, 42, 50);
+        // Trap
+        trap = new TextureRegion(defenses, 82, 0, 42, 50);
         Texture debug = new Texture("images/rangeCircle.png");
         rangeCircle = new TextureRegion(debug, 0, 0, 500, 500);
         //------------------
@@ -118,19 +124,18 @@ public class Assets {
         resourceFrame = new TextureRegion(hud, 290, 0, 300, 100);
         // Dollar
         dollar = new TextureRegion(hud, 591, 0, 54, 41); // TODO WHY +1
-
-        empty = new TextureRegion(tiles, 100, 225, 1, 1);
-        //------------------
-        //      PLANTS
-        //------------------
-        plantTest = new TextureRegion(new Texture("images/plant.png"), 0, 0, 100, 100);
         //------------------
         //       MISC
         //------------------
         pixel = new TextureRegion(new Texture("images/pixel.png"), 0, 0, 1, 1);
         // TODO TEST
         nptest = new TextureRegion(new Texture("images/nptest.png"), 0, 0, 10, 10);
-        grassx = new Texture("images/grass.png");
+        testFrame = new TextureRegion(new Texture("images/testFrame.png"), 0, 0, 100, 100);
+        testPanel = new TextureRegion(new Texture("images/testPanel.png"), 0, 0, 3, 3);
+        // Toggle buttons
+        Texture toggleButtons = new Texture("images/testToggleButtons.png");
+        testToggleButtonRight = new TextureRegion(toggleButtons, 0, 0, 50, 50);
+        testToggleButtonLeft = new TextureRegion(toggleButtons, 50, 0, 50, 50);
     }
 
 }

@@ -2,7 +2,7 @@ package com.frontanilla.farminghappyness.game.areas;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
-import com.frontanilla.farminghappyness.components.Tile;
+import com.frontanilla.farminghappyness.components.NinePatcherTile;
 import com.frontanilla.farminghappyness.utils.Assets;
 
 import static com.frontanilla.farminghappyness.utils.Constants.BOTTOM_DEFENSE_COLUMNS;
@@ -21,14 +21,14 @@ import static com.frontanilla.farminghappyness.utils.Enums.TileType.DEFENSIVE_TI
 
 public class DefenseArea {
 
-    private DelayedRemovalArray<Tile> defenseTiles;
+    private DelayedRemovalArray<NinePatcherTile> defenseTiles;
 
     public DefenseArea() {
         defenseTiles = new DelayedRemovalArray<>();
         // Add left tiles
         for (int row = 0; row < LEFT_DEFENSE_ROWS; row++) {
             for (int column = 0; column < LEFT_DEFENSE_COLUMNS; column++) {
-                defenseTiles.add(new Tile(
+                defenseTiles.add(new NinePatcherTile(
                         DEFENSIVE_TILE,
                         Assets.nptest,
                         DEFENSE_TILE_SIZE / 10f,
@@ -42,7 +42,7 @@ public class DefenseArea {
         // Add bottom tiles
         for (int row = 0; row < BOTTOM_DEFENSE_ROWS; row++) {
             for (int column = 0; column < BOTTOM_DEFENSE_COLUMNS; column++) {
-                defenseTiles.add(new Tile(
+                defenseTiles.add(new NinePatcherTile(
                         DEFENSIVE_TILE,
                         Assets.nptest,
                         DEFENSE_TILE_SIZE / 10f,
@@ -54,7 +54,7 @@ public class DefenseArea {
             }
         }
         // Add extra tiles
-        defenseTiles.add(new Tile(
+        defenseTiles.add(new NinePatcherTile(
                 DEFENSIVE_TILE,
                 Assets.nptest,
                 DEFENSE_TILE_SIZE / 10f,
@@ -63,7 +63,7 @@ public class DefenseArea {
                 LEFT_DEFENSE_Y - DEFENSE_TILE_SIZE - DEFENSE_Y_SPACING,
                 DEFENSE_TILE_SIZE,
                 DEFENSE_TILE_SIZE));
-        defenseTiles.add(new Tile(
+        defenseTiles.add(new NinePatcherTile(
                 DEFENSIVE_TILE,
                 Assets.nptest,
                 DEFENSE_TILE_SIZE / 10f,
@@ -72,7 +72,7 @@ public class DefenseArea {
                 LEFT_DEFENSE_Y - DEFENSE_TILE_SIZE - DEFENSE_Y_SPACING,
                 DEFENSE_TILE_SIZE,
                 DEFENSE_TILE_SIZE));
-        defenseTiles.add(new Tile(
+        defenseTiles.add(new NinePatcherTile(
                 DEFENSIVE_TILE,
                 Assets.nptest,
                 DEFENSE_TILE_SIZE / 10f,
@@ -81,7 +81,7 @@ public class DefenseArea {
                 LEFT_DEFENSE_Y - DEFENSE_TILE_SIZE - DEFENSE_Y_SPACING,
                 DEFENSE_TILE_SIZE,
                 DEFENSE_TILE_SIZE));
-        defenseTiles.add(new Tile(
+        defenseTiles.add(new NinePatcherTile(
                 DEFENSIVE_TILE,
                 Assets.nptest,
                 DEFENSE_TILE_SIZE / 10f,
@@ -90,7 +90,7 @@ public class DefenseArea {
                 LEFT_DEFENSE_Y - DEFENSE_TILE_SIZE * 2 - DEFENSE_Y_SPACING * 2,
                 DEFENSE_TILE_SIZE,
                 DEFENSE_TILE_SIZE));
-        defenseTiles.add(new Tile(
+        defenseTiles.add(new NinePatcherTile(
                 DEFENSIVE_TILE,
                 Assets.nptest,
                 DEFENSE_TILE_SIZE / 10f,
@@ -99,7 +99,7 @@ public class DefenseArea {
                 LEFT_DEFENSE_Y - DEFENSE_TILE_SIZE * 2 - DEFENSE_Y_SPACING * 2,
                 DEFENSE_TILE_SIZE,
                 DEFENSE_TILE_SIZE));
-        defenseTiles.add(new Tile(
+        defenseTiles.add(new NinePatcherTile(
                 DEFENSIVE_TILE,
                 Assets.nptest,
                 DEFENSE_TILE_SIZE / 10f,
@@ -111,14 +111,14 @@ public class DefenseArea {
     }
 
     public void render(SpriteBatch batch) {
-        for (Tile defenseTile : defenseTiles) {
-            if (defenseTile.getGameEntity() == null) {
-                defenseTile.render(batch); // TODO draw the tile even when something is on it
+        for (NinePatcherTile defenseNinePatcherTile : defenseTiles) {
+            if (defenseNinePatcherTile.getGameEntity() == null) {
+                defenseNinePatcherTile.render(batch); // TODO draw the tile even when something is on it
             }
         }
     }
 
-    public DelayedRemovalArray<Tile> getTiles() {
+    public DelayedRemovalArray<NinePatcherTile> getTiles() {
         return defenseTiles;
     }
 }

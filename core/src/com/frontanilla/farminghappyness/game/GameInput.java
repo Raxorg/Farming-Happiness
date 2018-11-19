@@ -1,11 +1,11 @@
 package com.frontanilla.farminghappyness.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.frontanilla.farminghappyness.game.GameConnector;
 
 public class GameInput extends InputAdapter implements GestureDetector.GestureListener {
 
@@ -14,6 +14,7 @@ public class GameInput extends InputAdapter implements GestureDetector.GestureLi
     // Camera related
     private float lastZoomDistance;
     private float lastPinchX, lastPinchY;
+    private Vector3 unprojected;
 
     public GameInput(GameConnector connector) {
         this.connector = connector;
@@ -31,6 +32,7 @@ public class GameInput extends InputAdapter implements GestureDetector.GestureLi
         );
         inputMultiplexer.addProcessor(this);
         inputMultiplexer.addProcessor(gestureDetector);
+        unprojected = new Vector3();
     }
 
     public InputMultiplexer getInputMultiplexer() {
@@ -45,7 +47,10 @@ public class GameInput extends InputAdapter implements GestureDetector.GestureLi
 
     @Override
     public boolean tap(float x, float y, int count, int button) {
-        // TODO use this for buying selling
+        if (!connector.getGameLogic().rawTap(x, Gdx.graphics.getHeight() - y)) {
+            unprojected.set(connector.getCamera().unproject(new Vector3(x, y, 0)));
+            connector.getGameLogic().unprojectedTap(unprojected.x, unprojected.y);
+        }
         return false;
     }
 

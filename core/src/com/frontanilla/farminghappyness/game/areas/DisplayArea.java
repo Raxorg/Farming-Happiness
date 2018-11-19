@@ -1,67 +1,52 @@
 package com.frontanilla.farminghappyness.game.areas;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.frontanilla.farminghappyness.game.GameState;
-import com.frontanilla.farminghappyness.game.other.ResourceFrame;
+import com.frontanilla.farminghappyness.components.ToggleMenu;
+import com.frontanilla.farminghappyness.components.ResourceFrame;
 import com.frontanilla.farminghappyness.utils.Assets;
-import com.frontanilla.farminghappyness.utils.Point;
 
-import static com.frontanilla.farminghappyness.utils.Constants.RESOURCE_FRAME_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.RESOURCE_FRAME_WIDTH;
-import static com.frontanilla.farminghappyness.utils.Constants.SPAWN_TIME;
+import static com.frontanilla.farminghappyness.utils.Constants.RESOURCE_FRAME_Y;
 
 public class DisplayArea {
 
     private ResourceFrame moneyFrame, workerFrame;
-    private float time;
-    private SpriteBatch batch;
-    private BitmapFont font;
+    private ToggleMenu toggleMenu;
 
     public DisplayArea() {
-        // TODO, set the rectangles
+        // Resource frames
         moneyFrame = new ResourceFrame(
                 Color.FOREST,
-                new Point(
-                        0,
-                        Gdx.graphics.getHeight() - RESOURCE_FRAME_HEIGHT),
+                0,
+                RESOURCE_FRAME_Y,
                 Assets.dollar);
         workerFrame = new ResourceFrame(Color.SALMON,
-                new Point(
-                        RESOURCE_FRAME_WIDTH,
-                        Gdx.graphics.getHeight() - RESOURCE_FRAME_HEIGHT),
+                RESOURCE_FRAME_WIDTH,
+                RESOURCE_FRAME_Y,
                 Assets.dollar
         );
-
-        batch = new SpriteBatch();
-        font = new BitmapFont();
-        font.getData().scale(3);
-        font.setColor(Color.RED);
-    }
-
-    public void restart() {
-        time = 0;
+        // Defenses menu
+        toggleMenu = new ToggleMenu();
     }
 
     public void update(float delta, int money, int workers) {
         moneyFrame.setQuantity(money);
-        workerFrame.setQuantity(workers); // TODO don't update each frame, update each change
-        time += delta;
-        if (time < SPAWN_TIME) {
-            batch.begin();
-            font.draw(
-                    batch,
-                    (int) (SPAWN_TIME + 1 - time) + "",
-                    Gdx.graphics.getWidth() / 2,
-                    Gdx.graphics.getHeight() - 10);
-            batch.end();
-        }
+        workerFrame.setQuantity(workers);
+        toggleMenu.update(delta, money);
     }
 
     public void render(SpriteBatch staticBatch) {
         moneyFrame.render(staticBatch);
         workerFrame.render(staticBatch);
+        toggleMenu.render(staticBatch);
+    }
+
+    //----------------------------
+    //      GETTERS & SETTERS
+    //----------------------------
+
+    public ToggleMenu getToggleMenu() {
+        return toggleMenu;
     }
 }

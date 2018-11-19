@@ -2,12 +2,14 @@ package com.frontanilla.farminghappyness.game;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.frontanilla.farminghappyness.components.Background;
-import com.frontanilla.farminghappyness.components.Tile;
+import com.frontanilla.farminghappyness.components.NinePatcherTile;
+import com.frontanilla.farminghappyness.game.defenses.Defense;
 import com.frontanilla.farminghappyness.game.defenses.Turret;
 import com.frontanilla.farminghappyness.game.entities.units.Enemy;
 import com.frontanilla.farminghappyness.game.other.Bullet;
 import com.frontanilla.farminghappyness.utils.Assets;
 
+import static com.frontanilla.farminghappyness.utils.Constants.DEBUG;
 import static com.frontanilla.farminghappyness.utils.Constants.TURRET_RANGE;
 import static com.frontanilla.farminghappyness.utils.Constants.TURRET_WIDTH;
 
@@ -29,25 +31,27 @@ public class GameRenderer {
         dynamicBatch.begin();
         // Render background
         background.render(dynamicBatch);
+        // Render Turret ranges
+        if (DEBUG) {
+            for (NinePatcherTile ninePatcherTile : connector.getGameState().getDefenseArea().getTiles()) {
+                if (ninePatcherTile.getGameEntity() instanceof Turret) {
+                    dynamicBatch.draw(
+                            Assets.rangeCircle,
+                            ninePatcherTile.getGameEntity().getBounds().x - TURRET_RANGE + TURRET_WIDTH / 2,
+                            ninePatcherTile.getGameEntity().getBounds().y - TURRET_RANGE + TURRET_WIDTH / 2,
+                            TURRET_RANGE * 2,
+                            TURRET_RANGE * 2);
+                }
+            }
+        }
         // Render bullets
         for (Bullet b : connector.getGameState().getBullets()) {
             b.render(dynamicBatch);
         }
-        // Render Turret ranges TODO improve?
-        for (Tile tile : connector.getGameState().getDefenseArea().getTiles()) {
-            if (tile.getGameEntity() instanceof Turret) {
-                dynamicBatch.draw(
-                        Assets.rangeCircle,
-                        tile.getGameEntity().getBounds().x - TURRET_RANGE + TURRET_WIDTH / 2,
-                        tile.getGameEntity().getBounds().y - TURRET_RANGE + TURRET_WIDTH / 2,
-                        TURRET_RANGE * 2,
-                        TURRET_RANGE * 2);
-            }
-        }
         // Render defenses TODO improve logic and placement of code?
-        for (Tile tile : connector.getGameState().getDefenseArea().getTiles()) {
-            if (tile.getGameEntity() != null) {
-                tile.getGameEntity().render(dynamicBatch);
+        for (NinePatcherTile ninePatcherTile : connector.getGameState().getDefenseArea().getTiles()) {
+            if (ninePatcherTile.getGameEntity() instanceof Defense) {
+                ninePatcherTile.getGameEntity().render(dynamicBatch);
             }
         }
         // Render Areas

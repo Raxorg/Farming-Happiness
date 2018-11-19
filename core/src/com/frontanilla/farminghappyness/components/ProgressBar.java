@@ -39,7 +39,7 @@ public class ProgressBar {
         // Right side
         batch.draw(
                 Assets.barSides,
-                progressable.getBounds().getX() + PROGRESS_BAR_SIDES_WIDTH + portionWidth * (int) (progressable.getProgress() + 1),
+                progressable.getBounds().getX() + PROGRESS_BAR_SIDES_WIDTH + portionWidth * (int) (Math.min(progressable.getProgress() + 1, progressable.getMaxProgress())),
                 progressable.getBounds().getY() + progressable.getBounds().height,
                 PROGRESS_BAR_SIDES_WIDTH,
                 PROGRESS_BAR_HEIGHT);

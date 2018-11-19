@@ -43,14 +43,13 @@ public class GameState {
         enemies = new DelayedRemovalArray<>();
         defenses = new DelayedRemovalArray<>();
         bullets = new DelayedRemovalArray<>();
-        money = 100;
+        money = 10;
         workers = 0;
     }
 
     //----------------------------
     //      GETTERS & SETTERS
     //----------------------------
-
 
     public RiverArea getRiverArea() {
         return riverArea;

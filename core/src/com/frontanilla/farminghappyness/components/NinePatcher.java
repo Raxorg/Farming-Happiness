@@ -1,5 +1,6 @@
-package com.frontanilla.farminghappyness.utils;
+package com.frontanilla.farminghappyness.components;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
@@ -10,6 +11,7 @@ public class NinePatcher {
     private TextureRegion left, top, right, bottom, center;
     private Rectangle bounds;
     private float borderSize;
+    private Color color;
 
     public NinePatcher(TextureRegion textureRegion, float borderSize, int borderPixels) {
         this.borderSize = borderSize;
@@ -61,10 +63,13 @@ public class NinePatcher {
                 borderPixels,
                 textureRegion.getRegionWidth() - borderPixels - borderPixels,
                 textureRegion.getRegionHeight() - borderPixels - borderPixels);
+        // Lastly
         bounds = new Rectangle(0, 0, textureRegion.getRegionWidth(), textureRegion.getRegionHeight());
+        color = Color.WHITE;
     }
 
     public void render(SpriteBatch batch) {
+        batch.setColor(color);
         renderCorners(batch);
         renderSides(batch);
         renderCenter(batch);
@@ -156,5 +161,9 @@ public class NinePatcher {
     public void setPosition(float x, float y) {
         bounds.x = x;
         bounds.y = y;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 }

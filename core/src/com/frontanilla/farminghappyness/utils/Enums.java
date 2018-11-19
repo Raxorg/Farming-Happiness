@@ -15,6 +15,13 @@ public class Enums {
         SHOOTING_AND_MOVING
     }
 
+    public enum MenuState {
+        DEACTIVATED,
+        ACTIVATED,
+        ACTIVATING,
+        DEACTIVATING
+    }
+
     public enum ConstructionState {
         BUILDING_TURRET,
         BUILDING_WALL,

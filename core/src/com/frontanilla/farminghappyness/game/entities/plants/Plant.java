@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
-import com.frontanilla.farminghappyness.components.Tile;
+import com.frontanilla.farminghappyness.components.ButtonTile;
 import com.frontanilla.farminghappyness.game.entities.Progressable;
 import com.frontanilla.farminghappyness.utils.Assets;
 import com.frontanilla.farminghappyness.utils.Enums.PlantType;
@@ -36,34 +36,34 @@ public class Plant extends Progressable {
         super(new Rectangle(), PLANT_PRODUCTION_TIME);
         switch (plantType) {
             case ELSKER:
-                textureRegion = Assets.plantTest;
+                textureRegion = Assets.elsker;
                 break;
             case GRA:
-                textureRegion = Assets.plantTest;
+                textureRegion = Assets.gra;
                 break;
             case KOCHAM:
-                textureRegion = Assets.plantTest;
+                textureRegion = Assets.kocham;
                 break;
             case SZERELEM:
-                textureRegion = Assets.plantTest;
+                textureRegion = Assets.szerelem;
                 break;
             case ELSKA:
-                textureRegion = Assets.plantTest;
+                textureRegion = Assets.elska;
                 break;
             case AYARN:
-                textureRegion = Assets.plantTest;
+                textureRegion = Assets.ayarn;
                 break;
             case SEVIYORUM:
-                textureRegion = Assets.plantTest;
+                textureRegion = Assets.seviyorum;
                 break;
             case MILESTIBA:
-                textureRegion = Assets.plantTest;
+                textureRegion = Assets.milestiba;
                 break;
             case RAKKAUS:
-                textureRegion = Assets.plantTest;
+                textureRegion = Assets.rakkaus;
                 break;
             case KAERLIGHED:
-                textureRegion = Assets.plantTest;
+                textureRegion = Assets.kaerlighed;
                 break;
         }
         this.plantType = plantType;
@@ -71,8 +71,8 @@ public class Plant extends Progressable {
         this.sellCost = sellCost;
     }
 
-    public Plant(Plant plant, Tile tile) {
-        super(new Rectangle(tile.getX() + PLANT_TILE_SPACING, tile.getY() + PLANT_TILE_SPACING, PLANT_SIZE, PLANT_SIZE), PLANT_PRODUCTION_TIME);
+    public Plant(Plant plant, ButtonTile buttonTile) {
+        super(new Rectangle(buttonTile.getX() + PLANT_TILE_SPACING, buttonTile.getY() + PLANT_TILE_SPACING, PLANT_SIZE, PLANT_SIZE), PLANT_PRODUCTION_TIME);
         // Structure
         textureRegion = plant.textureRegion;
         // Plant

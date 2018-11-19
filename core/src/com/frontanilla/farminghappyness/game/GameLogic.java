@@ -9,7 +9,7 @@ import com.frontanilla.farminghappyness.components.ButtonTile;
 import com.frontanilla.farminghappyness.components.NinePatcherTile;
 import com.frontanilla.farminghappyness.components.ToggleMenuButton;
 import com.frontanilla.farminghappyness.game.defenses.Defense;
-import com.frontanilla.farminghappyness.game.defenses.Trap;
+import com.frontanilla.farminghappyness.game.defenses.Mine;
 import com.frontanilla.farminghappyness.game.defenses.Turret;
 import com.frontanilla.farminghappyness.game.defenses.Wall;
 import com.frontanilla.farminghappyness.game.entities.plants.Plant;
@@ -20,13 +20,27 @@ import com.frontanilla.farminghappyness.utils.Constants;
 import com.frontanilla.farminghappyness.utils.Enums;
 import com.frontanilla.farminghappyness.utils.Util;
 
+import static com.frontanilla.farminghappyness.utils.Constants.AYARN_ID;
+import static com.frontanilla.farminghappyness.utils.Constants.ELSKA_ID;
+import static com.frontanilla.farminghappyness.utils.Constants.ELSKER_ID;
 import static com.frontanilla.farminghappyness.utils.Constants.ENEMY_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.ENEMY_WIDTH;
+import static com.frontanilla.farminghappyness.utils.Constants.GRA_ID;
+import static com.frontanilla.farminghappyness.utils.Constants.KAERLIGHED_ID;
+import static com.frontanilla.farminghappyness.utils.Constants.KOCHAM_ID;
+import static com.frontanilla.farminghappyness.utils.Constants.MILESTIBA_ID;
+import static com.frontanilla.farminghappyness.utils.Constants.RAKKAUS_ID;
 import static com.frontanilla.farminghappyness.utils.Constants.RIVER_TILE_SIZE;
+import static com.frontanilla.farminghappyness.utils.Constants.SEVIYORUM_ID;
 import static com.frontanilla.farminghappyness.utils.Constants.SPAWN_TIME;
+import static com.frontanilla.farminghappyness.utils.Constants.SZERELEM_ID;
+import static com.frontanilla.farminghappyness.utils.Constants.TRAP_ID;
+import static com.frontanilla.farminghappyness.utils.Constants.TURRET_ID;
+import static com.frontanilla.farminghappyness.utils.Constants.WALL_ID;
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_WIDTH;
 import static com.frontanilla.farminghappyness.utils.Enums.ConstructionState;
+import static com.frontanilla.farminghappyness.utils.Enums.MenuState;
 import static com.frontanilla.farminghappyness.utils.Enums.TileType.DEFENSIVE_TILE;
 
 public class GameLogic {
@@ -54,6 +68,7 @@ public class GameLogic {
             updatePlants(delta);
             updateEnemies(delta);
             updateTurrets(delta);
+            updateMines(delta);
             updateBullets(delta);
 
             time += delta;
@@ -101,6 +116,16 @@ public class GameLogic {
                             break;
                         }
                     }
+                }
+            }
+        }
+    }
+
+    private void updateMines(float delta) {
+        for (NinePatcherTile ninePatcherTile : connector.getGameState().getDefenseArea().getTiles()) {
+            if (ninePatcherTile.getGameEntity() != null) {
+                if (ninePatcherTile.getGameEntity() instanceof Mine) {
+                    ((Mine) ninePatcherTile.getGameEntity()).update(delta);
                 }
             }
         }
@@ -154,7 +179,7 @@ public class GameLogic {
                             connector.getGameState().setMoney(connector.getGameState().getMoney() - 10);
                             break;
                         case BUILDING_TRAP:
-                            newDefense = new Trap(ninePatcherTile);
+                            newDefense = new Mine(ninePatcherTile);
                             connector.getGameState().getDefenses().add(newDefense);
                             ninePatcherTile.setGameEntity(newDefense);
                             connector.getGameState().setMoney(connector.getGameState().getMoney() - 10);
@@ -194,31 +219,33 @@ public class GameLogic {
     //--------------------
     public boolean rawTap(float x, float y) {
         // Check if this happened on a menu activation button
-        if (connector.getGameState().getDisplayArea().getToggleMenu().getDefensesButton().contains(x, y)) {
-            if (connector.getGameState().getDisplayArea().getToggleMenu().getMenuState() == Enums.MenuState.SHOWING_DEFENSES_MENU) {
+        if (connector.getGameState().getDisplayArea().getToggleMenu().getDefensesToggleButton().contains(x, y)) {
+            if (connector.getGameState().getDisplayArea().getToggleMenu().getMenuState() == MenuState.SHOWING_DEFENSES_MENU) {
                 connector.getGameState().getDisplayArea().getToggleMenu().deactivate();
-            }
-            if (connector.getGameState().getDisplayArea().getToggleMenu().getMenuState() == Enums.MenuState.DEACTIVATED) {
+            } else if (connector.getGameState().getDisplayArea().getToggleMenu().getMenuState() == MenuState.SHOWING_PLANTS_MENU) {
+                connector.getGameState().getDisplayArea().getToggleMenu().setMenuState(MenuState.SHOWING_DEFENSES_MENU);
+            } else if (connector.getGameState().getDisplayArea().getToggleMenu().getMenuState() == MenuState.DEACTIVATED) {
                 connector.getGameState().getDisplayArea().getToggleMenu().activate(true);
             }
             return true;
         }
-        if (connector.getGameState().getDisplayArea().getToggleMenu().getPlantsButton().contains(x, y)) {
-            if (connector.getGameState().getDisplayArea().getToggleMenu().getMenuState() == Enums.MenuState.SHOWING_PLANTS_MENU) {
+        if (connector.getGameState().getDisplayArea().getToggleMenu().getPlantsToggleButton().contains(x, y)) {
+            if (connector.getGameState().getDisplayArea().getToggleMenu().getMenuState() == MenuState.SHOWING_PLANTS_MENU) {
                 connector.getGameState().getDisplayArea().getToggleMenu().deactivate();
-            }
-            if (connector.getGameState().getDisplayArea().getToggleMenu().getMenuState() == Enums.MenuState.DEACTIVATED) {
+            } else if (connector.getGameState().getDisplayArea().getToggleMenu().getMenuState() == MenuState.SHOWING_DEFENSES_MENU) {
+                connector.getGameState().getDisplayArea().getToggleMenu().setMenuState(MenuState.SHOWING_PLANTS_MENU);
+            } else if (connector.getGameState().getDisplayArea().getToggleMenu().getMenuState() == MenuState.DEACTIVATED) {
                 connector.getGameState().getDisplayArea().getToggleMenu().activate(false);
             }
             return true;
         }
         // Check if this happened on a menu button
-        if (connector.getGameState().getDisplayArea().getToggleMenu().getMenuState() == Enums.MenuState.SHOWING_DEFENSES_MENU
-                || connector.getGameState().getDisplayArea().getToggleMenu().getMenuState() == Enums.MenuState.SHOWING_PLANTS_MENU) {
+        if (connector.getGameState().getDisplayArea().getToggleMenu().getMenuState() == MenuState.SHOWING_DEFENSES_MENU
+                || connector.getGameState().getDisplayArea().getToggleMenu().getMenuState() == MenuState.SHOWING_PLANTS_MENU) {
             for (ToggleMenuButton button : connector.getGameState().getDisplayArea().getToggleMenu().getActiveButtons()) {
                 if (button.contains(x, y)) {
                     for (ToggleMenuButton buttons : connector.getGameState().getDisplayArea().getToggleMenu().getActiveButtons()) {
-                        buttons.setColor(Color.BLUE);
+                        buttons.setColor(Color.SKY);
                     }
                     button.setColor(Color.YELLOW);
                     return true;
@@ -231,16 +258,79 @@ public class GameLogic {
     public void unprojectedTap(float x, float y) {
         for (NinePatcherTile tile : connector.getGameState().getDefenseArea().getTiles()) {
             if (tile.contains(x, y)) {
-                Defense newDefense = new Turret(tile);
-                tile.setGameEntity(newDefense); // TODO place according to selection
-                connector.getGameState().getDefenses().add(newDefense);
+                switch (connector.getGameState().getDisplayArea().getToggleMenu().getSelectedButtonID()) {
+                    case TURRET_ID:
+                        Defense newDefense = new Turret(tile);
+                        tile.setGameEntity(newDefense);
+                        connector.getGameState().getDefenses().add(newDefense);
+                        break;
+                    case WALL_ID:
+                        newDefense = new Wall(tile);
+                        tile.setGameEntity(newDefense);
+                        connector.getGameState().getDefenses().add(newDefense);
+                        break;
+                    case TRAP_ID:
+                        newDefense = new Mine(tile);
+                        tile.setGameEntity(newDefense);
+                        connector.getGameState().getDefenses().add(newDefense);
+                        break;
+                }
             }
         }
         for (ButtonTile tile : connector.getGameState().getFarmingArea().getTiles()) {
             if (tile.contains(x, y)) {
-                Plant newPlant = new Plant(Plant.AYARN, tile);
-                tile.setGameEntity(newPlant); // TODO place according to selection
-                connector.getGameState().getPlants().add(newPlant);
+                switch (connector.getGameState().getDisplayArea().getToggleMenu().getSelectedButtonID()) {
+                    case ELSKER_ID:
+                        Plant newPlant = new Plant(Plant.ELSKER, tile);
+                        tile.setGameEntity(newPlant);
+                        connector.getGameState().getPlants().add(newPlant);
+                        break;
+                    case GRA_ID:
+                        newPlant = new Plant(Plant.GRA, tile);
+                        tile.setGameEntity(newPlant);
+                        connector.getGameState().getPlants().add(newPlant);
+                        break;
+                    case KOCHAM_ID:
+                        newPlant = new Plant(Plant.KOCHAM, tile);
+                        tile.setGameEntity(newPlant);
+                        connector.getGameState().getPlants().add(newPlant);
+                        break;
+                    case SZERELEM_ID:
+                        newPlant = new Plant(Plant.SZERELEM, tile);
+                        tile.setGameEntity(newPlant);
+                        connector.getGameState().getPlants().add(newPlant);
+                        break;
+                    case ELSKA_ID:
+                        newPlant = new Plant(Plant.ELSKA, tile);
+                        tile.setGameEntity(newPlant);
+                        connector.getGameState().getPlants().add(newPlant);
+                        break;
+                    case AYARN_ID:
+                        newPlant = new Plant(Plant.AYARN, tile);
+                        tile.setGameEntity(newPlant);
+                        connector.getGameState().getPlants().add(newPlant);
+                        break;
+                    case SEVIYORUM_ID:
+                        newPlant = new Plant(Plant.SEVIYORUM, tile);
+                        tile.setGameEntity(newPlant);
+                        connector.getGameState().getPlants().add(newPlant);
+                        break;
+                    case MILESTIBA_ID:
+                        newPlant = new Plant(Plant.MILESTIBA, tile);
+                        tile.setGameEntity(newPlant);
+                        connector.getGameState().getPlants().add(newPlant);
+                        break;
+                    case RAKKAUS_ID:
+                        newPlant = new Plant(Plant.RAKKAUS, tile);
+                        tile.setGameEntity(newPlant);
+                        connector.getGameState().getPlants().add(newPlant);
+                        break;
+                    case KAERLIGHED_ID:
+                        newPlant = new Plant(Plant.KAERLIGHED, tile);
+                        tile.setGameEntity(newPlant);
+                        connector.getGameState().getPlants().add(newPlant);
+                        break;
+                }
             }
         }
     }

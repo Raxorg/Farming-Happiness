@@ -9,25 +9,17 @@ public class Constants {
     //------------------
     public static final int WORLD_WIDTH = 1000;
     public static final int WORLD_HEIGHT = 1100;
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
     //------------------
     //     TERRAIN
     //------------------
     public static final int BACKGROUND_GRASS_TILE_SIZE = 100;
     public static final int BACKGROUND_GRASS_TILE_ROWS = WORLD_HEIGHT / BACKGROUND_GRASS_TILE_SIZE;
     public static final int BACKGROUND_GRASS_TILE_COLUMNS = WORLD_WIDTH / BACKGROUND_GRASS_TILE_SIZE;
-    // Grids
-    public static final float TILE_SIZE = 25f;
-    public static final float TILE_SPACING = 5f;
-    // Global Area
-    public static final int GRASS_COLUMNS = WORLD_WIDTH / 100;
-    public static final int GRASS_ROWS = WORLD_HEIGHT / 100;
-    public static final float GRASS_WIDTH = WORLD_WIDTH / GRASS_COLUMNS;
-    public static final float GRASS_HEIGHT = WORLD_HEIGHT / GRASS_ROWS;
     //------------------
     //      RIVER
     //------------------
-    public static final float RIVER_TILE_SIZE = 100;
+    public static final int RIVER_TILE_SIZE = 100;
     public static final int RIVER_TILES = (int) (WORLD_WIDTH / RIVER_TILE_SIZE + 1);
     //------------------
     //   DEFENSE AREA
@@ -57,15 +49,23 @@ public class Constants {
     public static final int FARMING_AREA_COLUMNS = (int) (FARMING_AREA_SIZE / FARMING_TILE_SIZE);
     public static final float FARMING_X_SPACE = 5;
     public static final float FARMING_AREA_X = 500f;
+    public static final float FARMING_AREA_X_OFFSET = (FARMING_AREA_SIZE - FARMING_AREA_COLUMNS * FARMING_TILE_SIZE) / 2;
 
     public static final int FARMING_AREA_ROWS = (int) (FARMING_AREA_SIZE / FARMING_TILE_SIZE) / 2;
     public static final float FARMING_Y_SPACE = 5;
     public static final float FARMING_AREA_Y = 500f;
     //------------------
+    //     BUILDINGS
+    //------------------
+    public static final int LABORATORY_WIDTH = 90;
+    public static final int LABORATORY_HEIGHT = 46;
+    public static final int LABORATORY_X = WORLD_WIDTH - LABORATORY_WIDTH * 3;
+    public static final int LABORATORY_Y = WORLD_HEIGHT - RIVER_TILE_SIZE - LABORATORY_HEIGHT;
+    //------------------
     //      CAMERA
     //------------------
     public static final float MIN_ZOOM = 1.5f;
-    public static final float SCREEN_WIDTH_VISIBILITY_PERCENTAGE_ = 0.7f;
+    public static final float SCREEN_WIDTH_VISIBILITY_PERCENTAGE_ = 0.8f;
     public static final float SCREEN_HEIGHT_VISIBILITY_PERCENTAGE_ = 1f;
     //------------------
     //      TURRET
@@ -78,29 +78,28 @@ public class Constants {
     public static final int TURRET_INITIAL_HEALTH = 10;
     public static final int TURRET_COST = 1;
 
-    public static final float TURRET_CANNON_WIDTH = TURRET_WIDTH / 3f;
     public static final float TURRET_CANNON_HEIGHT = TURRET_HEIGHT / 5f;
-    public static final float TURRET_CANNON_X_OFFSET = TURRET_WIDTH / 2f - TURRET_CANNON_WIDTH / 2;
     public static final float TURRET_CANNON_Y_OFFSET = TURRET_HEIGHT * 0.7f;
 
-    public static final float TURRET_BULLET_SIZE = TILE_SIZE / 8f;
+    public static final int TURRET_BULLET_SIZE = TURRET_WIDTH / 10;
     public static final float TURRET_BULLET_SPEED = 350f;
     //------------------
     //       WALL
     //------------------
     public static final int WALL_WIDTH = 42;
     public static final int WALL_HEIGHT = 50;
+    public static final int WALL_X_OFFSET = 1;
 
     public static final int WALL_INITIAL_HEALTH = 25;
     public static final int WALL_COST = 2;
     //------------------
-    //       TRAP
+    //       MINE
     //------------------
-    public static final int TRAP_WIDTH = 42;
-    public static final int TRAP_HEIGHT = 50;
+    public static final int MINE_WIDTH = 40;
+    public static final int MINE_HEIGHT = 40;
 
-    public static final int TRAP_INITIAL_HEALTH = 5;
-    public static final int TRAP_COST = 2;
+    public static final int MINE_INITIAL_HEALTH = 5;
+    public static final int MINE_COST = 2;
     //------------------
     //      ENEMIES
     //------------------
@@ -154,10 +153,28 @@ public class Constants {
     //------------------
     //    DECORATION
     //------------------
-    public static final int DOT_QUANTITY = 500;
-    public static final float DOT_SIZE = 15f;
+
     //------------------
     //       TEST
     //------------------
     public static final int NPTEST_BORDER_PIXELS = 2;
+    //------------------
+    //       IDs
+    //------------------
+    public static final int NULL_ID = 0;
+
+    public static final int TURRET_ID = 1;
+    public static final int WALL_ID = 2;
+    public static final int TRAP_ID = 3;
+
+    public static final int ELSKER_ID = 4;
+    public static final int GRA_ID = 5;
+    public static final int KOCHAM_ID = 6;
+    public static final int SZERELEM_ID = 7;
+    public static final int ELSKA_ID = 8;
+    public static final int AYARN_ID = 9;
+    public static final int SEVIYORUM_ID = 10;
+    public static final int MILESTIBA_ID = 11;
+    public static final int RAKKAUS_ID = 12;
+    public static final int KAERLIGHED_ID = 13;
 }

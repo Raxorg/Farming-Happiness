@@ -3,6 +3,7 @@ package com.frontanilla.farminghappyness.game.areas;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.frontanilla.farminghappyness.components.ButtonTile;
+import com.frontanilla.farminghappyness.game.other.Laboratory;
 import com.frontanilla.farminghappyness.utils.Assets;
 import com.frontanilla.farminghappyness.utils.Enums;
 import com.frontanilla.farminghappyness.utils.Point;
@@ -11,15 +12,32 @@ import static com.frontanilla.farminghappyness.utils.Constants.FARMING_AREA_COLU
 import static com.frontanilla.farminghappyness.utils.Constants.FARMING_AREA_ROWS;
 import static com.frontanilla.farminghappyness.utils.Constants.FARMING_AREA_SIZE;
 import static com.frontanilla.farminghappyness.utils.Constants.FARMING_AREA_X;
+import static com.frontanilla.farminghappyness.utils.Constants.FARMING_AREA_X_OFFSET;
 import static com.frontanilla.farminghappyness.utils.Constants.FARMING_AREA_Y;
 import static com.frontanilla.farminghappyness.utils.Constants.FARMING_TILE_SIZE;
+import static com.frontanilla.farminghappyness.utils.Constants.LABORATORY_HEIGHT;
+import static com.frontanilla.farminghappyness.utils.Constants.LABORATORY_WIDTH;
+import static com.frontanilla.farminghappyness.utils.Constants.LABORATORY_X;
+import static com.frontanilla.farminghappyness.utils.Constants.LABORATORY_Y;
+import static com.frontanilla.farminghappyness.utils.Constants.RIVER_TILE_SIZE;
+import static com.frontanilla.farminghappyness.utils.Constants.WORLD_HEIGHT;
+import static com.frontanilla.farminghappyness.utils.Constants.WORLD_WIDTH;
 
 public class FarmingArea {
 
+    private Laboratory laboratory;
     private DelayedRemovalArray<ButtonTile> farmingTiles;
     private Point center;
 
     public FarmingArea() {
+        // Laboratory
+        laboratory = new Laboratory(
+                Assets.laboratory,
+                WORLD_WIDTH - LABORATORY_WIDTH * 3,
+                WORLD_HEIGHT - RIVER_TILE_SIZE - LABORATORY_HEIGHT,
+                LABORATORY_WIDTH,
+                LABORATORY_HEIGHT);
+        // Farming tiles
         farmingTiles = new DelayedRemovalArray<>();
         for (int row = 0; row < FARMING_AREA_ROWS; row++) {
             // NinePatcherTile row
@@ -27,7 +45,7 @@ public class FarmingArea {
                 ButtonTile farmingNinePatcherTile = new ButtonTile(
                         Enums.TileType.FARMING_TILE,
                         Assets.farmlandTile,
-                        FARMING_AREA_X + column * FARMING_TILE_SIZE,
+                        FARMING_AREA_X + FARMING_AREA_X_OFFSET + column * FARMING_TILE_SIZE,
                         FARMING_AREA_Y + row * FARMING_TILE_SIZE,
                         FARMING_TILE_SIZE,
                         FARMING_TILE_SIZE);
@@ -38,6 +56,12 @@ public class FarmingArea {
     }
 
     public void render(SpriteBatch batch) {
+        // Laboratory
+        laboratory.render(batch);
+        for (int i = 0; i < 5; i++) {
+            batch.draw(Assets.pathTile, LABORATORY_X + 35, LABORATORY_Y - 20 - i * 20);
+        }
+        // Farming tiles
         for (ButtonTile ninePatcherTile : farmingTiles) {
             ninePatcherTile.render(batch);
             if (ninePatcherTile.getGameEntity() != null) {

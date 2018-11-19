@@ -12,14 +12,16 @@ public class ToggleMenuButton extends Button {
     private int cost;
     private TextureRegion image;
     private float imageWidth, imageHeight;
+    private int ID;
 
-    public ToggleMenuButton(int cost, TextureRegion frame, TextureRegion image, float x, float y, float w, float h, float imageWidth, float imageHeight) {
+    public ToggleMenuButton(int cost, TextureRegion frame, TextureRegion image, float x, float y, float w, float h, float imageWidth, float imageHeight, int ID) {
         super(frame, x, y, w, h);
         this.cost = cost;
         this.image = image;
         this.imageWidth = imageWidth;
         this.imageHeight = imageHeight;
-        color = Color.BLUE;
+        this.ID = ID;
+        color = Color.SKY;
     }
 
     @Override
@@ -32,6 +34,10 @@ public class ToggleMenuButton extends Button {
                 bounds.y + MENU_BUTTON_IMAGE_X_OFFSET,
                 MENU_BUTTON_IMAGE_WIDTH,
                 imageHeight * MENU_BUTTON_IMAGE_WIDTH / imageWidth);
+    }
+
+    public int getID() {
+        return ID;
     }
 
     public int getCost() {

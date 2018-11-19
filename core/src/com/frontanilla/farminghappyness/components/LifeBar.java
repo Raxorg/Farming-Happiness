@@ -28,7 +28,7 @@ public class LifeBar {
                 LIFE_BAR_HEIGHT);
         // Center
         for (int i = 0; i < damageable.getLife(); i++) {
-            batch.setColor(Color.CYAN);
+            batch.setColor(Color.SKY);
             batch.draw(
                     Assets.centerLifeBar,
                     damageable.getBounds().getX() + LIFE_BAR_SIDES_WIDTH + portionWidth * i,

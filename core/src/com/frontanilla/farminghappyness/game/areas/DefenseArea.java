@@ -40,7 +40,7 @@ public class DefenseArea {
             }
         }
         // Add bottom tiles
-        for (int row = 0; row < BOTTOM_DEFENSE_ROWS; row++) {
+        for (int row = BOTTOM_DEFENSE_ROWS - 1; row >= 0; row--) {
             for (int column = 0; column < BOTTOM_DEFENSE_COLUMNS; column++) {
                 defenseTiles.add(new NinePatcherTile(
                         DEFENSIVE_TILE,

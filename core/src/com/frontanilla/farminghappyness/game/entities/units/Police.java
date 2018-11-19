@@ -3,7 +3,7 @@ package com.frontanilla.farminghappyness.game.entities.units;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.frontanilla.farminghappyness.game.defenses.Defense;
-import com.frontanilla.farminghappyness.game.defenses.Trap;
+import com.frontanilla.farminghappyness.game.defenses.Mine;
 import com.frontanilla.farminghappyness.game.defenses.Wall;
 import com.frontanilla.farminghappyness.utils.Enums;
 
@@ -21,9 +21,9 @@ public class Police extends Enemy {
             if (d.getBounds().overlaps(bounds)) {
                 if (d instanceof Wall) {
                     stuck = true;
-                } else if (d instanceof Trap && !((Trap) d).isActivated()) {
+                } else if (d instanceof Mine && !((Mine) d).isActivated()) {
                     life -= 5;
-                    ((Trap) d).activate();
+                    ((Mine) d).activate();
                 }
             }
         }

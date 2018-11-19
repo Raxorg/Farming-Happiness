@@ -14,14 +14,18 @@ import static com.frontanilla.farminghappyness.utils.Constants.MENU_BUTTON_SIZE;
 import static com.frontanilla.farminghappyness.utils.Constants.MENU_BUTTON_X_OFFSET;
 import static com.frontanilla.farminghappyness.utils.Constants.MENU_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.MENU_WIDTH;
-import static com.frontanilla.farminghappyness.utils.Constants.TRAP_COST;
-import static com.frontanilla.farminghappyness.utils.Constants.TRAP_HEIGHT;
-import static com.frontanilla.farminghappyness.utils.Constants.TRAP_WIDTH;
+import static com.frontanilla.farminghappyness.utils.Constants.MINE_COST;
+import static com.frontanilla.farminghappyness.utils.Constants.MINE_HEIGHT;
+import static com.frontanilla.farminghappyness.utils.Constants.MINE_WIDTH;
+import static com.frontanilla.farminghappyness.utils.Constants.NULL_ID;
+import static com.frontanilla.farminghappyness.utils.Constants.TRAP_ID;
 import static com.frontanilla.farminghappyness.utils.Constants.TURRET_COST;
 import static com.frontanilla.farminghappyness.utils.Constants.TURRET_HEIGHT;
+import static com.frontanilla.farminghappyness.utils.Constants.TURRET_ID;
 import static com.frontanilla.farminghappyness.utils.Constants.TURRET_WIDTH;
 import static com.frontanilla.farminghappyness.utils.Constants.WALL_COST;
 import static com.frontanilla.farminghappyness.utils.Constants.WALL_HEIGHT;
+import static com.frontanilla.farminghappyness.utils.Constants.WALL_ID;
 import static com.frontanilla.farminghappyness.utils.Constants.WALL_WIDTH;
 
 public class ToggleMenu {
@@ -29,7 +33,7 @@ public class ToggleMenu {
     private MenuState menuState;
     private float time, x;
     private NinePatcher panel;
-    private Button defensesButton, plantsButton;
+    private Button defensesToggleButton, plantsToggleButton;
     private DelayedRemovalArray<ToggleMenuButton> defenseButtons, plantButtons;
 
     public ToggleMenu() {
@@ -49,15 +53,15 @@ public class ToggleMenu {
     }
 
     private void initToggleButtons() {
-        defensesButton = new Button(
+        defensesToggleButton = new Button(
                 Assets.testToggleButtonRight,
-                -MENU_ACTIVATION_BUTTON_SIZE / 2,
+                0,
                 MENU_ACTIVATION_BUTTON_Y,
                 MENU_ACTIVATION_BUTTON_SIZE,
                 MENU_ACTIVATION_BUTTON_SIZE);
-        plantsButton = new Button(
+        plantsToggleButton = new Button(
                 Assets.testToggleButtonRight,
-                -MENU_ACTIVATION_BUTTON_SIZE / 2,
+                0,
                 MENU_ACTIVATION_BUTTON_Y - MENU_ACTIVATION_BUTTON_SIZE,
                 MENU_ACTIVATION_BUTTON_SIZE,
                 MENU_ACTIVATION_BUTTON_SIZE);
@@ -74,7 +78,8 @@ public class ToggleMenu {
                 MENU_BUTTON_SIZE,
                 MENU_BUTTON_SIZE,
                 TURRET_WIDTH,
-                TURRET_HEIGHT));
+                TURRET_HEIGHT,
+                TURRET_ID));
         defenseButtons.add(new ToggleMenuButton(
                 WALL_COST,
                 Assets.testFrame,
@@ -84,21 +89,24 @@ public class ToggleMenu {
                 MENU_BUTTON_SIZE,
                 MENU_BUTTON_SIZE,
                 WALL_WIDTH,
-                WALL_HEIGHT));
+                WALL_HEIGHT,
+                WALL_ID));
         defenseButtons.add(new ToggleMenuButton(
-                TRAP_COST,
+                MINE_COST,
                 Assets.testFrame,
-                Assets.trap,
+                Assets.mine,
                 x,
                 MENU_HEIGHT - MENU_BUTTON_IMAGE_WIDTH * 6,
                 MENU_BUTTON_SIZE,
                 MENU_BUTTON_SIZE,
-                TRAP_WIDTH,
-                TRAP_HEIGHT));
+                MINE_WIDTH,
+                MINE_HEIGHT,
+                TRAP_ID));
     }
 
     private void initPlantButtons() {
         plantButtons = new DelayedRemovalArray<>();
+
     }
 
     public void update(float delta, int money) {
@@ -109,16 +117,16 @@ public class ToggleMenu {
                 time = MENU_ACTIVATION_TIME;
                 if (menuState == MenuState.ACTIVATING_DEFENSES_MENU) {
                     menuState = MenuState.SHOWING_DEFENSES_MENU;
-                    defensesButton.setTexture(Assets.testToggleButtonLeft);
+                    defensesToggleButton.setTexture(Assets.testToggleButtonLeft);
                 }
                 if (menuState == MenuState.ACTIVATING_PLANTS_MENU) {
                     menuState = MenuState.SHOWING_PLANTS_MENU;
-                    plantsButton.setTexture(Assets.testToggleButtonLeft);
+                    plantsToggleButton.setTexture(Assets.testToggleButtonLeft);
                 }
             }
             x = Math.min((time * MENU_WIDTH) / MENU_ACTIVATION_TIME - MENU_WIDTH, 0);
-            defensesButton.bounds.x = x + MENU_WIDTH - MENU_ACTIVATION_BUTTON_SIZE / 2;
-            plantsButton.bounds.x = x + MENU_WIDTH - MENU_ACTIVATION_BUTTON_SIZE / 2;
+            defensesToggleButton.bounds.x = x + MENU_WIDTH;
+            plantsToggleButton.bounds.x = x + MENU_WIDTH;
         }
         // Deactivating
         if (menuState == MenuState.DEACTIVATING) {
@@ -126,12 +134,12 @@ public class ToggleMenu {
             if (time <= 0) {
                 menuState = MenuState.DEACTIVATED;
                 time = 0;
-                defensesButton.setTexture(Assets.testToggleButtonRight);
-                plantsButton.setTexture(Assets.testToggleButtonRight);
+                defensesToggleButton.setTexture(Assets.testToggleButtonRight);
+                plantsToggleButton.setTexture(Assets.testToggleButtonRight);
             }
             x = Math.max(-MENU_WIDTH, (time * MENU_WIDTH) / MENU_ACTIVATION_TIME - MENU_WIDTH);
-            defensesButton.bounds.x = x + MENU_WIDTH - MENU_ACTIVATION_BUTTON_SIZE / 2;
-            plantsButton.bounds.x = x + MENU_WIDTH - MENU_ACTIVATION_BUTTON_SIZE / 2;
+            defensesToggleButton.bounds.x = x + MENU_WIDTH;
+            plantsToggleButton.bounds.x = x + MENU_WIDTH;
         }
         // Update images to show availability
         for (ToggleMenuButton button : defenseButtons) {
@@ -150,7 +158,7 @@ public class ToggleMenu {
     public void render(SpriteBatch batch) {
         renderPanel(batch);
         renderToggleButtons(batch);
-        renderIcons(batch);
+        renderEntityButtons(batch);
     }
 
     private void renderPanel(SpriteBatch batch) {
@@ -158,11 +166,11 @@ public class ToggleMenu {
     }
 
     private void renderToggleButtons(SpriteBatch batch) {
-        defensesButton.render(batch);
-        plantsButton.render(batch);
+        defensesToggleButton.render(batch);
+        plantsToggleButton.render(batch);
     }
 
-    private void renderIcons(SpriteBatch batch) {
+    private void renderEntityButtons(SpriteBatch batch) {
         if (menuState == MenuState.SHOWING_DEFENSES_MENU) {
             for (ToggleMenuButton b : defenseButtons) {
                 b.render(batch);
@@ -188,6 +196,20 @@ public class ToggleMenu {
         time = MENU_ACTIVATION_TIME;
     }
 
+    public int getSelectedButtonID() {
+        for (ToggleMenuButton button : defenseButtons) {
+            if (button.color == Color.YELLOW) {
+                return button.getID();
+            }
+        }
+        for (ToggleMenuButton button : plantButtons) {
+            if (button.color == Color.YELLOW) {
+                return button.getID();
+            }
+        }
+        return NULL_ID;
+    }
+
     //----------------------------
     //      GETTERS & SETTERS
     //----------------------------
@@ -196,12 +218,23 @@ public class ToggleMenu {
         return menuState;
     }
 
-    public Button getDefensesButton() {
-        return defensesButton;
+    public void setMenuState(MenuState menuState) {
+        this.menuState = menuState;
+        if (menuState == MenuState.SHOWING_DEFENSES_MENU) {
+            defensesToggleButton.setTexture(Assets.testToggleButtonLeft);
+            plantsToggleButton.setTexture(Assets.testToggleButtonRight);
+        } else if (menuState == MenuState.SHOWING_PLANTS_MENU) {
+            defensesToggleButton.setTexture(Assets.testToggleButtonRight);
+            plantsToggleButton.setTexture(Assets.testToggleButtonLeft);
+        }
     }
 
-    public Button getPlantsButton() {
-        return plantsButton;
+    public Button getDefensesToggleButton() {
+        return defensesToggleButton;
+    }
+
+    public Button getPlantsToggleButton() {
+        return plantsToggleButton;
     }
 
     public DelayedRemovalArray<ToggleMenuButton> getActiveButtons() {

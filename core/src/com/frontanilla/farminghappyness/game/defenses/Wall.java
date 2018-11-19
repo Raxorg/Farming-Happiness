@@ -1,14 +1,15 @@
 package com.frontanilla.farminghappyness.game.defenses;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.frontanilla.farminghappyness.components.NinePatcherTile;
 import com.frontanilla.farminghappyness.utils.Assets;
 
-import static com.frontanilla.farminghappyness.utils.Constants.TILE_SPACING;
 import static com.frontanilla.farminghappyness.utils.Constants.WALL_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.WALL_INITIAL_HEALTH;
 import static com.frontanilla.farminghappyness.utils.Constants.WALL_WIDTH;
+import static com.frontanilla.farminghappyness.utils.Constants.WALL_X_OFFSET;
 
 public class Wall extends Defense {
 
@@ -24,12 +25,11 @@ public class Wall extends Defense {
 
     @Override
     public void render(SpriteBatch batch) {
+        batch.setColor(Color.WHITE);
         batch.draw(
                 Assets.wall,
-                bounds.x - TILE_SPACING,
-                bounds.y,
-                bounds.width + TILE_SPACING * 2,
-                bounds.height);
+                bounds.x - WALL_X_OFFSET,
+                bounds.y);
     }
 
     @Override

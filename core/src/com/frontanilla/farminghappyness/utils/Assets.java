@@ -18,7 +18,7 @@ public class Assets {
     //------------------
     //     TERRAIN
     //------------------
-    public static TextureRegion grassTile, farmlandTile;
+    public static TextureRegion pathTile, grassTile, farmlandTile;
     //------------------
     //      RIVER
     //------------------
@@ -33,7 +33,8 @@ public class Assets {
     //------------------
     //     DEFENSES
     //------------------
-    public static TextureRegion turret, turretBullet, wall, trap;
+    public static TextureRegion turret, turretBullet, wall, mine;
+    public static Animation<TextureRegion> mineAnimation;
     //-------------------
     //     GAME MENU
     //-------------------
@@ -71,6 +72,8 @@ public class Assets {
         //     TERRAIN
         //------------------
         Texture terrain = new Texture("images/terrain.png");
+        // Path
+        pathTile = new TextureRegion(terrain, 100, 35, 20, 20);
         // Grass
         grassTile = new TextureRegion(terrain, 0, 0, 100, 100);
         // Farmland
@@ -97,8 +100,12 @@ public class Assets {
         turretBullet = new TextureRegion(defenses, 0, 0, 10, 10);
         // Wall
         wall = new TextureRegion(defenses, 40, 0, 42, 50);
-        // Trap
-        trap = new TextureRegion(defenses, 82, 0, 42, 50);
+        // Mine
+        mine = new TextureRegion(defenses, 82, 0, 40, 40);
+        Texture mines = new Texture("animations/mineStates.png");
+        mineAnimation = new Animation<>(0.5f, Util.regions(mines, 40, 40, 0));
+        mineAnimation.setPlayMode(Animation.PlayMode.LOOP);
+        // Debug
         Texture debug = new Texture("images/rangeCircle.png");
         rangeCircle = new TextureRegion(debug, 0, 0, 500, 500);
         //------------------

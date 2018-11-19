@@ -42,9 +42,7 @@ public class Turret extends Defense {
         batch.draw(
                 Assets.turret,
                 bounds.x,
-                bounds.y,
-                bounds.width,
-                bounds.height);
+                bounds.y);
         lifeBar.render(batch);
     }
 

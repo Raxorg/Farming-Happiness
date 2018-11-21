@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import static com.frontanilla.farminghappyness.utils.Constants.MENU_BUTTON_IMAGE_WIDTH;
 import static com.frontanilla.farminghappyness.utils.Constants.MENU_BUTTON_IMAGE_X_OFFSET;
+import static com.frontanilla.farminghappyness.utils.Constants.MENU_BUTTON_SIZE;
 
 public class ToggleMenuButton extends Button {
 
@@ -28,10 +29,14 @@ public class ToggleMenuButton extends Button {
     public void render(SpriteBatch batch) {
         super.render(batch);
         batch.setColor(Color.WHITE);
+        float yOffset = 0;
+        if (ID >= 4 && ID <= 13) {
+            yOffset = MENU_BUTTON_SIZE / 9f;
+        }
         batch.draw(
                 image,
                 bounds.x + MENU_BUTTON_IMAGE_X_OFFSET,
-                bounds.y + MENU_BUTTON_IMAGE_X_OFFSET,
+                bounds.y + MENU_BUTTON_IMAGE_X_OFFSET - yOffset,
                 MENU_BUTTON_IMAGE_WIDTH,
                 imageHeight * MENU_BUTTON_IMAGE_WIDTH / imageWidth);
     }

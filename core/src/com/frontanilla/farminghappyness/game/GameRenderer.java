@@ -1,67 +1,47 @@
 package com.frontanilla.farminghappyness.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.frontanilla.farminghappyness.components.Background;
-import com.frontanilla.farminghappyness.components.NinePatcherTile;
-import com.frontanilla.farminghappyness.game.defenses.Defense;
-import com.frontanilla.farminghappyness.game.defenses.Turret;
 import com.frontanilla.farminghappyness.game.entities.units.Enemy;
 import com.frontanilla.farminghappyness.game.other.Bullet;
-import com.frontanilla.farminghappyness.utils.Assets;
-
-import static com.frontanilla.farminghappyness.utils.Constants.DEBUG;
-import static com.frontanilla.farminghappyness.utils.Constants.TURRET_RANGE;
-import static com.frontanilla.farminghappyness.utils.Constants.TURRET_WIDTH;
+import com.frontanilla.farminghappyness.game.other.Foliage;
 
 public class GameRenderer {
 
     private GameConnector connector;
     private SpriteBatch dynamicBatch, staticBatch;
-    private Background background;
+    private Foliage foliage;
 
     public GameRenderer(GameConnector connector) {
         this.connector = connector;
         dynamicBatch = new SpriteBatch();
         staticBatch = new SpriteBatch();
-        background = new Background();
+        foliage = new Foliage();
     }
 
     public void render() {
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         // Begin batch
         dynamicBatch.begin();
-        // Render background
-        background.render(dynamicBatch);
+        // Render grass
+        foliage.renderGrass(dynamicBatch);
         // Render Areas
         connector.getGameState().getRiverArea().render(dynamicBatch);
         connector.getGameState().getFarmingArea().render(dynamicBatch);
         connector.getGameState().getDefenseArea().render(dynamicBatch);
-        // Render Turret ranges
-        if (DEBUG) {
-            for (NinePatcherTile ninePatcherTile : connector.getGameState().getDefenseArea().getTiles()) {
-                if (ninePatcherTile.getGameEntity() instanceof Turret) {
-                    dynamicBatch.draw(
-                            Assets.rangeCircle,
-                            ninePatcherTile.getGameEntity().getBounds().x - TURRET_RANGE + TURRET_WIDTH / 2,
-                            ninePatcherTile.getGameEntity().getBounds().y - TURRET_RANGE + TURRET_WIDTH / 2,
-                            TURRET_RANGE * 2,
-                            TURRET_RANGE * 2);
-                }
-            }
-        }
-        // Render defenses
-        for (NinePatcherTile ninePatcherTile : connector.getGameState().getDefenseArea().getTiles()) {
-            if (ninePatcherTile.getGameEntity() instanceof Defense) {
-                ninePatcherTile.getGameEntity().render(dynamicBatch);
-            }
-        }
         // Render bullets
         for (Bullet b : connector.getGameState().getBullets()) {
             b.render(dynamicBatch);
         }
+        // Render trunks
+        foliage.renderTrunks(dynamicBatch);
         // Render enemies
         for (Enemy e : connector.getGameState().getEnemies()) {
             e.render(dynamicBatch);
         }
+        // Render leaves
+        foliage.renderLeaves(dynamicBatch);
         // End batch
         dynamicBatch.end();
         // Render static display area

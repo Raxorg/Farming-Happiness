@@ -6,8 +6,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
 
 import static com.frontanilla.farminghappyness.utils.Constants.MIN_ZOOM;
-import static com.frontanilla.farminghappyness.utils.Constants.SCREEN_HEIGHT_VISIBILITY_PERCENTAGE_;
-import static com.frontanilla.farminghappyness.utils.Constants.SCREEN_WIDTH_VISIBILITY_PERCENTAGE_;
+import static com.frontanilla.farminghappyness.utils.Constants.SCREEN_HEIGHT_VISIBILITY_PERCENTAGE;
+import static com.frontanilla.farminghappyness.utils.Constants.SCREEN_WIDTH_VISIBILITY_PERCENTAGE;
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_WIDTH;
 
@@ -16,16 +16,20 @@ public class MyCamera extends OrthographicCamera {
     public MyCamera(float viewportWidth, float viewportHeight) {
         super(viewportWidth, viewportHeight);
         position.add(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, 0);
-        zoom = MathUtils.clamp(zoom, (WORLD_WIDTH / viewportWidth) * SCREEN_WIDTH_VISIBILITY_PERCENTAGE_, (WORLD_WIDTH / viewportWidth) * SCREEN_WIDTH_VISIBILITY_PERCENTAGE_);
-        zoom = MathUtils.clamp(zoom, (WORLD_HEIGHT / viewportHeight) * SCREEN_HEIGHT_VISIBILITY_PERCENTAGE_, (WORLD_HEIGHT / viewportHeight) * SCREEN_HEIGHT_VISIBILITY_PERCENTAGE_);
+        zoom = MathUtils.clamp(zoom,
+                (WORLD_WIDTH / viewportWidth) * SCREEN_WIDTH_VISIBILITY_PERCENTAGE,
+                (WORLD_WIDTH / viewportWidth) * SCREEN_WIDTH_VISIBILITY_PERCENTAGE);
+        zoom = MathUtils.clamp(zoom,
+                (WORLD_HEIGHT / viewportHeight) * SCREEN_HEIGHT_VISIBILITY_PERCENTAGE,
+                (WORLD_HEIGHT / viewportHeight) * SCREEN_HEIGHT_VISIBILITY_PERCENTAGE);
         update();
     }
 
     @Override
     public void update() {
         super.update();
-        zoom = MathUtils.clamp(zoom, MIN_ZOOM, (WORLD_WIDTH / viewportWidth) * SCREEN_WIDTH_VISIBILITY_PERCENTAGE_);
-        zoom = MathUtils.clamp(zoom, MIN_ZOOM, (WORLD_HEIGHT / viewportHeight) * SCREEN_HEIGHT_VISIBILITY_PERCENTAGE_);
+        zoom = MathUtils.clamp(zoom, MIN_ZOOM, (WORLD_WIDTH / viewportWidth) * SCREEN_WIDTH_VISIBILITY_PERCENTAGE);
+        zoom = MathUtils.clamp(zoom, MIN_ZOOM, (WORLD_HEIGHT / viewportHeight) * SCREEN_HEIGHT_VISIBILITY_PERCENTAGE);
 
         float effectiveViewportWidth = viewportWidth * zoom;
         float effectiveViewportHeight = viewportHeight * zoom;

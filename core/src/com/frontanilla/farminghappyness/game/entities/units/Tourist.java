@@ -8,17 +8,13 @@ import com.frontanilla.farminghappyness.game.defenses.Mine;
 import com.frontanilla.farminghappyness.game.defenses.Wall;
 import com.frontanilla.farminghappyness.utils.Assets;
 
-import static com.frontanilla.farminghappyness.utils.Assets.touristAnimation;
 import static com.frontanilla.farminghappyness.utils.Constants.TOURIST_INITIAL_LIFE;
 import static com.frontanilla.farminghappyness.utils.Constants.TOURIST_SPEED;
 
 public class Tourist extends Enemy {
 
-    private float time;
-
     public Tourist(float x, float y) {
-        super(Assets.tourist, x, y, TOURIST_SPEED, TOURIST_INITIAL_LIFE);
-        time = 0;
+        super(Assets.enemyAnimation, x, y, TOURIST_SPEED, TOURIST_INITIAL_LIFE);
     }
 
     @Override
@@ -45,18 +41,13 @@ public class Tourist extends Enemy {
 
     @Override
     public void render(SpriteBatch batch) {
+        super.render(batch);
         batch.setColor(Color.WHITE);
-        batch.draw(
-                touristAnimation.getKeyFrame(time),
-                bounds.x,
-                bounds.y,
-                bounds.width,
-                bounds.height);
-        lifeBar.render(batch);
+        batch.draw(Assets.touristHat, bounds.x, bounds.y, bounds.width, bounds.height);
     }
 
     @Override
     public void takeDamage(int damage) {
-
+        // TODO use this
     }
 }

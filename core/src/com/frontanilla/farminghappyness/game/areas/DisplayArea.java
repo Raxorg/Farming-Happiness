@@ -15,12 +15,13 @@ public class DisplayArea {
     private ToggleMenu toggleMenu;
 
     public DisplayArea() {
-        // Resource frames
+        // Money resource frame
         moneyFrame = new ResourceFrame(
                 Color.FOREST,
                 0,
                 RESOURCE_FRAME_Y,
                 Assets.dollar);
+        // Workers resource frame
         workerFrame = new ResourceFrame(Color.SALMON,
                 RESOURCE_FRAME_WIDTH,
                 RESOURCE_FRAME_Y,

@@ -2,7 +2,6 @@ package com.frontanilla.farminghappyness.game.entities;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.frontanilla.farminghappyness.components.LifeBar;
-import com.frontanilla.farminghappyness.game.entities.GameEntity;
 
 public abstract class Damageable extends GameEntity {
 

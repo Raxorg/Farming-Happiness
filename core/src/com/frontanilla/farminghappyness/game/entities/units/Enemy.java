@@ -1,6 +1,7 @@
 package com.frontanilla.farminghappyness.game.entities.units;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
@@ -16,30 +17,31 @@ import static com.frontanilla.farminghappyness.utils.Constants.ENEMY_WIDTH;
 
 public abstract class Enemy extends Damageable {
 
-    protected TextureRegion texture;
-    protected float speed, angle;
+    protected Animation<TextureRegion> animation;
+    protected float speed, angle, time;
     protected Enums.EnemyState state;
 
-    public Enemy(TextureRegion texture, float x, float y, float speed, int life) {
+    public Enemy(Animation<TextureRegion> animation, float x, float y, float speed, int life) {
         super(new Rectangle(x, y, ENEMY_WIDTH, ENEMY_HEIGHT), life);
-        this.texture = texture;
+        this.animation = animation;
         this.speed = speed;
+        time = 0;
         state = Enums.EnemyState.MOVING;
+    }
+
+    public void update(float delta, DelayedRemovalArray<Defense> defenses) {
+        // TODO use this or delete this
     }
 
     public void render(SpriteBatch batch) {
         batch.setColor(Color.WHITE);
         batch.draw(
-                texture,
-                bounds.getX(),
-                bounds.getY(),
-                ENEMY_WIDTH,
-                ENEMY_HEIGHT);
+                animation.getKeyFrame(time),
+                bounds.x,
+                bounds.y,
+                bounds.width,
+                bounds.height);
         lifeBar.render(batch);
-    }
-
-    public void update(float delta, DelayedRemovalArray<Defense> defenses) {
-        bounds.set(bounds.getX(), bounds.getY(), ENEMY_WIDTH, ENEMY_HEIGHT);
     }
 
     protected void move(float delta, float speedModifier) {

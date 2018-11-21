@@ -4,9 +4,16 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class Assets {
+import static com.frontanilla.farminghappyness.utils.Constants.FARM_BASE_HEIGHT;
+import static com.frontanilla.farminghappyness.utils.Constants.FARM_BASE_WIDTH;
+import static com.frontanilla.farminghappyness.utils.Constants.LABORATORY_HEIGHT;
+import static com.frontanilla.farminghappyness.utils.Constants.LABORATORY_WIDTH;
 
-    public static TextureRegion tourist, rangeCircle, barSides, centerLifeBar, dollar, centerEmptyLifeBar, triangle, resourceFrame;
+public class Assets {
+    //-------------------
+    //     MAIN MENU
+    //-------------------
+    public static TextureRegion playButton, creditsButton, mainMenuBackground;
     //-------------------
     //     BUILDINGS
     //-------------------
@@ -26,10 +33,9 @@ public class Assets {
     //------------------
     //     ENEMIES
     //------------------
-    public static Animation<TextureRegion> touristAnimation;
-    // Borders
-    public static TextureRegion bordersTopLeft, bordersTopRight, bordersBottomLeft, bordersBottomRight, bordersLeft, bordersTop, bordersRight,
-            bordersBottom;
+    // Tourist
+    public static Animation<TextureRegion> enemyAnimation;
+    public static TextureRegion touristHat;
     //------------------
     //     DEFENSES
     //------------------
@@ -38,22 +44,35 @@ public class Assets {
     //-------------------
     //     GAME MENU
     //-------------------
-    public static TextureRegion testPanel;
-    // Decoration
-    public static TextureRegion grass1, grass1Glow;
+    public static TextureRegion toggleMenuPanel;
+    //--------------------
+    //     DECORATION
+    //--------------------
+    public static TextureRegion tree, appleTree, flowerTree, trunk, treeShadow;
     // Misc
     public static TextureRegion pixel;
     // TODO test
     public static TextureRegion nptest;
     public static TextureRegion testFrame, testToggleButtonRight, testToggleButtonLeft;
+    //-------------------
+    //       DEBUG
+    //-------------------
+    public static TextureRegion rangeCircle, barSides, centerLifeBar, dollar, centerEmptyLifeBar, triangle, resourceFrame;
 
     public static void init() {
+        //-------------------
+        //     MAIN MENU
+        //-------------------
+        Texture mainMenuButtons = new Texture("images/mainMenuButtons.png");
+        playButton = new TextureRegion(mainMenuButtons, 0, 0, 99, 36);
+        creditsButton = new TextureRegion(mainMenuButtons, 0, 36, 100, 38);
+        mainMenuBackground = new TextureRegion(new Texture("images/mainMenuBG.png"));
         //-------------------
         //     BUILDINGS
         //-------------------
         Texture buildings = new Texture("images/buildings.png");
-        farmBase = new TextureRegion(buildings, 0, 0, 90, 46);
-        laboratory = new TextureRegion(buildings, 0, 46, 90, 51);
+        farmBase = new TextureRegion(buildings, 0, 0, FARM_BASE_WIDTH, FARM_BASE_HEIGHT);
+        laboratory = new TextureRegion(buildings, 0, FARM_BASE_HEIGHT, LABORATORY_WIDTH, LABORATORY_HEIGHT);
         //-------------------
         //      PLANTS
         //-------------------
@@ -79,19 +98,6 @@ public class Assets {
         // Farmland
         farmlandTile = new TextureRegion(terrain, 100, 0, 35, 35);
         //------------------
-        //      TILES
-        //------------------
-        // Borders
-        Texture borders = new Texture("images/borders.png");
-        bordersTopLeft = new TextureRegion(borders, 0, 0, 500, 500);
-        bordersTopRight = new TextureRegion(borders, 1000, 0, 500, 500);
-        bordersBottomLeft = new TextureRegion(borders, 0, 1000, 500, 500);
-        bordersBottomRight = new TextureRegion(borders, 1000, 1000, 500, 500);
-        bordersLeft = new TextureRegion(borders, 0, 500, 500, 500);
-        bordersTop = new TextureRegion(borders, 500, 0, 500, 500);
-        bordersRight = new TextureRegion(borders, 1000, 500, 500, 500);
-        bordersBottom = new TextureRegion(borders, 500, 1000, 500, 500);
-        //------------------
         //     DEFENSES
         //------------------
         Texture defenses = new Texture("images/defenses.png");
@@ -111,16 +117,20 @@ public class Assets {
         //------------------
         //    DECORATION
         //------------------
-        Texture decor = new Texture("images/decor.png");
-        grass1 = new TextureRegion(decor, 0, 0, 100, 100);
-        grass1Glow = new TextureRegion(decor, 100, 0, 100, 100);
+        Texture decoration = new Texture("images/decoration2.png");
+        tree = new TextureRegion(decoration, 0, 0, 35, 52);
+        appleTree = new TextureRegion(decoration, 35, 0, 35, 52);
+        flowerTree = new TextureRegion(decoration, 70, 0, 35, 52);
+        trunk = new TextureRegion(decoration, 0, 52, 35, 52);
+        treeShadow = new TextureRegion(decoration, 35, 52, 35, 52);
         //------------------
         //     ENEMIES
         //------------------
         Texture enemies = new Texture("animations/stickFigureRunning.png");
-        touristAnimation = new Animation<>(1f / 60f, Util.regions(enemies, 180, 340, 2));
-        touristAnimation.setPlayMode(Animation.PlayMode.LOOP);
-        tourist = new TextureRegion(enemies, 0, 0, 594, 1135);
+        enemyAnimation = new Animation<>(1f / 60f, Util.regions(enemies, 180, 367, 2));
+        enemyAnimation.setPlayMode(Animation.PlayMode.LOOP);
+        // Tourist
+        touristHat = new TextureRegion(new Texture("images/touristHat.png"), 0, 0, 180, 367);
         //------------------
         //      RIVER
         //------------------
@@ -148,7 +158,7 @@ public class Assets {
         // TODO TEST
         nptest = new TextureRegion(new Texture("images/nptest.png"), 0, 0, 10, 10);
         testFrame = new TextureRegion(new Texture("images/testFrame.png"), 0, 0, 100, 100);
-        testPanel = new TextureRegion(new Texture("images/testPanel.png"), 0, 0, 3, 3);
+        toggleMenuPanel = new TextureRegion(new Texture("images/testPanel.png"), 0, 0, 3, 3);
         // Toggle buttons
         Texture toggleButtons = new Texture("images/testToggleButtons.png");
         testToggleButtonRight = new TextureRegion(toggleButtons, 0, 0, 50, 50);

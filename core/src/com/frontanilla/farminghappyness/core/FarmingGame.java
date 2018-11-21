@@ -1,13 +1,10 @@
 package com.frontanilla.farminghappyness.core;
 
 import com.badlogic.gdx.Game;
-import com.frontanilla.farminghappyness.game.GameConnector;
+import com.frontanilla.farminghappyness.menus.MainMenu;
 import com.frontanilla.farminghappyness.utils.Assets;
 
 public class FarmingGame extends Game {
-
-    public FarmingGame() {
-    }
 
     @Override
     public void create() {
@@ -22,6 +19,6 @@ public class FarmingGame extends Game {
 
         Assets.init();
 
-        setScreen(new GameConnector());
+        setScreen(new MainMenu(this));
     }
 }

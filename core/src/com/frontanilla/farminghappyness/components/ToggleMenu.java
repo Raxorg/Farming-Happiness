@@ -6,18 +6,39 @@ import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.frontanilla.farminghappyness.utils.Assets;
 import com.frontanilla.farminghappyness.utils.Enums.MenuState;
 
+import static com.frontanilla.farminghappyness.utils.Constants.AYARN_COST;
+import static com.frontanilla.farminghappyness.utils.Constants.AYARN_ID;
+import static com.frontanilla.farminghappyness.utils.Constants.ELSKA_COST;
+import static com.frontanilla.farminghappyness.utils.Constants.ELSKA_ID;
+import static com.frontanilla.farminghappyness.utils.Constants.ELSKER_COST;
+import static com.frontanilla.farminghappyness.utils.Constants.ELSKER_ID;
+import static com.frontanilla.farminghappyness.utils.Constants.GRA_COST;
+import static com.frontanilla.farminghappyness.utils.Constants.GRA_ID;
+import static com.frontanilla.farminghappyness.utils.Constants.KAERLIGHED_COST;
+import static com.frontanilla.farminghappyness.utils.Constants.KAERLIGHED_ID;
+import static com.frontanilla.farminghappyness.utils.Constants.KOCHAM_COST;
+import static com.frontanilla.farminghappyness.utils.Constants.KOCHAM_ID;
 import static com.frontanilla.farminghappyness.utils.Constants.MENU_ACTIVATION_BUTTON_SIZE;
 import static com.frontanilla.farminghappyness.utils.Constants.MENU_ACTIVATION_BUTTON_Y;
 import static com.frontanilla.farminghappyness.utils.Constants.MENU_ACTIVATION_TIME;
-import static com.frontanilla.farminghappyness.utils.Constants.MENU_BUTTON_IMAGE_WIDTH;
 import static com.frontanilla.farminghappyness.utils.Constants.MENU_BUTTON_SIZE;
+import static com.frontanilla.farminghappyness.utils.Constants.MENU_BUTTON_Y_SPACING;
 import static com.frontanilla.farminghappyness.utils.Constants.MENU_BUTTON_X_OFFSET;
+import static com.frontanilla.farminghappyness.utils.Constants.MENU_BUTTON_Y_OFFSET;
 import static com.frontanilla.farminghappyness.utils.Constants.MENU_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.MENU_WIDTH;
+import static com.frontanilla.farminghappyness.utils.Constants.MILESTIBA_COST;
+import static com.frontanilla.farminghappyness.utils.Constants.MILESTIBA_ID;
 import static com.frontanilla.farminghappyness.utils.Constants.MINE_COST;
 import static com.frontanilla.farminghappyness.utils.Constants.MINE_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.MINE_WIDTH;
 import static com.frontanilla.farminghappyness.utils.Constants.NULL_ID;
+import static com.frontanilla.farminghappyness.utils.Constants.RAKKAUS_COST;
+import static com.frontanilla.farminghappyness.utils.Constants.RAKKAUS_ID;
+import static com.frontanilla.farminghappyness.utils.Constants.SEVIYORUM_COST;
+import static com.frontanilla.farminghappyness.utils.Constants.SEVIYORUM_ID;
+import static com.frontanilla.farminghappyness.utils.Constants.SZERELEM_COST;
+import static com.frontanilla.farminghappyness.utils.Constants.SZERELEM_ID;
 import static com.frontanilla.farminghappyness.utils.Constants.TRAP_ID;
 import static com.frontanilla.farminghappyness.utils.Constants.TURRET_COST;
 import static com.frontanilla.farminghappyness.utils.Constants.TURRET_HEIGHT;
@@ -41,7 +62,7 @@ public class ToggleMenu {
         time = 0;
         x = -MENU_WIDTH;
         panel = new NinePatcher(
-                Assets.testPanel,
+                Assets.toggleMenuPanel,
                 10f,
                 1);
         panel.setWidth(MENU_WIDTH);
@@ -69,12 +90,13 @@ public class ToggleMenu {
 
     private void initDefenseButtons() {
         defenseButtons = new DelayedRemovalArray<>();
+        int yMultiplier = 1;
         defenseButtons.add(new ToggleMenuButton(
                 TURRET_COST,
                 Assets.testFrame,
                 Assets.turret,
                 x,
-                MENU_HEIGHT - MENU_BUTTON_IMAGE_WIDTH * 2,
+                MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
                 MENU_BUTTON_SIZE,
                 MENU_BUTTON_SIZE,
                 TURRET_WIDTH,
@@ -85,7 +107,7 @@ public class ToggleMenu {
                 Assets.testFrame,
                 Assets.wall,
                 x,
-                MENU_HEIGHT - MENU_BUTTON_IMAGE_WIDTH * 4,
+                MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
                 MENU_BUTTON_SIZE,
                 MENU_BUTTON_SIZE,
                 WALL_WIDTH,
@@ -96,7 +118,7 @@ public class ToggleMenu {
                 Assets.testFrame,
                 Assets.mine,
                 x,
-                MENU_HEIGHT - MENU_BUTTON_IMAGE_WIDTH * 6,
+                MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier,
                 MENU_BUTTON_SIZE,
                 MENU_BUTTON_SIZE,
                 MINE_WIDTH,
@@ -106,7 +128,117 @@ public class ToggleMenu {
 
     private void initPlantButtons() {
         plantButtons = new DelayedRemovalArray<>();
-
+        int yMultiplier = 1;
+        plantButtons.add(new ToggleMenuButton(
+                ELSKER_COST,
+                Assets.testFrame,
+                Assets.elsker,
+                x,
+                MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
+                MENU_BUTTON_SIZE,
+                MENU_BUTTON_SIZE,
+                TURRET_WIDTH,
+                TURRET_HEIGHT,
+                ELSKER_ID));
+        plantButtons.add(new ToggleMenuButton(
+                GRA_COST,
+                Assets.testFrame,
+                Assets.gra,
+                x,
+                MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
+                MENU_BUTTON_SIZE,
+                MENU_BUTTON_SIZE,
+                TURRET_WIDTH,
+                TURRET_HEIGHT,
+                GRA_ID));
+        plantButtons.add(new ToggleMenuButton(
+                KOCHAM_COST,
+                Assets.testFrame,
+                Assets.kocham,
+                x,
+                MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
+                MENU_BUTTON_SIZE,
+                MENU_BUTTON_SIZE,
+                TURRET_WIDTH,
+                TURRET_HEIGHT,
+                KOCHAM_ID));
+        plantButtons.add(new ToggleMenuButton(
+                SZERELEM_COST,
+                Assets.testFrame,
+                Assets.szerelem,
+                x,
+                MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
+                MENU_BUTTON_SIZE,
+                MENU_BUTTON_SIZE,
+                TURRET_WIDTH,
+                TURRET_HEIGHT,
+                SZERELEM_ID));
+        plantButtons.add(new ToggleMenuButton(
+                ELSKA_COST,
+                Assets.testFrame,
+                Assets.elska,
+                x,
+                MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
+                MENU_BUTTON_SIZE,
+                MENU_BUTTON_SIZE,
+                TURRET_WIDTH,
+                TURRET_HEIGHT,
+                ELSKA_ID));
+        plantButtons.add(new ToggleMenuButton(
+                AYARN_COST,
+                Assets.testFrame,
+                Assets.ayarn,
+                x,
+                MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
+                MENU_BUTTON_SIZE,
+                MENU_BUTTON_SIZE,
+                TURRET_WIDTH,
+                TURRET_HEIGHT,
+                AYARN_ID));
+        plantButtons.add(new ToggleMenuButton(
+                SEVIYORUM_COST,
+                Assets.testFrame,
+                Assets.seviyorum,
+                x,
+                MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
+                MENU_BUTTON_SIZE,
+                MENU_BUTTON_SIZE,
+                TURRET_WIDTH,
+                TURRET_HEIGHT,
+                SEVIYORUM_ID));
+        plantButtons.add(new ToggleMenuButton(
+                MILESTIBA_COST,
+                Assets.testFrame,
+                Assets.milestiba,
+                x,
+                MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
+                MENU_BUTTON_SIZE,
+                MENU_BUTTON_SIZE,
+                TURRET_WIDTH,
+                TURRET_HEIGHT,
+                MILESTIBA_ID));
+        plantButtons.add(new ToggleMenuButton(
+                RAKKAUS_COST,
+                Assets.testFrame,
+                Assets.rakkaus,
+                x,
+                MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
+                MENU_BUTTON_SIZE,
+                MENU_BUTTON_SIZE,
+                TURRET_WIDTH,
+                TURRET_HEIGHT,
+                RAKKAUS_ID));
+        plantButtons.add(new ToggleMenuButton(
+                KAERLIGHED_COST,
+                Assets.testFrame,
+                Assets.kaerlighed,
+                x,
+                MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier,
+                MENU_BUTTON_SIZE,
+                MENU_BUTTON_SIZE,
+                TURRET_WIDTH,
+                TURRET_HEIGHT,
+                KAERLIGHED_ID));
     }
 
     public void update(float delta, int money) {
@@ -141,15 +273,27 @@ public class ToggleMenu {
             defensesToggleButton.bounds.x = x + MENU_WIDTH;
             plantsToggleButton.bounds.x = x + MENU_WIDTH;
         }
-        // Update images to show availability
+        // Update defense buttons to show availability
         for (ToggleMenuButton button : defenseButtons) {
             button.setX(x + MENU_BUTTON_X_OFFSET);
             if (button.getCost() > money) {
                 button.setColor(Color.GRAY);
+            } else {
+                if (button.getColor() == Color.GRAY) {
+                    button.setColor(Color.SKY);
+                }
             }
         }
+        // Update plant buttons to show availability
         for (ToggleMenuButton button : plantButtons) {
             button.setX(x + MENU_BUTTON_X_OFFSET);
+            if (button.getCost() > money) {
+                button.setColor(Color.GRAY);
+            } else {
+                if (button.getColor() == Color.GRAY) {
+                    button.setColor(Color.SKY);
+                }
+            }
         }
         // Update panel position
         panel.setPosition(x, 0);

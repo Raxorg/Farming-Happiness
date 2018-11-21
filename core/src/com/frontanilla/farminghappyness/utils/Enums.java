@@ -24,13 +24,6 @@ public class Enums {
         DEACTIVATING
     }
 
-    public enum ConstructionState {
-        BUILDING_TURRET,
-        BUILDING_WALL,
-        BUILDING_TRAP,
-        NONE
-    }
-
     public enum PlantType {
         ELSKER,
         GRA,

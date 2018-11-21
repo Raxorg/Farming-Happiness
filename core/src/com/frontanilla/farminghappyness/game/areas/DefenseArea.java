@@ -3,12 +3,14 @@ package com.frontanilla.farminghappyness.game.areas;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.frontanilla.farminghappyness.components.NinePatcherTile;
+import com.frontanilla.farminghappyness.game.defenses.Turret;
 import com.frontanilla.farminghappyness.utils.Assets;
 
 import static com.frontanilla.farminghappyness.utils.Constants.BOTTOM_DEFENSE_COLUMNS;
 import static com.frontanilla.farminghappyness.utils.Constants.BOTTOM_DEFENSE_ROWS;
 import static com.frontanilla.farminghappyness.utils.Constants.BOTTOM_DEFENSE_X;
 import static com.frontanilla.farminghappyness.utils.Constants.BOTTOM_DEFENSE_Y;
+import static com.frontanilla.farminghappyness.utils.Constants.DEBUG;
 import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_TILE_SIZE;
 import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_X_SPACING;
 import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_Y_SPACING;
@@ -111,9 +113,24 @@ public class DefenseArea {
     }
 
     public void render(SpriteBatch batch) {
-        for (NinePatcherTile defenseNinePatcherTile : defenseTiles) {
-            if (defenseNinePatcherTile.getGameEntity() == null) {
-                defenseNinePatcherTile.render(batch); // TODO draw the tile even when something is on it
+        // Render tiles
+        for (NinePatcherTile tile : defenseTiles) {
+            if (tile.getGameEntity() == null) {
+                tile.render(batch);
+            }
+        }
+        // Render Turret ranges
+        if (DEBUG) {
+            for (NinePatcherTile tile : defenseTiles) {
+                if (tile.getGameEntity() != null && tile.getGameEntity() instanceof Turret) {
+                    ((Turret) tile.getGameEntity()).renderRangeCircle(batch);
+                }
+            }
+        }
+        // Render defenses
+        for (NinePatcherTile tile : defenseTiles) {
+            if (tile.getGameEntity() != null) {
+                tile.getGameEntity().render(batch);
             }
         }
     }

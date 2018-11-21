@@ -1,16 +1,16 @@
 package com.frontanilla.farminghappyness.game.entities.units;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.frontanilla.farminghappyness.game.defenses.Defense;
 import com.frontanilla.farminghappyness.game.defenses.Mine;
 import com.frontanilla.farminghappyness.game.defenses.Wall;
+import com.frontanilla.farminghappyness.utils.Assets;
 import com.frontanilla.farminghappyness.utils.Enums;
 
 public class Police extends Enemy {
 
-    public Police(TextureRegion texture, float x, float y, float speed, int life) {
-        super(texture, x, y, speed, life);
+    public Police(float x, float y, float speed, int life) {
+        super(Assets.enemyAnimation, x, y, speed, life); // TODO police animation
     }
 
     @Override

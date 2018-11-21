@@ -9,9 +9,29 @@ import com.frontanilla.farminghappyness.game.entities.Progressable;
 import com.frontanilla.farminghappyness.utils.Assets;
 import com.frontanilla.farminghappyness.utils.Enums.PlantType;
 
+import static com.frontanilla.farminghappyness.utils.Constants.AYARN_COST;
+import static com.frontanilla.farminghappyness.utils.Constants.AYARN_SELL_PRICE;
+import static com.frontanilla.farminghappyness.utils.Constants.ELSKA_COST;
+import static com.frontanilla.farminghappyness.utils.Constants.ELSKA_SELL_PRICE;
+import static com.frontanilla.farminghappyness.utils.Constants.ELSKER_COST;
+import static com.frontanilla.farminghappyness.utils.Constants.ELSKER_SELL_PRICE;
+import static com.frontanilla.farminghappyness.utils.Constants.GRA_COST;
+import static com.frontanilla.farminghappyness.utils.Constants.GRA_SELL_PRICE;
+import static com.frontanilla.farminghappyness.utils.Constants.KAERLIGHED_COST;
+import static com.frontanilla.farminghappyness.utils.Constants.KAERLIGHED_SELL_PRICE;
+import static com.frontanilla.farminghappyness.utils.Constants.KOCHAM_COST;
+import static com.frontanilla.farminghappyness.utils.Constants.KOCHAM_SELL_PRICE;
+import static com.frontanilla.farminghappyness.utils.Constants.MILESTIBA_COST;
+import static com.frontanilla.farminghappyness.utils.Constants.MILESTIBA_SELL_PRICE;
 import static com.frontanilla.farminghappyness.utils.Constants.PLANT_PRODUCTION_TIME;
 import static com.frontanilla.farminghappyness.utils.Constants.PLANT_SIZE;
 import static com.frontanilla.farminghappyness.utils.Constants.PLANT_TILE_SPACING;
+import static com.frontanilla.farminghappyness.utils.Constants.RAKKAUS_COST;
+import static com.frontanilla.farminghappyness.utils.Constants.RAKKAUS_SELL_PRICE;
+import static com.frontanilla.farminghappyness.utils.Constants.SEVIYORUM_COST;
+import static com.frontanilla.farminghappyness.utils.Constants.SEVIYORUM_SELL_PRICE;
+import static com.frontanilla.farminghappyness.utils.Constants.SZERELEM_COST;
+import static com.frontanilla.farminghappyness.utils.Constants.SZERELEM_SELL_PRICE;
 
 public class Plant extends Progressable {
 
@@ -21,16 +41,16 @@ public class Plant extends Progressable {
     private PlantType plantType;
     private int buyCost, sellCost;
     // Plants
-    public static Plant ELSKER = new Plant(PlantType.ELSKER, 1, 2);
-    public static Plant GRA = new Plant(PlantType.GRA, 1, 2);
-    public static Plant KOCHAM = new Plant(PlantType.KOCHAM, 1, 2);
-    public static Plant SZERELEM = new Plant(PlantType.SZERELEM, 1, 2);
-    public static Plant ELSKA = new Plant(PlantType.ELSKA, 1, 3);
-    public static Plant AYARN = new Plant(PlantType.AYARN, 1, 3);
-    public static Plant SEVIYORUM = new Plant(PlantType.SEVIYORUM, 1, 3);
-    public static Plant MILESTIBA = new Plant(PlantType.MILESTIBA, 1, 4);
-    public static Plant RAKKAUS = new Plant(PlantType.RAKKAUS, 1, 4);
-    public static Plant KAERLIGHED = new Plant(PlantType.KAERLIGHED, 1, 5);
+    public static Plant ELSKER = new Plant(PlantType.ELSKER, ELSKER_COST, ELSKER_SELL_PRICE);
+    public static Plant GRA = new Plant(PlantType.GRA, GRA_COST, GRA_SELL_PRICE);
+    public static Plant KOCHAM = new Plant(PlantType.KOCHAM, KOCHAM_COST, KOCHAM_SELL_PRICE);
+    public static Plant SZERELEM = new Plant(PlantType.SZERELEM, SZERELEM_COST, SZERELEM_SELL_PRICE);
+    public static Plant ELSKA = new Plant(PlantType.ELSKA, ELSKA_COST, ELSKA_SELL_PRICE);
+    public static Plant AYARN = new Plant(PlantType.AYARN, AYARN_COST, AYARN_SELL_PRICE);
+    public static Plant SEVIYORUM = new Plant(PlantType.SEVIYORUM, SEVIYORUM_COST, SEVIYORUM_SELL_PRICE);
+    public static Plant MILESTIBA = new Plant(PlantType.MILESTIBA, MILESTIBA_COST, MILESTIBA_SELL_PRICE);
+    public static Plant RAKKAUS = new Plant(PlantType.RAKKAUS, RAKKAUS_COST, RAKKAUS_SELL_PRICE);
+    public static Plant KAERLIGHED = new Plant(PlantType.KAERLIGHED, KAERLIGHED_COST, KAERLIGHED_SELL_PRICE);
 
     private Plant(PlantType plantType, int buyCost, int sellCost) {
         super(new Rectangle(), PLANT_PRODUCTION_TIME);

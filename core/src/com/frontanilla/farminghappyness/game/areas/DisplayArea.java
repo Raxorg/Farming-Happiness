@@ -2,11 +2,12 @@ package com.frontanilla.farminghappyness.game.areas;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.frontanilla.farminghappyness.components.ToggleMenu;
 import com.frontanilla.farminghappyness.components.ResourceFrame;
+import com.frontanilla.farminghappyness.components.ToggleMenu;
 import com.frontanilla.farminghappyness.utils.Assets;
 
 import static com.frontanilla.farminghappyness.utils.Constants.RESOURCE_FRAME_WIDTH;
+import static com.frontanilla.farminghappyness.utils.Constants.RESOURCE_FRAME_X;
 import static com.frontanilla.farminghappyness.utils.Constants.RESOURCE_FRAME_Y;
 
 public class DisplayArea {
@@ -18,12 +19,12 @@ public class DisplayArea {
         // Money resource frame
         moneyFrame = new ResourceFrame(
                 Color.FOREST,
-                0,
+                RESOURCE_FRAME_X,
                 RESOURCE_FRAME_Y,
                 Assets.dollar);
         // Workers resource frame
         workerFrame = new ResourceFrame(Color.SALMON,
-                RESOURCE_FRAME_WIDTH,
+                RESOURCE_FRAME_X + RESOURCE_FRAME_WIDTH,
                 RESOURCE_FRAME_Y,
                 Assets.dollar
         );

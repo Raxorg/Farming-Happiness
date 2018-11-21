@@ -217,9 +217,10 @@ public class GameLogic {
     }
 
     public void unprojectedTap(float x, float y) {
+        // Check a tap in a defense tile
         for (NinePatcherTile tile : connector.getGameState().getDefenseArea().getTiles()) {
             if (tile.contains(x, y) && tile.getGameEntity() == null) {
-                switch (connector.getGameState().getDisplayArea().getToggleMenu().getSelectedButtonID()) {
+                switch (connector.getGameState().getDisplayArea().getToggleMenu().getSelectedDefenseButtonID()) {
                     case TURRET_ID:
                         //TODO test
                         playerReady = true;
@@ -243,9 +244,10 @@ public class GameLogic {
                 }
             }
         }
+        // Check a tap in a farming tile
         for (ButtonTile tile : connector.getGameState().getFarmingArea().getTiles()) {
             if (tile.contains(x, y)) {
-                switch (connector.getGameState().getDisplayArea().getToggleMenu().getSelectedButtonID()) {
+                switch (connector.getGameState().getDisplayArea().getToggleMenu().getSelectedPlantButtonID()) {
                     case ELSKER_ID:
                         Plant newPlant = new Plant(Plant.ELSKER, tile);
                         tile.setGameEntity(newPlant);

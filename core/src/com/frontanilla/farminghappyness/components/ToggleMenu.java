@@ -340,12 +340,16 @@ public class ToggleMenu {
         time = MENU_ACTIVATION_TIME;
     }
 
-    public int getSelectedButtonID() {
+    public int getSelectedDefenseButtonID() {
         for (ToggleMenuButton button : defenseButtons) {
             if (button.color == Color.YELLOW) {
                 return button.getID();
             }
         }
+        return NULL_ID;
+    }
+
+    public int getSelectedPlantButtonID() {
         for (ToggleMenuButton button : plantButtons) {
             if (button.color == Color.YELLOW) {
                 return button.getID();
@@ -390,5 +394,5 @@ public class ToggleMenu {
         return null;
     }
 
-    // TODO use ConstructionState enum
+    // TODO use ConstructionState enum maybe
 }

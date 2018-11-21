@@ -125,6 +125,7 @@ public class Constants {
     //-------------------
     public static final float RESOURCE_FRAME_WIDTH = Gdx.graphics.getWidth() / 6f;
     public static final float RESOURCE_FRAME_HEIGHT = RESOURCE_FRAME_WIDTH / 3f;
+    public static final float RESOURCE_FRAME_X = Gdx.graphics.getWidth() - RESOURCE_FRAME_WIDTH * 2;
     public static final float RESOURCE_FRAME_Y = Gdx.graphics.getHeight() - RESOURCE_FRAME_HEIGHT;
     public static final float RESOURCE_FRAME_BORDER = RESOURCE_FRAME_HEIGHT / 20f;
     // Resource frame image

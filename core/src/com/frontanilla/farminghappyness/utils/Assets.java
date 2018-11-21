@@ -35,7 +35,7 @@ public class Assets {
     //------------------
     // Tourist
     public static Animation<TextureRegion> enemyAnimation;
-    public static TextureRegion touristHat;
+    public static TextureRegion touristHat, policeHat, militaryHat, alienHat;
     //------------------
     //     DEFENSES
     //------------------
@@ -130,7 +130,13 @@ public class Assets {
         enemyAnimation = new Animation<>(1f / 60f, Util.regions(enemies, 180, 367, 2));
         enemyAnimation.setPlayMode(Animation.PlayMode.LOOP);
         // Tourist
-        touristHat = new TextureRegion(new Texture("images/touristHat.png"), 0, 0, 180, 367);
+        touristHat = new TextureRegion(new Texture("images/hats.png"), 0, 0, 180, 367);
+        // Police
+        policeHat = new TextureRegion(new Texture("images/hats.png"), 180, 0, 180, 367);
+        // Military
+        militaryHat = new TextureRegion(new Texture("images/hats.png"), 360, 0, 180, 367);
+        // Alien
+        alienHat = new TextureRegion(new Texture("images/hats.png"), 540, 0, 180, 367);
         //------------------
         //      RIVER
         //------------------

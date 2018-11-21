@@ -1,7 +1,9 @@
 package com.frontanilla.farminghappyness.game.areas;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.frontanilla.farminghappyness.components.Button;
 import com.frontanilla.farminghappyness.components.ResourceFrame;
 import com.frontanilla.farminghappyness.components.ToggleMenu;
 import com.frontanilla.farminghappyness.utils.Assets;
@@ -14,6 +16,7 @@ public class DisplayArea {
 
     private ResourceFrame moneyFrame, workerFrame;
     private ToggleMenu toggleMenu;
+    private Button readyButton;
 
     public DisplayArea() {
         // Money resource frame
@@ -30,6 +33,13 @@ public class DisplayArea {
         );
         // Defenses menu
         toggleMenu = new ToggleMenu();
+        // Ready button
+        readyButton = new Button(
+                Assets.readyButton,
+                Gdx.graphics.getWidth() / 2 - Assets.readyButton.getRegionWidth() / 2,
+                0,
+                Assets.readyButton.getRegionWidth(),
+                Assets.readyButton.getRegionHeight());
     }
 
     public void update(float delta, int money, int workers) {
@@ -42,6 +52,7 @@ public class DisplayArea {
         moneyFrame.render(staticBatch);
         workerFrame.render(staticBatch);
         toggleMenu.render(staticBatch);
+        readyButton.render(staticBatch);
     }
 
     //----------------------------
@@ -50,5 +61,9 @@ public class DisplayArea {
 
     public ToggleMenu getToggleMenu() {
         return toggleMenu;
+    }
+
+    public Button getReadyButton() {
+        return readyButton;
     }
 }

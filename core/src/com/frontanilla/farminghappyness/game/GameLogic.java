@@ -173,6 +173,7 @@ public class GameLogic {
         connector.getGameState().restart();
         lost = false;
         time = 0;
+        playerReady = false;
     }
 
     //--------------------
@@ -213,6 +214,12 @@ public class GameLogic {
                 }
             }
         }
+        // Check if this happened on the ready button
+        if (connector.getGameState().getDisplayArea().getReadyButton().contains(x, y)
+                && connector.getGameState().getDisplayArea().getReadyButton().isVisible()) {
+            playerReady = true;
+            connector.getGameState().getDisplayArea().getReadyButton().setVisible(false);
+        }
         return false;
     }
 
@@ -222,8 +229,6 @@ public class GameLogic {
             if (tile.contains(x, y) && tile.getGameEntity() == null) {
                 switch (connector.getGameState().getDisplayArea().getToggleMenu().getSelectedDefenseButtonID()) {
                     case TURRET_ID:
-                        //TODO test
-                        playerReady = true;
                         Defense newDefense = new Turret(tile);
                         tile.setGameEntity(newDefense);
                         connector.getGameState().getDefenses().add(newDefense);

@@ -71,7 +71,7 @@ public class FarmingArea {
         // Laboratory
         laboratory.render(batch);
         for (int i = 0; i < 5; i++) {
-            batch.draw(Assets.pathTile, LABORATORY_X + 58, LABORATORY_Y - 20 - i * 20);
+            batch.draw(Assets.pathTile, LABORATORY_X + 83, LABORATORY_Y - 20 - i * 20);
         }
         // Farming tiles
         for (ButtonTile ninePatcherTile : farmingTiles) {

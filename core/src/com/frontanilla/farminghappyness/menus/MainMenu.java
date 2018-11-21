@@ -3,7 +3,9 @@ package com.frontanilla.farminghappyness.menus;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.frontanilla.farminghappyness.components.Button;
 import com.frontanilla.farminghappyness.core.FarmingGame;
 import com.frontanilla.farminghappyness.game.GameConnector;
@@ -17,6 +19,9 @@ public class MainMenu extends ScreenAdapter {
 
     private SpriteBatch batch;
 
+    private Animation<TextureRegion> animation;
+    private float time;
+
     public MainMenu(FarmingGame game) {
         this.game = game;
 
@@ -24,6 +29,9 @@ public class MainMenu extends ScreenAdapter {
         float width = Gdx.graphics.getWidth() / 5f;
         playButton = new Button(Assets.playButton, Gdx.graphics.getWidth() / 2 - width / 2, width * ratio, width, width * ratio);
         creditsButton = new Button(Assets.creditsButton, Gdx.graphics.getWidth() / 2 - width / 2, 0, width, width * ratio);
+
+        animation = GifDecoder.loadGIFAnimation(Animation.PlayMode.LOOP, Gdx.files.internal("animations/backgroundGIF.gif").read());
+        time = 0;
 
         batch = new SpriteBatch();
         // Detect and process user input
@@ -36,10 +44,10 @@ public class MainMenu extends ScreenAdapter {
         Gdx.gl.glClearColor(1, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-
+        time+= delta;
         batch.begin();
         // Draw background
-        batch.draw(Assets.mainMenuBackground,
+        batch.draw(animation.getKeyFrame(time),
                 0,
                 0,
                 Gdx.graphics.getWidth(),

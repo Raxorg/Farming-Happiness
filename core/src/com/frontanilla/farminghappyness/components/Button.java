@@ -10,14 +10,19 @@ public class Button {
     protected TextureRegion texture;
     protected Rectangle bounds;
     protected Color color;
+    protected boolean visible;
 
     public Button(TextureRegion texture, float x, float y, float w, float h) {
         this.texture = texture;
         bounds = new Rectangle(x, y, w, h);
         color = Color.WHITE;
+        visible = true;
     }
 
     public void render(SpriteBatch batch) {
+        if (!visible) {
+            return;
+        }
         batch.setColor(color);
         batch.draw(
                 texture,
@@ -57,5 +62,13 @@ public class Button {
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 }

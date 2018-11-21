@@ -2,6 +2,7 @@ package com.frontanilla.farminghappyness.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.frontanilla.farminghappyness.game.entities.units.Enemy;
 import com.frontanilla.farminghappyness.game.other.Bullet;
@@ -47,6 +48,7 @@ public class GameRenderer {
         // Render static display area
         staticBatch.begin();
         connector.getGameState().getDisplayArea().render(staticBatch);
+        staticBatch.draw(new Texture("images/clouds.png"), 100, 100,150,25);
         staticBatch.end();
     }
 

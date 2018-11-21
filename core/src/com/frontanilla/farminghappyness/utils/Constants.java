@@ -61,9 +61,9 @@ public class Constants {
     public static final int FARM_BASE_X = WORLD_WIDTH - FARM_BASE_WIDTH;
     public static final int FARM_BASE_Y = WORLD_HEIGHT - RIVER_TILE_SIZE - FARM_BASE_HEIGHT;
     // Laboratory
-    public static final int LABORATORY_WIDTH = 135;
-    public static final int LABORATORY_HEIGHT = 77;
-    public static final int LABORATORY_X = WORLD_WIDTH - LABORATORY_WIDTH * 3;
+    public static final int LABORATORY_WIDTH = 182;
+    public static final int LABORATORY_HEIGHT = 103;
+    public static final int LABORATORY_X = WORLD_WIDTH - LABORATORY_WIDTH * 2;
     public static final int LABORATORY_Y = WORLD_HEIGHT - RIVER_TILE_SIZE - LABORATORY_HEIGHT;
     //------------------
     //      CAMERA
@@ -108,7 +108,7 @@ public class Constants {
     //------------------
     public static final float ENEMY_WIDTH = 15f;
     public static final float ENEMY_HEIGHT = ENEMY_WIDTH * 1.8f;
-    public static final float ENEMY_SPAWN_RATE = 0.4f;
+    public static final float ENEMY_SPAWN_RATE = 0.04f;
     //------------------
     //     TOURISTS
     //------------------

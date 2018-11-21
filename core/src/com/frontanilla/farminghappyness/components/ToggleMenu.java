@@ -22,9 +22,9 @@ import static com.frontanilla.farminghappyness.utils.Constants.MENU_ACTIVATION_B
 import static com.frontanilla.farminghappyness.utils.Constants.MENU_ACTIVATION_BUTTON_Y;
 import static com.frontanilla.farminghappyness.utils.Constants.MENU_ACTIVATION_TIME;
 import static com.frontanilla.farminghappyness.utils.Constants.MENU_BUTTON_SIZE;
-import static com.frontanilla.farminghappyness.utils.Constants.MENU_BUTTON_Y_SPACING;
 import static com.frontanilla.farminghappyness.utils.Constants.MENU_BUTTON_X_OFFSET;
 import static com.frontanilla.farminghappyness.utils.Constants.MENU_BUTTON_Y_OFFSET;
+import static com.frontanilla.farminghappyness.utils.Constants.MENU_BUTTON_Y_SPACING;
 import static com.frontanilla.farminghappyness.utils.Constants.MENU_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.MENU_WIDTH;
 import static com.frontanilla.farminghappyness.utils.Constants.MILESTIBA_COST;
@@ -137,8 +137,8 @@ public class ToggleMenu {
                 MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
                 MENU_BUTTON_SIZE,
                 MENU_BUTTON_SIZE,
-                TURRET_WIDTH,
-                TURRET_HEIGHT,
+                Assets.elsker.getRegionWidth(),
+                Assets.elsker.getRegionHeight(),
                 ELSKER_ID));
         plantButtons.add(new ToggleMenuButton(
                 GRA_COST,
@@ -148,8 +148,8 @@ public class ToggleMenu {
                 MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
                 MENU_BUTTON_SIZE,
                 MENU_BUTTON_SIZE,
-                TURRET_WIDTH,
-                TURRET_HEIGHT,
+                Assets.gra.getRegionWidth(),
+                Assets.gra.getRegionHeight(),
                 GRA_ID));
         plantButtons.add(new ToggleMenuButton(
                 KOCHAM_COST,
@@ -159,8 +159,8 @@ public class ToggleMenu {
                 MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
                 MENU_BUTTON_SIZE,
                 MENU_BUTTON_SIZE,
-                TURRET_WIDTH,
-                TURRET_HEIGHT,
+                Assets.kocham.getRegionWidth(),
+                Assets.kocham.getRegionHeight(),
                 KOCHAM_ID));
         plantButtons.add(new ToggleMenuButton(
                 SZERELEM_COST,
@@ -170,8 +170,8 @@ public class ToggleMenu {
                 MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
                 MENU_BUTTON_SIZE,
                 MENU_BUTTON_SIZE,
-                TURRET_WIDTH,
-                TURRET_HEIGHT,
+                Assets.szerelem.getRegionWidth(),
+                Assets.szerelem.getRegionHeight(),
                 SZERELEM_ID));
         plantButtons.add(new ToggleMenuButton(
                 ELSKA_COST,
@@ -181,8 +181,8 @@ public class ToggleMenu {
                 MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
                 MENU_BUTTON_SIZE,
                 MENU_BUTTON_SIZE,
-                TURRET_WIDTH,
-                TURRET_HEIGHT,
+                Assets.elska.getRegionWidth(),
+                Assets.elska.getRegionHeight(),
                 ELSKA_ID));
         plantButtons.add(new ToggleMenuButton(
                 AYARN_COST,
@@ -192,8 +192,8 @@ public class ToggleMenu {
                 MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
                 MENU_BUTTON_SIZE,
                 MENU_BUTTON_SIZE,
-                TURRET_WIDTH,
-                TURRET_HEIGHT,
+                Assets.ayarn.getRegionWidth(),
+                Assets.ayarn.getRegionHeight(),
                 AYARN_ID));
         plantButtons.add(new ToggleMenuButton(
                 SEVIYORUM_COST,
@@ -203,8 +203,8 @@ public class ToggleMenu {
                 MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
                 MENU_BUTTON_SIZE,
                 MENU_BUTTON_SIZE,
-                TURRET_WIDTH,
-                TURRET_HEIGHT,
+                Assets.seviyorum.getRegionWidth(),
+                Assets.seviyorum.getRegionHeight(),
                 SEVIYORUM_ID));
         plantButtons.add(new ToggleMenuButton(
                 MILESTIBA_COST,
@@ -214,8 +214,8 @@ public class ToggleMenu {
                 MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
                 MENU_BUTTON_SIZE,
                 MENU_BUTTON_SIZE,
-                TURRET_WIDTH,
-                TURRET_HEIGHT,
+                Assets.milestiba.getRegionWidth(),
+                Assets.milestiba.getRegionHeight(),
                 MILESTIBA_ID));
         plantButtons.add(new ToggleMenuButton(
                 RAKKAUS_COST,
@@ -225,8 +225,8 @@ public class ToggleMenu {
                 MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
                 MENU_BUTTON_SIZE,
                 MENU_BUTTON_SIZE,
-                TURRET_WIDTH,
-                TURRET_HEIGHT,
+                Assets.rakkaus.getRegionWidth(),
+                Assets.rakkaus.getRegionHeight(),
                 RAKKAUS_ID));
         plantButtons.add(new ToggleMenuButton(
                 KAERLIGHED_COST,
@@ -236,8 +236,8 @@ public class ToggleMenu {
                 MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier,
                 MENU_BUTTON_SIZE,
                 MENU_BUTTON_SIZE,
-                TURRET_WIDTH,
-                TURRET_HEIGHT,
+                Assets.kaerlighed.getRegionWidth(),
+                Assets.kaerlighed.getRegionHeight(),
                 KAERLIGHED_ID));
     }
 

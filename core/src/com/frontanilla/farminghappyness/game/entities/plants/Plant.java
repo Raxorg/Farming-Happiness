@@ -41,16 +41,46 @@ public class Plant extends Progressable {
     private PlantType plantType;
     private int buyCost, sellCost;
     // Plants
-    public static Plant ELSKER = new Plant(PlantType.ELSKER, ELSKER_COST, ELSKER_SELL_PRICE);
-    public static Plant GRA = new Plant(PlantType.GRA, GRA_COST, GRA_SELL_PRICE);
-    public static Plant KOCHAM = new Plant(PlantType.KOCHAM, KOCHAM_COST, KOCHAM_SELL_PRICE);
-    public static Plant SZERELEM = new Plant(PlantType.SZERELEM, SZERELEM_COST, SZERELEM_SELL_PRICE);
-    public static Plant ELSKA = new Plant(PlantType.ELSKA, ELSKA_COST, ELSKA_SELL_PRICE);
-    public static Plant AYARN = new Plant(PlantType.AYARN, AYARN_COST, AYARN_SELL_PRICE);
-    public static Plant SEVIYORUM = new Plant(PlantType.SEVIYORUM, SEVIYORUM_COST, SEVIYORUM_SELL_PRICE);
-    public static Plant MILESTIBA = new Plant(PlantType.MILESTIBA, MILESTIBA_COST, MILESTIBA_SELL_PRICE);
-    public static Plant RAKKAUS = new Plant(PlantType.RAKKAUS, RAKKAUS_COST, RAKKAUS_SELL_PRICE);
-    public static Plant KAERLIGHED = new Plant(PlantType.KAERLIGHED, KAERLIGHED_COST, KAERLIGHED_SELL_PRICE);
+    public static Plant ELSKER = new Plant(
+            PlantType.ELSKER,
+            ELSKER_COST,
+            ELSKER_SELL_PRICE);
+    public static Plant GRA = new Plant(
+            PlantType.GRA,
+            GRA_COST,
+            GRA_SELL_PRICE);
+    public static Plant KOCHAM = new Plant(
+            PlantType.KOCHAM,
+            KOCHAM_COST,
+            KOCHAM_SELL_PRICE);
+    public static Plant SZERELEM = new Plant(
+            PlantType.SZERELEM,
+            SZERELEM_COST,
+            SZERELEM_SELL_PRICE);
+    public static Plant ELSKA = new Plant(
+            PlantType.ELSKA,
+            ELSKA_COST,
+            ELSKA_SELL_PRICE);
+    public static Plant AYARN = new Plant(
+            PlantType.AYARN,
+            AYARN_COST,
+            AYARN_SELL_PRICE);
+    public static Plant SEVIYORUM = new Plant(
+            PlantType.SEVIYORUM,
+            SEVIYORUM_COST,
+            SEVIYORUM_SELL_PRICE);
+    public static Plant MILESTIBA = new Plant(
+            PlantType.MILESTIBA,
+            MILESTIBA_COST,
+            MILESTIBA_SELL_PRICE);
+    public static Plant RAKKAUS = new Plant(
+            PlantType.RAKKAUS,
+            RAKKAUS_COST,
+            RAKKAUS_SELL_PRICE);
+    public static Plant KAERLIGHED = new Plant(
+            PlantType.KAERLIGHED,
+            KAERLIGHED_COST,
+            KAERLIGHED_SELL_PRICE);
 
     private Plant(PlantType plantType, int buyCost, int sellCost) {
         super(new Rectangle(), PLANT_PRODUCTION_TIME);

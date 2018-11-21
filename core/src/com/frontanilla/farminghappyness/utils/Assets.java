@@ -42,9 +42,11 @@ public class Assets {
     public static TextureRegion turret, turretBullet, wall, mine;
     public static Animation<TextureRegion> mineAnimation;
     //-------------------
-    //     GAME MENU
+    //       HUD
     //-------------------
-    public static TextureRegion toggleMenuPanel;
+    public static TextureRegion toggleMenuPanel, barSides, centerLifeBar, dollar, centerEmptyLifeBar, triangle, resourceFrame;
+    public static TextureRegion testFrame, testToggleButtonRight, testToggleButtonLeft;
+    public static TextureRegion readyButton;
     //--------------------
     //     DECORATION
     //--------------------
@@ -53,11 +55,10 @@ public class Assets {
     public static TextureRegion pixel;
     // TODO test
     public static TextureRegion nptest;
-    public static TextureRegion testFrame, testToggleButtonRight, testToggleButtonLeft;
     //-------------------
     //       DEBUG
     //-------------------
-    public static TextureRegion rangeCircle, barSides, centerLifeBar, dollar, centerEmptyLifeBar, triangle, resourceFrame;
+    public static TextureRegion rangeCircle;
 
     public static void init() {
         //-------------------
@@ -72,7 +73,7 @@ public class Assets {
         //-------------------
         Texture buildings = new Texture("images/buildings.png");
         farmBase = new TextureRegion(buildings, 0, 0, FARM_BASE_WIDTH, FARM_BASE_HEIGHT);
-        laboratory = new TextureRegion(buildings, 0, FARM_BASE_HEIGHT, LABORATORY_WIDTH, LABORATORY_HEIGHT);
+        laboratory = new TextureRegion(buildings, FARM_BASE_WIDTH, 0, LABORATORY_WIDTH, LABORATORY_HEIGHT);
         //-------------------
         //      PLANTS
         //-------------------
@@ -157,6 +158,8 @@ public class Assets {
         resourceFrame = new TextureRegion(hud, 290, 0, 300, 100);
         // Dollar
         dollar = new TextureRegion(hud, 591, 0, 54, 41); // TODO WHY +1
+        // Ready button
+        readyButton = new TextureRegion(new Texture("images/readyButton.png"));
         //------------------
         //       MISC
         //------------------

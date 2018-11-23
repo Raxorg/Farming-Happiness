@@ -58,21 +58,12 @@ public class Turret extends Defense {
     public Bullet shoot(Enemy e) {
         coolDown = TURRET_COOL_DOWN;
         Point bulletSpawnPoint = new Point(
-                getCenter().getX(),
+                center.getX(),
                 bounds.y + TURRET_CANNON_HEIGHT);
         return new Bullet(bulletSpawnPoint, e);
     }
 
     public float getCoolDown() {
         return coolDown;
-    }
-
-    public Point getCenter() {
-        return new Point(bounds.x + TURRET_WIDTH / 2, bounds.y + TURRET_HEIGHT / 2);
-    }
-
-    @Override
-    public void takeDamage(int damage) {
-
     }
 }

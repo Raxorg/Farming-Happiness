@@ -8,22 +8,14 @@ import com.frontanilla.farminghappyness.utils.Point;
 public abstract class Defense extends Damageable {
 
     protected Point center;
-    protected int health;
 
     public Defense(Rectangle bounds, int life) {
         super(bounds, life);
+        center = new Point(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2);
     }
 
     public Point getCenter() {
         return center;
-    }
-
-    public int getHealth() {
-        return health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
     }
 
     public abstract void update(float delta);

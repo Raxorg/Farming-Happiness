@@ -9,7 +9,6 @@ public class Constants {
     //------------------
     public static final int WORLD_WIDTH = 1000;
     public static final int WORLD_HEIGHT = 1100;
-    public static final boolean DEBUG = true;
     //------------------
     //     TERRAIN
     //------------------
@@ -108,7 +107,7 @@ public class Constants {
     //------------------
     public static final float ENEMY_WIDTH = 15f;
     public static final float ENEMY_HEIGHT = ENEMY_WIDTH * 1.8f;
-    public static final float ENEMY_SPAWN_RATE = 0.04f;
+    public static final float ENEMY_SPAWN_RATE = 0.25f;
     //------------------
     //     TOURISTS
     //------------------
@@ -180,13 +179,17 @@ public class Constants {
     public static final int RAKKAUS_SELL_PRICE = 6;
     public static final int KAERLIGHED_COST = 4;
     public static final int KAERLIGHED_SELL_PRICE = 8;
-    //------------------
-    //    DECORATION
-    //------------------
+    //-------------------
+    //      AMBIENT
+    //-------------------
     // Trees
     public static final int TREE_WIDTH = 35;
     public static final int TREE_HEIGHT = 52;
     public static final int SIDE_TREES_QUANTITY = 100;
+    // Clouds
+    public static final int CLOUD_WIDTH = 50;
+    public static final int CLOUD_HEIGHT = 22;
+    public static final int CLOUD_QUANTITY = 50;
     //------------------
     //       TEST
     //------------------

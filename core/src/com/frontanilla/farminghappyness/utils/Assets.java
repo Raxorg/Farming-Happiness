@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import static com.frontanilla.farminghappyness.utils.Constants.CLOUD_HEIGHT;
+import static com.frontanilla.farminghappyness.utils.Constants.CLOUD_WIDTH;
 import static com.frontanilla.farminghappyness.utils.Constants.FARM_BASE_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.FARM_BASE_WIDTH;
 import static com.frontanilla.farminghappyness.utils.Constants.LABORATORY_HEIGHT;
@@ -47,10 +49,10 @@ public class Assets {
     public static TextureRegion toggleMenuPanel, barSides, centerLifeBar, dollar, centerEmptyLifeBar, triangle, resourceFrame;
     public static TextureRegion testFrame, testToggleButtonRight, testToggleButtonLeft;
     public static TextureRegion readyButton;
-    //--------------------
-    //     DECORATION
-    //--------------------
-    public static TextureRegion tree, appleTree, flowerTree, trunk, treeShadow;
+    //-------------------
+    //      AMBIENT
+    //-------------------
+    public static TextureRegion tree, appleTree, flowerTree, trunk, treeShadow, cloud;
     // Misc
     public static TextureRegion pixel;
     // TODO test
@@ -116,14 +118,15 @@ public class Assets {
         Texture debug = new Texture("images/rangeCircle.png");
         rangeCircle = new TextureRegion(debug, 0, 0, 500, 500);
         //------------------
-        //    DECORATION
+        //      AMBIENT
         //------------------
-        Texture decoration = new Texture("images/decoration2.png");
-        tree = new TextureRegion(decoration, 0, 0, 35, 52);
-        appleTree = new TextureRegion(decoration, 35, 0, 35, 52);
-        flowerTree = new TextureRegion(decoration, 70, 0, 35, 52);
-        trunk = new TextureRegion(decoration, 0, 52, 35, 52);
-        treeShadow = new TextureRegion(decoration, 35, 52, 35, 52);
+        Texture ambient = new Texture("images/ambient.png");
+        tree = new TextureRegion(ambient, 0, 0, 35, 52);
+        appleTree = new TextureRegion(ambient, 35, 0, 35, 52);
+        flowerTree = new TextureRegion(ambient, 70, 0, 35, 52);
+        trunk = new TextureRegion(ambient, 0, 52, 35, 52);
+        treeShadow = new TextureRegion(ambient, 35, 52, 35, 52);
+        cloud = new TextureRegion(ambient, 105, CLOUD_HEIGHT, CLOUD_WIDTH, CLOUD_HEIGHT);
         //------------------
         //     ENEMIES
         //------------------

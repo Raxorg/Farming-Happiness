@@ -10,7 +10,6 @@ import static com.frontanilla.farminghappyness.utils.Constants.BOTTOM_DEFENSE_CO
 import static com.frontanilla.farminghappyness.utils.Constants.BOTTOM_DEFENSE_ROWS;
 import static com.frontanilla.farminghappyness.utils.Constants.BOTTOM_DEFENSE_X;
 import static com.frontanilla.farminghappyness.utils.Constants.BOTTOM_DEFENSE_Y;
-import static com.frontanilla.farminghappyness.utils.Constants.DEBUG;
 import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_TILE_SIZE;
 import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_X_SPACING;
 import static com.frontanilla.farminghappyness.utils.Constants.DEFENSE_Y_SPACING;
@@ -23,9 +22,11 @@ import static com.frontanilla.farminghappyness.utils.Enums.TileType.DEFENSIVE_TI
 
 public class DefenseArea {
 
+    private boolean showingTurretRanges;
     private DelayedRemovalArray<NinePatcherTile> defenseTiles;
 
     public DefenseArea() {
+        showingTurretRanges = false;
         defenseTiles = new DelayedRemovalArray<>();
         // Add left tiles
         for (int row = LEFT_DEFENSE_ROWS - 1; row >= 0; row--) {
@@ -120,7 +121,7 @@ public class DefenseArea {
             }
         }
         // Render Turret ranges
-        if (DEBUG) {
+        if (showingTurretRanges) {
             for (NinePatcherTile tile : defenseTiles) {
                 if (tile.getGameEntity() != null && tile.getGameEntity() instanceof Turret) {
                     ((Turret) tile.getGameEntity()).renderRangeCircle(batch);
@@ -133,6 +134,14 @@ public class DefenseArea {
                 tile.getGameEntity().render(batch);
             }
         }
+    }
+
+    //----------------------------
+    //      GETTERS & SETTERS
+    //----------------------------
+
+    public void setShowingTurretRanges(boolean showingTurretRanges) {
+        this.showingTurretRanges = showingTurretRanges;
     }
 
     public DelayedRemovalArray<NinePatcherTile> getTiles() {

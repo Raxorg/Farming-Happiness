@@ -69,6 +69,7 @@ public class GameLogic {
             connector.getCamera().update();
             connector.getGameRenderer().getDynamicBatch().setProjectionMatrix(connector.getCamera().combined);
 
+            connector.getGameState().getAmbientArea().update(delta);
             connector.getGameState().getRiverArea().update(delta);
             updatePlants(delta);
             updateEnemies(delta);
@@ -169,6 +170,94 @@ public class GameLogic {
         connector.getGameState().getEnemies().add(newTourist);
     }
 
+    private void placeDefense(NinePatcherTile tile) {
+        switch (connector.getGameState().getDisplayArea().getToggleMenu().getSelectedDefenseButtonID()) {
+            case TURRET_ID:
+                Defense newDefense = new Turret(tile);
+                tile.setGameEntity(newDefense);
+                connector.getGameState().getDefenses().add(newDefense);
+                connector.getGameState().setMoney(connector.getGameState().getMoney() - TURRET_COST);
+                break;
+            case WALL_ID:
+                newDefense = new Wall(tile);
+                tile.setGameEntity(newDefense);
+                connector.getGameState().getDefenses().add(newDefense);
+                connector.getGameState().setMoney(connector.getGameState().getMoney() - WALL_COST);
+                break;
+            case TRAP_ID:
+                newDefense = new Mine(tile);
+                tile.setGameEntity(newDefense);
+                connector.getGameState().getDefenses().add(newDefense);
+                connector.getGameState().setMoney(connector.getGameState().getMoney() - MINE_COST);
+                break;
+        }
+    }
+
+    private void placePlant(ButtonTile tile) {
+        switch (connector.getGameState().getDisplayArea().getToggleMenu().getSelectedPlantButtonID()) {
+            case ELSKER_ID:
+                Plant newPlant = new Plant(Plant.ELSKER, tile);
+                tile.setGameEntity(newPlant);
+                connector.getGameState().getPlants().add(newPlant);
+                connector.getGameState().setMoney(connector.getGameState().getMoney() - ELSKER_COST);
+                break;
+            case GRA_ID:
+                newPlant = new Plant(Plant.GRA, tile);
+                tile.setGameEntity(newPlant);
+                connector.getGameState().getPlants().add(newPlant);
+                connector.getGameState().setMoney(connector.getGameState().getMoney() - GRA_COST);
+                break;
+            case KOCHAM_ID:
+                newPlant = new Plant(Plant.KOCHAM, tile);
+                tile.setGameEntity(newPlant);
+                connector.getGameState().getPlants().add(newPlant);
+                connector.getGameState().setMoney(connector.getGameState().getMoney() - KOCHAM_COST);
+                break;
+            case SZERELEM_ID:
+                newPlant = new Plant(Plant.SZERELEM, tile);
+                tile.setGameEntity(newPlant);
+                connector.getGameState().getPlants().add(newPlant);
+                connector.getGameState().setMoney(connector.getGameState().getMoney() - SZERELEM_COST);
+                break;
+            case ELSKA_ID:
+                newPlant = new Plant(Plant.ELSKA, tile);
+                tile.setGameEntity(newPlant);
+                connector.getGameState().getPlants().add(newPlant);
+                connector.getGameState().setMoney(connector.getGameState().getMoney() - ELSKA_COST);
+                break;
+            case AYARN_ID:
+                newPlant = new Plant(Plant.AYARN, tile);
+                tile.setGameEntity(newPlant);
+                connector.getGameState().getPlants().add(newPlant);
+                connector.getGameState().setMoney(connector.getGameState().getMoney() - AYARN_COST);
+                break;
+            case SEVIYORUM_ID:
+                newPlant = new Plant(Plant.SEVIYORUM, tile);
+                tile.setGameEntity(newPlant);
+                connector.getGameState().getPlants().add(newPlant);
+                connector.getGameState().setMoney(connector.getGameState().getMoney() - SEVIYORUM_COST);
+                break;
+            case MILESTIBA_ID:
+                newPlant = new Plant(Plant.MILESTIBA, tile);
+                tile.setGameEntity(newPlant);
+                connector.getGameState().getPlants().add(newPlant);
+                connector.getGameState().setMoney(connector.getGameState().getMoney() - MILESTIBA_COST);
+                break;
+            case RAKKAUS_ID:
+                newPlant = new Plant(Plant.RAKKAUS, tile);
+                tile.setGameEntity(newPlant);
+                connector.getGameState().getPlants().add(newPlant);
+                connector.getGameState().setMoney(connector.getGameState().getMoney() - RAKKAUS_COST);
+                break;
+            case KAERLIGHED_ID:
+                newPlant = new Plant(Plant.KAERLIGHED, tile);
+                tile.setGameEntity(newPlant);
+                connector.getGameState().getPlants().add(newPlant);
+                connector.getGameState().setMoney(connector.getGameState().getMoney() - KAERLIGHED_COST);
+                break;
+        }
+    }
+
     private void restart() {
         connector.getGameState().restart();
         lost = false;
@@ -227,93 +316,13 @@ public class GameLogic {
         // Check a tap in a defense tile
         for (NinePatcherTile tile : connector.getGameState().getDefenseArea().getTiles()) {
             if (tile.contains(x, y) && tile.getGameEntity() == null) {
-                switch (connector.getGameState().getDisplayArea().getToggleMenu().getSelectedDefenseButtonID()) {
-                    case TURRET_ID:
-                        Defense newDefense = new Turret(tile);
-                        tile.setGameEntity(newDefense);
-                        connector.getGameState().getDefenses().add(newDefense);
-                        connector.getGameState().setMoney(connector.getGameState().getMoney() - TURRET_COST);
-                        break;
-                    case WALL_ID:
-                        newDefense = new Wall(tile);
-                        tile.setGameEntity(newDefense);
-                        connector.getGameState().getDefenses().add(newDefense);
-                        connector.getGameState().setMoney(connector.getGameState().getMoney() - WALL_COST);
-                        break;
-                    case TRAP_ID:
-                        newDefense = new Mine(tile);
-                        tile.setGameEntity(newDefense);
-                        connector.getGameState().getDefenses().add(newDefense);
-                        connector.getGameState().setMoney(connector.getGameState().getMoney() - MINE_COST);
-                        break;
-                }
+                placeDefense(tile);
             }
         }
         // Check a tap in a farming tile
         for (ButtonTile tile : connector.getGameState().getFarmingArea().getTiles()) {
-            if (tile.contains(x, y)) {
-                switch (connector.getGameState().getDisplayArea().getToggleMenu().getSelectedPlantButtonID()) {
-                    case ELSKER_ID:
-                        Plant newPlant = new Plant(Plant.ELSKER, tile);
-                        tile.setGameEntity(newPlant);
-                        connector.getGameState().getPlants().add(newPlant);
-                        connector.getGameState().setMoney(connector.getGameState().getMoney() - ELSKER_COST);
-                        break;
-                    case GRA_ID:
-                        newPlant = new Plant(Plant.GRA, tile);
-                        tile.setGameEntity(newPlant);
-                        connector.getGameState().getPlants().add(newPlant);
-                        connector.getGameState().setMoney(connector.getGameState().getMoney() - GRA_COST);
-                        break;
-                    case KOCHAM_ID:
-                        newPlant = new Plant(Plant.KOCHAM, tile);
-                        tile.setGameEntity(newPlant);
-                        connector.getGameState().getPlants().add(newPlant);
-                        connector.getGameState().setMoney(connector.getGameState().getMoney() - KOCHAM_COST);
-                        break;
-                    case SZERELEM_ID:
-                        newPlant = new Plant(Plant.SZERELEM, tile);
-                        tile.setGameEntity(newPlant);
-                        connector.getGameState().getPlants().add(newPlant);
-                        connector.getGameState().setMoney(connector.getGameState().getMoney() - SZERELEM_COST);
-                        break;
-                    case ELSKA_ID:
-                        newPlant = new Plant(Plant.ELSKA, tile);
-                        tile.setGameEntity(newPlant);
-                        connector.getGameState().getPlants().add(newPlant);
-                        connector.getGameState().setMoney(connector.getGameState().getMoney() - ELSKA_COST);
-                        break;
-                    case AYARN_ID:
-                        newPlant = new Plant(Plant.AYARN, tile);
-                        tile.setGameEntity(newPlant);
-                        connector.getGameState().getPlants().add(newPlant);
-                        connector.getGameState().setMoney(connector.getGameState().getMoney() - AYARN_COST);
-                        break;
-                    case SEVIYORUM_ID:
-                        newPlant = new Plant(Plant.SEVIYORUM, tile);
-                        tile.setGameEntity(newPlant);
-                        connector.getGameState().getPlants().add(newPlant);
-                        connector.getGameState().setMoney(connector.getGameState().getMoney() - SEVIYORUM_COST);
-                        break;
-                    case MILESTIBA_ID:
-                        newPlant = new Plant(Plant.MILESTIBA, tile);
-                        tile.setGameEntity(newPlant);
-                        connector.getGameState().getPlants().add(newPlant);
-                        connector.getGameState().setMoney(connector.getGameState().getMoney() - MILESTIBA_COST);
-                        break;
-                    case RAKKAUS_ID:
-                        newPlant = new Plant(Plant.RAKKAUS, tile);
-                        tile.setGameEntity(newPlant);
-                        connector.getGameState().getPlants().add(newPlant);
-                        connector.getGameState().setMoney(connector.getGameState().getMoney() - RAKKAUS_COST);
-                        break;
-                    case KAERLIGHED_ID:
-                        newPlant = new Plant(Plant.KAERLIGHED, tile);
-                        tile.setGameEntity(newPlant);
-                        connector.getGameState().getPlants().add(newPlant);
-                        connector.getGameState().setMoney(connector.getGameState().getMoney() - KAERLIGHED_COST);
-                        break;
-                }
+            if (tile.contains(x, y) && tile.getGameEntity() == null) {
+                placePlant(tile);
             }
         }
     }

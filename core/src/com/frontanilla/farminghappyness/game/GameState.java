@@ -1,6 +1,7 @@
 package com.frontanilla.farminghappyness.game;
 
 import com.badlogic.gdx.utils.DelayedRemovalArray;
+import com.frontanilla.farminghappyness.game.areas.AmbientArea;
 import com.frontanilla.farminghappyness.game.areas.DefenseArea;
 import com.frontanilla.farminghappyness.game.areas.DisplayArea;
 import com.frontanilla.farminghappyness.game.areas.FarmingArea;
@@ -14,6 +15,7 @@ public class GameState {
 
     // Areas
     private RiverArea riverArea;
+    private AmbientArea ambientArea;
     private FarmingArea farmingArea;
     private DefenseArea defenseArea;
     private DisplayArea displayArea;
@@ -36,6 +38,7 @@ public class GameState {
 
     public void restart() {
         riverArea = new RiverArea();
+        ambientArea = new AmbientArea();
         farmingArea = new FarmingArea();
         defenseArea = new DefenseArea();
         displayArea = new DisplayArea();
@@ -44,7 +47,7 @@ public class GameState {
         defenses = new DelayedRemovalArray<>();
         bullets = new DelayedRemovalArray<>();
         money = 10;
-        workers = 0;
+        workers = 1;
     }
 
     //----------------------------
@@ -53,6 +56,10 @@ public class GameState {
 
     public RiverArea getRiverArea() {
         return riverArea;
+    }
+
+    public AmbientArea getAmbientArea() {
+        return ambientArea;
     }
 
     public FarmingArea getFarmingArea() {

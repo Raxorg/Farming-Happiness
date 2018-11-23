@@ -19,8 +19,8 @@ public class MainMenu extends ScreenAdapter {
 
     private SpriteBatch batch;
 
-    private Animation<TextureRegion> animation;
-    private float time;
+    //private Animation<TextureRegion> animation;
+    //private float time;
 
     public MainMenu(FarmingGame game) {
         this.game = game;
@@ -30,8 +30,8 @@ public class MainMenu extends ScreenAdapter {
         playButton = new Button(Assets.playButton, Gdx.graphics.getWidth() / 2 - width / 2, width * ratio, width, width * ratio);
         creditsButton = new Button(Assets.creditsButton, Gdx.graphics.getWidth() / 2 - width / 2, 0, width, width * ratio);
 
-        animation = GifDecoder.loadGIFAnimation(Animation.PlayMode.LOOP, Gdx.files.internal("animations/backgroundGIF.gif").read());
-        time = 0;
+        //animation = GifDecoder.loadGIFAnimation(Animation.PlayMode.LOOP, Gdx.files.internal("animations/backgroundGIF.gif").read());
+        //time = 0;
 
         batch = new SpriteBatch();
         // Detect and process user input
@@ -44,10 +44,11 @@ public class MainMenu extends ScreenAdapter {
         Gdx.gl.glClearColor(1, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        time+= delta;
+        //time+= delta;
         batch.begin();
         // Draw background
-        batch.draw(animation.getKeyFrame(time),
+        //batch.draw(animation.getKeyFrame(time),
+        batch.draw(Assets.mainMenuBackground,
                 0,
                 0,
                 Gdx.graphics.getWidth(),

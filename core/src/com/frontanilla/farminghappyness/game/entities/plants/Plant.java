@@ -37,10 +37,10 @@ public class Plant extends Progressable {
 
     // Structure
     private TextureRegion textureRegion;
-    // Plant
+    // Attributes
     private PlantType plantType;
     private int buyCost, sellCost;
-    // Plants
+    //region Plants
     public static Plant ELSKER = new Plant(
             PlantType.ELSKER,
             ELSKER_COST,
@@ -81,6 +81,7 @@ public class Plant extends Progressable {
             PlantType.KAERLIGHED,
             KAERLIGHED_COST,
             KAERLIGHED_SELL_PRICE);
+    //endregion
 
     private Plant(PlantType plantType, int buyCost, int sellCost) {
         super(new Rectangle(), PLANT_PRODUCTION_TIME);
@@ -142,9 +143,7 @@ public class Plant extends Progressable {
         batch.draw(
                 textureRegion,
                 bounds.x,
-                bounds.y,
-                bounds.width,
-                bounds.height);
+                bounds.y);
         progressBar.render(batch);
     }
 }

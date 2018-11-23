@@ -315,8 +315,12 @@ public class GameLogic {
     public void unprojectedTap(float x, float y) {
         // Check a tap in a defense tile
         for (NinePatcherTile tile : connector.getGameState().getDefenseArea().getTiles()) {
-            if (tile.contains(x, y) && tile.getGameEntity() == null) {
-                placeDefense(tile);
+            if (tile.contains(x, y)) {
+                if (tile.getGameEntity() == null) {
+                    placeDefense(tile);
+                } else if (tile.getGameEntity() instanceof Turret) {
+                    connector.getGameState().getDefenseArea().toggleShowingTurretRanges();
+                }
             }
         }
         // Check a tap in a farming tile

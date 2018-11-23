@@ -140,8 +140,8 @@ public class DefenseArea {
     //      GETTERS & SETTERS
     //----------------------------
 
-    public void setShowingTurretRanges(boolean showingTurretRanges) {
-        this.showingTurretRanges = showingTurretRanges;
+    public void toggleShowingTurretRanges() {
+        showingTurretRanges = !showingTurretRanges;
     }
 
     public DelayedRemovalArray<NinePatcherTile> getTiles() {

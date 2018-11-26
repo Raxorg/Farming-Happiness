@@ -10,7 +10,7 @@ public class LevelLabel {
     private TextureRegion textureRegion;
     private float alpha;
 
-    public LevelLabel(int level) {
+    public LevelLabel() {
         startLevel(1);
     }
 

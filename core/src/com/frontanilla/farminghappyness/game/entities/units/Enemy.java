@@ -19,15 +19,16 @@ public abstract class Enemy extends Damageable {
 
     protected Animation<TextureRegion> animation;
     protected int damage;
-    protected float speed, angle, time, attackTime;
+    protected float speed, angle, time, attackTime, attackCooldown;
     protected Enums.EnemyState state;
 
-    public Enemy(Animation<TextureRegion> animation, float x, float y, float speed, int life, int damage) {
+    public Enemy(Animation<TextureRegion> animation, float x, float y, float speed, int life, int damage, float attackCooldown) {
         super(new Rectangle(x, y, ENEMY_WIDTH, ENEMY_HEIGHT), life);
         this.animation = animation;
         this.damage = damage;
         this.speed = speed;
         time = 0;
+        this.attackCooldown = attackCooldown;
         state = Enums.EnemyState.MOVING;
     }
 
@@ -46,13 +47,13 @@ public abstract class Enemy extends Damageable {
         lifeBar.render(batch);
     }
 
-    protected void move(float delta, float speedModifier) {
+    protected void move(float delta) {
         float cos = MathUtils.cosDeg(angle);
         float sin = MathUtils.sinDeg(angle);
         float x = delta * cos;
         float y = delta * sin;
-        bounds.setX(bounds.getX() + x * speed * speedModifier);
-        bounds.setY(bounds.getY() + y * speed * speedModifier);
+        bounds.setX(bounds.getX() + x * speed);
+        bounds.setY(bounds.getY() + y * speed);
     }
 
     public Point getCenter() {

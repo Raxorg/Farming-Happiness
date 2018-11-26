@@ -10,10 +10,10 @@ import static com.frontanilla.farminghappyness.utils.Enums.EnemyType.TOURIST;
 
 public class Level {
 
-    public static Level level1 = new Level(TOURIST, 30, 1f);
-    public static Level level2 = new Level(POLICE, 30, 0.5f);
-    public static Level level3 = new Level(MILITARY, 30, 0.25f);
-    public static Level level4 = new Level(ALIEN, 30, 0.125f);
+    public static Level level1 = new Level(TOURIST, 30, 1.5f);
+    public static Level level2 = new Level(POLICE, 30, 1.25f);
+    public static Level level3 = new Level(MILITARY, 30, 1f);
+    public static Level level4 = new Level(ALIEN, 30, 0.75f);
 
 
     private EnemyType enemyType;
@@ -24,13 +24,21 @@ public class Level {
         this.enemyType = enemyType;
         this.maxSpawn = maxSpawn;
         this.spawnInterval = spawnInterval;
-        time = 0;
         currentSpawn = 0;
+        time = 0;
 
     }
 
-    public boolean isCompleted(int kills) {
-        return kills == maxSpawn;
+    public Level restart() {
+        currentSpawn = 0;
+        time = 0;
+        level2.currentSpawn = 0;
+        level2.time = 0;
+        level3.currentSpawn = 0;
+        level3.time = 0;
+        level4.currentSpawn = 0;
+        level4.time = 0;
+        return this;
     }
 
     public void update(float delta, GameLogic gameLogic) {
@@ -40,6 +48,10 @@ public class Level {
             currentSpawn++;
             time -= spawnInterval;
         }
+    }
+
+    public boolean isCompleted(int kills) {
+        return kills == maxSpawn;
     }
 
     public int getLevelNumber() {

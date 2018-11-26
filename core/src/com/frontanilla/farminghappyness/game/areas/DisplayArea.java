@@ -42,8 +42,9 @@ public class DisplayArea {
                 0,
                 Assets.readyButton.getRegionWidth(),
                 Assets.readyButton.getRegionHeight());
+        readyButton.setVisible(true);
         // Level label
-        levelLabel = new LevelLabel(1);
+        levelLabel = new LevelLabel();
     }
 
     public void update(float delta, int money, int availableWorkers) {

@@ -129,12 +129,15 @@ public class GameLogic {
                     switch (connector.getGameState().getLevel().getLevelNumber()) {
                         case 1:
                             connector.getGameState().setLevel(Level.level2);
+                            connector.getGameState().getDisplayArea().getLevelLabel().startLevel(2);
                             break;
                         case 2:
                             connector.getGameState().setLevel(Level.level3);
+                            connector.getGameState().getDisplayArea().getLevelLabel().startLevel(3);
                             break;
                         case 3:
                             connector.getGameState().setLevel(Level.level4);
+                            connector.getGameState().getDisplayArea().getLevelLabel().startLevel(4);
                             break;
                         case 4:
                             restart();
@@ -191,6 +194,7 @@ public class GameLogic {
                     }
                     if (turret.isLifeless()) {
                         connector.getGameState().getDefenses().removeValue(turret, true);
+                        ninePatcherTile.setGameEntity(null);
                     }
                 }
             }
@@ -420,6 +424,7 @@ public class GameLogic {
                 && connector.getGameState().getDisplayArea().getReadyButton().isVisible()) {
             playerReady = true;
             connector.getGameState().getDisplayArea().getReadyButton().setVisible(false);
+            return true;
         }
         return false;
     }

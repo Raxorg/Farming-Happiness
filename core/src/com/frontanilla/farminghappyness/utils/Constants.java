@@ -84,7 +84,7 @@ public class Constants {
     // Stats
     public static final float TURRET_RANGE = 100f;
     public static final float TURRET_COOL_DOWN = 0.2f;
-    public static final int TURRET_INITIAL_HEALTH = 10;
+    public static final int TURRET_INITIAL_HEALTH = 2;
     public static final int TURRET_COST = 1;
     // Turret cannon
     public static final int TURRET_CANNON_HEIGHT = 43;
@@ -99,8 +99,8 @@ public class Constants {
     public static final int WALL_HEIGHT = 50;
     public static final int WALL_X_OFFSET = 1;
     // Stats
-    public static final int WALL_INITIAL_HEALTH = 25;
-    public static final int WALL_COST = 2;
+    public static final int WALL_INITIAL_HEALTH = 10;
+    public static final int WALL_COST = 3;
     //------------------
     //       MINE
     //------------------
@@ -115,27 +115,26 @@ public class Constants {
     //------------------
     public static final float ENEMY_WIDTH = 15f;
     public static final float ENEMY_HEIGHT = ENEMY_WIDTH * 1.8f;
-    public static final float ENEMY_SPAWN_RATE = 0.25f;
     //------------------
     //     TOURIST
     //------------------
     public static final int TOURIST_INITIAL_LIFE = 7;
     public static final float TOURIST_SPEED = 50f;
-    public static final float TOURIST_ATTACK_COOLDOWN = 3f;
+    public static final float TOURIST_ATTACK_COOLDOWN = 1.5f;
     public static final int TOURIST_DAMAGE = 1;
     //------------------
     //      POLICE
     //------------------
     public static final int POLICE_INITIAL_LIFE = 10;
     public static final float POLICE_SPEED = 60f;
-    public static final float POLICE_ATTACK_COOLDOWN = 1.5f;
+    public static final float POLICE_ATTACK_COOLDOWN = 1f;
     public static final int POLICE_DAMAGE = 2;
     //------------------
     //     MILITARY
     //------------------
     public static final int MILITARY_INITIAL_LIFE = 13;
     public static final float MILITARY_SPEED = 70f;
-    public static final float MILITARY_ATTACK_COOLDOWN = 1f;
+    public static final float MILITARY_ATTACK_COOLDOWN = 0.7f;
     public static final int MILITARY_DAMAGE = 3;
     //------------------
     //      ALIEN
@@ -210,6 +209,7 @@ public class Constants {
     public static final int RAKKAUS_SELL_PRICE = 6;
     public static final int KAERLIGHED_COST = 4;
     public static final int KAERLIGHED_SELL_PRICE = 8;
+    // Production time
     //-------------------
     //      AMBIENT
     //-------------------

@@ -52,7 +52,7 @@ public class GameState {
         money = 7;
         availableWorkers = 5;
         maxWorkers = 5;
-        level = Level.level1;
+        level = Level.level1.restart();
     }
 
     //----------------------------

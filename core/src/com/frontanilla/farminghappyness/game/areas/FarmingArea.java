@@ -82,11 +82,15 @@ public class FarmingArea {
         }
     }
 
-    public Point getCenter() {
-        return center;
+    public Laboratory getLaboratory() {
+        return laboratory;
     }
 
     public DelayedRemovalArray<ButtonTile> getTiles() {
         return farmingTiles;
+    }
+
+    public Point getCenter() {
+        return center;
     }
 }

@@ -63,6 +63,9 @@ public class GameLogic {
         playerReady = false;
     }
 
+    //--------------------
+    //       UPDATE
+    //--------------------
     public void update(float delta) {
         if (!lost) {
             connector.getCamera().handleInput();
@@ -155,6 +158,9 @@ public class GameLogic {
         connector.getGameState().getBullets().end();
     }
 
+    //--------------------
+    //       ACTIONS
+    //--------------------
     private void spawnEnemy() {
         boolean randSide = MathUtils.randomBoolean();
         Tourist newTourist;
@@ -328,6 +334,10 @@ public class GameLogic {
             if (tile.contains(x, y) && tile.getGameEntity() == null) {
                 placePlant(tile);
             }
+        }
+        // Check a tap in the laboratory
+        if (connector.getGameState().getFarmingArea().getLaboratory().contains(x, y)) {
+            connector.getGameState().getFarmingArea().getLaboratory().toggleShowingTechTree();
         }
     }
 }

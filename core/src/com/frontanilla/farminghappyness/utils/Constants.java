@@ -51,19 +51,25 @@ public class Constants {
 
     public static final int FARMING_AREA_ROWS = (FARMING_AREA_SIZE / FARMING_TILE_SIZE) / 2;
     public static final int FARMING_AREA_Y = 500;
-    //------------------
-    //     BUILDINGS
-    //------------------
-    // Farm base
+    //-------------------
+    //     FARM BASE
+    //-------------------
     public static final int FARM_BASE_WIDTH = 135;
     public static final int FARM_BASE_HEIGHT = 69;
     public static final int FARM_BASE_X = WORLD_WIDTH - FARM_BASE_WIDTH;
     public static final int FARM_BASE_Y = WORLD_HEIGHT - RIVER_TILE_SIZE - FARM_BASE_HEIGHT;
-    // Laboratory
+    //------------------
+    //    LABORATORY
+    //------------------
     public static final int LABORATORY_WIDTH = 182;
     public static final int LABORATORY_HEIGHT = 103;
     public static final int LABORATORY_X = WORLD_WIDTH - LABORATORY_WIDTH * 2;
     public static final int LABORATORY_Y = WORLD_HEIGHT - RIVER_TILE_SIZE - LABORATORY_HEIGHT;
+    // Tech tree panel
+    public static final float TECH_TREE_PANEL_WIDTH = Gdx.graphics.getWidth() * 0.5f;
+    public static final float TECH_TREE_PANEL_HEIGHT = Gdx.graphics.getHeight() * 0.8f;
+    public static final float TECH_TREE_PANEL_X = Gdx.graphics.getWidth() - Gdx.graphics.getHeight() * 0.05f - TECH_TREE_PANEL_WIDTH;
+    public static final float TECH_TREE_PANEL_Y = Gdx.graphics.getHeight() * 0.1f;
     //------------------
     //      CAMERA
     //------------------
@@ -122,7 +128,7 @@ public class Constants {
     //-------------------
     //  RESOURCE FRAMES
     //-------------------
-    public static final float RESOURCE_FRAME_WIDTH = Gdx.graphics.getWidth() / 6f;
+    public static final float RESOURCE_FRAME_WIDTH = Gdx.graphics.getWidth() / 8f;
     public static final float RESOURCE_FRAME_HEIGHT = RESOURCE_FRAME_WIDTH / 3f;
     public static final float RESOURCE_FRAME_X = Gdx.graphics.getWidth() - RESOURCE_FRAME_WIDTH * 2;
     public static final float RESOURCE_FRAME_Y = Gdx.graphics.getHeight() - RESOURCE_FRAME_HEIGHT;
@@ -137,18 +143,18 @@ public class Constants {
     //   TOGGLE MENU
     //-----------------
     // Menu size
-    public static final float MENU_WIDTH = Gdx.graphics.getWidth() / 8f;
-    public static final float MENU_HEIGHT = Gdx.graphics.getHeight();
+    public static final float TOGGLE_MENU_WIDTH = Gdx.graphics.getWidth() / 8f;
+    public static final float TOGGLE_MENU_HEIGHT = Gdx.graphics.getHeight();
     // Menu activators
-    public static final float MENU_ACTIVATION_BUTTON_SIZE = MENU_WIDTH * 0.5f;
-    public static final float MENU_ACTIVATION_BUTTON_Y = MENU_HEIGHT - MENU_ACTIVATION_BUTTON_SIZE;
+    public static final float MENU_ACTIVATION_BUTTON_SIZE = TOGGLE_MENU_WIDTH * 0.5f;
+    public static final float MENU_ACTIVATION_BUTTON_Y = TOGGLE_MENU_HEIGHT - MENU_ACTIVATION_BUTTON_SIZE;
     // Properties
     public static final float MENU_ACTIVATION_TIME = 0.1f;
     // Menu buttons
-    public static final float MENU_BUTTON_SIZE = MENU_WIDTH * 0.65f;
+    public static final float MENU_BUTTON_SIZE = TOGGLE_MENU_WIDTH * 0.65f;
     public static final float MENU_BUTTON_Y_SPACING = MENU_BUTTON_SIZE * 1.25f;
     public static final float MENU_BUTTON_IMAGE_WIDTH = MENU_BUTTON_SIZE * 0.7f;
-    public static final float MENU_BUTTON_X_OFFSET = (MENU_WIDTH - MENU_BUTTON_SIZE) / 2f;
+    public static final float MENU_BUTTON_X_OFFSET = (TOGGLE_MENU_WIDTH - MENU_BUTTON_SIZE) / 2f;
     //public static final float MENU_BUTTON_Y_OFFSET = Gdx.graphics.getHeight() / 10f;
     public static final float MENU_BUTTON_Y_OFFSET = 0;
     public static final float MENU_BUTTON_IMAGE_X_OFFSET = (MENU_BUTTON_SIZE - MENU_BUTTON_IMAGE_WIDTH) / 2f;

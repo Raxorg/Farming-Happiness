@@ -25,8 +25,8 @@ import static com.frontanilla.farminghappyness.utils.Constants.MENU_BUTTON_SIZE;
 import static com.frontanilla.farminghappyness.utils.Constants.MENU_BUTTON_X_OFFSET;
 import static com.frontanilla.farminghappyness.utils.Constants.MENU_BUTTON_Y_OFFSET;
 import static com.frontanilla.farminghappyness.utils.Constants.MENU_BUTTON_Y_SPACING;
-import static com.frontanilla.farminghappyness.utils.Constants.MENU_HEIGHT;
-import static com.frontanilla.farminghappyness.utils.Constants.MENU_WIDTH;
+import static com.frontanilla.farminghappyness.utils.Constants.TOGGLE_MENU_HEIGHT;
+import static com.frontanilla.farminghappyness.utils.Constants.TOGGLE_MENU_WIDTH;
 import static com.frontanilla.farminghappyness.utils.Constants.MILESTIBA_COST;
 import static com.frontanilla.farminghappyness.utils.Constants.MILESTIBA_ID;
 import static com.frontanilla.farminghappyness.utils.Constants.MINE_COST;
@@ -60,13 +60,13 @@ public class ToggleMenu {
     public ToggleMenu() {
         menuState = MenuState.DEACTIVATED;
         time = 0;
-        x = -MENU_WIDTH;
+        x = -TOGGLE_MENU_WIDTH;
         panel = new NinePatcher(
                 Assets.toggleMenuPanel,
                 10f,
                 1);
-        panel.setWidth(MENU_WIDTH);
-        panel.setHeight(MENU_HEIGHT);
+        panel.setWidth(TOGGLE_MENU_WIDTH);
+        panel.setHeight(TOGGLE_MENU_HEIGHT);
         panel.setColor(Color.BROWN);
         initToggleButtons();
         initDefenseButtons();
@@ -96,7 +96,7 @@ public class ToggleMenu {
                 Assets.testFrame,
                 Assets.turret,
                 x,
-                MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
+                TOGGLE_MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
                 MENU_BUTTON_SIZE,
                 MENU_BUTTON_SIZE,
                 TURRET_WIDTH,
@@ -107,7 +107,7 @@ public class ToggleMenu {
                 Assets.testFrame,
                 Assets.wall,
                 x,
-                MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
+                TOGGLE_MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
                 MENU_BUTTON_SIZE,
                 MENU_BUTTON_SIZE,
                 WALL_WIDTH,
@@ -118,7 +118,7 @@ public class ToggleMenu {
                 Assets.testFrame,
                 Assets.mine,
                 x,
-                MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier,
+                TOGGLE_MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier,
                 MENU_BUTTON_SIZE,
                 MENU_BUTTON_SIZE,
                 MINE_WIDTH,
@@ -134,7 +134,7 @@ public class ToggleMenu {
                 Assets.testFrame,
                 Assets.elsker,
                 x,
-                MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
+                TOGGLE_MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
                 MENU_BUTTON_SIZE,
                 MENU_BUTTON_SIZE,
                 Assets.elsker.getRegionWidth(),
@@ -145,7 +145,7 @@ public class ToggleMenu {
                 Assets.testFrame,
                 Assets.gra,
                 x,
-                MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
+                TOGGLE_MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
                 MENU_BUTTON_SIZE,
                 MENU_BUTTON_SIZE,
                 Assets.gra.getRegionWidth(),
@@ -156,7 +156,7 @@ public class ToggleMenu {
                 Assets.testFrame,
                 Assets.kocham,
                 x,
-                MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
+                TOGGLE_MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
                 MENU_BUTTON_SIZE,
                 MENU_BUTTON_SIZE,
                 Assets.kocham.getRegionWidth(),
@@ -167,7 +167,7 @@ public class ToggleMenu {
                 Assets.testFrame,
                 Assets.szerelem,
                 x,
-                MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
+                TOGGLE_MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
                 MENU_BUTTON_SIZE,
                 MENU_BUTTON_SIZE,
                 Assets.szerelem.getRegionWidth(),
@@ -178,7 +178,7 @@ public class ToggleMenu {
                 Assets.testFrame,
                 Assets.elska,
                 x,
-                MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
+                TOGGLE_MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
                 MENU_BUTTON_SIZE,
                 MENU_BUTTON_SIZE,
                 Assets.elska.getRegionWidth(),
@@ -189,7 +189,7 @@ public class ToggleMenu {
                 Assets.testFrame,
                 Assets.ayarn,
                 x,
-                MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
+                TOGGLE_MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
                 MENU_BUTTON_SIZE,
                 MENU_BUTTON_SIZE,
                 Assets.ayarn.getRegionWidth(),
@@ -200,7 +200,7 @@ public class ToggleMenu {
                 Assets.testFrame,
                 Assets.seviyorum,
                 x,
-                MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
+                TOGGLE_MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
                 MENU_BUTTON_SIZE,
                 MENU_BUTTON_SIZE,
                 Assets.seviyorum.getRegionWidth(),
@@ -211,7 +211,7 @@ public class ToggleMenu {
                 Assets.testFrame,
                 Assets.milestiba,
                 x,
-                MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
+                TOGGLE_MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
                 MENU_BUTTON_SIZE,
                 MENU_BUTTON_SIZE,
                 Assets.milestiba.getRegionWidth(),
@@ -222,7 +222,7 @@ public class ToggleMenu {
                 Assets.testFrame,
                 Assets.rakkaus,
                 x,
-                MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
+                TOGGLE_MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier++,
                 MENU_BUTTON_SIZE,
                 MENU_BUTTON_SIZE,
                 Assets.rakkaus.getRegionWidth(),
@@ -233,7 +233,7 @@ public class ToggleMenu {
                 Assets.testFrame,
                 Assets.kaerlighed,
                 x,
-                MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier,
+                TOGGLE_MENU_HEIGHT - MENU_BUTTON_Y_OFFSET - MENU_BUTTON_Y_SPACING * yMultiplier,
                 MENU_BUTTON_SIZE,
                 MENU_BUTTON_SIZE,
                 Assets.kaerlighed.getRegionWidth(),
@@ -256,9 +256,9 @@ public class ToggleMenu {
                     plantsToggleButton.setTexture(Assets.testToggleButtonLeft);
                 }
             }
-            x = Math.min((time * MENU_WIDTH) / MENU_ACTIVATION_TIME - MENU_WIDTH, 0);
-            defensesToggleButton.bounds.x = x + MENU_WIDTH;
-            plantsToggleButton.bounds.x = x + MENU_WIDTH;
+            x = Math.min((time * TOGGLE_MENU_WIDTH) / MENU_ACTIVATION_TIME - TOGGLE_MENU_WIDTH, 0);
+            defensesToggleButton.bounds.x = x + TOGGLE_MENU_WIDTH;
+            plantsToggleButton.bounds.x = x + TOGGLE_MENU_WIDTH;
         }
         // Deactivating
         if (menuState == MenuState.DEACTIVATING) {
@@ -269,9 +269,9 @@ public class ToggleMenu {
                 defensesToggleButton.setTexture(Assets.testToggleButtonRight);
                 plantsToggleButton.setTexture(Assets.testToggleButtonRight);
             }
-            x = Math.max(-MENU_WIDTH, (time * MENU_WIDTH) / MENU_ACTIVATION_TIME - MENU_WIDTH);
-            defensesToggleButton.bounds.x = x + MENU_WIDTH;
-            plantsToggleButton.bounds.x = x + MENU_WIDTH;
+            x = Math.max(-TOGGLE_MENU_WIDTH, (time * TOGGLE_MENU_WIDTH) / MENU_ACTIVATION_TIME - TOGGLE_MENU_WIDTH);
+            defensesToggleButton.bounds.x = x + TOGGLE_MENU_WIDTH;
+            plantsToggleButton.bounds.x = x + TOGGLE_MENU_WIDTH;
         }
         // Update defense buttons to show availability
         for (ToggleMenuButton button : defenseButtons) {
@@ -393,6 +393,4 @@ public class ToggleMenu {
         }
         return null;
     }
-
-    // TODO use ConstructionState enum maybe
 }

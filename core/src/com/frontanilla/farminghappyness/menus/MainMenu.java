@@ -3,9 +3,7 @@ package com.frontanilla.farminghappyness.menus;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.frontanilla.farminghappyness.components.Button;
 import com.frontanilla.farminghappyness.core.FarmingGame;
 import com.frontanilla.farminghappyness.game.GameConnector;
@@ -63,8 +61,7 @@ public class MainMenu extends ScreenAdapter {
         if (playButton.contains(screenX, screenY)) {
             game.setScreen(new GameConnector());
         } else if (creditsButton.contains(screenX, screenY)) {
-            // showingCredits = true
-            game.setScreen(new GameConnector());
+            // TODO show credits
         }
     }
 }

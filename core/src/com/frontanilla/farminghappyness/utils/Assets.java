@@ -164,15 +164,18 @@ public class Assets {
         // Ready button
         readyButton = new TextureRegion(new Texture("images/readyButton.png"));
         //------------------
-        //       MISC
+        //      OTHER
         //------------------
         pixel = new TextureRegion(new Texture("images/pixel.png"), 0, 0, 1, 1);
         // TODO TEST
         nptest = new TextureRegion(new Texture("images/nptest.png"), 0, 0, 10, 10);
         testFrame = new TextureRegion(new Texture("images/testFrame.png"), 0, 0, 100, 100);
         toggleMenuPanel = new TextureRegion(new Texture("images/testPanel.png"), 0, 0, 3, 3);
-        // Toggle buttons
+        //-------------------
+        //    TOGGLE MENU
+        //-------------------
         Texture toggleButtons = new Texture("images/testToggleButtons.png");
+        toggleButtons.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
         testToggleButtonRight = new TextureRegion(toggleButtons, 0, 0, 50, 50);
         testToggleButtonLeft = new TextureRegion(toggleButtons, 50, 0, 50, 50);
     }

@@ -10,6 +10,7 @@ import com.frontanilla.farminghappyness.game.defenses.Defense;
 import com.frontanilla.farminghappyness.game.entities.plants.Plant;
 import com.frontanilla.farminghappyness.game.entities.units.Enemy;
 import com.frontanilla.farminghappyness.game.other.Bullet;
+import com.frontanilla.farminghappyness.game.other.Level;
 
 public class GameState {
 
@@ -26,7 +27,9 @@ public class GameState {
     private DelayedRemovalArray<Defense> defenses;
     // Values
     private int money;
-    private int workers;
+    private int availableWorkers, maxWorkers;
+    // Level
+    private Level level;
 
     public GameState() {
         restart();
@@ -46,8 +49,10 @@ public class GameState {
         enemies = new DelayedRemovalArray<>();
         defenses = new DelayedRemovalArray<>();
         bullets = new DelayedRemovalArray<>();
-        money = 10;
-        workers = 1;
+        money = 7;
+        availableWorkers = 5;
+        maxWorkers = 5;
+        level = Level.level1;
     }
 
     //----------------------------
@@ -98,11 +103,19 @@ public class GameState {
         this.money = money;
     }
 
-    public int getWorkers() {
-        return workers;
+    public int getAvailableWorkers() {
+        return availableWorkers;
     }
 
-    public void setWorkers(int workers) {
-        this.workers = workers;
-    } // TODO more setters?
+    public void setAvailableWorkers(int availableWorkers) {
+        this.availableWorkers = availableWorkers;
+    }
+
+    public Level getLevel() {
+        return level;
+    }
+
+    public void setLevel(Level level) {
+        this.level = level;
+    }
 }

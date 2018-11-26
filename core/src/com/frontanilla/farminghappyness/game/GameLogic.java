@@ -10,10 +10,15 @@ import com.frontanilla.farminghappyness.game.defenses.Mine;
 import com.frontanilla.farminghappyness.game.defenses.Turret;
 import com.frontanilla.farminghappyness.game.defenses.Wall;
 import com.frontanilla.farminghappyness.game.entities.plants.Plant;
+import com.frontanilla.farminghappyness.game.entities.units.Alien;
 import com.frontanilla.farminghappyness.game.entities.units.Enemy;
+import com.frontanilla.farminghappyness.game.entities.units.Military;
+import com.frontanilla.farminghappyness.game.entities.units.Police;
 import com.frontanilla.farminghappyness.game.entities.units.Tourist;
 import com.frontanilla.farminghappyness.game.other.Bullet;
+import com.frontanilla.farminghappyness.game.other.Level;
 import com.frontanilla.farminghappyness.utils.Constants;
+import com.frontanilla.farminghappyness.utils.Enums.EnemyType;
 import com.frontanilla.farminghappyness.utils.Util;
 
 import static com.frontanilla.farminghappyness.utils.Constants.AYARN_COST;
@@ -23,7 +28,6 @@ import static com.frontanilla.farminghappyness.utils.Constants.ELSKA_ID;
 import static com.frontanilla.farminghappyness.utils.Constants.ELSKER_COST;
 import static com.frontanilla.farminghappyness.utils.Constants.ELSKER_ID;
 import static com.frontanilla.farminghappyness.utils.Constants.ENEMY_HEIGHT;
-import static com.frontanilla.farminghappyness.utils.Constants.ENEMY_SPAWN_RATE;
 import static com.frontanilla.farminghappyness.utils.Constants.ENEMY_WIDTH;
 import static com.frontanilla.farminghappyness.utils.Constants.GRA_COST;
 import static com.frontanilla.farminghappyness.utils.Constants.GRA_ID;
@@ -55,12 +59,14 @@ public class GameLogic {
     private GameConnector connector;
     private float time;
     private boolean lost, playerReady;
+    private int kills;
 
     public GameLogic(GameConnector connector) {
         this.connector = connector;
         time = 0;
         lost = false;
         playerReady = false;
+        kills = 0;
     }
 
     //--------------------
@@ -68,46 +74,77 @@ public class GameLogic {
     //--------------------
     public void update(float delta) {
         if (!lost) {
+            time += delta;
             connector.getCamera().handleInput();
             connector.getCamera().update();
             connector.getGameRenderer().getDynamicBatch().setProjectionMatrix(connector.getCamera().combined);
 
             connector.getGameState().getAmbientArea().update(delta);
             connector.getGameState().getRiverArea().update(delta);
-            updatePlants(delta);
+            if (playerReady) {
+                updatePlants(delta);
+            }
             updateEnemies(delta);
             updateTurrets(delta);
+            updateWalls();
             updateMines(delta);
             updateBullets(delta);
 
-            time += delta;
-            if (time >= ENEMY_SPAWN_RATE && playerReady) {
-                spawnEnemy();
-                while (time >= ENEMY_SPAWN_RATE) {
-                    time -= ENEMY_SPAWN_RATE;
-                }
+            if (playerReady) {
+                connector.getGameState().getLevel().update(delta, this);
             }
 
-            connector.getGameState().getDisplayArea().update(delta, connector.getGameState().getMoney(), connector.getGameState().getWorkers());
+            connector.getGameState().getDisplayArea().update(delta, connector.getGameState().getMoney(), connector.getGameState().getAvailableWorkers());
         }
     }
 
     private void updatePlants(float delta) {
-        for (Plant p : connector.getGameState().getPlants()) {
-            p.update(delta);
+        connector.getGameState().getPlants().begin();
+
+        for (ButtonTile tile : connector.getGameState().getFarmingArea().getTiles()) {
+            if (tile.getGameEntity() != null) {
+                Plant plant = (Plant) tile.getGameEntity();
+                plant.update(delta);
+                if (plant.isReady()) {
+                    connector.getGameState().setMoney(connector.getGameState().getMoney() + plant.getSellPrice());
+                    connector.getGameState().setAvailableWorkers(connector.getGameState().getAvailableWorkers() + 1);
+                    connector.getGameState().getPlants().removeValue(plant, true);
+                    tile.setGameEntity(null);
+                }
+            }
         }
+
+        connector.getGameState().getPlants().end();
     }
 
     private void updateEnemies(float delta) {
-        boolean willRestart = false; // TODO improve this logic
+        boolean willRestart = false; // TODO testing restart, delete
         connector.getGameState().getEnemies().begin();
-        for (Enemy e : connector.getGameState().getEnemies()) {
-            e.update(delta, connector.getGameState().getDefenses());
-            if (!e.isAlive()) {
-                connector.getGameState().getEnemies().removeValue(e, true);
-                connector.getGameState().setMoney(connector.getGameState().getMoney() + 1);
+        for (Enemy enemy : connector.getGameState().getEnemies()) {
+            enemy.update(delta, connector.getGameState().getDefenses());
+            if (enemy.isLifeless()) {
+                connector.getGameState().getEnemies().removeValue(enemy, true);
+                kills++;
+                if (connector.getGameState().getLevel().isCompleted(kills)) {
+                    switch (connector.getGameState().getLevel().getLevelNumber()) {
+                        case 1:
+                            connector.getGameState().setLevel(Level.level2);
+                            break;
+                        case 2:
+                            connector.getGameState().setLevel(Level.level3);
+                            break;
+                        case 3:
+                            connector.getGameState().setLevel(Level.level4);
+                            break;
+                        case 4:
+                            restart();
+                            break;
+                    }
+                    kills = 0;
+                }
+                //connector.getGameState().setMoney(connector.getGameState().getMoney() + 1); TODO money comes from plants
             }
-            if (Util.getDistance(e.getCenter(), connector.getGameState().getFarmingArea().getCenter()) < ENEMY_WIDTH / 2f) {
+            if (Util.getDistance(enemy.getCenter(), connector.getGameState().getFarmingArea().getCenter()) < ENEMY_WIDTH / 2f) {
                 willRestart = true;
                 //lost = true;
             }
@@ -118,7 +155,27 @@ public class GameLogic {
         }
     }
 
+    private void updateWalls() {
+        connector.getGameState().getDefenses().begin();
+
+        for (NinePatcherTile ninePatcherTile : connector.getGameState().getDefenseArea().getTiles()) {
+            if (ninePatcherTile.getGameEntity() != null) {
+                if (ninePatcherTile.getGameEntity() instanceof Wall) {
+                    Wall wall = (Wall) ninePatcherTile.getGameEntity();
+                    if (wall.isLifeless()) {
+                        connector.getGameState().getDefenses().removeValue(wall, true);
+                        ninePatcherTile.setGameEntity(null);
+                    }
+                }
+            }
+        }
+
+        connector.getGameState().getDefenses().end();
+    }
+
     private void updateTurrets(float delta) {
+        connector.getGameState().getDefenses().begin();
+
         for (NinePatcherTile ninePatcherTile : connector.getGameState().getDefenseArea().getTiles()) {
             if (ninePatcherTile.getGameEntity() != null) {
                 if (ninePatcherTile.getGameEntity() instanceof Turret) {
@@ -132,27 +189,39 @@ public class GameLogic {
                             break;
                         }
                     }
+                    if (turret.isLifeless()) {
+                        connector.getGameState().getDefenses().removeValue(turret, true);
+                    }
                 }
             }
         }
+
+        connector.getGameState().getDefenses().end();
     }
 
     private void updateMines(float delta) {
+        connector.getGameState().getDefenses().begin();
         for (NinePatcherTile ninePatcherTile : connector.getGameState().getDefenseArea().getTiles()) {
             if (ninePatcherTile.getGameEntity() != null) {
                 if (ninePatcherTile.getGameEntity() instanceof Mine) {
-                    ((Mine) ninePatcherTile.getGameEntity()).update(delta);
+                    Mine mine = (Mine) ninePatcherTile.getGameEntity();
+                    mine.update(delta);
+                    if (mine.isActivated()) {
+                        connector.getGameState().getDefenses().removeValue(mine, true);
+                        ninePatcherTile.setGameEntity(null);
+                    }
                 }
             }
         }
+        connector.getGameState().getDefenses().end();
     }
 
     private void updateBullets(float delta) {
         connector.getGameState().getBullets().begin();
-        for (Bullet b : connector.getGameState().getBullets()) {
-            b.update(delta);
-            if (b.hasExploded()) {
-                connector.getGameState().getBullets().removeValue(b, true);
+        for (Bullet bullet : connector.getGameState().getBullets()) {
+            bullet.update(delta);
+            if (bullet.hasExploded()) {
+                connector.getGameState().getBullets().removeValue(bullet, true);
             }
         }
         connector.getGameState().getBullets().end();
@@ -161,19 +230,45 @@ public class GameLogic {
     //--------------------
     //       ACTIONS
     //--------------------
-    private void spawnEnemy() {
+    public void spawnEnemy(EnemyType enemyType) {
         boolean randSide = MathUtils.randomBoolean();
-        Tourist newTourist;
+        Enemy newEnemy = null;
         if (randSide) { // Left
             float randY = MathUtils.random(0, WORLD_HEIGHT - ENEMY_HEIGHT - RIVER_TILE_SIZE);
-            newTourist = new Tourist(-ENEMY_WIDTH, randY);
+            switch (enemyType) {
+                case TOURIST:
+                    newEnemy = new Tourist(-ENEMY_WIDTH, randY);
+                    break;
+                case POLICE:
+                    newEnemy = new Police(-ENEMY_WIDTH, randY);
+                    break;
+                case MILITARY:
+                    newEnemy = new Military(-ENEMY_WIDTH, randY);
+                    break;
+                case ALIEN:
+                    newEnemy = new Alien(-ENEMY_WIDTH, randY);
+                    break;
+            }
         } else { // Bottom
             float randX = MathUtils.random(0, WORLD_WIDTH - ENEMY_WIDTH);
-            newTourist = new Tourist(randX, -ENEMY_HEIGHT);
+            switch (enemyType) {
+                case TOURIST:
+                    newEnemy = new Tourist(randX, -ENEMY_HEIGHT);
+                    break;
+                case POLICE:
+                    newEnemy = new Police(randX, -ENEMY_HEIGHT);
+                    break;
+                case MILITARY:
+                    newEnemy = new Military(randX, -ENEMY_HEIGHT);
+                    break;
+                case ALIEN:
+                    newEnemy = new Alien(randX, -ENEMY_HEIGHT);
+                    break;
+            }
         }
-        float angle = Util.getAngle(newTourist.getCenter(), connector.getGameState().getFarmingArea().getCenter());
-        newTourist.setAngle(angle);
-        connector.getGameState().getEnemies().add(newTourist);
+        float angle = Util.getAngle(newEnemy.getCenter(), connector.getGameState().getFarmingArea().getCenter());
+        newEnemy.setAngle(angle);
+        connector.getGameState().getEnemies().add(newEnemy);
     }
 
     private void placeDefense(NinePatcherTile tile) {
@@ -206,60 +301,70 @@ public class GameLogic {
                 tile.setGameEntity(newPlant);
                 connector.getGameState().getPlants().add(newPlant);
                 connector.getGameState().setMoney(connector.getGameState().getMoney() - ELSKER_COST);
+                connector.getGameState().setAvailableWorkers(connector.getGameState().getAvailableWorkers() - 1);
                 break;
             case GRA_ID:
                 newPlant = new Plant(Plant.GRA, tile);
                 tile.setGameEntity(newPlant);
                 connector.getGameState().getPlants().add(newPlant);
                 connector.getGameState().setMoney(connector.getGameState().getMoney() - GRA_COST);
+                connector.getGameState().setAvailableWorkers(connector.getGameState().getAvailableWorkers() - 1);
                 break;
             case KOCHAM_ID:
                 newPlant = new Plant(Plant.KOCHAM, tile);
                 tile.setGameEntity(newPlant);
                 connector.getGameState().getPlants().add(newPlant);
                 connector.getGameState().setMoney(connector.getGameState().getMoney() - KOCHAM_COST);
+                connector.getGameState().setAvailableWorkers(connector.getGameState().getAvailableWorkers() - 1);
                 break;
             case SZERELEM_ID:
                 newPlant = new Plant(Plant.SZERELEM, tile);
                 tile.setGameEntity(newPlant);
                 connector.getGameState().getPlants().add(newPlant);
                 connector.getGameState().setMoney(connector.getGameState().getMoney() - SZERELEM_COST);
+                connector.getGameState().setAvailableWorkers(connector.getGameState().getAvailableWorkers() - 1);
                 break;
             case ELSKA_ID:
                 newPlant = new Plant(Plant.ELSKA, tile);
                 tile.setGameEntity(newPlant);
                 connector.getGameState().getPlants().add(newPlant);
                 connector.getGameState().setMoney(connector.getGameState().getMoney() - ELSKA_COST);
+                connector.getGameState().setAvailableWorkers(connector.getGameState().getAvailableWorkers() - 1);
                 break;
             case AYARN_ID:
                 newPlant = new Plant(Plant.AYARN, tile);
                 tile.setGameEntity(newPlant);
                 connector.getGameState().getPlants().add(newPlant);
                 connector.getGameState().setMoney(connector.getGameState().getMoney() - AYARN_COST);
+                connector.getGameState().setAvailableWorkers(connector.getGameState().getAvailableWorkers() - 1);
                 break;
             case SEVIYORUM_ID:
                 newPlant = new Plant(Plant.SEVIYORUM, tile);
                 tile.setGameEntity(newPlant);
                 connector.getGameState().getPlants().add(newPlant);
                 connector.getGameState().setMoney(connector.getGameState().getMoney() - SEVIYORUM_COST);
+                connector.getGameState().setAvailableWorkers(connector.getGameState().getAvailableWorkers() - 1);
                 break;
             case MILESTIBA_ID:
                 newPlant = new Plant(Plant.MILESTIBA, tile);
                 tile.setGameEntity(newPlant);
                 connector.getGameState().getPlants().add(newPlant);
                 connector.getGameState().setMoney(connector.getGameState().getMoney() - MILESTIBA_COST);
+                connector.getGameState().setAvailableWorkers(connector.getGameState().getAvailableWorkers() - 1);
                 break;
             case RAKKAUS_ID:
                 newPlant = new Plant(Plant.RAKKAUS, tile);
                 tile.setGameEntity(newPlant);
                 connector.getGameState().getPlants().add(newPlant);
                 connector.getGameState().setMoney(connector.getGameState().getMoney() - RAKKAUS_COST);
+                connector.getGameState().setAvailableWorkers(connector.getGameState().getAvailableWorkers() - 1);
                 break;
             case KAERLIGHED_ID:
                 newPlant = new Plant(Plant.KAERLIGHED, tile);
                 tile.setGameEntity(newPlant);
                 connector.getGameState().getPlants().add(newPlant);
                 connector.getGameState().setMoney(connector.getGameState().getMoney() - KAERLIGHED_COST);
+                connector.getGameState().setAvailableWorkers(connector.getGameState().getAvailableWorkers() - 1);
                 break;
         }
     }
@@ -269,6 +374,7 @@ public class GameLogic {
         lost = false;
         time = 0;
         playerReady = false;
+        kills = 0;
     }
 
     //--------------------

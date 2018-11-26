@@ -58,6 +58,10 @@ public class Assets {
     // TODO test
     public static TextureRegion nptest;
     //-------------------
+    //       OTHER
+    //-------------------
+    public static TextureRegion level1, level2, level3, level4;
+    //-------------------
     //       DEBUG
     //-------------------
     public static TextureRegion rangeCircle;
@@ -171,6 +175,12 @@ public class Assets {
         nptest = new TextureRegion(new Texture("images/nptest.png"), 0, 0, 10, 10);
         testFrame = new TextureRegion(new Texture("images/testFrame.png"), 0, 0, 100, 100);
         toggleMenuPanel = new TextureRegion(new Texture("images/testPanel.png"), 0, 0, 3, 3);
+        // Levels
+        Texture levels = new Texture("images/levels.png");
+        level1 = new TextureRegion(levels, 0, 0, 800, 200);
+        level2 = new TextureRegion(levels, 0, 200, 800, 200);
+        level3 = new TextureRegion(levels, 0, 400, 800, 200);
+        level4 = new TextureRegion(levels, 0, 600, 800, 200);
         //-------------------
         //    TOGGLE MENU
         //-------------------

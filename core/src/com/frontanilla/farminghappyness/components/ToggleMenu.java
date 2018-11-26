@@ -25,8 +25,6 @@ import static com.frontanilla.farminghappyness.utils.Constants.MENU_BUTTON_SIZE;
 import static com.frontanilla.farminghappyness.utils.Constants.MENU_BUTTON_X_OFFSET;
 import static com.frontanilla.farminghappyness.utils.Constants.MENU_BUTTON_Y_OFFSET;
 import static com.frontanilla.farminghappyness.utils.Constants.MENU_BUTTON_Y_SPACING;
-import static com.frontanilla.farminghappyness.utils.Constants.TOGGLE_MENU_HEIGHT;
-import static com.frontanilla.farminghappyness.utils.Constants.TOGGLE_MENU_WIDTH;
 import static com.frontanilla.farminghappyness.utils.Constants.MILESTIBA_COST;
 import static com.frontanilla.farminghappyness.utils.Constants.MILESTIBA_ID;
 import static com.frontanilla.farminghappyness.utils.Constants.MINE_COST;
@@ -39,6 +37,8 @@ import static com.frontanilla.farminghappyness.utils.Constants.SEVIYORUM_COST;
 import static com.frontanilla.farminghappyness.utils.Constants.SEVIYORUM_ID;
 import static com.frontanilla.farminghappyness.utils.Constants.SZERELEM_COST;
 import static com.frontanilla.farminghappyness.utils.Constants.SZERELEM_ID;
+import static com.frontanilla.farminghappyness.utils.Constants.TOGGLE_MENU_HEIGHT;
+import static com.frontanilla.farminghappyness.utils.Constants.TOGGLE_MENU_WIDTH;
 import static com.frontanilla.farminghappyness.utils.Constants.TRAP_ID;
 import static com.frontanilla.farminghappyness.utils.Constants.TURRET_COST;
 import static com.frontanilla.farminghappyness.utils.Constants.TURRET_HEIGHT;
@@ -241,7 +241,7 @@ public class ToggleMenu {
                 KAERLIGHED_ID));
     }
 
-    public void update(float delta, int money) {
+    public void update(float delta, int money, int availableWorkers) {
         // Activating
         if (menuState == MenuState.ACTIVATING_DEFENSES_MENU || menuState == MenuState.ACTIVATING_PLANTS_MENU) {
             time += delta;
@@ -276,7 +276,7 @@ public class ToggleMenu {
         // Update defense buttons to show availability
         for (ToggleMenuButton button : defenseButtons) {
             button.setX(x + MENU_BUTTON_X_OFFSET);
-            if (button.getCost() > money) {
+            if (button.getPlantCost() > money) {
                 button.setColor(Color.GRAY);
             } else {
                 if (button.getColor() == Color.GRAY) {
@@ -285,13 +285,13 @@ public class ToggleMenu {
             }
         }
         // Update plant buttons to show availability
-        for (ToggleMenuButton button : plantButtons) {
-            button.setX(x + MENU_BUTTON_X_OFFSET);
-            if (button.getCost() > money) {
-                button.setColor(Color.GRAY);
+        for (ToggleMenuButton plantButton : plantButtons) {
+            plantButton.setX(x + MENU_BUTTON_X_OFFSET);
+            if (plantButton.getPlantCost() > availableWorkers) {
+                plantButton.setColor(Color.GRAY);
             } else {
-                if (button.getColor() == Color.GRAY) {
-                    button.setColor(Color.SKY);
+                if (plantButton.getColor() == Color.GRAY) {
+                    plantButton.setColor(Color.SKY);
                 }
             }
         }
@@ -320,9 +320,13 @@ public class ToggleMenu {
                 b.render(batch);
             }
         } else if (menuState == MenuState.SHOWING_PLANTS_MENU) {
-            for (ToggleMenuButton b : plantButtons) {
-                b.render(batch);
+            // TODO render only 4 for now
+            for (int i = 0; i < 4; i++) {
+                plantButtons.get(i).render(batch);
             }
+//            for (ToggleMenuButton b : plantButtons) {
+//                b.render(batch);
+//            }
         }
     }
 

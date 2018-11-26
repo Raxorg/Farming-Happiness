@@ -40,7 +40,7 @@ public class ToggleMenuButton extends Button {
         return ID;
     }
 
-    public int getCost() {
+    public int getPlantCost() {
         return cost;
     }
 }

@@ -39,7 +39,7 @@ public class Plant extends Progressable {
     private TextureRegion textureRegion;
     // Attributes
     private PlantType plantType;
-    private int buyCost, sellCost;
+    private int buyCost, sellPrice;
     //region Plants
     public static Plant ELSKER = new Plant(
             PlantType.ELSKER,
@@ -83,7 +83,7 @@ public class Plant extends Progressable {
             KAERLIGHED_SELL_PRICE);
     //endregion
 
-    private Plant(PlantType plantType, int buyCost, int sellCost) {
+    private Plant(PlantType plantType, int buyCost, int sellPrice) {
         super(new Rectangle(), PLANT_PRODUCTION_TIME);
         switch (plantType) {
             case ELSKER:
@@ -119,7 +119,7 @@ public class Plant extends Progressable {
         }
         this.plantType = plantType;
         this.buyCost = buyCost;
-        this.sellCost = sellCost;
+        this.sellPrice = sellPrice;
     }
 
     public Plant(Plant plant, ButtonTile buttonTile) {
@@ -129,9 +129,13 @@ public class Plant extends Progressable {
         // Plant
         plantType = plant.plantType;
         buyCost = plant.buyCost;
-        sellCost = plant.sellCost;
+        sellPrice = plant.sellPrice;
         // Logic
         progress = 0;
+    }
+
+    public boolean isReady() {
+        return progress == maxProgress;
     }
 
     public void update(float delta) {
@@ -143,7 +147,13 @@ public class Plant extends Progressable {
         batch.draw(
                 textureRegion,
                 bounds.x,
-                bounds.y);
+                bounds.y,
+                bounds.width,
+                bounds.height);
         progressBar.render(batch);
+    }
+
+    public int getSellPrice() {
+        return sellPrice;
     }
 }

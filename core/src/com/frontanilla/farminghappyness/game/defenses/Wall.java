@@ -30,10 +30,6 @@ public class Wall extends Defense {
                 Assets.wall,
                 bounds.x - WALL_X_OFFSET,
                 bounds.y);
-    }
-
-    @Override
-    public void takeDamage(int damage) {
-
+        lifeBar.render(batch);
     }
 }

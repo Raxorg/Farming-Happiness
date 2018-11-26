@@ -18,12 +18,14 @@ import static com.frontanilla.farminghappyness.utils.Constants.ENEMY_WIDTH;
 public abstract class Enemy extends Damageable {
 
     protected Animation<TextureRegion> animation;
-    protected float speed, angle, time;
+    protected int damage;
+    protected float speed, angle, time, attackTime;
     protected Enums.EnemyState state;
 
-    public Enemy(Animation<TextureRegion> animation, float x, float y, float speed, int life) {
+    public Enemy(Animation<TextureRegion> animation, float x, float y, float speed, int life, int damage) {
         super(new Rectangle(x, y, ENEMY_WIDTH, ENEMY_HEIGHT), life);
         this.animation = animation;
+        this.damage = damage;
         this.speed = speed;
         time = 0;
         state = Enums.EnemyState.MOVING;
@@ -59,9 +61,5 @@ public abstract class Enemy extends Damageable {
 
     public void setAngle(float angle) {
         this.angle = angle;
-    }
-
-    public boolean isAlive() {
-        return life > 0;
     }
 }

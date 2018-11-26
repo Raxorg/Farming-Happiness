@@ -19,6 +19,9 @@ public class ProgressBar {
     }
 
     public void render(SpriteBatch batch) {
+        if (progressable.getProgress() == 0) {
+            return;
+        }
         // Left side
         batch.draw(
                 Assets.barSides,

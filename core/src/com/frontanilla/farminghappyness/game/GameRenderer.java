@@ -50,8 +50,8 @@ public class GameRenderer {
         dynamicBatch.end();
         // Render static display area
         staticBatch.begin();
-        connector.getGameState().getDisplayArea().render(staticBatch);
         connector.getGameState().getFarmingArea().getLaboratory().renderTechTree(staticBatch);
+        connector.getGameState().getDisplayArea().render(staticBatch);
         staticBatch.end();
     }
 

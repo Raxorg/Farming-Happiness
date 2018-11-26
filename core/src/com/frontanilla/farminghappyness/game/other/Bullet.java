@@ -9,6 +9,7 @@ import com.frontanilla.farminghappyness.utils.Point;
 import com.frontanilla.farminghappyness.utils.Util;
 
 import static com.frontanilla.farminghappyness.utils.Constants.ENEMY_WIDTH;
+import static com.frontanilla.farminghappyness.utils.Constants.TURRET_BULLET_DAMAGE;
 import static com.frontanilla.farminghappyness.utils.Constants.TURRET_BULLET_SIZE;
 import static com.frontanilla.farminghappyness.utils.Constants.TURRET_BULLET_SPEED;
 
@@ -37,7 +38,7 @@ public class Bullet {
         position.setY(position.getY() + y * TURRET_BULLET_SPEED);
         // Collision detection
         if (Util.getDistance(getCenter(), target.getCenter()) < ENEMY_WIDTH) {
-            target.setLife(target.getLife() - 1);
+            target.takeDamage(TURRET_BULLET_DAMAGE);
             exploded = true;
         }
     }

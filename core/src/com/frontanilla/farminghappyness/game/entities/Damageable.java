@@ -23,6 +23,10 @@ public abstract class Damageable extends GameEntity {
         }
     }
 
+    public boolean isLifeless() {
+        return lifeless;
+    }
+
     public int getInitialLife() {
         return initialLife;
     }

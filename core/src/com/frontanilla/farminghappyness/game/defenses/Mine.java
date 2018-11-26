@@ -13,25 +13,17 @@ import static com.frontanilla.farminghappyness.utils.Constants.MINE_WIDTH;
 public class Mine extends Defense {
 
     private boolean activated;
-    private float activationTime, animationTime;
+    private float animationTime;
 
     public Mine(NinePatcherTile ninePatcherTile) {
         super(new Rectangle(ninePatcherTile.getX(), ninePatcherTile.getY(), MINE_WIDTH, MINE_HEIGHT), MINE_INITIAL_HEALTH);
         activated = false;
-        activationTime = 0;
         animationTime = 0;
     }
 
     @Override
     public void update(float delta) {
         animationTime += delta;
-        if (activated) {
-            activationTime += delta;
-            if (activationTime >= 7) {
-                activated = false;
-                activationTime = 0;
-            }
-        }
     }
 
     @Override
@@ -49,10 +41,5 @@ public class Mine extends Defense {
 
     public boolean isActivated() {
         return activated;
-    }
-
-    @Override
-    public void takeDamage(int damage) {
-
     }
 }

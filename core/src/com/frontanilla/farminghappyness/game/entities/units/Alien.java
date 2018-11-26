@@ -6,18 +6,17 @@ import com.frontanilla.farminghappyness.game.defenses.Mine;
 import com.frontanilla.farminghappyness.game.defenses.Wall;
 import com.frontanilla.farminghappyness.utils.Assets;
 
+import static com.frontanilla.farminghappyness.utils.Constants.ALIEN_DAMAGE;
+import static com.frontanilla.farminghappyness.utils.Constants.ALIEN_INITIAL_LIFE;
+import static com.frontanilla.farminghappyness.utils.Constants.ALIEN_SPEED;
 import static com.frontanilla.farminghappyness.utils.Constants.MINE_DAMAGE;
-import static com.frontanilla.farminghappyness.utils.Constants.POLICE_ATTACK_COOLDOWN;
-import static com.frontanilla.farminghappyness.utils.Constants.POLICE_DAMAGE;
-import static com.frontanilla.farminghappyness.utils.Constants.POLICE_INITIAL_LIFE;
-import static com.frontanilla.farminghappyness.utils.Constants.POLICE_SPEED;
+import static com.frontanilla.farminghappyness.utils.Constants.TOURIST_ATTACK_COOLDOWN;
 import static com.frontanilla.farminghappyness.utils.Enums.EnemyState.MOVING;
 import static com.frontanilla.farminghappyness.utils.Enums.EnemyState.STUCK;
 
-public class Police extends Enemy {
-
-    public Police(float x, float y) {
-        super(Assets.enemyAnimation, x, y, POLICE_SPEED, POLICE_INITIAL_LIFE, POLICE_DAMAGE);
+public class Alien extends Enemy {
+    public Alien(float x, float y) {
+        super(Assets.enemyAnimation, x, y, ALIEN_SPEED, ALIEN_INITIAL_LIFE, ALIEN_DAMAGE);
     }
 
     @Override
@@ -36,8 +35,8 @@ public class Police extends Enemy {
                         }
                     } else {
                         attackTime += delta;
-                        if (attackTime >= POLICE_ATTACK_COOLDOWN) {
-                            attackTime -= POLICE_ATTACK_COOLDOWN;
+                        if (attackTime >= TOURIST_ATTACK_COOLDOWN) {
+                            attackTime -= TOURIST_ATTACK_COOLDOWN;
                             defense.takeDamage(damage);
                         }
                     }

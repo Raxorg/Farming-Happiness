@@ -89,6 +89,7 @@ public class Constants {
     // Turret cannon
     public static final int TURRET_CANNON_HEIGHT = 43;
     // Turret bullet
+    public static final int TURRET_BULLET_DAMAGE = 1;
     public static final int TURRET_BULLET_SIZE = TURRET_WIDTH / 10;
     public static final float TURRET_BULLET_SPEED = 350f;
     //------------------
@@ -108,6 +109,7 @@ public class Constants {
     // Stats
     public static final int MINE_INITIAL_HEALTH = 5;
     public static final int MINE_COST = 2;
+    public static final int MINE_DAMAGE = 10;
     //------------------
     //      ENEMIES
     //------------------
@@ -115,10 +117,33 @@ public class Constants {
     public static final float ENEMY_HEIGHT = ENEMY_WIDTH * 1.8f;
     public static final float ENEMY_SPAWN_RATE = 0.25f;
     //------------------
-    //     TOURISTS
+    //     TOURIST
     //------------------
     public static final int TOURIST_INITIAL_LIFE = 7;
     public static final float TOURIST_SPEED = 50f;
+    public static final float TOURIST_ATTACK_COOLDOWN = 3f;
+    public static final int TOURIST_DAMAGE = 1;
+    //------------------
+    //      POLICE
+    //------------------
+    public static final int POLICE_INITIAL_LIFE = 10;
+    public static final float POLICE_SPEED = 60f;
+    public static final float POLICE_ATTACK_COOLDOWN = 1.5f;
+    public static final int POLICE_DAMAGE = 2;
+    //------------------
+    //     MILITARY
+    //------------------
+    public static final int MILITARY_INITIAL_LIFE = 13;
+    public static final float MILITARY_SPEED = 70f;
+    public static final float MILITARY_ATTACK_COOLDOWN = 1f;
+    public static final int MILITARY_DAMAGE = 3;
+    //------------------
+    //      ALIEN
+    //------------------
+    public static final int ALIEN_INITIAL_LIFE = 16;
+    public static final float ALIEN_SPEED = 80f;
+    public static final float ALIEN_ATTACK_COOLDOWN = 0.5f;
+    public static final int ALIEN_DAMAGE = 4;
     // Life bars
     public static final float LIFE_BAR_HEIGHT = 3f;
     public static final float LIFE_BAR_SIDES_WIDTH = (LIFE_BAR_HEIGHT / 3f);

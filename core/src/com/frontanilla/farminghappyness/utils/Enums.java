@@ -10,9 +10,16 @@ public class Enums {
 
     public enum EnemyState {
         MOVING,
-        CLIMBING,
+        STUCK,
         SHOOTING,
         SHOOTING_AND_MOVING
+    }
+
+    public enum EnemyType {
+        TOURIST,
+        POLICE,
+        MILITARY,
+        ALIEN
     }
 
     public enum MenuState {

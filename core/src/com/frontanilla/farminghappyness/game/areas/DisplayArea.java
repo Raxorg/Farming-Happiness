@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.frontanilla.farminghappyness.components.Button;
+import com.frontanilla.farminghappyness.components.LevelLabel;
 import com.frontanilla.farminghappyness.components.ResourceFrame;
 import com.frontanilla.farminghappyness.components.ToggleMenu;
 import com.frontanilla.farminghappyness.utils.Assets;
@@ -17,6 +18,7 @@ public class DisplayArea {
     private ResourceFrame moneyFrame, workerFrame;
     private ToggleMenu toggleMenu;
     private Button readyButton;
+    private LevelLabel levelLabel;
 
     public DisplayArea() {
         // Money resource frame
@@ -40,12 +42,15 @@ public class DisplayArea {
                 0,
                 Assets.readyButton.getRegionWidth(),
                 Assets.readyButton.getRegionHeight());
+        // Level label
+        levelLabel = new LevelLabel(1);
     }
 
-    public void update(float delta, int money, int workers) {
+    public void update(float delta, int money, int availableWorkers) {
         moneyFrame.setQuantity(money);
-        workerFrame.setQuantity(workers);
-        toggleMenu.update(delta, money);
+        workerFrame.setQuantity(availableWorkers);
+        toggleMenu.update(delta, money, availableWorkers);
+        levelLabel.update(delta);
     }
 
     public void render(SpriteBatch staticBatch) {
@@ -53,6 +58,7 @@ public class DisplayArea {
         workerFrame.render(staticBatch);
         toggleMenu.render(staticBatch);
         readyButton.render(staticBatch);
+        levelLabel.render(staticBatch);
     }
 
     //----------------------------
@@ -65,5 +71,9 @@ public class DisplayArea {
 
     public Button getReadyButton() {
         return readyButton;
+    }
+
+    public LevelLabel getLevelLabel() {
+        return levelLabel;
     }
 }

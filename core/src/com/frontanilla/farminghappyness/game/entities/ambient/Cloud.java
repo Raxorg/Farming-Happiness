@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.frontanilla.farminghappyness.game.entities.GameEntity;
 import com.frontanilla.farminghappyness.utils.Assets;
 
+import static com.frontanilla.farminghappyness.utils.Constants.CLOUD_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.RIVER_TILE_SIZE;
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_HEIGHT;
 import static com.frontanilla.farminghappyness.utils.Constants.WORLD_WIDTH;
@@ -24,7 +25,7 @@ public class Cloud extends GameEntity {
         bounds.x += delta * speed;
         if (bounds.x >= WORLD_WIDTH) {
             bounds.x = -bounds.width;
-            bounds.y = MathUtils.random(WORLD_HEIGHT - RIVER_TILE_SIZE);
+            bounds.y = MathUtils.random(WORLD_HEIGHT - CLOUD_HEIGHT);
         }
     }
 

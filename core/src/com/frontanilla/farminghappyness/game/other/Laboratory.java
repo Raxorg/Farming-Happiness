@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.frontanilla.farminghappyness.components.Button;
 import com.frontanilla.farminghappyness.components.TechTreePanel;
+import com.frontanilla.farminghappyness.game.entities.Progressable;
+import com.frontanilla.farminghappyness.utils.Assets;
 
 public class Laboratory extends Button {
 
@@ -16,15 +18,23 @@ public class Laboratory extends Button {
         showingTechTree = false;
     }
 
-    @Override
-    public void render(SpriteBatch batch) {
-        super.render(batch);
-    }
-
     public void renderTechTree(SpriteBatch batch) {
         if (showingTechTree) {
             techTreePanel.render(batch);
         }
+    }
+
+    //----------------------------
+    //      GETTERS & SETTERS
+    //----------------------------
+
+
+    public TechTreePanel getTechTreePanel() {
+        return techTreePanel;
+    }
+
+    public boolean isShowingTechTree() {
+        return showingTechTree;
     }
 
     public void toggleShowingTechTree() {

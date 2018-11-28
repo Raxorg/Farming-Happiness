@@ -28,10 +28,11 @@ public class DisplayArea {
                 RESOURCE_FRAME_Y,
                 Assets.dollar);
         // Workers resource frame
-        workerFrame = new ResourceFrame(Color.SALMON,
+        workerFrame = new ResourceFrame(
+                Color.SALMON,
                 RESOURCE_FRAME_X + RESOURCE_FRAME_WIDTH,
                 RESOURCE_FRAME_Y,
-                Assets.dollar
+                Assets.pickaxe
         );
         // Defenses menu
         toggleMenu = new ToggleMenu();

@@ -19,7 +19,10 @@ public class Assets {
     //-------------------
     //     BUILDINGS
     //-------------------
-    public static TextureRegion farmBase, laboratory;
+    // Farm base
+    public static TextureRegion farmBase;
+    // Laboratory
+    public static TextureRegion laboratory, closeButton, research, researchCost;
     //-------------------
     //      PLANTS
     //-------------------
@@ -46,7 +49,7 @@ public class Assets {
     //-------------------
     //       HUD
     //-------------------
-    public static TextureRegion toggleMenuPanel, barSides, centerLifeBar, dollar, centerEmptyLifeBar, triangle, resourceFrame;
+    public static TextureRegion toggleMenuPanel, barSides, centerLifeBar, dollar, pickaxe, centerEmptyLifeBar, triangle, resourceFrame;
     public static TextureRegion testFrame, testToggleButtonRight, testToggleButtonLeft;
     public static TextureRegion readyButton;
     //-------------------
@@ -78,8 +81,13 @@ public class Assets {
         //     BUILDINGS
         //-------------------
         Texture buildings = new Texture("images/buildings.png");
+        // Farm base
         farmBase = new TextureRegion(buildings, 0, 0, FARM_BASE_WIDTH, FARM_BASE_HEIGHT);
+        // Laboratory
         laboratory = new TextureRegion(buildings, FARM_BASE_WIDTH, 0, LABORATORY_WIDTH, LABORATORY_HEIGHT);
+        closeButton = new TextureRegion(new Texture("images/cancel.png"));
+        research = new TextureRegion(new Texture("images/research.png"));
+        researchCost = new TextureRegion(new Texture("images/researchCost.png"));
         //-------------------
         //      PLANTS
         //-------------------
@@ -165,6 +173,8 @@ public class Assets {
         resourceFrame = new TextureRegion(hud, 290, 0, 300, 100);
         // Dollar
         dollar = new TextureRegion(hud, 591, 0, 54, 41); // TODO WHY +1
+        // Pickaxe
+        pickaxe = new TextureRegion(new Texture("images/pickaxe.png"));
         // Ready button
         readyButton = new TextureRegion(new Texture("images/readyButton.png"));
         //------------------

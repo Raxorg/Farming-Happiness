@@ -54,22 +54,24 @@ public class Constants {
     //-------------------
     //     FARM BASE
     //-------------------
-    public static final int FARM_BASE_WIDTH = 135;
-    public static final int FARM_BASE_HEIGHT = 69;
-    public static final int FARM_BASE_X = WORLD_WIDTH - FARM_BASE_WIDTH;
+    public static final int FARM_BASE_WIDTH = 181;
+    public static final int FARM_BASE_HEIGHT = 93;
+    public static final int FARM_BASE_X = FARMING_AREA_SIZE;
     public static final int FARM_BASE_Y = WORLD_HEIGHT - RIVER_TILE_SIZE - FARM_BASE_HEIGHT;
     //------------------
     //    LABORATORY
     //------------------
     public static final int LABORATORY_WIDTH = 182;
     public static final int LABORATORY_HEIGHT = 103;
-    public static final int LABORATORY_X = WORLD_WIDTH - LABORATORY_WIDTH * 2;
-    public static final int LABORATORY_Y = WORLD_HEIGHT - RIVER_TILE_SIZE - LABORATORY_HEIGHT;
+    public static final int LABORATORY_X = (int) (FARM_BASE_X + FARM_BASE_WIDTH * 1.5f);
+    public static final int LABORATORY_Y = WORLD_HEIGHT - RIVER_TILE_SIZE - FARM_BASE_HEIGHT;
     // Tech tree panel
     public static final float TECH_TREE_PANEL_WIDTH = Gdx.graphics.getWidth() * 0.5f;
     public static final float TECH_TREE_PANEL_HEIGHT = Gdx.graphics.getHeight() * 0.8f;
     public static final float TECH_TREE_PANEL_X = Gdx.graphics.getWidth() - Gdx.graphics.getHeight() * 0.05f - TECH_TREE_PANEL_WIDTH;
     public static final float TECH_TREE_PANEL_Y = Gdx.graphics.getHeight() * 0.1f;
+    // Close button
+    public static final float TECH_TREE_PANEL_CLOSE_BUTTON_SIZE = TECH_TREE_PANEL_WIDTH * 0.1f;
     //------------------
     //      CAMERA
     //------------------
@@ -82,7 +84,7 @@ public class Constants {
     public static final int TURRET_WIDTH = 40;
     public static final int TURRET_HEIGHT = 57;
     // Stats
-    public static final float TURRET_RANGE = 100f;
+    public static final float TURRET_RANGE = 200f;
     public static final float TURRET_COOL_DOWN = 0.2f;
     public static final int TURRET_INITIAL_HEALTH = 2;
     public static final int TURRET_COST = 1;
@@ -128,6 +130,7 @@ public class Constants {
     public static final int POLICE_INITIAL_LIFE = 10;
     public static final float POLICE_SPEED = 60f;
     public static final float POLICE_ATTACK_COOLDOWN = 1f;
+    public static final float POLICE_ATTACK_RANGE = 35f;
     public static final int POLICE_DAMAGE = 2;
     //------------------
     //     MILITARY
@@ -135,6 +138,7 @@ public class Constants {
     public static final int MILITARY_INITIAL_LIFE = 13;
     public static final float MILITARY_SPEED = 70f;
     public static final float MILITARY_ATTACK_COOLDOWN = 0.7f;
+    public static final float MILITARY_ATTACK_RANGE = 50f;
     public static final int MILITARY_DAMAGE = 3;
     //------------------
     //      ALIEN
@@ -142,6 +146,7 @@ public class Constants {
     public static final int ALIEN_INITIAL_LIFE = 16;
     public static final float ALIEN_SPEED = 80f;
     public static final float ALIEN_ATTACK_COOLDOWN = 0.5f;
+    public static final float ALIEN_ATTACK_RANGE = 65f;
     public static final int ALIEN_DAMAGE = 4;
     // Life bars
     public static final float LIFE_BAR_HEIGHT = 3f;

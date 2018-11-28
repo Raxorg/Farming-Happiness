@@ -68,6 +68,9 @@ public class FarmingArea {
     public void render(SpriteBatch batch) {
         // Farm base
         farmBase.render(batch);
+        for (int i = 0; i < 5; i++) {
+            batch.draw(Assets.pathTile, FARM_BASE_X + 81, FARM_BASE_Y - 20 - i * 20);
+        }
         // Laboratory
         laboratory.render(batch);
         for (int i = 0; i < 5; i++) {

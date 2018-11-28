@@ -140,7 +140,7 @@ public class GameLogic {
                             connector.getGameState().getDisplayArea().getLevelLabel().startLevel(4);
                             break;
                         case 4:
-                            restart();
+                            willRestart = true;
                             break;
                     }
                     kills = 0;
@@ -426,6 +426,18 @@ public class GameLogic {
             connector.getGameState().getDisplayArea().getReadyButton().setVisible(false);
             return true;
         }
+        // Check a tap in the laboratory's close button
+        if (connector.getGameState().getFarmingArea().getLaboratory().getTechTreePanel().getCloseButton().contains(x, y)
+                && connector.getGameState().getFarmingArea().getLaboratory().isShowingTechTree()) {
+            connector.getGameState().getFarmingArea().getLaboratory().toggleShowingTechTree();
+            return true;
+        }
+        // Check a tap in the laboratory's research button
+        if (connector.getGameState().getFarmingArea().getLaboratory().getTechTreePanel().getResearchButton().contains(x, y)
+                && connector.getGameState().getFarmingArea().getLaboratory().isShowingTechTree()) {
+
+            return true;
+        }
         return false;
     }
 
@@ -447,7 +459,8 @@ public class GameLogic {
             }
         }
         // Check a tap in the laboratory
-        if (connector.getGameState().getFarmingArea().getLaboratory().contains(x, y)) {
+        if (connector.getGameState().getFarmingArea().getLaboratory().contains(x, y)
+                && !connector.getGameState().getFarmingArea().getLaboratory().isShowingTechTree()) {
             connector.getGameState().getFarmingArea().getLaboratory().toggleShowingTechTree();
         }
     }

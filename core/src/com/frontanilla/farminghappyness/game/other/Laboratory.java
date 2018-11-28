@@ -18,6 +18,10 @@ public class Laboratory extends Button {
         showingTechTree = false;
     }
 
+    public void update(int money) {
+        techTreePanel.update(money);
+    }
+
     public void renderTechTree(SpriteBatch batch) {
         if (showingTechTree) {
             techTreePanel.render(batch);
@@ -27,7 +31,6 @@ public class Laboratory extends Button {
     //----------------------------
     //      GETTERS & SETTERS
     //----------------------------
-
 
     public TechTreePanel getTechTreePanel() {
         return techTreePanel;

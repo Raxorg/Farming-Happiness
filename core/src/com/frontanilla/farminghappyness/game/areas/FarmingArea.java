@@ -85,6 +85,10 @@ public class FarmingArea {
         }
     }
 
+    public FarmBase getFarmBase() {
+        return farmBase;
+    }
+
     public Laboratory getLaboratory() {
         return laboratory;
     }

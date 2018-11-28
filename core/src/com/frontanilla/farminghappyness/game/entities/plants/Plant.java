@@ -156,4 +156,8 @@ public class Plant extends Progressable {
     public int getSellPrice() {
         return sellPrice;
     }
+
+    public void setSellPrice(int sellPrice) {
+        this.sellPrice = sellPrice;
+    }
 }

@@ -20,7 +20,7 @@ public class Assets {
     //     BUILDINGS
     //-------------------
     // Farm base
-    public static TextureRegion farmBase;
+    public static TextureRegion farmBase, hire, hireCost;
     // Laboratory
     public static TextureRegion laboratory, closeButton, research, researchCost;
     //-------------------
@@ -83,6 +83,8 @@ public class Assets {
         Texture buildings = new Texture("images/buildings.png");
         // Farm base
         farmBase = new TextureRegion(buildings, 0, 0, FARM_BASE_WIDTH, FARM_BASE_HEIGHT);
+        hire = new TextureRegion(new Texture("images/hire.png"));
+        hireCost = new TextureRegion(new Texture("images/hireCost.png"));
         // Laboratory
         laboratory = new TextureRegion(buildings, FARM_BASE_WIDTH, 0, LABORATORY_WIDTH, LABORATORY_HEIGHT);
         closeButton = new TextureRegion(new Texture("images/cancel.png"));

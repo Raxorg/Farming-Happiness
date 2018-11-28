@@ -10,10 +10,10 @@ import static com.frontanilla.farminghappyness.utils.Enums.EnemyType.TOURIST;
 
 public class Level {
 
-    public static Level level1 = new Level(TOURIST, 30, 1f);
-    public static Level level2 = new Level(POLICE, 40, 1f);
-    public static Level level3 = new Level(MILITARY, 50, 1f);
-    public static Level level4 = new Level(ALIEN, 60, 1f);
+    public static Level level1 = new Level(TOURIST, 200, 0.5f);
+    public static Level level2 = new Level(POLICE, 40, 0.5f);
+    public static Level level3 = new Level(MILITARY, 50, 0.5f);
+    public static Level level4 = new Level(ALIEN, 30, 0.5f);
 
 
     private EnemyType enemyType;

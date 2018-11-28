@@ -103,6 +103,14 @@ public class GameState {
         this.money = money;
     }
 
+    public int getMaxWorkers() {
+        return maxWorkers;
+    }
+
+    public void setMaxWorkers(int maxWorkers) {
+        this.maxWorkers = maxWorkers;
+    }
+
     public int getAvailableWorkers() {
         return availableWorkers;
     }

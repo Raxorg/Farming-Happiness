@@ -67,9 +67,9 @@ public class Constants {
     public static final int LABORATORY_Y = WORLD_HEIGHT - RIVER_TILE_SIZE - FARM_BASE_HEIGHT;
     // Tech tree panel
     public static final float TECH_TREE_PANEL_WIDTH = Gdx.graphics.getWidth() * 0.5f;
-    public static final float TECH_TREE_PANEL_HEIGHT = Gdx.graphics.getHeight() * 0.8f;
+    public static final float TECH_TREE_PANEL_HEIGHT = Gdx.graphics.getHeight() * 0.4f;
     public static final float TECH_TREE_PANEL_X = Gdx.graphics.getWidth() - Gdx.graphics.getHeight() * 0.05f - TECH_TREE_PANEL_WIDTH;
-    public static final float TECH_TREE_PANEL_Y = Gdx.graphics.getHeight() * 0.1f;
+    public static final float TECH_TREE_PANEL_Y = Gdx.graphics.getHeight() * 0.5f;
     // Close button
     public static final float TECH_TREE_PANEL_CLOSE_BUTTON_SIZE = TECH_TREE_PANEL_WIDTH * 0.1f;
     //------------------

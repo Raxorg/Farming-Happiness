@@ -14,6 +14,7 @@ public class GameRenderer {
     /**
      * This class' job is to establish a rendering order for everything that's gonna be
      * rendered on screen, no logic should be placed in here
+     *
      * @param connector connects the GameRenderer to the rest of classes
      */
     public GameRenderer(GameConnector connector) {
@@ -50,6 +51,7 @@ public class GameRenderer {
         dynamicBatch.end();
         // Render static display area
         staticBatch.begin();
+        connector.getGameState().getFarmingArea().getFarmBase().renderWorkersPanel(staticBatch);
         connector.getGameState().getFarmingArea().getLaboratory().renderTechTree(staticBatch);
         connector.getGameState().getDisplayArea().render(staticBatch);
         staticBatch.end();

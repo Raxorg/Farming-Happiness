@@ -95,6 +95,8 @@ public class GameLogic {
             }
 
             connector.getGameState().getDisplayArea().update(delta, connector.getGameState().getMoney(), connector.getGameState().getAvailableWorkers());
+            connector.getGameState().getFarmingArea().getFarmBase().update(connector.getGameState().getMoney());
+            connector.getGameState().getFarmingArea().getLaboratory().update(connector.getGameState().getMoney());
         }
     }
 
@@ -426,6 +428,21 @@ public class GameLogic {
             connector.getGameState().getDisplayArea().getReadyButton().setVisible(false);
             return true;
         }
+        // Check a tap in the Farm base's close button
+        if (connector.getGameState().getFarmingArea().getFarmBase().getWorkersPanel().getCloseButton().contains(x, y)
+                && connector.getGameState().getFarmingArea().getFarmBase().isShowingWorkersPanel()) {
+            connector.getGameState().getFarmingArea().getFarmBase().toggleShowingWorkersPanel();
+            return true;
+        }
+        // Check a tap in the Farm base's hire button
+        if (connector.getGameState().getFarmingArea().getFarmBase().getWorkersPanel().getHireButton().contains(x, y)
+                && connector.getGameState().getFarmingArea().getFarmBase().isShowingWorkersPanel()
+                && connector.getGameState().getMoney() >= 5) {
+            connector.getGameState().setMaxWorkers(connector.getGameState().getMaxWorkers() + 1);
+            connector.getGameState().setAvailableWorkers(connector.getGameState().getAvailableWorkers() + 1);
+            connector.getGameState().setMoney(connector.getGameState().getMoney() - 5);
+            return true;
+        }
         // Check a tap in the laboratory's close button
         if (connector.getGameState().getFarmingArea().getLaboratory().getTechTreePanel().getCloseButton().contains(x, y)
                 && connector.getGameState().getFarmingArea().getLaboratory().isShowingTechTree()) {
@@ -434,8 +451,13 @@ public class GameLogic {
         }
         // Check a tap in the laboratory's research button
         if (connector.getGameState().getFarmingArea().getLaboratory().getTechTreePanel().getResearchButton().contains(x, y)
-                && connector.getGameState().getFarmingArea().getLaboratory().isShowingTechTree()) {
-
+                && connector.getGameState().getFarmingArea().getLaboratory().isShowingTechTree()
+                && connector.getGameState().getMoney() >= 5) {
+            Plant.ELSKER.setSellPrice(Plant.ELSKER.getSellPrice() + 1);
+            Plant.GRA.setSellPrice(Plant.GRA.getSellPrice() + 1);
+            Plant.KOCHAM.setSellPrice(Plant.KOCHAM.getSellPrice() + 1);
+            Plant.SZERELEM.setSellPrice(Plant.SZERELEM.getSellPrice() + 1);
+            connector.getGameState().setMoney(connector.getGameState().getMoney() - 5);
             return true;
         }
         return false;
@@ -458,9 +480,16 @@ public class GameLogic {
                 placePlant(tile);
             }
         }
+        // Check a tap in the Farm base
+        if (connector.getGameState().getFarmingArea().getFarmBase().contains(x, y)
+                && !connector.getGameState().getFarmingArea().getFarmBase().isShowingWorkersPanel()
+                && !connector.getGameState().getFarmingArea().getLaboratory().isShowingTechTree()) {
+            connector.getGameState().getFarmingArea().getFarmBase().toggleShowingWorkersPanel();
+        }
         // Check a tap in the laboratory
         if (connector.getGameState().getFarmingArea().getLaboratory().contains(x, y)
-                && !connector.getGameState().getFarmingArea().getLaboratory().isShowingTechTree()) {
+                && !connector.getGameState().getFarmingArea().getLaboratory().isShowingTechTree()
+                && !connector.getGameState().getFarmingArea().getFarmBase().isShowingWorkersPanel()) {
             connector.getGameState().getFarmingArea().getLaboratory().toggleShowingTechTree();
         }
     }

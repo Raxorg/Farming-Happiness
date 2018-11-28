@@ -10,13 +10,13 @@ import static com.frontanilla.farminghappyness.utils.Constants.TECH_TREE_PANEL_W
 import static com.frontanilla.farminghappyness.utils.Constants.TECH_TREE_PANEL_X;
 import static com.frontanilla.farminghappyness.utils.Constants.TECH_TREE_PANEL_Y;
 
-public class TechTreePanel {
+public class WorkersPanel {
 
     private NinePatcher panel;
     //private DelayedRemovalArray<Button> buttons;
-    private Button closeButton, researchButton;
+    private Button closeButton, hireButton;
 
-    public TechTreePanel() {
+    public WorkersPanel() {
         // Panel
         panel = new NinePatcher(
                 Assets.toggleMenuPanel,
@@ -25,11 +25,10 @@ public class TechTreePanel {
         panel.setPosition(TECH_TREE_PANEL_X, TECH_TREE_PANEL_Y);
         panel.setWidth(TECH_TREE_PANEL_WIDTH);
         panel.setHeight(TECH_TREE_PANEL_HEIGHT);
-        panel.setColor(Color.NAVY);
-        // Plant buttons
+        panel.setColor(Color.FIREBRICK);
         // Research button
-        researchButton = new Button(
-                Assets.research,
+        hireButton = new Button(
+                Assets.hire,
                 TECH_TREE_PANEL_X + TECH_TREE_PANEL_WIDTH / 2 - TECH_TREE_PANEL_WIDTH / 4f,
                 TECH_TREE_PANEL_Y + TECH_TREE_PANEL_HEIGHT / 2 - TECH_TREE_PANEL_WIDTH / 16f,
                 TECH_TREE_PANEL_WIDTH / 4f,
@@ -45,10 +44,10 @@ public class TechTreePanel {
 
     public void render(SpriteBatch batch) {
         panel.render(batch);
-        researchButton.render(batch);
+        hireButton.render(batch);
         batch.setColor(Color.WHITE);
         batch.draw(
-                Assets.researchCost,
+                Assets.hireCost,
                 TECH_TREE_PANEL_X + TECH_TREE_PANEL_WIDTH / 2,
                 TECH_TREE_PANEL_Y + TECH_TREE_PANEL_HEIGHT / 2 - TECH_TREE_PANEL_WIDTH / 16f,
                 TECH_TREE_PANEL_WIDTH / 4f,
@@ -58,9 +57,9 @@ public class TechTreePanel {
 
     public void update(int money) {
         if (money >= 5) {
-            researchButton.setColor(Color.WHITE);
+            hireButton.setColor(Color.WHITE);
         } else {
-            researchButton.setColor(Color.DARK_GRAY);
+            hireButton.setColor(Color.DARK_GRAY);
         }
     }
 
@@ -73,7 +72,7 @@ public class TechTreePanel {
         return closeButton;
     }
 
-    public Button getResearchButton() {
-        return researchButton;
+    public Button getHireButton() {
+        return hireButton;
     }
 }

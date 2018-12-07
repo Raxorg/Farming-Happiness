@@ -1,5 +1,7 @@
 package com.frontanilla.farminghappyness.utils;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -63,11 +65,15 @@ public class Assets {
     //-------------------
     //       OTHER
     //-------------------
-    public static TextureRegion level1, level2, level3, level4;
+    public static TextureRegion level1, level2, level3, level4, logo;
     //-------------------
     //       DEBUG
     //-------------------
     public static TextureRegion rangeCircle;
+    //-------------------
+    //       AUDIO
+    //-------------------
+    public static Music music1, music2;
 
     public static void init() {
         //-------------------
@@ -193,6 +199,8 @@ public class Assets {
         level2 = new TextureRegion(levels, 0, 200, 800, 200);
         level3 = new TextureRegion(levels, 0, 400, 800, 200);
         level4 = new TextureRegion(levels, 0, 600, 800, 200);
+        // Logo
+        logo = new TextureRegion(new Texture("images/logo.png"));
         //-------------------
         //    TOGGLE MENU
         //-------------------
@@ -200,6 +208,11 @@ public class Assets {
         toggleButtons.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
         testToggleButtonRight = new TextureRegion(toggleButtons, 0, 0, 50, 50);
         testToggleButtonLeft = new TextureRegion(toggleButtons, 50, 0, 50, 50);
+        //-------------------
+        //      AUDIO
+        //-------------------
+        music1 = Gdx.audio.newMusic(Gdx.files.internal("audio/comienzo.mp3"));
+        music2 = Gdx.audio.newMusic(Gdx.files.internal("audio/previo.mp3"));
     }
 
 }

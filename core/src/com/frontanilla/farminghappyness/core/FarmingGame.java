@@ -2,6 +2,7 @@ package com.frontanilla.farminghappyness.core;
 
 import com.badlogic.gdx.Game;
 import com.frontanilla.farminghappyness.menus.MainMenu;
+import com.frontanilla.farminghappyness.splash.SplashScreen;
 import com.frontanilla.farminghappyness.utils.Assets;
 
 public class FarmingGame extends Game {
@@ -19,6 +20,6 @@ public class FarmingGame extends Game {
 
         Assets.init();
 
-        setScreen(new MainMenu(this));
+        setScreen(new SplashScreen(this));
     }
 }

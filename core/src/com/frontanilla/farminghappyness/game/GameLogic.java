@@ -17,6 +17,7 @@ import com.frontanilla.farminghappyness.game.entities.units.Police;
 import com.frontanilla.farminghappyness.game.entities.units.Tourist;
 import com.frontanilla.farminghappyness.game.other.Bullet;
 import com.frontanilla.farminghappyness.game.other.Level;
+import com.frontanilla.farminghappyness.utils.Assets;
 import com.frontanilla.farminghappyness.utils.Constants;
 import com.frontanilla.farminghappyness.utils.Enums.EnemyType;
 import com.frontanilla.farminghappyness.utils.Util;
@@ -426,6 +427,7 @@ public class GameLogic {
                 && connector.getGameState().getDisplayArea().getReadyButton().isVisible()) {
             playerReady = true;
             connector.getGameState().getDisplayArea().getReadyButton().setVisible(false);
+            Assets.music2.play();
             return true;
         }
         // Check a tap in the Farm base's close button

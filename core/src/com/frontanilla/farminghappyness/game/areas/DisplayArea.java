@@ -39,10 +39,10 @@ public class DisplayArea {
         // Ready button
         readyButton = new Button(
                 Assets.readyButton,
-                Gdx.graphics.getWidth() / 2 - Assets.readyButton.getRegionWidth() / 2,
+                Gdx.graphics.getWidth() / 2 - Assets.readyButton.getRegionWidth(),
                 0,
-                Assets.readyButton.getRegionWidth(),
-                Assets.readyButton.getRegionHeight());
+                Assets.readyButton.getRegionWidth() * 2,
+                Assets.readyButton.getRegionHeight() * 2);
         readyButton.setVisible(true);
         // Level label
         levelLabel = new LevelLabel();
